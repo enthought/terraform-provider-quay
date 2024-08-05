@@ -165,13 +165,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "user:admin"
-            ]
-          }
-        ],
         "tags": [
           "appspecifictokens"
         ]
@@ -236,13 +229,6 @@
             "description": "Successful creation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "user:admin"
-            ]
-          }
-        ],
         "tags": [
           "appspecifictokens"
         ],
@@ -313,13 +299,6 @@
             "description": "Deleted"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "user:admin"
-            ]
-          }
-        ],
         "tags": [
           "appspecifictokens"
         ]
@@ -384,13 +363,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "user:admin"
-            ]
-          }
-        ],
         "tags": [
           "appspecifictokens"
         ]
@@ -476,13 +448,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "repo:read"
-            ]
-          }
-        ],
         "tags": [
           "build"
         ]
@@ -558,13 +523,6 @@
             "description": "Successful creation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "repo:write"
-            ]
-          }
-        ],
         "tags": [
           "build"
         ],
@@ -644,13 +602,6 @@
             "description": "Deleted"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "repo:admin"
-            ]
-          }
-        ],
         "tags": [
           "build"
         ]
@@ -724,13 +675,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "repo:read"
-            ]
-          }
-        ],
         "tags": [
           "build"
         ]
@@ -809,13 +753,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "repo:read"
-            ]
-          }
-        ],
         "tags": [
           "build"
         ]
@@ -894,13 +831,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "repo:read"
-            ]
-          }
-        ],
         "tags": [
           "build"
         ]
@@ -1166,13 +1096,6 @@
             "description": "Successful creation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "super:user"
-            ]
-          }
-        ],
         "tags": [
           "globalmessages"
         ],
@@ -1242,13 +1165,6 @@
             "description": "Deleted"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "super:user"
-            ]
-          }
-        ],
         "tags": [
           "globalmessages"
         ]
@@ -1342,13 +1258,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "repo:admin"
-            ]
-          }
-        ],
         "tags": [
           "logs"
         ]
@@ -1441,13 +1350,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "user:admin"
-            ]
-          }
-        ],
         "tags": [
           "logs"
         ]
@@ -1549,13 +1451,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "org:admin"
-            ]
-          }
-        ],
         "tags": [
           "logs"
         ]
@@ -1641,13 +1536,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "repo:admin"
-            ]
-          }
-        ],
         "tags": [
           "logs"
         ]
@@ -1732,13 +1620,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "user:admin"
-            ]
-          }
-        ],
         "tags": [
           "logs"
         ]
@@ -1832,13 +1713,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "org:admin"
-            ]
-          }
-        ],
         "tags": [
           "logs"
         ]
@@ -1935,13 +1809,6 @@
             "description": "Successful creation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "repo:admin"
-            ]
-          }
-        ],
         "tags": [
           "logs"
         ],
@@ -2030,13 +1897,6 @@
             "description": "Successful creation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "user:admin"
-            ]
-          }
-        ],
         "tags": [
           "logs"
         ],
@@ -2134,13 +1994,6 @@
             "description": "Successful creation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "org:admin"
-            ]
-          }
-        ],
         "tags": [
           "logs"
         ],
@@ -2219,13 +2072,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "repo:read"
-            ]
-          }
-        ],
         "tags": [
           "manifest"
         ]
@@ -2311,13 +2157,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "repo:read"
-            ]
-          }
-        ],
         "tags": [
           "manifest"
         ]
@@ -2402,13 +2241,6 @@
             "description": "Successful creation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "repo:write"
-            ]
-          }
-        ],
         "tags": [
           "manifest"
         ],
@@ -2497,13 +2329,6 @@
             "description": "Deleted"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "repo:write"
-            ]
-          }
-        ],
         "tags": [
           "manifest"
         ]
@@ -2586,13 +2411,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "repo:read"
-            ]
-          }
-        ],
         "tags": [
           "manifest"
         ]
@@ -2734,13 +2552,6 @@
             "description": "Successful creation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "super:user"
-            ]
-          }
-        ],
         "tags": [
           "namespacequota"
         ],
@@ -2817,13 +2628,6 @@
             "description": "Deleted"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "super:user"
-            ]
-          }
-        ],
         "tags": [
           "namespacequota"
         ]
@@ -2975,13 +2779,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "super:user"
-            ]
-          }
-        ],
         "tags": [
           "namespacequota"
         ],
@@ -3139,13 +2936,6 @@
             "description": "Successful creation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "super:user"
-            ]
-          }
-        ],
         "tags": [
           "namespacequota"
         ],
@@ -3230,13 +3020,6 @@
             "description": "Deleted"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "super:user"
-            ]
-          }
-        ],
         "tags": [
           "namespacequota"
         ]
@@ -3404,13 +3187,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "super:user"
-            ]
-          }
-        ],
         "tags": [
           "namespacequota"
         ],
@@ -3469,13 +3245,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "user:admin"
-            ]
-          }
-        ],
         "tags": [
           "namespacequota"
         ]
@@ -3543,13 +3312,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "user:admin"
-            ]
-          }
-        ],
         "tags": [
           "namespacequota"
         ]
@@ -3617,13 +3379,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "user:admin"
-            ]
-          }
-        ],
         "tags": [
           "namespacequota"
         ]
@@ -3699,13 +3454,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "user:admin"
-            ]
-          }
-        ],
         "tags": [
           "namespacequota"
         ]
@@ -3775,13 +3523,6 @@
             "description": "Successful creation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "user:admin"
-            ]
-          }
-        ],
         "tags": [
           "organization"
         ],
@@ -3852,13 +3593,6 @@
             "description": "Deleted"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "org:admin"
-            ]
-          }
-        ],
         "tags": [
           "organization"
         ]
@@ -3998,13 +3732,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "org:admin"
-            ]
-          }
-        ],
         "tags": [
           "organization"
         ],
@@ -4075,13 +3802,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "org:admin"
-            ]
-          }
-        ],
         "tags": [
           "organization"
         ]
@@ -4151,13 +3871,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "org:admin"
-            ]
-          }
-        ],
         "tags": [
           "organization"
         ]
@@ -4236,13 +3949,6 @@
             "description": "Deleted"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "org:admin"
-            ]
-          }
-        ],
         "tags": [
           "organization"
         ]
@@ -4316,13 +4022,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "org:admin"
-            ]
-          }
-        ],
         "tags": [
           "organization"
         ]
@@ -4461,13 +4160,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "org:admin"
-            ]
-          }
-        ],
         "tags": [
           "organization"
         ]
@@ -4543,13 +4235,6 @@
             "description": "Successful creation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "org:admin"
-            ]
-          }
-        ],
         "tags": [
           "organization"
         ],
@@ -4629,13 +4314,6 @@
             "description": "Deleted"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "org:admin"
-            ]
-          }
-        ],
         "tags": [
           "organization"
         ]
@@ -4709,13 +4387,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "org:admin"
-            ]
-          }
-        ],
         "tags": [
           "organization"
         ]
@@ -4800,13 +4471,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "org:admin"
-            ]
-          }
-        ],
         "tags": [
           "organization"
         ],
@@ -4877,13 +4541,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "repo:admin"
-            ]
-          }
-        ],
         "tags": [
           "permission"
         ]
@@ -4953,13 +4610,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "repo:admin"
-            ]
-          }
-        ],
         "tags": [
           "permission"
         ]
@@ -5038,13 +4688,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "repo:admin"
-            ]
-          }
-        ],
         "tags": [
           "permission"
         ]
@@ -5123,13 +4766,6 @@
             "description": "Deleted"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "repo:admin"
-            ]
-          }
-        ],
         "tags": [
           "permission"
         ]
@@ -5203,13 +4839,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "repo:admin"
-            ]
-          }
-        ],
         "tags": [
           "permission"
         ]
@@ -5294,13 +4923,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "repo:admin"
-            ]
-          }
-        ],
         "tags": [
           "permission"
         ],
@@ -5380,13 +5002,6 @@
             "description": "Deleted"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "repo:admin"
-            ]
-          }
-        ],
         "tags": [
           "permission"
         ]
@@ -5460,13 +5075,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "repo:admin"
-            ]
-          }
-        ],
         "tags": [
           "permission"
         ]
@@ -5551,13 +5159,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "repo:admin"
-            ]
-          }
-        ],
         "tags": [
           "permission"
         ],
@@ -5628,13 +5229,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "org:admin"
-            ]
-          }
-        ],
         "tags": [
           "prototype"
         ]
@@ -5710,13 +5304,6 @@
             "description": "Successful creation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "org:admin"
-            ]
-          }
-        ],
         "tags": [
           "prototype"
         ],
@@ -5796,13 +5383,6 @@
             "description": "Deleted"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "org:admin"
-            ]
-          }
-        ],
         "tags": [
           "prototype"
         ]
@@ -5887,13 +5467,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "org:admin"
-            ]
-          }
-        ],
         "tags": [
           "prototype"
         ],
@@ -6011,13 +5584,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "repo:read"
-            ]
-          }
-        ],
         "tags": [
           "repository"
         ]
@@ -6082,13 +5648,6 @@
             "description": "Successful creation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "repo:create"
-            ]
-          }
-        ],
         "tags": [
           "repository"
         ],
@@ -6159,13 +5718,6 @@
             "description": "Deleted"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "repo:admin"
-            ]
-          }
-        ],
         "tags": [
           "repository"
         ]
@@ -6246,13 +5798,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "repo:read"
-            ]
-          }
-        ],
         "tags": [
           "repository"
         ]
@@ -6328,13 +5873,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "repo:write"
-            ]
-          }
-        ],
         "tags": [
           "repository"
         ],
@@ -6416,13 +5954,6 @@
             "description": "Successful creation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "repo:admin"
-            ]
-          }
-        ],
         "tags": [
           "repository"
         ],
@@ -6498,13 +6029,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "repo:admin"
-            ]
-          }
-        ],
         "tags": [
           "repositorynotification"
         ]
@@ -6579,13 +6103,6 @@
             "description": "Successful creation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "repo:admin"
-            ]
-          }
-        ],
         "tags": [
           "repositorynotification"
         ],
@@ -6665,13 +6182,6 @@
             "description": "Deleted"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "repo:admin"
-            ]
-          }
-        ],
         "tags": [
           "repositorynotification"
         ]
@@ -6745,13 +6255,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "repo:admin"
-            ]
-          }
-        ],
         "tags": [
           "repositorynotification"
         ]
@@ -6825,13 +6328,6 @@
             "description": "Successful creation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "repo:admin"
-            ]
-          }
-        ],
         "tags": [
           "repositorynotification"
         ]
@@ -6910,13 +6406,6 @@
             "description": "Successful creation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "repo:admin"
-            ]
-          }
-        ],
         "tags": [
           "repositorynotification"
         ]
@@ -6986,13 +6475,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "repo:admin"
-            ]
-          }
-        ],
         "tags": [
           "repotoken"
         ]
@@ -7068,13 +6550,6 @@
             "description": "Successful creation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "repo:admin"
-            ]
-          }
-        ],
         "tags": [
           "repotoken"
         ],
@@ -7154,13 +6629,6 @@
             "description": "Deleted"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "repo:admin"
-            ]
-          }
-        ],
         "tags": [
           "repotoken"
         ]
@@ -7234,13 +6702,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "repo:admin"
-            ]
-          }
-        ],
         "tags": [
           "repotoken"
         ]
@@ -7325,13 +6786,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "repo:admin"
-            ]
-          }
-        ],
         "tags": [
           "repotoken"
         ],
@@ -7417,13 +6871,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "user:admin"
-            ]
-          }
-        ],
         "tags": [
           "robot"
         ]
@@ -7493,13 +6940,6 @@
             "description": "Deleted"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "user:admin"
-            ]
-          }
-        ],
         "tags": [
           "robot"
         ]
@@ -7564,13 +7004,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "user:admin"
-            ]
-          }
-        ],
         "tags": [
           "robot"
         ]
@@ -7646,13 +7079,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "user:admin"
-            ]
-          }
-        ],
         "tags": [
           "robot"
         ],
@@ -7747,13 +7173,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "org:admin"
-            ]
-          }
-        ],
         "tags": [
           "robot"
         ]
@@ -7832,13 +7251,6 @@
             "description": "Deleted"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "org:admin"
-            ]
-          }
-        ],
         "tags": [
           "robot"
         ]
@@ -7912,13 +7324,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "org:admin"
-            ]
-          }
-        ],
         "tags": [
           "robot"
         ]
@@ -8003,13 +7408,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "org:admin"
-            ]
-          }
-        ],
         "tags": [
           "robot"
         ],
@@ -8080,13 +7478,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "user:admin"
-            ]
-          }
-        ],
         "tags": [
           "robot"
         ]
@@ -8165,13 +7556,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "user:admin"
-            ]
-          }
-        ],
         "tags": [
           "robot"
         ]
@@ -8241,13 +7625,6 @@
             "description": "Successful creation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "user:admin"
-            ]
-          }
-        ],
         "tags": [
           "robot"
         ]
@@ -8326,13 +7703,6 @@
             "description": "Successful creation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "org:admin"
-            ]
-          }
-        ],
         "tags": [
           "robot"
         ]
@@ -8493,13 +7863,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "repo:read"
-            ]
-          }
-        ],
         "tags": [
           "search"
         ]
@@ -8676,13 +8039,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "super:user"
-            ]
-          }
-        ],
         "tags": [
           "superuser"
         ]
@@ -8750,13 +8106,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "super:user"
-            ]
-          }
-        ],
         "tags": [
           "superuser"
         ]
@@ -8830,13 +8179,6 @@
             "description": "Successful creation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "super:user"
-            ]
-          }
-        ],
         "tags": [
           "superuser"
         ],
@@ -8905,13 +8247,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "super:user"
-            ]
-          }
-        ],
         "tags": [
           "superuser"
         ]
@@ -8985,13 +8320,6 @@
             "description": "Successful creation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "super:user"
-            ]
-          }
-        ],
         "tags": [
           "superuser"
         ],
@@ -9068,13 +8396,6 @@
             "description": "Deleted"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "super:user"
-            ]
-          }
-        ],
         "tags": [
           "superuser"
         ]
@@ -9156,13 +8477,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "super:user"
-            ]
-          }
-        ],
         "tags": [
           "superuser"
         ],
@@ -9239,13 +8553,6 @@
             "description": "Deleted"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "super:user"
-            ]
-          }
-        ],
         "tags": [
           "superuser"
         ]
@@ -9327,13 +8634,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "super:user"
-            ]
-          }
-        ],
         "tags": [
           "superuser"
         ],
@@ -9419,13 +8719,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "super:user"
-            ]
-          }
-        ],
         "tags": [
           "superuser"
         ]
@@ -9490,13 +8783,6 @@
             "description": "Successful creation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "super:user"
-            ]
-          }
-        ],
         "tags": [
           "superuser"
         ],
@@ -9567,13 +8853,6 @@
             "description": "Deleted"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "super:user"
-            ]
-          }
-        ],
         "tags": [
           "superuser"
         ]
@@ -9649,13 +8928,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "super:user"
-            ]
-          }
-        ],
         "tags": [
           "superuser"
         ],
@@ -9714,13 +8986,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "super:user"
-            ]
-          }
-        ],
         "tags": [
           "superuser"
         ]
@@ -9784,13 +9049,6 @@
             "description": "Successful creation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "super:user"
-            ]
-          }
-        ],
         "tags": [
           "superuser"
         ],
@@ -9860,13 +9118,6 @@
             "description": "Deleted"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "super:user"
-            ]
-          }
-        ],
         "tags": [
           "superuser"
         ]
@@ -9930,13 +9181,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "super:user"
-            ]
-          }
-        ],
         "tags": [
           "superuser"
         ]
@@ -10011,13 +9255,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "super:user"
-            ]
-          }
-        ],
         "tags": [
           "superuser"
         ],
@@ -10098,13 +9335,6 @@
             "description": "Successful creation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "super:user"
-            ]
-          }
-        ],
         "tags": [
           "superuser"
         ],
@@ -10175,13 +9405,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "super:user"
-            ]
-          }
-        ],
         "tags": [
           "superuser"
         ]
@@ -10260,13 +9483,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "super:user"
-            ]
-          }
-        ],
         "tags": [
           "superuser"
         ]
@@ -10345,13 +9561,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "super:user"
-            ]
-          }
-        ],
         "tags": [
           "superuser"
         ]
@@ -10460,13 +9669,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "repo:read"
-            ]
-          }
-        ],
         "tags": [
           "tag"
         ]
@@ -10545,13 +9747,6 @@
             "description": "Deleted"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "repo:write"
-            ]
-          }
-        ],
         "tags": [
           "tag"
         ]
@@ -10636,13 +9831,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "repo:write"
-            ]
-          }
-        ],
         "tags": [
           "tag"
         ],
@@ -10733,13 +9921,6 @@
             "description": "Successful creation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "repo:write"
-            ]
-          }
-        ],
         "tags": [
           "tag"
         ],
@@ -10819,13 +10000,6 @@
             "description": "Deleted"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "org:admin"
-            ]
-          }
-        ],
         "tags": [
           "team"
         ]
@@ -10910,13 +10084,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "org:admin"
-            ]
-          }
-        ],
         "tags": [
           "team"
         ],
@@ -10995,13 +10162,6 @@
             "description": "Deleted"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "org:admin"
-            ]
-          }
-        ],
         "tags": [
           "team"
         ]
@@ -11074,13 +10234,6 @@
             "description": "Successful creation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "org:admin"
-            ]
-          }
-        ],
         "tags": [
           "team"
         ]
@@ -11167,13 +10320,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "org:admin"
-            ]
-          }
-        ],
         "tags": [
           "team"
         ]
@@ -11261,13 +10407,6 @@
             "description": "Deleted"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "org:admin"
-            ]
-          }
-        ],
         "tags": [
           "team"
         ]
@@ -11350,13 +10489,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "org:admin"
-            ]
-          }
-        ],
         "tags": [
           "team"
         ]
@@ -11441,13 +10573,6 @@
             "description": "Deleted"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "org:admin"
-            ]
-          }
-        ],
         "tags": [
           "team"
         ]
@@ -11527,13 +10652,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "org:admin"
-            ]
-          }
-        ],
         "tags": [
           "team"
         ]
@@ -11681,13 +10799,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "repo:admin"
-            ]
-          }
-        ],
         "tags": [
           "trigger"
         ]
@@ -11766,13 +10877,6 @@
             "description": "Deleted"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "repo:admin"
-            ]
-          }
-        ],
         "tags": [
           "trigger"
         ]
@@ -11846,13 +10950,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "repo:admin"
-            ]
-          }
-        ],
         "tags": [
           "trigger"
         ]
@@ -11937,13 +11034,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "repo:admin"
-            ]
-          }
-        ],
         "tags": [
           "trigger"
         ],
@@ -12034,13 +11124,6 @@
             "description": "Successful creation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "repo:admin"
-            ]
-          }
-        ],
         "tags": [
           "trigger"
         ],
@@ -12131,13 +11214,6 @@
             "description": "Successful creation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "repo:admin"
-            ]
-          }
-        ],
         "tags": [
           "trigger"
         ],
@@ -12225,13 +11301,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "repo:admin"
-            ]
-          }
-        ],
         "tags": [
           "trigger"
         ]
@@ -12296,13 +11365,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "user:read"
-            ]
-          }
-        ],
         "tags": [
           "user"
         ]
@@ -12371,13 +11433,6 @@
             "description": "Successful invocation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "user:admin"
-            ]
-          }
-        ],
         "tags": [
           "user"
         ]
@@ -12442,13 +11497,6 @@
             "description": "Successful creation"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "repo:read"
-            ]
-          }
-        ],
         "tags": [
           "user"
         ],
@@ -12519,13 +11567,6 @@
             "description": "Deleted"
           }
         },
-        "security": [
-          {
-            "oauth2_implicit": [
-              "user:admin"
-            ]
-          }
-        ],
         "tags": [
           "user"
         ]
@@ -13503,26 +12544,6 @@
           "name"
         ],
         "type": "object"
-      }
-    },
-    "securitySchemes": {
-      "oauth2_implicit": {
-        "flows": {
-          "implicit": {
-            "authorizationUrl": "https://quay.example.com/oauth/authorize",
-            "scopes": {
-              "repo:read": "This application will be able to view and pull all repositories visible to the granting user or robot account",
-              "repo:write": "This application will be able to view, push and pull to all repositories to which the granting user or robot account has write access",
-              "repo:admin": "This application will have administrator access to all repositories to which the granting user or robot account has access",
-              "repo:create": "This application will be able to create repositories in to any namespaces that the granting user or robot account is allowed to create repositories",
-              "user:read": "This application will be able to read user information such as username and email address.",
-              "org:admin": "This application will be able to administer your organizations including creating robots, creating teams, adjusting team membership, and changing billing settings. You should have absolute trust in the requesting application before granting this permission.",
-              "super:user": "This application will be able to administer your installation including managing users, managing organizations and other features found in the superuser panel. You should have absolute trust in the requesting application before granting this permission.",
-              "user:admin": "This application will be able to administer your account including creating robots and granting them permissions to your repositories. You should have absolute trust in the requesting application before granting this permission."
-            }
-          }
-        },
-        "type": "oauth2"
       }
     }
   },
