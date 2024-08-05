@@ -16,7 +16,6 @@ Install the following dependencies:
 
 ```sh
 go get github.com/stretchr/testify/assert
-go get golang.org/x/oauth2
 go get golang.org/x/net/context
 ```
 
@@ -280,42 +279,7 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Authorization
 
-
-Authentication schemes defined for the API:
-### oauth2_implicit
-
-
-- **Type**: OAuth
-- **Flow**: implicit
-- **Authorization URL**: https://quay.example.com/oauth/authorize
-- **Scopes**: 
- - **repo:read**: This application will be able to view and pull all repositories visible to the granting user or robot account
- - **repo:write**: This application will be able to view, push and pull to all repositories to which the granting user or robot account has write access
- - **repo:admin**: This application will have administrator access to all repositories to which the granting user or robot account has access
- - **repo:create**: This application will be able to create repositories in to any namespaces that the granting user or robot account is allowed to create repositories
- - **user:read**: This application will be able to read user information such as username and email address.
- - **org:admin**: This application will be able to administer your organizations including creating robots, creating teams, adjusting team membership, and changing billing settings. You should have absolute trust in the requesting application before granting this permission.
- - **super:user**: This application will be able to administer your installation including managing users, managing organizations and other features found in the superuser panel. You should have absolute trust in the requesting application before granting this permission.
- - **user:admin**: This application will be able to administer your account including creating robots and granting them permissions to your repositories. You should have absolute trust in the requesting application before granting this permission.
-
-Example
-
-```go
-auth := context.WithValue(context.Background(), quay_api.ContextAccessToken, "ACCESSTOKENSTRING")
-r, err := client.Service.Operation(auth, args)
-```
-
-Or via OAuth2 module to automatically refresh tokens and perform user authentication.
-
-```go
-import "golang.org/x/oauth2"
-
-/* Perform OAuth2 round trip request and obtain a token */
-
-tokenSource := oauth2cfg.TokenSource(createContext(httpClient), &token)
-auth := context.WithValue(oauth2.NoContext, quay_api.ContextOAuth2, tokenSource)
-r, err := client.Service.Operation(auth, args)
-```
+Endpoints do not require authorization.
 
 
 ## Documentation for Utility Methods

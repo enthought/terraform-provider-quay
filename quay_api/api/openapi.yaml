@@ -96,9 +96,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - user:admin
       tags:
       - appspecifictokens
     post:
@@ -139,9 +136,6 @@ paths:
         "201":
           content: {}
           description: Successful creation
-      security:
-      - oauth2_implicit:
-        - user:admin
       tags:
       - appspecifictokens
       x-codegen-request-body-name: body
@@ -189,9 +183,6 @@ paths:
         "204":
           content: {}
           description: Deleted
-      security:
-      - oauth2_implicit:
-        - user:admin
       tags:
       - appspecifictokens
     get:
@@ -234,9 +225,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - user:admin
       tags:
       - appspecifictokens
     x-name: endpoints.api.appspecifictokens.AppToken
@@ -299,9 +287,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - repo:read
       tags:
       - build
     post:
@@ -352,9 +337,6 @@ paths:
         "201":
           content: {}
           description: Successful creation
-      security:
-      - oauth2_implicit:
-        - repo:write
       tags:
       - build
       x-codegen-request-body-name: body
@@ -410,9 +392,6 @@ paths:
         "204":
           content: {}
           description: Deleted
-      security:
-      - oauth2_implicit:
-        - repo:admin
       tags:
       - build
     get:
@@ -463,9 +442,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - repo:read
       tags:
       - build
     x-name: endpoints.api.build.RepositoryBuildResource
@@ -520,9 +496,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - repo:read
       tags:
       - build
     x-name: endpoints.api.build.RepositoryBuildStatus
@@ -577,9 +550,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - repo:read
       tags:
       - build
     x-name: endpoints.api.build.RepositoryBuildLogs
@@ -752,9 +722,6 @@ paths:
         "201":
           content: {}
           description: Successful creation
-      security:
-      - oauth2_implicit:
-        - super:user
       tags:
       - globalmessages
       x-codegen-request-body-name: body
@@ -801,9 +768,6 @@ paths:
         "204":
           content: {}
           description: Deleted
-      security:
-      - oauth2_implicit:
-        - super:user
       tags:
       - globalmessages
     x-name: endpoints.api.globalmessages.GlobalUserMessage
@@ -874,9 +838,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - repo:admin
       tags:
       - logs
     x-name: endpoints.api.logs.RepositoryLogs
@@ -947,9 +908,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - user:admin
       tags:
       - logs
     x-name: endpoints.api.logs.UserLogs
@@ -1028,9 +986,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - org:admin
       tags:
       - logs
     x-name: endpoints.api.logs.OrgLogs
@@ -1093,9 +1048,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - repo:admin
       tags:
       - logs
     x-name: endpoints.api.logs.RepositoryAggregateLogs
@@ -1158,9 +1110,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - user:admin
       tags:
       - logs
     x-name: endpoints.api.logs.UserAggregateLogs
@@ -1231,9 +1180,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - org:admin
       tags:
       - logs
     x-name: endpoints.api.logs.OrgAggregateLogs
@@ -1303,9 +1249,6 @@ paths:
         "201":
           content: {}
           description: Successful creation
-      security:
-      - oauth2_implicit:
-        - repo:admin
       tags:
       - logs
       x-codegen-request-body-name: body
@@ -1368,9 +1311,6 @@ paths:
         "201":
           content: {}
           description: Successful creation
-      security:
-      - oauth2_implicit:
-        - user:admin
       tags:
       - logs
       x-codegen-request-body-name: body
@@ -1441,9 +1381,6 @@ paths:
         "201":
           content: {}
           description: Successful creation
-      security:
-      - oauth2_implicit:
-        - org:admin
       tags:
       - logs
       x-codegen-request-body-name: body
@@ -1498,9 +1435,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - repo:read
       tags:
       - manifest
     x-name: endpoints.api.manifest.RepositoryManifest
@@ -1563,9 +1497,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - repo:read
       tags:
       - manifest
     post:
@@ -1623,9 +1554,6 @@ paths:
         "201":
           content: {}
           description: Successful creation
-      security:
-      - oauth2_implicit:
-        - repo:write
       tags:
       - manifest
       x-codegen-request-body-name: body
@@ -1689,9 +1617,6 @@ paths:
         "204":
           content: {}
           description: Deleted
-      security:
-      - oauth2_implicit:
-        - repo:write
       tags:
       - manifest
     get:
@@ -1750,9 +1675,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - repo:read
       tags:
       - manifest
     x-name: endpoints.api.manifest.ManageRepositoryManifestLabel
@@ -1845,9 +1767,6 @@ paths:
         "201":
           content: {}
           description: Successful creation
-      security:
-      - oauth2_implicit:
-        - super:user
       tags:
       - namespacequota
       x-codegen-request-body-name: body
@@ -1900,9 +1819,6 @@ paths:
         "204":
           content: {}
           description: Deleted
-      security:
-      - oauth2_implicit:
-        - super:user
       tags:
       - namespacequota
     get:
@@ -2004,9 +1920,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - super:user
       tags:
       - namespacequota
       x-codegen-request-body-name: body
@@ -2113,9 +2026,6 @@ paths:
         "201":
           content: {}
           description: Successful creation
-      security:
-      - oauth2_implicit:
-        - super:user
       tags:
       - namespacequota
       x-codegen-request-body-name: body
@@ -2175,9 +2085,6 @@ paths:
         "204":
           content: {}
           description: Deleted
-      security:
-      - oauth2_implicit:
-        - super:user
       tags:
       - namespacequota
     get:
@@ -2293,9 +2200,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - super:user
       tags:
       - namespacequota
       x-codegen-request-body-name: body
@@ -2333,9 +2237,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - user:admin
       tags:
       - namespacequota
     x-name: endpoints.api.namespacequota.UserQuotaList
@@ -2380,9 +2281,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - user:admin
       tags:
       - namespacequota
     x-name: endpoints.api.namespacequota.UserQuota
@@ -2427,9 +2325,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - user:admin
       tags:
       - namespacequota
     x-name: endpoints.api.namespacequota.UserQuotaLimitList
@@ -2481,9 +2376,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - user:admin
       tags:
       - namespacequota
     x-name: endpoints.api.namespacequota.UserQuotaLimit
@@ -2528,9 +2420,6 @@ paths:
         "201":
           content: {}
           description: Successful creation
-      security:
-      - oauth2_implicit:
-        - user:admin
       tags:
       - organization
       x-codegen-request-body-name: body
@@ -2578,9 +2467,6 @@ paths:
         "204":
           content: {}
           description: Deleted
-      security:
-      - oauth2_implicit:
-        - org:admin
       tags:
       - organization
     get:
@@ -2672,9 +2558,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - org:admin
       tags:
       - organization
       x-codegen-request-body-name: body
@@ -2722,9 +2605,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - org:admin
       tags:
       - organization
     x-name: endpoints.api.organization.OrganizationCollaboratorList
@@ -2771,9 +2651,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - org:admin
       tags:
       - organization
     x-name: endpoints.api.organization.OrganizationMemberList
@@ -2830,9 +2707,6 @@ paths:
         "204":
           content: {}
           description: Deleted
-      security:
-      - oauth2_implicit:
-        - org:admin
       tags:
       - organization
     get:
@@ -2883,9 +2757,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - org:admin
       tags:
       - organization
     x-name: endpoints.api.organization.OrganizationMember
@@ -2978,9 +2849,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - org:admin
       tags:
       - organization
     post:
@@ -3030,9 +2898,6 @@ paths:
         "201":
           content: {}
           description: Successful creation
-      security:
-      - oauth2_implicit:
-        - org:admin
       tags:
       - organization
       x-codegen-request-body-name: body
@@ -3088,9 +2953,6 @@ paths:
         "204":
           content: {}
           description: Deleted
-      security:
-      - oauth2_implicit:
-        - org:admin
       tags:
       - organization
     get:
@@ -3142,9 +3004,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - org:admin
       tags:
       - organization
     put:
@@ -3202,9 +3061,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - org:admin
       tags:
       - organization
       x-codegen-request-body-name: body
@@ -3252,9 +3108,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - repo:admin
       tags:
       - permission
     x-name: endpoints.api.permission.RepositoryTeamPermissionList
@@ -3301,9 +3154,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - repo:admin
       tags:
       - permission
     x-name: endpoints.api.permission.RepositoryUserPermissionList
@@ -3358,9 +3208,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - repo:admin
       tags:
       - permission
     x-name: endpoints.api.permission.RepositoryUserTransitivePermission
@@ -3415,9 +3262,6 @@ paths:
         "204":
           content: {}
           description: Deleted
-      security:
-      - oauth2_implicit:
-        - repo:admin
       tags:
       - permission
     get:
@@ -3468,9 +3312,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - repo:admin
       tags:
       - permission
     put:
@@ -3528,9 +3369,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - repo:admin
       tags:
       - permission
       x-codegen-request-body-name: body
@@ -3586,9 +3424,6 @@ paths:
         "204":
           content: {}
           description: Deleted
-      security:
-      - oauth2_implicit:
-        - repo:admin
       tags:
       - permission
     get:
@@ -3639,9 +3474,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - repo:admin
       tags:
       - permission
     put:
@@ -3699,9 +3531,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - repo:admin
       tags:
       - permission
       x-codegen-request-body-name: body
@@ -3749,9 +3578,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - org:admin
       tags:
       - prototype
     post:
@@ -3801,9 +3627,6 @@ paths:
         "201":
           content: {}
           description: Successful creation
-      security:
-      - oauth2_implicit:
-        - org:admin
       tags:
       - prototype
       x-codegen-request-body-name: body
@@ -3859,9 +3682,6 @@ paths:
         "204":
           content: {}
           description: Deleted
-      security:
-      - oauth2_implicit:
-        - org:admin
       tags:
       - prototype
     put:
@@ -3919,9 +3739,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - org:admin
       tags:
       - prototype
       x-codegen-request-body-name: body
@@ -4019,9 +3836,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - repo:read
       tags:
       - repository
     post:
@@ -4062,9 +3876,6 @@ paths:
         "201":
           content: {}
           description: Successful creation
-      security:
-      - oauth2_implicit:
-        - repo:create
       tags:
       - repository
       x-codegen-request-body-name: body
@@ -4112,9 +3923,6 @@ paths:
         "204":
           content: {}
           description: Deleted
-      security:
-      - oauth2_implicit:
-        - repo:admin
       tags:
       - repository
     get:
@@ -4173,9 +3981,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - repo:read
       tags:
       - repository
     put:
@@ -4225,9 +4030,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - repo:write
       tags:
       - repository
       x-codegen-request-body-name: body
@@ -4282,9 +4084,6 @@ paths:
         "201":
           content: {}
           description: Successful creation
-      security:
-      - oauth2_implicit:
-        - repo:admin
       tags:
       - repository
       x-codegen-request-body-name: body
@@ -4336,9 +4135,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - repo:admin
       tags:
       - repositorynotification
     post:
@@ -4387,9 +4183,6 @@ paths:
         "201":
           content: {}
           description: Successful creation
-      security:
-      - oauth2_implicit:
-        - repo:admin
       tags:
       - repositorynotification
       x-codegen-request-body-name: body
@@ -4445,9 +4238,6 @@ paths:
         "204":
           content: {}
           description: Deleted
-      security:
-      - oauth2_implicit:
-        - repo:admin
       tags:
       - repositorynotification
     get:
@@ -4498,9 +4288,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - repo:admin
       tags:
       - repositorynotification
     post:
@@ -4551,9 +4338,6 @@ paths:
         "201":
           content: {}
           description: Successful creation
-      security:
-      - oauth2_implicit:
-        - repo:admin
       tags:
       - repositorynotification
     x-name: endpoints.api.repositorynotification.RepositoryNotification
@@ -4608,9 +4392,6 @@ paths:
         "201":
           content: {}
           description: Successful creation
-      security:
-      - oauth2_implicit:
-        - repo:admin
       tags:
       - repositorynotification
     x-name: endpoints.api.repositorynotification.TestRepositoryNotification
@@ -4657,9 +4438,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - repo:admin
       tags:
       - repotoken
     post:
@@ -4709,9 +4487,6 @@ paths:
         "201":
           content: {}
           description: Successful creation
-      security:
-      - oauth2_implicit:
-        - repo:admin
       tags:
       - repotoken
       x-codegen-request-body-name: body
@@ -4767,9 +4542,6 @@ paths:
         "204":
           content: {}
           description: Deleted
-      security:
-      - oauth2_implicit:
-        - repo:admin
       tags:
       - repotoken
     get:
@@ -4820,9 +4592,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - repo:admin
       tags:
       - repotoken
     put:
@@ -4880,9 +4649,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - repo:admin
       tags:
       - repotoken
       x-codegen-request-body-name: body
@@ -4947,9 +4713,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - user:admin
       tags:
       - robot
     x-name: endpoints.api.robot.UserRobotList
@@ -4997,9 +4760,6 @@ paths:
         "204":
           content: {}
           description: Deleted
-      security:
-      - oauth2_implicit:
-        - user:admin
       tags:
       - robot
     get:
@@ -5043,9 +4803,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - user:admin
       tags:
       - robot
     put:
@@ -5096,9 +4853,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - user:admin
       tags:
       - robot
       x-codegen-request-body-name: body
@@ -5171,9 +4925,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - org:admin
       tags:
       - robot
     x-name: endpoints.api.robot.OrgRobotList
@@ -5229,9 +4980,6 @@ paths:
         "204":
           content: {}
           description: Deleted
-      security:
-      - oauth2_implicit:
-        - org:admin
       tags:
       - robot
     get:
@@ -5283,9 +5031,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - org:admin
       tags:
       - robot
     put:
@@ -5344,9 +5089,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - org:admin
       tags:
       - robot
       x-codegen-request-body-name: body
@@ -5395,9 +5137,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - user:admin
       tags:
       - robot
     x-name: endpoints.api.robot.UserRobotPermissions
@@ -5453,9 +5192,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - user:admin
       tags:
       - robot
     x-name: endpoints.api.robot.OrgRobotPermissions
@@ -5503,9 +5239,6 @@ paths:
         "201":
           content: {}
           description: Successful creation
-      security:
-      - oauth2_implicit:
-        - user:admin
       tags:
       - robot
     x-name: endpoints.api.robot.RegenerateUserRobot
@@ -5561,9 +5294,6 @@ paths:
         "201":
           content: {}
           description: Successful creation
-      security:
-      - oauth2_implicit:
-        - org:admin
       tags:
       - robot
     x-name: endpoints.api.robot.RegenerateOrgRobot
@@ -5679,9 +5409,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - repo:read
       tags:
       - search
     x-name: endpoints.api.search.ConductSearch
@@ -5814,9 +5541,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - super:user
       tags:
       - superuser
     x-name: endpoints.api.superuser.SuperUserLogs
@@ -5861,9 +5585,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - super:user
       tags:
       - superuser
     post:
@@ -5911,9 +5632,6 @@ paths:
         "201":
           content: {}
           description: Successful creation
-      security:
-      - oauth2_implicit:
-        - super:user
       tags:
       - superuser
       x-codegen-request-body-name: body
@@ -5959,9 +5677,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - super:user
       tags:
       - superuser
     post:
@@ -6009,9 +5724,6 @@ paths:
         "201":
           content: {}
           description: Successful creation
-      security:
-      - oauth2_implicit:
-        - super:user
       tags:
       - superuser
       x-codegen-request-body-name: body
@@ -6064,9 +5776,6 @@ paths:
         "204":
           content: {}
           description: Deleted
-      security:
-      - oauth2_implicit:
-        - super:user
       tags:
       - superuser
     put:
@@ -6121,9 +5830,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - super:user
       tags:
       - superuser
       x-codegen-request-body-name: body
@@ -6176,9 +5882,6 @@ paths:
         "204":
           content: {}
           description: Deleted
-      security:
-      - oauth2_implicit:
-        - super:user
       tags:
       - superuser
     put:
@@ -6233,9 +5936,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - super:user
       tags:
       - superuser
       x-codegen-request-body-name: body
@@ -6299,9 +5999,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - super:user
       tags:
       - superuser
     post:
@@ -6342,9 +6039,6 @@ paths:
         "201":
           content: {}
           description: Successful creation
-      security:
-      - oauth2_implicit:
-        - super:user
       tags:
       - superuser
       x-codegen-request-body-name: body
@@ -6392,9 +6086,6 @@ paths:
         "204":
           content: {}
           description: Deleted
-      security:
-      - oauth2_implicit:
-        - super:user
       tags:
       - superuser
     put:
@@ -6444,9 +6135,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - super:user
       tags:
       - superuser
       x-codegen-request-body-name: body
@@ -6484,9 +6172,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - super:user
       tags:
       - superuser
     post:
@@ -6526,9 +6211,6 @@ paths:
         "201":
           content: {}
           description: Successful creation
-      security:
-      - oauth2_implicit:
-        - super:user
       tags:
       - superuser
       x-codegen-request-body-name: body
@@ -6575,9 +6257,6 @@ paths:
         "204":
           content: {}
           description: Deleted
-      security:
-      - oauth2_implicit:
-        - super:user
       tags:
       - superuser
     get:
@@ -6619,9 +6298,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - super:user
       tags:
       - superuser
     put:
@@ -6670,9 +6346,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - super:user
       tags:
       - superuser
       x-codegen-request-body-name: body
@@ -6726,9 +6399,6 @@ paths:
         "201":
           content: {}
           description: Successful creation
-      security:
-      - oauth2_implicit:
-        - super:user
       tags:
       - superuser
       x-codegen-request-body-name: body
@@ -6776,9 +6446,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - super:user
       tags:
       - superuser
     x-name: endpoints.api.superuser.SuperUserRepositoryBuildLogs
@@ -6833,9 +6500,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - super:user
       tags:
       - superuser
     x-name: endpoints.api.superuser.SuperUserRepositoryBuildStatus
@@ -6890,9 +6554,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - super:user
       tags:
       - superuser
     x-name: endpoints.api.superuser.SuperUserRepositoryBuildResource
@@ -6979,9 +6640,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - repo:read
       tags:
       - tag
     x-name: endpoints.api.tag.ListRepositoryTags
@@ -7036,9 +6694,6 @@ paths:
         "204":
           content: {}
           description: Deleted
-      security:
-      - oauth2_implicit:
-        - repo:write
       tags:
       - tag
     put:
@@ -7096,9 +6751,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - repo:write
       tags:
       - tag
       x-codegen-request-body-name: body
@@ -7161,9 +6813,6 @@ paths:
         "201":
           content: {}
           description: Successful creation
-      security:
-      - oauth2_implicit:
-        - repo:write
       tags:
       - tag
       x-codegen-request-body-name: body
@@ -7219,9 +6868,6 @@ paths:
         "204":
           content: {}
           description: Deleted
-      security:
-      - oauth2_implicit:
-        - org:admin
       tags:
       - team
     put:
@@ -7279,9 +6925,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - org:admin
       tags:
       - team
       x-codegen-request-body-name: body
@@ -7336,9 +6979,6 @@ paths:
         "204":
           content: {}
           description: Deleted
-      security:
-      - oauth2_implicit:
-        - org:admin
       tags:
       - team
     post:
@@ -7388,9 +7028,6 @@ paths:
         "201":
           content: {}
           description: Successful creation
-      security:
-      - oauth2_implicit:
-        - org:admin
       tags:
       - team
     x-name: endpoints.api.team.OrganizationTeamSyncing
@@ -7453,9 +7090,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - org:admin
       tags:
       - team
     x-name: endpoints.api.team.TeamMemberList
@@ -7521,9 +7155,6 @@ paths:
         "204":
           content: {}
           description: Deleted
-      security:
-      - oauth2_implicit:
-        - org:admin
       tags:
       - team
     put:
@@ -7582,9 +7213,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - org:admin
       tags:
       - team
     x-name: endpoints.api.team.TeamMember
@@ -7644,9 +7272,6 @@ paths:
         "204":
           content: {}
           description: Deleted
-      security:
-      - oauth2_implicit:
-        - org:admin
       tags:
       - team
     put:
@@ -7702,9 +7327,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - org:admin
       tags:
       - team
     x-name: endpoints.api.team.InviteTeamMember
@@ -7805,9 +7427,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - repo:admin
       tags:
       - trigger
     x-name: endpoints.api.trigger.BuildTriggerList
@@ -7862,9 +7481,6 @@ paths:
         "204":
           content: {}
           description: Deleted
-      security:
-      - oauth2_implicit:
-        - repo:admin
       tags:
       - trigger
     get:
@@ -7915,9 +7531,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - repo:admin
       tags:
       - trigger
     put:
@@ -7975,9 +7588,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - repo:admin
       tags:
       - trigger
       x-codegen-request-body-name: body
@@ -8040,9 +7650,6 @@ paths:
         "201":
           content: {}
           description: Successful creation
-      security:
-      - oauth2_implicit:
-        - repo:admin
       tags:
       - trigger
       x-codegen-request-body-name: body
@@ -8105,9 +7712,6 @@ paths:
         "201":
           content: {}
           description: Successful creation
-      security:
-      - oauth2_implicit:
-        - repo:admin
       tags:
       - trigger
       x-codegen-request-body-name: body
@@ -8171,9 +7775,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - repo:admin
       tags:
       - trigger
     x-name: endpoints.api.trigger.TriggerBuildList
@@ -8214,9 +7815,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/UserView'
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - user:read
       tags:
       - user
     x-name: endpoints.api.user.User
@@ -8263,9 +7861,6 @@ paths:
         "200":
           content: {}
           description: Successful invocation
-      security:
-      - oauth2_implicit:
-        - user:admin
       tags:
       - user
     post:
@@ -8306,9 +7901,6 @@ paths:
         "201":
           content: {}
           description: Successful creation
-      security:
-      - oauth2_implicit:
-        - repo:read
       tags:
       - user
       x-codegen-request-body-name: body
@@ -8356,9 +7948,6 @@ paths:
         "204":
           content: {}
           description: Deleted
-      security:
-      - oauth2_implicit:
-        - user:admin
       tags:
       - user
     x-name: endpoints.api.user.StarredRepository
@@ -9231,35 +8820,4 @@ components:
       - kind
       - name
       type: object
-  securitySchemes:
-    oauth2_implicit:
-      flows:
-        implicit:
-          authorizationUrl: https://quay.example.com/oauth/authorize
-          scopes:
-            repo:read: This application will be able to view and pull all repositories
-              visible to the granting user or robot account
-            repo:write: "This application will be able to view, push and pull to all\
-              \ repositories to which the granting user or robot account has write\
-              \ access"
-            repo:admin: This application will have administrator access to all repositories
-              to which the granting user or robot account has access
-            repo:create: This application will be able to create repositories in to
-              any namespaces that the granting user or robot account is allowed to
-              create repositories
-            user:read: This application will be able to read user information such
-              as username and email address.
-            org:admin: "This application will be able to administer your organizations\
-              \ including creating robots, creating teams, adjusting team membership,\
-              \ and changing billing settings. You should have absolute trust in the\
-              \ requesting application before granting this permission."
-            super:user: "This application will be able to administer your installation\
-              \ including managing users, managing organizations and other features\
-              \ found in the superuser panel. You should have absolute trust in the\
-              \ requesting application before granting this permission."
-            user:admin: This application will be able to administer your account including
-              creating robots and granting them permissions to your repositories.
-              You should have absolute trust in the requesting application before
-              granting this permission.
-      type: oauth2
 x-original-swagger-version: "2.0"
