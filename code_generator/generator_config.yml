@@ -1,0 +1,19 @@
+provider:
+  name: quay
+resources:
+  organization:
+    create:
+      path: /api/v1/organization/
+      method: POST
+    read:
+      path: /api/v1/organization/{orgname}
+      method: GET
+    schema:
+      attributes:
+        aliases:
+          orgname: name
+        overrides:
+          name:
+            description: Organization name
+      ignores:
+        - recaptcha_response

@@ -1,0 +1,52 @@
+{
+	"provider": {
+		"name": "quay"
+	},
+	"resources": [
+		{
+			"name": "organization",
+			"schema": {
+				"attributes": [
+					{
+						"name": "email",
+						"string": {
+							"computed_optional_required": "required",
+							"description": "Organization contact email"
+						}
+					},
+					{
+						"name": "name",
+						"string": {
+							"computed_optional_required": "required",
+							"description": "Organization name"
+						}
+					}
+				]
+			}
+		}
+	],
+	"datasources": [
+		{
+			"name": "organization",
+			"schema": {
+				"attributes": [
+					{
+						"name": "email",
+						"string": {
+							"computed_optional_required": "computed",
+							"description": "Organization contact email"
+						}
+					},
+					{
+						"name": "name",
+						"string": {
+							"computed_optional_required": "required",
+							"description": "Organization name"
+						}
+					}
+				]
+			}
+		}
+	],
+	"version": "0.1"
+}
