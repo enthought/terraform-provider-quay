@@ -79,7 +79,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[oauth2_implicit](../README.md#oauth2_implicit)
+No authorization required
 
 ### HTTP request headers
 
@@ -143,7 +143,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[oauth2_implicit](../README.md#oauth2_implicit)
+No authorization required
 
 ### HTTP request headers
 
@@ -213,7 +213,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[oauth2_implicit](../README.md#oauth2_implicit)
+No authorization required
 
 ### HTTP request headers
 
@@ -281,7 +281,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[oauth2_implicit](../README.md#oauth2_implicit)
+No authorization required
 
 ### HTTP request headers
 
@@ -352,7 +352,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[oauth2_implicit](../README.md#oauth2_implicit)
+No authorization required
 
 ### HTTP request headers
 
@@ -559,7 +559,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[oauth2_implicit](../README.md#oauth2_implicit)
+No authorization required
 
 ### HTTP request headers
 
@@ -627,7 +627,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[oauth2_implicit](../README.md#oauth2_implicit)
+No authorization required
 
 ### HTTP request headers
 
@@ -695,7 +695,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[oauth2_implicit](../README.md#oauth2_implicit)
+No authorization required
 
 ### HTTP request headers
 
@@ -766,7 +766,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[oauth2_implicit](../README.md#oauth2_implicit)
+No authorization required
 
 ### HTTP request headers
 
@@ -834,7 +834,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[oauth2_implicit](../README.md#oauth2_implicit)
+No authorization required
 
 ### HTTP request headers
 
@@ -905,7 +905,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[oauth2_implicit](../README.md#oauth2_implicit)
+No authorization required
 
 ### HTTP request headers
 
@@ -978,7 +978,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[oauth2_implicit](../README.md#oauth2_implicit)
+No authorization required
 
 ### HTTP request headers
 
