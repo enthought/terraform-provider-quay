@@ -139,12 +139,12 @@ func Test_quay_api_TeamAPIService(t *testing.T) {
 			Description: nil,
 		}
 		httpRes, err = apiClient.TeamAPI.UpdateOrganizationTeam(context.Background(), orgName, teamName).Body(newTeam).Execute()
-		require.Nil(t, err)
+		handleQuayAPIError(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 		// Get team permissions
 		httpRes, err = apiClient.TeamAPI.GetOrganizationTeamPermissions(context.Background(), orgName, teamName).Execute()
-		require.Nil(t, err)
+		handleQuayAPIError(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
 	})
 
@@ -185,7 +185,7 @@ func Test_quay_api_TeamAPIService(t *testing.T) {
 			Description: nil,
 		}
 		httpRes, err = apiClient.TeamAPI.UpdateOrganizationTeam(context.Background(), orgName, teamName).Body(newTeam).Execute()
-		require.Nil(t, err)
+		handleQuayAPIError(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
 	})
 
