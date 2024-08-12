@@ -101,17 +101,34 @@ func Test_quay_api_TeamAPIService(t *testing.T) {
 	})
 
 	t.Run("Test TeamAPIService GetOrganizationTeamPermissions", func(t *testing.T) {
+		orgName := "get-org-team-perm"
+		teamName := "getorgteamperm"
 
-		t.Skip("skip test") // remove to run test
+		// Ensure org is destroyed
+		defer func(organization quay_api.ApiDeleteAdminedOrganizationRequest) {
+			_, err := organization.Execute()
+			handleQuayAPIError(t, err)
+		}(apiClient.OrganizationAPI.DeleteAdminedOrganization(context.Background(), orgName))
 
-		var orgname string
-		var teamname string
+		// Create org
+		newOrg := quay_api.NewNewOrg(orgName, orgName+"@example.com")
+		httpRes, err := apiClient.OrganizationAPI.CreateOrganization(context.Background()).Body(*newOrg).Execute()
+		handleQuayAPIError(t, err)
+		assert.Equal(t, 201, httpRes.StatusCode)
 
-		httpRes, err := apiClient.TeamAPI.GetOrganizationTeamPermissions(context.Background(), orgname, teamname).Execute()
-
+		// Create team
+		newTeam := quay_api.TeamDescription{
+			Role:        "admin",
+			Description: nil,
+		}
+		httpRes, err = apiClient.TeamAPI.UpdateOrganizationTeam(context.Background(), orgName, teamName).Body(newTeam).Execute()
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
+		// Get team permissions
+		httpRes, err = apiClient.TeamAPI.GetOrganizationTeamPermissions(context.Background(), orgName, teamName).Execute()
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
 	})
 
 	t.Run("Test TeamAPIService InviteTeamMemberEmail", func(t *testing.T) {
