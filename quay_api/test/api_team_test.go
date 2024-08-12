@@ -15,17 +15,34 @@ func Test_quay_api_TeamAPIService(t *testing.T) {
 	apiClient := quay_api.NewAPIClient(configuration)
 
 	t.Run("Test TeamAPIService DeleteOrganizationTeam", func(t *testing.T) {
+		orgName := "delete-org-team"
+		teamName := "delete"
 
-		t.Skip("skip test") // remove to run test
+		// Ensure org is destroyed
+		defer func(organization quay_api.ApiDeleteAdminedOrganizationRequest) {
+			_, err := organization.Execute()
+			handleQuayAPIError(t, err)
+		}(apiClient.OrganizationAPI.DeleteAdminedOrganization(context.Background(), orgName))
 
-		var orgname string
-		var teamname string
+		// Create org
+		newOrg := quay_api.NewNewOrg(orgName, orgName+"@example.com")
+		httpRes, err := apiClient.OrganizationAPI.CreateOrganization(context.Background()).Body(*newOrg).Execute()
+		handleQuayAPIError(t, err)
+		assert.Equal(t, 201, httpRes.StatusCode)
 
-		httpRes, err := apiClient.TeamAPI.DeleteOrganizationTeam(context.Background(), orgname, teamname).Execute()
-
-		require.Nil(t, err)
+		// Create team
+		newTeam := quay_api.TeamDescription{
+			Role:        "admin",
+			Description: nil,
+		}
+		httpRes, err = apiClient.TeamAPI.UpdateOrganizationTeam(context.Background(), orgName, teamName).Body(newTeam).Execute()
+		handleQuayAPIError(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
+		// Delete team
+		httpRes, err = apiClient.TeamAPI.DeleteOrganizationTeam(context.Background(), orgName, teamName).Execute()
+		handleQuayAPIError(t, err)
+		assert.Equal(t, 204, httpRes.StatusCode)
 	})
 
 	t.Run("Test TeamAPIService DeleteOrganizationTeamMember", func(t *testing.T) {
