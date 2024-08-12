@@ -190,18 +190,42 @@ func Test_quay_api_TeamAPIService(t *testing.T) {
 	})
 
 	t.Run("Test TeamAPIService UpdateOrganizationTeamMember", func(t *testing.T) {
+		orgName := "add-org-team-member"
+		teamName := "addorgteammember"
+		robotShortname := "robot"
+		memberName := orgName + "+" + robotShortname
 
-		t.Skip("skip test") // remove to run test
+		// Ensure org is destroyed
+		defer func(organization quay_api.ApiDeleteAdminedOrganizationRequest) {
+			_, err := organization.Execute()
+			handleQuayAPIError(t, err)
+		}(apiClient.OrganizationAPI.DeleteAdminedOrganization(context.Background(), orgName))
 
-		var orgname string
-		var membername string
-		var teamname string
+		// Create org
+		newOrg := quay_api.NewNewOrg(orgName, orgName+"@example.com")
+		httpRes, err := apiClient.OrganizationAPI.CreateOrganization(context.Background()).Body(*newOrg).Execute()
+		handleQuayAPIError(t, err)
+		assert.Equal(t, 201, httpRes.StatusCode)
 
-		httpRes, err := apiClient.TeamAPI.UpdateOrganizationTeamMember(context.Background(), orgname, membername, teamname).Execute()
-
-		require.Nil(t, err)
+		// Create team
+		newTeam := quay_api.TeamDescription{
+			Role:        "admin",
+			Description: nil,
+		}
+		httpRes, err = apiClient.TeamAPI.UpdateOrganizationTeam(context.Background(), orgName, teamName).Body(newTeam).Execute()
+		handleQuayAPIError(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
+		// Create org robot
+		newCreateRobot := quay_api.NewCreateRobot()
+		httpRes, err = apiClient.RobotAPI.CreateOrgRobot(context.Background(), orgName, robotShortname).Body(*newCreateRobot).Execute()
+		handleQuayAPIError(t, err)
+		assert.Equal(t, 201, httpRes.StatusCode)
+
+		// Add org team member
+		httpRes, err = apiClient.TeamAPI.UpdateOrganizationTeamMember(context.Background(), orgName, memberName, teamName).Execute()
+		handleQuayAPIError(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
 	})
 
 }
