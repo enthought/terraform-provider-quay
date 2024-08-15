@@ -5,7 +5,9 @@ package resource_team
 import (
 	"context"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 
@@ -32,11 +34,17 @@ func TeamResourceSchema(ctx context.Context) schema.Schema {
 				Required:            true,
 				Description:         "Team name",
 				MarkdownDescription: "Team name",
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.RequiresReplace(),
+				},
 			},
 			"orgname": schema.StringAttribute{
 				Required:            true,
 				Description:         "Organization name",
 				MarkdownDescription: "Organization name",
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.RequiresReplace(),
+				},
 			},
 			"role": schema.StringAttribute{
 				Required:            true,
