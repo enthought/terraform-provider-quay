@@ -36,7 +36,7 @@ func TeamResourceSchema(ctx context.Context) schema.Schema {
 				MarkdownDescription: "Organization name",
 			},
 			"role": schema.StringAttribute{
-				Optional:            true,
+				Required:            true,
 				Description:         "Team permission. Should be admin, creator, or member.",
 				MarkdownDescription: "Team permission. Should be admin, creator, or member.",
 				Validators: []validator.String{

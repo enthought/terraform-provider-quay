@@ -62,7 +62,7 @@
           {
             "name": "role",
             "string": {
-              "computed_optional_required": "optional",
+              "computed_optional_required": "required",
               "description": "Team permission. Should be admin, creator, or member.",
               "validators": [
                 {
