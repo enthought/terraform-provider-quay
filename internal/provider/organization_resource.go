@@ -29,9 +29,20 @@ type organizationResource struct {
 	client *quay_api.APIClient
 }
 
-type OrganizationModelJSON struct {
-	Email string `json:"email"`
-	Name  string `json:"name"`
+type organizationModelJSON struct {
+	Email string                               `json:"email"`
+	Name  string                               `json:"name"`
+	Teams map[string]organizationTeamModelJSON `json:"teams"`
+}
+
+type organizationTeamModelJSON struct {
+	Name        string `json:"name"`
+	Role        string `json:"role"`
+	Description string `json:"description"`
+	CanView     bool   `json:"can_view"`
+	RepoCount   int    `json:"repo_count"`
+	MemberCount int    `json:"member_count"`
+	IsSynced    bool   `json:"is_synced"`
 }
 
 func (r *organizationResource) Metadata(_ context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -75,7 +86,7 @@ func (r *organizationResource) Create(ctx context.Context, req resource.CreateRe
 
 func (r *organizationResource) Read(ctx context.Context, req resource.ReadRequest, resp *resource.ReadResponse) {
 	var data resource_organization.OrganizationModel
-	var resData OrganizationModelJSON
+	var resData organizationModelJSON
 	var apiErr *quay_api.GenericOpenAPIError
 
 	// Read Terraform prior state data into the model
