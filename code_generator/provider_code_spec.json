@@ -31,7 +31,10 @@
           {
             "name": "description",
             "string": {
-              "computed_optional_required": "optional",
+              "computed_optional_required": "computed_optional",
+              "default" : {
+                "static": ""
+              },
               "description": "Markdown description"
             }
           },

@@ -5,6 +5,7 @@ package resource_team
 import (
 	"context"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 
@@ -16,8 +17,10 @@ func TeamResourceSchema(ctx context.Context) schema.Schema {
 		Attributes: map[string]schema.Attribute{
 			"description": schema.StringAttribute{
 				Optional:            true,
+				Computed:            true,
 				Description:         "Markdown description",
 				MarkdownDescription: "Markdown description",
+				Default:             stringdefault.StaticString(""),
 			},
 			"members": schema.ListAttribute{
 				ElementType:         types.StringType,
