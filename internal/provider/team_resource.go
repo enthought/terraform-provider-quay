@@ -3,7 +3,6 @@ package provider
 import (
 	"context"
 	"encoding/json"
-	"errors"
 	"fmt"
 	"io"
 
@@ -52,7 +51,6 @@ func (r *teamResource) Schema(ctx context.Context, _ resource.SchemaRequest, res
 
 func (r *teamResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
 	var data resource_team.TeamModel
-	var apiErr *quay_api.GenericOpenAPIError
 
 	// Read Terraform plan data into the model
 	resp.Diagnostics.Append(req.Plan.Get(ctx, &data)...)
@@ -68,15 +66,8 @@ func (r *teamResource) Create(ctx context.Context, req resource.CreateRequest, r
 	}
 	_, err := r.client.TeamAPI.UpdateOrganizationTeam(context.Background(), data.Orgname.ValueString(), data.Name.ValueString()).Body(newTeam).Execute()
 	if err != nil {
-		errDetail := ""
-		if errors.As(err, &apiErr) {
-			errDetail = string(apiErr.Body())
-		} else {
-			errDetail = err.Error()
-		}
-		resp.Diagnostics.AddError(
-			"Error creating Quay team",
-			"Could not create Quay team, unexpected error: "+errDetail)
+		errDetail := handleQuayAPIError(err)
+		resp.Diagnostics.AddError("Error creating Quay team", "Could not create Quay team, unexpected error: "+errDetail)
 		return
 	}
 
@@ -103,7 +94,6 @@ func (r *teamResource) Read(ctx context.Context, req resource.ReadRequest, resp 
 	var data resource_team.TeamModel
 	var resTeamData teamModelJSON
 	var resOrgData organizationModelJSON
-	var apiErr *quay_api.GenericOpenAPIError
 
 	// Read Terraform prior state data into the model
 	resp.Diagnostics.Append(req.State.Get(ctx, &data)...)
@@ -118,15 +108,8 @@ func (r *teamResource) Read(ctx context.Context, req resource.ReadRequest, resp 
 	// Get members
 	httpRes, err := r.client.TeamAPI.GetOrganizationTeamMembers(context.Background(), orgName, teamName).Execute()
 	if err != nil {
-		errDetail := ""
-		if errors.As(err, &apiErr) {
-			errDetail = string(apiErr.Body())
-		} else {
-			errDetail = err.Error()
-		}
-		resp.Diagnostics.AddError(
-			"Error reading Quay team",
-			"Could not read Quay team, unexpected error: "+errDetail)
+		errDetail := handleQuayAPIError(err)
+		resp.Diagnostics.AddError("Error reading Quay team", "Could not read Quay team, unexpected error: "+errDetail)
 		return
 	}
 
@@ -162,15 +145,8 @@ func (r *teamResource) Read(ctx context.Context, req resource.ReadRequest, resp 
 	// Get org data
 	httpRes, err = r.client.OrganizationAPI.GetOrganization(context.Background(), orgName).Execute()
 	if err != nil {
-		errDetail := ""
-		if errors.As(err, &apiErr) {
-			errDetail = string(apiErr.Body())
-		} else {
-			errDetail = err.Error()
-		}
-		resp.Diagnostics.AddError(
-			"Error reading Quay team",
-			"Could not read Quay team, unexpected error: "+errDetail)
+		errDetail := handleQuayAPIError(err)
+		resp.Diagnostics.AddError("Error reading Quay team", "Could not read Quay team, unexpected error: "+errDetail)
 		return
 	}
 
@@ -200,24 +176,80 @@ func (r *teamResource) Read(ctx context.Context, req resource.ReadRequest, resp 
 }
 
 func (r *teamResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
-	var data resource_team.TeamModel
+	var dataState resource_team.TeamModel
+	var dataPlan resource_team.TeamModel
+
+	// Read Terraform prior state data into the model
+	resp.Diagnostics.Append(req.State.Get(ctx, &dataState)...)
 
 	// Read Terraform plan data into the model
-	resp.Diagnostics.Append(req.Plan.Get(ctx, &data)...)
+	resp.Diagnostics.Append(req.Plan.Get(ctx, &dataPlan)...)
 
 	if resp.Diagnostics.HasError() {
 		return
 	}
 
-	// Update API call logic
+	// Create variables
+	teamName := dataPlan.Name.ValueString()
+	orgName := dataPlan.Orgname.ValueString()
+
+	// Update members
+	if !dataPlan.Members.Equal(dataState.Members) {
+		elementsPlan := make([]string, 0, len(dataPlan.Members.Elements()))
+		diags := dataPlan.Members.ElementsAs(ctx, &elementsPlan, false)
+
+		resp.Diagnostics.Append(diags...)
+		if resp.Diagnostics.HasError() {
+			return
+		}
+
+		elementsState := make([]string, 0, len(dataState.Members.Elements()))
+		diags = dataPlan.Members.ElementsAs(ctx, &elementsState, false)
+
+		resp.Diagnostics.Append(diags...)
+		if resp.Diagnostics.HasError() {
+			return
+		}
+
+		// add team members
+		for _, member := range subtractStringSlice(elementsPlan, elementsState) {
+			_, err := r.client.TeamAPI.UpdateOrganizationTeamMember(context.Background(), orgName, member, teamName).Execute()
+			if err != nil {
+				errDetail := handleQuayAPIError(err)
+				resp.Diagnostics.AddError("Error updating Quay team", "Could not update Quay team, unexpected error: "+errDetail)
+				return
+			}
+		}
+
+		// remove team members
+		for _, member := range subtractStringSlice(elementsState, elementsPlan) {
+			_, err := r.client.TeamAPI.UpdateOrganizationTeamMember(context.Background(), orgName, member, teamName).Execute()
+			if err != nil {
+				errDetail := handleQuayAPIError(err)
+				resp.Diagnostics.AddError("Error updating Quay team", "Could not update Quay team, unexpected error: "+errDetail)
+				return
+			}
+		}
+	}
+
+	// Update role and description
+	updateTeam := quay_api.TeamDescription{
+		Role:        dataPlan.Role.ValueString(),
+		Description: dataPlan.Description.ValueStringPointer(),
+	}
+	_, err := r.client.TeamAPI.UpdateOrganizationTeam(context.Background(), orgName, teamName).Body(updateTeam).Execute()
+	if err != nil {
+		errDetail := handleQuayAPIError(err)
+		resp.Diagnostics.AddError("Error creating Quay team", "Could not create Quay team, unexpected error: "+errDetail)
+		return
+	}
 
 	// Save updated data into Terraform state
-	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
+	resp.Diagnostics.Append(resp.State.Set(ctx, &dataPlan)...)
 }
 
 func (r *teamResource) Delete(ctx context.Context, req resource.DeleteRequest, resp *resource.DeleteResponse) {
 	var data resource_team.TeamModel
-	var apiErr *quay_api.GenericOpenAPIError
 
 	// Read Terraform prior state data into the model
 	resp.Diagnostics.Append(req.State.Get(ctx, &data)...)
@@ -229,15 +261,8 @@ func (r *teamResource) Delete(ctx context.Context, req resource.DeleteRequest, r
 	// Delete API call logic
 	_, err := r.client.TeamAPI.DeleteOrganizationTeam(context.Background(), data.Orgname.ValueString(), data.Name.ValueString()).Execute()
 	if err != nil {
-		errDetail := ""
-		if errors.As(err, &apiErr) {
-			errDetail = string(apiErr.Body())
-		} else {
-			errDetail = err.Error()
-		}
-		resp.Diagnostics.AddError(
-			"Error deleting Quay team",
-			"Could not deleting Quay team, unexpected error: "+errDetail)
+		errDetail := handleQuayAPIError(err)
+		resp.Diagnostics.AddError("Error deleting Quay team", "Could not delete Quay team, unexpected error: "+errDetail)
 		return
 	}
 }
