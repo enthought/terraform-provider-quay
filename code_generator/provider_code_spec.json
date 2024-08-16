@@ -92,7 +92,7 @@
       }
     },
     {
-      "name": "team",
+      "name": "organization_team",
       "schema": {
         "attributes": [
           {

@@ -6,7 +6,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-testing/helper/resource"
 )
 
-func TestAccTeamResource(t *testing.T) {
+func TestAccOrganizationTeamResource(t *testing.T) {
 	resource.Test(t, resource.TestCase{
 		ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
 		Steps: []resource.TestStep{
@@ -18,7 +18,7 @@ resource "quay_organization" "test" {
   email = "quay+test@example.com"
 }
 
-resource "quay_team" "test" {
+resource "quay_organization_team" "test" {
   name = "test"
   orgname = quay_organization.test.name
   role = "member"
@@ -26,15 +26,15 @@ resource "quay_team" "test" {
 }
 `,
 				Check: resource.ComposeAggregateTestCheckFunc(
-					resource.TestCheckResourceAttr("quay_team.test", "name", "test"),
-					resource.TestCheckResourceAttr("quay_team.test", "orgname", "test"),
-					resource.TestCheckResourceAttr("quay_team.test", "role", "member"),
-					resource.TestCheckResourceAttr("quay_team.test", "description", "test"),
+					resource.TestCheckResourceAttr("quay_organization_team.test", "name", "test"),
+					resource.TestCheckResourceAttr("quay_organization_team.test", "orgname", "test"),
+					resource.TestCheckResourceAttr("quay_organization_team.test", "role", "member"),
+					resource.TestCheckResourceAttr("quay_organization_team.test", "description", "test"),
 				),
 			},
 			// Import
 			{
-				ResourceName:                         "quay_team.test",
+				ResourceName:                         "quay_organization_team.test",
 				ImportState:                          true,
 				ImportStateId:                        "test+test",
 				ImportStateVerify:                    true,
@@ -48,7 +48,7 @@ resource "quay_organization" "test" {
   email = "quay+test@example.com"
 }
 
-resource "quay_team" "test" {
+resource "quay_organization_team" "test" {
   name = "test"
   orgname = quay_organization.test.name
   role = "admin"
@@ -56,10 +56,10 @@ resource "quay_team" "test" {
 }
 `,
 				Check: resource.ComposeAggregateTestCheckFunc(
-					resource.TestCheckResourceAttr("quay_team.test", "name", "test"),
-					resource.TestCheckResourceAttr("quay_team.test", "orgname", "test"),
-					resource.TestCheckResourceAttr("quay_team.test", "role", "admin"),
-					resource.TestCheckResourceAttr("quay_team.test", "description", "test2"),
+					resource.TestCheckResourceAttr("quay_organization_team.test", "name", "test"),
+					resource.TestCheckResourceAttr("quay_organization_team.test", "orgname", "test"),
+					resource.TestCheckResourceAttr("quay_organization_team.test", "role", "admin"),
+					resource.TestCheckResourceAttr("quay_organization_team.test", "description", "test2"),
 				),
 			},
 			// Replace resource
@@ -70,7 +70,7 @@ resource "quay_organization" "test" {
   email = "quay+test@example.com"
 }
 
-resource "quay_team" "test" {
+resource "quay_organization_team" "test" {
   name = "test2"
   orgname = quay_organization.test.name
   role = "admin"
@@ -78,10 +78,10 @@ resource "quay_team" "test" {
 }
 `,
 				Check: resource.ComposeAggregateTestCheckFunc(
-					resource.TestCheckResourceAttr("quay_team.test", "name", "test2"),
-					resource.TestCheckResourceAttr("quay_team.test", "orgname", "test"),
-					resource.TestCheckResourceAttr("quay_team.test", "role", "admin"),
-					resource.TestCheckResourceAttr("quay_team.test", "description", "test2"),
+					resource.TestCheckResourceAttr("quay_organization_team.test", "name", "test2"),
+					resource.TestCheckResourceAttr("quay_organization_team.test", "orgname", "test"),
+					resource.TestCheckResourceAttr("quay_organization_team.test", "role", "admin"),
+					resource.TestCheckResourceAttr("quay_organization_team.test", "description", "test2"),
 				),
 			},
 		},

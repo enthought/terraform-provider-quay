@@ -18,20 +18,20 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 
 	"github.com/enthought/terraform-provider-quay/quay_api"
-	"terraform-provider-quay/internal/resource_team"
+	"terraform-provider-quay/internal/resource_organization_team"
 )
 
 var (
-	_ resource.Resource                = (*teamResource)(nil)
-	_ resource.ResourceWithConfigure   = (*teamResource)(nil)
-	_ resource.ResourceWithImportState = (*teamResource)(nil)
+	_ resource.Resource                = (*organizationTeamResource)(nil)
+	_ resource.ResourceWithConfigure   = (*organizationTeamResource)(nil)
+	_ resource.ResourceWithImportState = (*organizationTeamResource)(nil)
 )
 
-func NewTeamResource() resource.Resource {
-	return &teamResource{}
+func NewOrganizationTeamResource() resource.Resource {
+	return &organizationTeamResource{}
 }
 
-type teamResource struct {
+type organizationTeamResource struct {
 	client *quay_api.APIClient
 }
 
@@ -48,16 +48,16 @@ type teamMemberModelJSON struct {
 	Invited bool   `json:"invited"`
 }
 
-func (r *teamResource) Metadata(_ context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_team"
+func (r *organizationTeamResource) Metadata(_ context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
+	resp.TypeName = req.ProviderTypeName + "_organization_team"
 }
 
-func (r *teamResource) Schema(ctx context.Context, _ resource.SchemaRequest, resp *resource.SchemaResponse) {
-	resp.Schema = resource_team.TeamResourceSchema(ctx)
+func (r *organizationTeamResource) Schema(ctx context.Context, _ resource.SchemaRequest, resp *resource.SchemaResponse) {
+	resp.Schema = resource_organization_team.OrganizationTeamResourceSchema(ctx)
 }
 
-func (r *teamResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
-	var data resource_team.TeamModel
+func (r *organizationTeamResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
+	var data resource_organization_team.OrganizationTeamModel
 
 	// Read Terraform plan data into the model
 	resp.Diagnostics.Append(req.Plan.Get(ctx, &data)...)
@@ -97,8 +97,8 @@ func (r *teamResource) Create(ctx context.Context, req resource.CreateRequest, r
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
-func (r *teamResource) Read(ctx context.Context, req resource.ReadRequest, resp *resource.ReadResponse) {
-	var data resource_team.TeamModel
+func (r *organizationTeamResource) Read(ctx context.Context, req resource.ReadRequest, resp *resource.ReadResponse) {
+	var data resource_organization_team.OrganizationTeamModel
 	var resTeamData teamModelJSON
 	var resOrgData organizationModelJSON
 
@@ -182,9 +182,9 @@ func (r *teamResource) Read(ctx context.Context, req resource.ReadRequest, resp 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
-func (r *teamResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
-	var dataState resource_team.TeamModel
-	var dataPlan resource_team.TeamModel
+func (r *organizationTeamResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
+	var dataState resource_organization_team.OrganizationTeamModel
+	var dataPlan resource_organization_team.OrganizationTeamModel
 
 	// Read Terraform prior state data into the model
 	resp.Diagnostics.Append(req.State.Get(ctx, &dataState)...)
@@ -255,8 +255,8 @@ func (r *teamResource) Update(ctx context.Context, req resource.UpdateRequest, r
 	resp.Diagnostics.Append(resp.State.Set(ctx, &dataPlan)...)
 }
 
-func (r *teamResource) Delete(ctx context.Context, req resource.DeleteRequest, resp *resource.DeleteResponse) {
-	var data resource_team.TeamModel
+func (r *organizationTeamResource) Delete(ctx context.Context, req resource.DeleteRequest, resp *resource.DeleteResponse) {
+	var data resource_organization_team.OrganizationTeamModel
 
 	// Read Terraform prior state data into the model
 	resp.Diagnostics.Append(req.State.Get(ctx, &data)...)
@@ -274,7 +274,7 @@ func (r *teamResource) Delete(ctx context.Context, req resource.DeleteRequest, r
 	}
 }
 
-func (r *teamResource) Configure(_ context.Context, req resource.ConfigureRequest, resp *resource.ConfigureResponse) {
+func (r *organizationTeamResource) Configure(_ context.Context, req resource.ConfigureRequest, resp *resource.ConfigureResponse) {
 	if req.ProviderData == nil {
 		return
 	}
@@ -290,7 +290,7 @@ func (r *teamResource) Configure(_ context.Context, req resource.ConfigureReques
 	r.client = client
 }
 
-func (r *teamResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
+func (r *organizationTeamResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
 	idSplit := strings.Split(req.ID, "+")
 	if len(idSplit) != 2 || idSplit[0] == "" || idSplit[1] == "" {
 		resp.Diagnostics.AddError(
