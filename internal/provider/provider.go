@@ -158,5 +158,6 @@ func (p *quayProvider) Resources(_ context.Context) []func() resource.Resource {
 	return []func() resource.Resource{
 		NewOrganizationResource,
 		NewTeamResource,
+		NewOrganizationRobotResource,
 	}
 }
