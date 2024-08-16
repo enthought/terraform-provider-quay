@@ -25,7 +25,7 @@ func isValidURL(u string) bool {
 
 // Subtract two slices, c = a - b
 func subtractStringSlice(a []string, b []string) []string {
-	var bMap map[string]struct{}
+	bMap := make(map[string]struct{})
 	for _, v := range b {
 		bMap[v] = struct{}{}
 	}

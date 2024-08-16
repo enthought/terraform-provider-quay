@@ -28,6 +28,7 @@ resource "quay_organization_robot" "test" {
 					resource.TestCheckResourceAttr("quay_organization_robot.test", "name", "test"),
 					resource.TestCheckResourceAttr("quay_organization_robot.test", "orgname", "test"),
 					resource.TestCheckResourceAttr("quay_organization_robot.test", "description", "test"),
+					resource.TestCheckResourceAttr("quay_organization_robot.test", "fullname", "test+test"),
 				),
 			},
 			// Import
@@ -56,6 +57,7 @@ resource "quay_organization_robot" "test" {
 					resource.TestCheckResourceAttr("quay_organization_robot.test", "name", "test2"),
 					resource.TestCheckResourceAttr("quay_organization_robot.test", "orgname", "test"),
 					resource.TestCheckResourceAttr("quay_organization_robot.test", "description", "test2"),
+					resource.TestCheckResourceAttr("quay_organization_robot.test", "fullname", "test+test2"),
 				),
 			},
 		},

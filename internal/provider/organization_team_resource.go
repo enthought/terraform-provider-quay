@@ -9,6 +9,7 @@ package provider
 import (
 	"context"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"strings"
@@ -66,12 +67,18 @@ func (r *organizationTeamResource) Create(ctx context.Context, req resource.Crea
 		return
 	}
 
+	// Create variables
+	teamName := data.Name.ValueString()
+	orgName := data.Orgname.ValueString()
+	role := data.Role.ValueString()
+	description := data.Description.ValueString()
+
 	// Create team
 	newTeam := quay_api.TeamDescription{
-		Role:        data.Role.ValueString(),
-		Description: data.Description.ValueStringPointer(),
+		Role:        role,
+		Description: &description,
 	}
-	_, err := r.client.TeamAPI.UpdateOrganizationTeam(context.Background(), data.Orgname.ValueString(), data.Name.ValueString()).Body(newTeam).Execute()
+	_, err := r.client.TeamAPI.UpdateOrganizationTeam(context.Background(), orgName, teamName).Body(newTeam).Execute()
 	if err != nil {
 		errDetail := handleQuayAPIError(err)
 		resp.Diagnostics.AddError("Error creating Quay team", "Could not create Quay team, unexpected error: "+errDetail)
@@ -88,8 +95,13 @@ func (r *organizationTeamResource) Create(ctx context.Context, req resource.Crea
 			return
 		}
 
-		for _, teamMember := range elements {
-			_, err = r.client.TeamAPI.UpdateOrganizationTeamMember(context.Background(), data.Orgname.ValueString(), teamMember.ValueString(), data.Name.ValueString()).Execute()
+		for _, member := range elements {
+			_, err = r.client.TeamAPI.UpdateOrganizationTeamMember(context.Background(), orgName, member.ValueString(), teamName).Execute()
+			if err != nil {
+				errDetail := handleQuayAPIError(err)
+				resp.Diagnostics.AddError("Error creating Quay team", "Could not create Quay team, unexpected error: "+errDetail)
+				return
+			}
 		}
 	}
 
@@ -185,6 +197,7 @@ func (r *organizationTeamResource) Read(ctx context.Context, req resource.ReadRe
 func (r *organizationTeamResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
 	var dataState resource_organization_team.OrganizationTeamModel
 	var dataPlan resource_organization_team.OrganizationTeamModel
+	var apiErr *quay_api.GenericOpenAPIError
 
 	// Read Terraform prior state data into the model
 	resp.Diagnostics.Append(req.State.Get(ctx, &dataState)...)
@@ -211,7 +224,7 @@ func (r *organizationTeamResource) Update(ctx context.Context, req resource.Upda
 		}
 
 		elementsState := make([]string, 0, len(dataState.Members.Elements()))
-		diags = dataPlan.Members.ElementsAs(ctx, &elementsState, false)
+		diags = dataState.Members.ElementsAs(ctx, &elementsState, false)
 
 		resp.Diagnostics.Append(diags...)
 		if resp.Diagnostics.HasError() {
@@ -230,8 +243,17 @@ func (r *organizationTeamResource) Update(ctx context.Context, req resource.Upda
 
 		// remove team members
 		for _, member := range subtractStringSlice(elementsState, elementsPlan) {
-			_, err := r.client.TeamAPI.UpdateOrganizationTeamMember(context.Background(), orgName, member, teamName).Execute()
+			_, err := r.client.TeamAPI.DeleteOrganizationTeamMember(context.Background(), orgName, member, teamName).Execute()
 			if err != nil {
+				// handle case where team member no longer exists
+				if errors.As(err, &apiErr) {
+					if model, ok := apiErr.Model().(quay_api.ApiError); ok {
+						if model.Status == 404 {
+							continue
+						}
+					}
+				}
+
 				errDetail := handleQuayAPIError(err)
 				resp.Diagnostics.AddError("Error updating Quay team", "Could not update Quay team, unexpected error: "+errDetail)
 				return

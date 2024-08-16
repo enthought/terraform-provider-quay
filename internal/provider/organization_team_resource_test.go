@@ -14,15 +14,23 @@ func TestAccOrganizationTeamResource(t *testing.T) {
 			{
 				Config: providerConfig + `
 resource "quay_organization" "test" {
-  name = "test"
-  email = "quay+test@example.com"
+ name = "test"
+ email = "quay+test@example.com"
+}
+
+resource "quay_organization_robot" "test" {
+ name = "test"
+ orgname = quay_organization.test.name
 }
 
 resource "quay_organization_team" "test" {
-  name = "test"
-  orgname = quay_organization.test.name
-  role = "member"
-  description = "test"
+ name = "test"
+ orgname = quay_organization.test.name
+ role = "member"
+ description = "test"
+ members = [
+   quay_organization_robot.test.fullname
+ ]
 }
 `,
 				Check: resource.ComposeAggregateTestCheckFunc(
@@ -30,6 +38,7 @@ resource "quay_organization_team" "test" {
 					resource.TestCheckResourceAttr("quay_organization_team.test", "orgname", "test"),
 					resource.TestCheckResourceAttr("quay_organization_team.test", "role", "member"),
 					resource.TestCheckResourceAttr("quay_organization_team.test", "description", "test"),
+					resource.TestCheckResourceAttr("quay_organization_team.test", "members.0", "test+test"),
 				),
 			},
 			// Import
@@ -44,15 +53,23 @@ resource "quay_organization_team" "test" {
 			{
 				Config: providerConfig + `
 resource "quay_organization" "test" {
-  name = "test"
-  email = "quay+test@example.com"
+ name = "test"
+ email = "quay+test@example.com"
+}
+
+resource "quay_organization_robot" "test" {
+ name = "test"
+ orgname = quay_organization.test.name
 }
 
 resource "quay_organization_team" "test" {
-  name = "test"
-  orgname = quay_organization.test.name
-  role = "admin"
-  description = "test2"
+ name = "test"
+ orgname = quay_organization.test.name
+ role = "admin"
+ description = "test2"
+ members = [
+   quay_organization_robot.test.fullname
+ ]
 }
 `,
 				Check: resource.ComposeAggregateTestCheckFunc(
@@ -60,14 +77,120 @@ resource "quay_organization_team" "test" {
 					resource.TestCheckResourceAttr("quay_organization_team.test", "orgname", "test"),
 					resource.TestCheckResourceAttr("quay_organization_team.test", "role", "admin"),
 					resource.TestCheckResourceAttr("quay_organization_team.test", "description", "test2"),
+					resource.TestCheckResourceAttr("quay_organization_team.test", "members.0", "test+test"),
 				),
 			},
 			// Replace resource
 			{
 				Config: providerConfig + `
 resource "quay_organization" "test" {
+ name = "test"
+ email = "quay+test@example.com"
+}
+
+resource "quay_organization_robot" "test" {
+ name = "test"
+ orgname = quay_organization.test.name
+}
+
+resource "quay_organization_team" "test" {
+ name = "test2"
+ orgname = quay_organization.test.name
+ role = "admin"
+ description = "test2"
+ members = [
+   quay_organization_robot.test.fullname
+ ]
+}
+`,
+				Check: resource.ComposeAggregateTestCheckFunc(
+					resource.TestCheckResourceAttr("quay_organization_team.test", "name", "test2"),
+					resource.TestCheckResourceAttr("quay_organization_team.test", "orgname", "test"),
+					resource.TestCheckResourceAttr("quay_organization_team.test", "role", "admin"),
+					resource.TestCheckResourceAttr("quay_organization_team.test", "description", "test2"),
+					resource.TestCheckResourceAttr("quay_organization_team.test", "members.0", "test+test"),
+				),
+			},
+			// Add team member
+			{
+				Config: providerConfig + `
+resource "quay_organization" "test" {
   name = "test"
   email = "quay+test@example.com"
+}
+
+resource "quay_organization_robot" "test" {
+  name = "test"
+  orgname = quay_organization.test.name
+}
+
+resource "quay_organization_robot" "test2" {
+  name = "test2"
+  orgname = quay_organization.test.name
+}
+
+resource "quay_organization_team" "test" {
+  name = "test2"
+  orgname = quay_organization.test.name
+  role = "admin"
+  description = "test2"
+  members = [
+    quay_organization_robot.test.fullname,
+    quay_organization_robot.test2.fullname
+  ]
+}
+`,
+				Check: resource.ComposeAggregateTestCheckFunc(
+					resource.TestCheckResourceAttr("quay_organization_team.test", "name", "test2"),
+					resource.TestCheckResourceAttr("quay_organization_team.test", "orgname", "test"),
+					resource.TestCheckResourceAttr("quay_organization_team.test", "role", "admin"),
+					resource.TestCheckResourceAttr("quay_organization_team.test", "description", "test2"),
+					resource.TestCheckResourceAttr("quay_organization_team.test", "members.0", "test+test"),
+					resource.TestCheckResourceAttr("quay_organization_team.test", "members.1", "test+test2"),
+				),
+			},
+			// Remove team member by removing robot resource first (Quay will automatically remove the robot from the team)
+			{
+				Config: providerConfig + `
+resource "quay_organization" "test" {
+  name = "test"
+  email = "quay+test@example.com"
+}
+
+resource "quay_organization_robot" "test2" {
+  name = "test2"
+  orgname = quay_organization.test.name
+}
+
+resource "quay_organization_team" "test" {
+  name = "test2"
+  orgname = quay_organization.test.name
+  role = "admin"
+  description = "test2"
+  members = [
+    quay_organization_robot.test2.fullname
+  ]
+}
+`,
+				Check: resource.ComposeAggregateTestCheckFunc(
+					resource.TestCheckResourceAttr("quay_organization_team.test", "name", "test2"),
+					resource.TestCheckResourceAttr("quay_organization_team.test", "orgname", "test"),
+					resource.TestCheckResourceAttr("quay_organization_team.test", "role", "admin"),
+					resource.TestCheckResourceAttr("quay_organization_team.test", "description", "test2"),
+					resource.TestCheckResourceAttr("quay_organization_team.test", "members.0", "test+test2"),
+				),
+			},
+			// Remove team member without removing robot resource
+			{
+				Config: providerConfig + `
+resource "quay_organization" "test" {
+  name = "test"
+  email = "quay+test@example.com"
+}
+
+resource "quay_organization_robot" "test2" {
+  name = "test2"
+  orgname = quay_organization.test.name
 }
 
 resource "quay_organization_team" "test" {

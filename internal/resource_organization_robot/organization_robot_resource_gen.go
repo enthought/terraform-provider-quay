@@ -25,6 +25,11 @@ func OrganizationRobotResourceSchema(ctx context.Context) schema.Schema {
 				},
 				Default: stringdefault.StaticString(""),
 			},
+			"fullname": schema.StringAttribute{
+				Computed:            true,
+				Description:         "Robot full name",
+				MarkdownDescription: "Robot full name",
+			},
 			"name": schema.StringAttribute{
 				Required:            true,
 				Description:         "Robot short name",
@@ -47,6 +52,7 @@ func OrganizationRobotResourceSchema(ctx context.Context) schema.Schema {
 
 type OrganizationRobotModel struct {
 	Description types.String `tfsdk:"description"`
+	Fullname    types.String `tfsdk:"fullname"`
 	Name        types.String `tfsdk:"name"`
 	Orgname     types.String `tfsdk:"orgname"`
 }

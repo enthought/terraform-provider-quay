@@ -78,6 +78,9 @@ func (r *organizationRobotResource) Create(ctx context.Context, req resource.Cre
 		return
 	}
 
+	// Set robot full name
+	data.Fullname = types.StringValue(orgName + "+" + robotName)
+
 	// Save data into Terraform state
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -121,6 +124,9 @@ func (r *organizationRobotResource) Read(ctx context.Context, req resource.ReadR
 
 	// Set Description
 	data.Description = types.StringValue(resRobotData.Description)
+
+	// Set robot full name
+	data.Fullname = types.StringValue(orgName + "+" + robotName)
 
 	// Save updated data into Terraform state
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
