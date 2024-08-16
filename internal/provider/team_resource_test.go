@@ -32,6 +32,14 @@ resource "quay_team" "test" {
 					resource.TestCheckResourceAttr("quay_team.test", "description", "test"),
 				),
 			},
+			// Import
+			{
+				ResourceName:                         "quay_team.test",
+				ImportState:                          true,
+				ImportStateId:                        "test+test",
+				ImportStateVerify:                    true,
+				ImportStateVerifyIdentifierAttribute: "name",
+			},
 			// Update
 			{
 				Config: providerConfig + `

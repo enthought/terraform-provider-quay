@@ -1,3 +1,9 @@
+// Copyright (c) HashiCorp, Inc.
+// SPDX-License-Identifier: MPL-2.0
+
+// Modifications copyright (c) Enthought, Inc.
+// SPDX-License-Identifier:	BSD-3-Clause
+
 package provider
 
 import (
@@ -5,6 +11,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -284,6 +291,15 @@ func (r *teamResource) Configure(_ context.Context, req resource.ConfigureReques
 }
 
 func (r *teamResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	// Retrieve import ID and save to name attribute
-	resource.ImportStatePassthroughID(ctx, path.Root("name"), req, resp)
+	idSplit := strings.Split(req.ID, "+")
+	if len(idSplit) != 2 || idSplit[0] == "" || idSplit[1] == "" {
+		resp.Diagnostics.AddError(
+			"Unexpected Import Identifier",
+			fmt.Sprintf("Expected import identifier with format orgname+teamname. Got: %q", req.ID),
+		)
+		return
+	}
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("orgname"), idSplit[0])...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), idSplit[1])...)
 }
