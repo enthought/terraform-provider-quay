@@ -30,6 +30,14 @@ resource "quay_organization_robot" "test" {
 					resource.TestCheckResourceAttr("quay_organization_robot.test", "description", "test"),
 				),
 			},
+			// Import
+			{
+				ResourceName:                         "quay_organization_robot.test",
+				ImportState:                          true,
+				ImportStateId:                        "test+test",
+				ImportStateVerify:                    true,
+				ImportStateVerifyIdentifierAttribute: "name",
+			},
 			// Replace resource
 			{
 				Config: providerConfig + `

@@ -1,15 +1,22 @@
+// Copyright (c) HashiCorp, Inc.
+// SPDX-License-Identifier: MPL-2.0
+
+// Modifications copyright (c) Enthought, Inc.
+// SPDX-License-Identifier:	BSD-3-Clause
+
 package provider
 
 import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"github.com/hashicorp/terraform-plugin-framework/types"
 	"io"
+	"strings"
 
 	"github.com/enthought/terraform-provider-quay/quay_api"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 
 	"terraform-provider-quay/internal/resource_organization_robot"
 )
@@ -173,6 +180,15 @@ func (r *organizationRobotResource) Configure(_ context.Context, req resource.Co
 }
 
 func (r *organizationRobotResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	// Retrieve import ID and save to name attribute
-	resource.ImportStatePassthroughID(ctx, path.Root("name"), req, resp)
+	idSplit := strings.Split(req.ID, "+")
+	if len(idSplit) != 2 || idSplit[0] == "" || idSplit[1] == "" {
+		resp.Diagnostics.AddError(
+			"Unexpected Import Identifier",
+			fmt.Sprintf("Expected import identifier with format orgname+robotname. Got: %q", req.ID),
+		)
+		return
+	}
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("orgname"), idSplit[0])...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), idSplit[1])...)
 }
