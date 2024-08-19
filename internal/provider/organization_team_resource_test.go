@@ -119,7 +119,46 @@ func TestAccOrganizationTeamResourceMembers(t *testing.T) {
 	resource.ParallelTest(t, resource.TestCase{
 		ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
 		Steps: []resource.TestStep{
-			// Create team with one team member
+			// Create team with no members
+			{
+				Config: providerConfig + `
+resource "quay_organization" "org_team_members" {
+  name = "org_team_members"
+  email = "quay+org_team_members@example.com"
+}
+resource "quay_organization_team" "test" {
+  name = "test"
+  orgname = quay_organization.org_team_members.name
+  role = "member"
+}
+`,
+				Check: resource.ComposeAggregateTestCheckFunc(
+					resource.TestCheckResourceAttr("quay_organization_team.test", "name", "test"),
+					resource.TestCheckResourceAttr("quay_organization_team.test", "orgname", "org_team_members"),
+					resource.TestCheckResourceAttr("quay_organization_team.test", "role", "member"),
+				),
+			},
+			// Set members to empty list
+			{
+				Config: providerConfig + `
+resource "quay_organization" "org_team_members" {
+  name = "org_team_members"
+  email = "quay+org_team_members@example.com"
+}
+resource "quay_organization_team" "test" {
+  name = "test"
+  orgname = quay_organization.org_team_members.name
+  role = "member"
+  members = []
+}
+`,
+				Check: resource.ComposeAggregateTestCheckFunc(
+					resource.TestCheckResourceAttr("quay_organization_team.test", "name", "test"),
+					resource.TestCheckResourceAttr("quay_organization_team.test", "orgname", "org_team_members"),
+					resource.TestCheckResourceAttr("quay_organization_team.test", "role", "member"),
+				),
+			},
+			// Add team member
 			{
 				Config: providerConfig + `
 resource "quay_organization" "org_team_members" {
@@ -235,35 +274,6 @@ resource "quay_organization_team" "test" {
 				Check: resource.ComposeAggregateTestCheckFunc(
 					resource.TestCheckResourceAttr("quay_organization_team.test", "name", "test"),
 					resource.TestCheckResourceAttr("quay_organization_team.test", "orgname", "org_team_members"),
-					resource.TestCheckResourceAttr("quay_organization_team.test", "role", "member"),
-				),
-			},
-		},
-	})
-}
-
-func TestAccOrganizationTeamResourceEmptyMembers(t *testing.T) {
-	resource.ParallelTest(t, resource.TestCase{
-		ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
-		Steps: []resource.TestStep{
-			// Create and Read
-			{
-				Config: providerConfig + `
-resource "quay_organization" "org_team_empty" {
-  name = "org_team_empty"
-  email = "quay+org_team_empty@example.com"
-}
-
-resource "quay_organization_team" "test" {
-  name = "test"
-  orgname = quay_organization.org_team_empty.name
-  role = "member"
-  members = []
-}
-`,
-				Check: resource.ComposeAggregateTestCheckFunc(
-					resource.TestCheckResourceAttr("quay_organization_team.test", "name", "test"),
-					resource.TestCheckResourceAttr("quay_organization_team.test", "orgname", "org_team_empty"),
 					resource.TestCheckResourceAttr("quay_organization_team.test", "role", "member"),
 				),
 			},
