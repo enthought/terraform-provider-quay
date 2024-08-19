@@ -37,7 +37,7 @@ func (d *organizationDataSource) Schema(ctx context.Context, _ datasource.Schema
 
 func (d *organizationDataSource) Read(ctx context.Context, req datasource.ReadRequest, resp *datasource.ReadResponse) {
 	var data datasource_organization.OrganizationModel
-	var resData OrganizationModelJSON
+	var resData organizationModelJSON
 	var apiErr *quay_api.GenericOpenAPIError
 
 	// Read Terraform configuration data into the model

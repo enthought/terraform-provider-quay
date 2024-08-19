@@ -3,7 +3,6 @@ package provider
 import (
 	"context"
 	"encoding/json"
-	"errors"
 	"fmt"
 	"io"
 
@@ -29,9 +28,20 @@ type organizationResource struct {
 	client *quay_api.APIClient
 }
 
-type OrganizationModelJSON struct {
-	Email string `json:"email"`
-	Name  string `json:"name"`
+type organizationModelJSON struct {
+	Email string                               `json:"email"`
+	Name  string                               `json:"name"`
+	Teams map[string]organizationTeamModelJSON `json:"teams"`
+}
+
+type organizationTeamModelJSON struct {
+	Name        string `json:"name"`
+	Role        string `json:"role"`
+	Description string `json:"description"`
+	CanView     bool   `json:"can_view"`
+	RepoCount   int    `json:"repo_count"`
+	MemberCount int    `json:"member_count"`
+	IsSynced    bool   `json:"is_synced"`
 }
 
 func (r *organizationResource) Metadata(_ context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -44,7 +54,6 @@ func (r *organizationResource) Schema(ctx context.Context, _ resource.SchemaRequ
 
 func (r *organizationResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
 	var data resource_organization.OrganizationModel
-	var apiErr *quay_api.GenericOpenAPIError
 
 	// Read Terraform plan data into the model
 	resp.Diagnostics.Append(req.Plan.Get(ctx, &data)...)
@@ -57,15 +66,8 @@ func (r *organizationResource) Create(ctx context.Context, req resource.CreateRe
 	newOrg := quay_api.NewNewOrg(data.Name.ValueString(), data.Email.ValueString())
 	_, err := r.client.OrganizationAPI.CreateOrganization(context.Background()).Body(*newOrg).Execute()
 	if err != nil {
-		errDetail := ""
-		if errors.As(err, &apiErr) {
-			errDetail = string(apiErr.Body())
-		} else {
-			errDetail = err.Error()
-		}
-		resp.Diagnostics.AddError(
-			"Error creating Quay org",
-			"Could not create Quay org, unexpected error: "+errDetail)
+		errDetail := handleQuayAPIError(err)
+		resp.Diagnostics.AddError("Error creating Quay org", "Could not create Quay org, unexpected error: "+errDetail)
 		return
 	}
 
@@ -75,8 +77,7 @@ func (r *organizationResource) Create(ctx context.Context, req resource.CreateRe
 
 func (r *organizationResource) Read(ctx context.Context, req resource.ReadRequest, resp *resource.ReadResponse) {
 	var data resource_organization.OrganizationModel
-	var resData OrganizationModelJSON
-	var apiErr *quay_api.GenericOpenAPIError
+	var resData organizationModelJSON
 
 	// Read Terraform prior state data into the model
 	resp.Diagnostics.Append(req.State.Get(ctx, &data)...)
@@ -87,15 +88,8 @@ func (r *organizationResource) Read(ctx context.Context, req resource.ReadReques
 	// Get data from API
 	httpRes, err := r.client.OrganizationAPI.GetOrganization(context.Background(), data.Name.ValueString()).Execute()
 	if err != nil {
-		errDetail := ""
-		if errors.As(err, &apiErr) {
-			errDetail = string(apiErr.Body())
-		} else {
-			errDetail = err.Error()
-		}
-		resp.Diagnostics.AddError(
-			"Error reading Quay org",
-			"Could not read Quay org, unexpected error: "+errDetail)
+		errDetail := handleQuayAPIError(err)
+		resp.Diagnostics.AddError("Error read Quay org", "Could not read Quay org, unexpected error: "+errDetail)
 		return
 	}
 
@@ -125,7 +119,6 @@ func (r *organizationResource) Read(ctx context.Context, req resource.ReadReques
 func (r *organizationResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
 	var dataState resource_organization.OrganizationModel
 	var dataPlan resource_organization.OrganizationModel
-	var apiErr *quay_api.GenericOpenAPIError
 
 	// Read Terraform prior state data into the model
 	resp.Diagnostics.Append(req.State.Get(ctx, &dataState)...)
@@ -146,15 +139,8 @@ func (r *organizationResource) Update(ctx context.Context, req resource.UpdateRe
 		}
 		_, err := r.client.OrganizationAPI.ChangeOrganizationDetails(context.Background(), dataState.Name.ValueString()).Body(updateOrg).Execute()
 		if err != nil {
-			errDetail := ""
-			if errors.As(err, &apiErr) {
-				errDetail = string(apiErr.Body())
-			} else {
-				errDetail = err.Error()
-			}
-			resp.Diagnostics.AddError(
-				"Error updating Quay org",
-				"Could not update Quay org, unexpected error: "+errDetail)
+			errDetail := handleQuayAPIError(err)
+			resp.Diagnostics.AddError("Error updating Quay org", "Could not update Quay org, unexpected error: "+errDetail)
 			return
 		}
 	}
@@ -166,15 +152,8 @@ func (r *organizationResource) Update(ctx context.Context, req resource.UpdateRe
 		}
 		_, err := r.client.SuperuserAPI.ChangeOrganization(context.Background(), dataState.Name.ValueString()).Body(updateOrg).Execute()
 		if err != nil {
-			errDetail := ""
-			if errors.As(err, &apiErr) {
-				errDetail = string(apiErr.Body())
-			} else {
-				errDetail = err.Error()
-			}
-			resp.Diagnostics.AddError(
-				"Error updating Quay org",
-				"Could not update Quay org, unexpected error: "+errDetail)
+			errDetail := handleQuayAPIError(err)
+			resp.Diagnostics.AddError("Error updating Quay org", "Could not update Quay org, unexpected error: "+errDetail)
 			return
 		}
 	}
@@ -185,7 +164,6 @@ func (r *organizationResource) Update(ctx context.Context, req resource.UpdateRe
 
 func (r *organizationResource) Delete(ctx context.Context, req resource.DeleteRequest, resp *resource.DeleteResponse) {
 	var data resource_organization.OrganizationModel
-	var apiErr *quay_api.GenericOpenAPIError
 
 	// Read Terraform prior state data into the model
 	resp.Diagnostics.Append(req.State.Get(ctx, &data)...)
@@ -197,15 +175,8 @@ func (r *organizationResource) Delete(ctx context.Context, req resource.DeleteRe
 	// Delete API call logic
 	_, err := r.client.OrganizationAPI.DeleteAdminedOrganization(context.Background(), data.Name.ValueString()).Execute()
 	if err != nil {
-		errDetail := ""
-		if errors.As(err, &apiErr) {
-			errDetail = string(apiErr.Body())
-		} else {
-			errDetail = err.Error()
-		}
-		resp.Diagnostics.AddError(
-			"Error deleting Quay org",
-			"Could not deleting Quay org, unexpected error: "+errDetail)
+		errDetail := handleQuayAPIError(err)
+		resp.Diagnostics.AddError("Error deleting Quay org", "Could not delete Quay org, unexpected error: "+errDetail)
 		return
 	}
 }

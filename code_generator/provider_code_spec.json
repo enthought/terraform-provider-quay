@@ -1,52 +1,210 @@
 {
-	"provider": {
-		"name": "quay"
-	},
-	"resources": [
-		{
-			"name": "organization",
-			"schema": {
-				"attributes": [
-					{
-						"name": "email",
-						"string": {
-							"computed_optional_required": "required",
-							"description": "Organization contact email"
-						}
-					},
-					{
-						"name": "name",
-						"string": {
-							"computed_optional_required": "required",
-							"description": "Organization name"
-						}
-					}
-				]
-			}
-		}
-	],
-	"datasources": [
-		{
-			"name": "organization",
-			"schema": {
-				"attributes": [
-					{
-						"name": "email",
-						"string": {
-							"computed_optional_required": "computed",
-							"description": "Organization contact email"
-						}
-					},
-					{
-						"name": "name",
-						"string": {
-							"computed_optional_required": "required",
-							"description": "Organization name"
-						}
-					}
-				]
-			}
-		}
-	],
-	"version": "0.1"
+  "provider": {
+    "name": "quay"
+  },
+  "resources": [
+    {
+      "name": "organization",
+      "schema": {
+        "attributes": [
+          {
+            "name": "email",
+            "string": {
+              "computed_optional_required": "required",
+              "description": "Organization contact email"
+            }
+          },
+          {
+            "name": "name",
+            "string": {
+              "computed_optional_required": "required",
+              "description": "Organization name"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "organization_robot",
+      "schema": {
+        "attributes": [
+          {
+            "name": "description",
+            "string": {
+              "computed_optional_required": "computed_optional",
+              "default" : {
+                "static": ""
+              },
+              "description": "Text description",
+              "plan_modifiers": [
+                {
+                  "custom": {
+                    "imports": [
+                      {
+                        "path": "github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+                      }
+                    ],
+                    "schema_definition": "stringplanmodifier.RequiresReplace()"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "name": "fullname",
+            "string": {
+              "computed_optional_required": "computed",
+              "description": "Robot full name"
+            }
+          },
+          {
+            "name": "name",
+            "string": {
+              "computed_optional_required": "required",
+              "description": "Robot short name",
+              "plan_modifiers": [
+                {
+                  "custom": {
+                    "imports": [
+                      {
+                        "path": "github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+                      }
+                    ],
+                    "schema_definition": "stringplanmodifier.RequiresReplace()"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "name": "orgname",
+            "string": {
+              "computed_optional_required": "required",
+              "description": "Organization name",
+              "plan_modifiers": [
+                {
+                  "custom": {
+                    "imports": [
+                      {
+                        "path": "github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+                      }
+                    ],
+                    "schema_definition": "stringplanmodifier.RequiresReplace()"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "organization_team",
+      "schema": {
+        "attributes": [
+          {
+            "name": "description",
+            "string": {
+              "computed_optional_required": "computed_optional",
+              "default" : {
+                "static": ""
+              },
+              "description": "Markdown description"
+            }
+          },
+          {
+            "name": "members",
+            "list": {
+              "computed_optional_required": "optional",
+              "description": "List of team members",
+              "element_type": {
+                "string": {}
+              }
+            }
+          },
+          {
+            "name": "name",
+            "string": {
+              "computed_optional_required": "required",
+              "description": "Team name",
+              "plan_modifiers": [
+                {
+                  "custom": {
+                    "imports": [
+                      {
+                        "path": "github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+                      }
+                    ],
+                    "schema_definition": "stringplanmodifier.RequiresReplace()"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "name": "orgname",
+            "string": {
+              "computed_optional_required": "required",
+              "description": "Organization name",
+              "plan_modifiers": [
+                {
+                  "custom": {
+                    "imports": [
+                      {
+                        "path": "github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+                      }
+                    ],
+                    "schema_definition": "stringplanmodifier.RequiresReplace()"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "name": "role",
+            "string": {
+              "computed_optional_required": "required",
+              "description": "Team permission. Should be admin, creator, or member.",
+              "validators": [
+                {
+                  "custom": {
+                    "imports": [
+                      {
+                        "path": "github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
+                      }
+                    ],
+                    "schema_definition": "stringvalidator.OneOf([]string{\"admin\", \"creator\", \"member\"}...)"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "datasources": [
+    {
+      "name": "organization",
+      "schema": {
+        "attributes": [
+          {
+            "name": "email",
+            "string": {
+              "computed_optional_required": "computed",
+              "description": "Organization contact email"
+            }
+          },
+          {
+            "name": "name",
+            "string": {
+              "computed_optional_required": "required",
+              "description": "Organization name"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "version": "0.1"
 }
