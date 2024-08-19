@@ -290,8 +290,12 @@ func (r *organizationTeamResource) Delete(ctx context.Context, req resource.Dele
 		return
 	}
 
+	// Create variables
+	teamName := data.Name.ValueString()
+	orgName := data.Orgname.ValueString()
+
 	// Delete API call logic
-	_, err := r.client.TeamAPI.DeleteOrganizationTeam(context.Background(), data.Orgname.ValueString(), data.Name.ValueString()).Execute()
+	_, err := r.client.TeamAPI.DeleteOrganizationTeam(context.Background(), orgName, teamName).Execute()
 	if err != nil {
 		errDetail := handleQuayAPIError(err)
 		resp.Diagnostics.AddError("Error deleting Quay team", "Could not delete Quay team, unexpected error: "+errDetail)
