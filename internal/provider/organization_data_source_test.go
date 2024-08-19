@@ -7,28 +7,28 @@ import (
 )
 
 func TestAccOrganizationDataSource(t *testing.T) {
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
 		Steps: []resource.TestStep{
 			// Create and read resource
 			{
 				Config: providerConfig + `
-resource "quay_organization" "test" {
-  name = "test"
-  email = "quay+test@example.com"
+resource "quay_organization" "org_data" {
+  name = "org_data"
+  email = "quay+org_data@example.com"
 }
 
-data "quay_organization" "test" {
-  name = "test"
+data "quay_organization" "org_data" {
+  name = "org_data"
 
   depends_on = [
-    quay_organization.test
+    quay_organization.org_data
   ]
 }
 `,
 				Check: resource.ComposeAggregateTestCheckFunc(
-					resource.TestCheckResourceAttr("data.quay_organization.test", "name", "test"),
-					resource.TestCheckResourceAttr("data.quay_organization.test", "email", "quay+test@example.com"),
+					resource.TestCheckResourceAttr("data.quay_organization.org_data", "name", "org_data"),
+					resource.TestCheckResourceAttr("data.quay_organization.org_data", "email", "quay+org_data@example.com"),
 				),
 			},
 		},
