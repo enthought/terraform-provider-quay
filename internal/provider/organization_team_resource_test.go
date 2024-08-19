@@ -241,3 +241,32 @@ resource "quay_organization_team" "test" {
 		},
 	})
 }
+
+func TestAccOrganizationTeamResourceEmptyMembers(t *testing.T) {
+	resource.ParallelTest(t, resource.TestCase{
+		ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
+		Steps: []resource.TestStep{
+			// Create and Read
+			{
+				Config: providerConfig + `
+resource "quay_organization" "org_team_empty" {
+  name = "org_team_empty"
+  email = "quay+org_team_empty@example.com"
+}
+
+resource "quay_organization_team" "test" {
+  name = "test"
+  orgname = quay_organization.org_team_empty.name
+  role = "member"
+  members = []
+}
+`,
+				Check: resource.ComposeAggregateTestCheckFunc(
+					resource.TestCheckResourceAttr("quay_organization_team.test", "name", "test"),
+					resource.TestCheckResourceAttr("quay_organization_team.test", "orgname", "org_team_empty"),
+					resource.TestCheckResourceAttr("quay_organization_team.test", "role", "member"),
+				),
+			},
+		},
+	})
+}

@@ -159,7 +159,10 @@ func (r *organizationTeamResource) Read(ctx context.Context, req resource.ReadRe
 		return
 	}
 
-	data.Members = members
+	// handle case where `members` is set to []
+	if len(data.Members.Elements()) > 0 || len(members.Elements()) > 0 {
+		data.Members = members
+	}
 
 	// Get org data
 	httpRes, err = r.client.OrganizationAPI.GetOrganization(context.Background(), orgName).Execute()
