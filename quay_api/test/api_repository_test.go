@@ -56,16 +56,36 @@ func Test_quay_api_RepositoryAPIService(t *testing.T) {
 	})
 
 	t.Run("Test RepositoryAPIService DeleteRepository", func(t *testing.T) {
+		orgName := "delete-repo"
+		repoName := "test"
 
-		t.Skip("skip test") // remove to run test
+		// Ensure org is destroyed
+		defer func(organization quay_api.ApiDeleteAdminedOrganizationRequest) {
+			_, err := organization.Execute()
+			handleQuayAPIError(t, err)
+		}(apiClient.OrganizationAPI.DeleteAdminedOrganization(context.Background(), orgName))
 
-		var repository string
+		// Create org
+		newOrg := quay_api.NewNewOrg(orgName, orgName+"@example.com")
+		httpRes, err := apiClient.OrganizationAPI.CreateOrganization(context.Background()).Body(*newOrg).Execute()
+		handleQuayAPIError(t, err)
+		assert.Equal(t, 201, httpRes.StatusCode)
 
-		httpRes, err := apiClient.RepositoryAPI.DeleteRepository(context.Background(), repository).Execute()
+		// Create repo
+		newRepo := quay_api.NewRepo{
+			Repository:  repoName,
+			Visibility:  "private",
+			Namespace:   &orgName,
+			Description: "test",
+		}
+		httpRes, err = apiClient.RepositoryAPI.CreateRepo(context.Background()).Body(newRepo).Execute()
+		handleQuayAPIError(t, err)
+		assert.Equal(t, 201, httpRes.StatusCode)
 
-		require.Nil(t, err)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
+		// Delete repo
+		httpRes, err = apiClient.RepositoryAPI.DeleteRepository(context.Background(), orgName+"/"+repoName).Execute()
+		handleQuayAPIError(t, err)
+		assert.Equal(t, 204, httpRes.StatusCode)
 	})
 
 	t.Run("Test RepositoryAPIService GetRepo", func(t *testing.T) {
