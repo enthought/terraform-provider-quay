@@ -237,7 +237,10 @@
           {
             "name": "visibility",
             "string": {
-              "computed_optional_required": "required",
+              "computed_optional_required": "computed_optional",
+              "default" : {
+                "static": "private"
+              },
               "description": "Repository visibility. Should be private or public.",
               "validators": [
                 {

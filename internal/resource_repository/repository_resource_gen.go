@@ -41,12 +41,14 @@ func RepositoryResourceSchema(ctx context.Context) schema.Schema {
 				},
 			},
 			"visibility": schema.StringAttribute{
-				Required:            true,
+				Optional:            true,
+				Computed:            true,
 				Description:         "Repository visibility. Should be private or public.",
 				MarkdownDescription: "Repository visibility. Should be private or public.",
 				Validators: []validator.String{
 					stringvalidator.OneOf([]string{"private", "public"}...),
 				},
+				Default: stringdefault.StaticString("private"),
 			},
 		},
 	}
