@@ -139,19 +139,49 @@ func (r *repositoryResource) Read(ctx context.Context, req resource.ReadRequest,
 }
 
 func (r *repositoryResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
-	var data resource_repository.RepositoryModel
+	var dataState resource_repository.RepositoryModel
+	var dataPlan resource_repository.RepositoryModel
+
+	// Read Terraform prior state data into the model
+	resp.Diagnostics.Append(req.State.Get(ctx, &dataState)...)
 
 	// Read Terraform plan data into the model
-	resp.Diagnostics.Append(req.Plan.Get(ctx, &data)...)
+	resp.Diagnostics.Append(req.Plan.Get(ctx, &dataPlan)...)
 
 	if resp.Diagnostics.HasError() {
 		return
 	}
 
-	// Update API call logic
+	// Create variables
+	repoName := dataPlan.Name.ValueString()
+	visibility := dataPlan.Visibility.ValueString()
+	namespace := dataPlan.Namespace.ValueString()
+	description := dataPlan.Description.ValueString()
+
+	// Update description
+	if dataPlan.Description != dataState.Description {
+		updateRepo := quay_api.NewRepoUpdate(description)
+		_, err := r.client.RepositoryAPI.UpdateRepo(context.Background(), namespace+"/"+repoName).Body(*updateRepo).Execute()
+		if err != nil {
+			errDetail := handleQuayAPIError(err)
+			resp.Diagnostics.AddError("Error updating Quay repository", "Could not update Quay repository, unexpected error: "+errDetail)
+			return
+		}
+	}
+
+	// Update visibility
+	if dataPlan.Visibility != dataState.Visibility {
+		newVisibility := quay_api.NewChangeVisibility(visibility)
+		_, err := r.client.RepositoryAPI.ChangeRepoVisibility(context.Background(), namespace+"/"+repoName).Body(*newVisibility).Execute()
+		if err != nil {
+			errDetail := handleQuayAPIError(err)
+			resp.Diagnostics.AddError("Error updating Quay repository", "Could not update Quay repository, unexpected error: "+errDetail)
+			return
+		}
+	}
 
 	// Save updated data into Terraform state
-	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
+	resp.Diagnostics.Append(resp.State.Set(ctx, &dataPlan)...)
 }
 
 func (r *repositoryResource) Delete(ctx context.Context, req resource.DeleteRequest, resp *resource.DeleteResponse) {

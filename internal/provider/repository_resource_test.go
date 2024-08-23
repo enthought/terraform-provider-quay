@@ -40,6 +40,28 @@ resource "quay_repository" "test" {
 				ImportStateVerify:                    true,
 				ImportStateVerifyIdentifierAttribute: "name",
 			},
+			// Update
+			{
+				Config: providerConfig + `
+resource "quay_organization" "org_repo" {
+  name = "org_repo"
+  email = "quay+repo@example.com"
+}
+
+resource "quay_repository" "test" {
+  name = "test"
+  namespace = quay_organization.org_repo.name
+  visibility = "public"
+  description = "test2"
+}
+`,
+				Check: resource.ComposeAggregateTestCheckFunc(
+					resource.TestCheckResourceAttr("quay_repository.test", "name", "test"),
+					resource.TestCheckResourceAttr("quay_repository.test", "namespace", "org_repo"),
+					resource.TestCheckResourceAttr("quay_repository.test", "visibility", "public"),
+					resource.TestCheckResourceAttr("quay_repository.test", "description", "test2"),
+				),
+			},
 		},
 	})
 }
