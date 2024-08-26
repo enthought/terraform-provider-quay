@@ -11,29 +11,60 @@ package quay_api
 
 import (
 	"context"
-	openapiclient "github.com/enthought/terraform-provider-quay/quay_api"
+	"testing"
+
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"testing"
+
+	"github.com/enthought/terraform-provider-quay/quay_api"
 )
 
 func Test_quay_api_PermissionAPIService(t *testing.T) {
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
+	configuration := newConfiguration()
+	apiClient := quay_api.NewAPIClient(configuration)
 
 	t.Run("Test PermissionAPIService ChangeTeamPermissions", func(t *testing.T) {
+		orgName := "change-team-perm"
+		teamName := "test"
+		repoName := "test"
 
-		t.Skip("skip test") // remove to run test
+		// Ensure org is destroyed
+		defer func(organization quay_api.ApiDeleteAdminedOrganizationRequest) {
+			_, err := organization.Execute()
+			handleQuayAPIError(t, err)
+		}(apiClient.OrganizationAPI.DeleteAdminedOrganization(context.Background(), orgName))
 
-		var repository string
-		var teamname string
+		// Create org
+		newOrg := quay_api.NewNewOrg(orgName, orgName+"@example.com")
+		httpRes, err := apiClient.OrganizationAPI.CreateOrganization(context.Background()).Body(*newOrg).Execute()
+		handleQuayAPIError(t, err)
+		assert.Equal(t, 201, httpRes.StatusCode)
 
-		httpRes, err := apiClient.PermissionAPI.ChangeTeamPermissions(context.Background(), repository, teamname).Execute()
-
-		require.Nil(t, err)
+		// Create team
+		newTeam := quay_api.TeamDescription{
+			Role:        "member",
+			Description: nil,
+		}
+		httpRes, err = apiClient.TeamAPI.UpdateOrganizationTeam(context.Background(), orgName, teamName).Body(newTeam).Execute()
+		handleQuayAPIError(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
+		// Create repo
+		newRepo := quay_api.NewRepo{
+			Repository:  repoName,
+			Visibility:  "private",
+			Namespace:   &orgName,
+			Description: "test",
+		}
+		httpRes, err = apiClient.RepositoryAPI.CreateRepo(context.Background()).Body(newRepo).Execute()
+		handleQuayAPIError(t, err)
+		assert.Equal(t, 201, httpRes.StatusCode)
+
+		// Change team permissions
+		newTeamPermission := quay_api.NewTeamPermission("read")
+		httpRes, err = apiClient.PermissionAPI.ChangeTeamPermissions(context.Background(), orgName+"/"+repoName, teamName).Body(*newTeamPermission).Execute()
+		handleQuayAPIError(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
 	})
 
 	t.Run("Test PermissionAPIService ChangeUserPermissions", func(t *testing.T) {
