@@ -151,6 +151,7 @@ func (p *quayProvider) Metadata(_ context.Context, _ provider.MetadataRequest, r
 func (p *quayProvider) DataSources(_ context.Context) []func() datasource.DataSource {
 	return []func() datasource.DataSource{
 		NewOrganizationDataSource,
+		NewRepositoryDataSource,
 	}
 }
 
@@ -159,5 +160,6 @@ func (p *quayProvider) Resources(_ context.Context) []func() resource.Resource {
 		NewOrganizationResource,
 		NewOrganizationTeamResource,
 		NewOrganizationRobotResource,
+		NewRepositoryResource,
 	}
 }

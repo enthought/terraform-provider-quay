@@ -181,6 +181,83 @@
           }
         ]
       }
+    },
+    {
+      "name": "repository",
+      "schema": {
+        "attributes": [
+          {
+            "name": "description",
+            "string": {
+              "computed_optional_required": "computed_optional",
+              "default" : {
+                "static": ""
+              },
+              "description": "Markdown description"
+            }
+          },
+          {
+            "name": "name",
+            "string": {
+              "computed_optional_required": "required",
+              "description": "Repository name",
+              "plan_modifiers": [
+                {
+                  "custom": {
+                    "imports": [
+                      {
+                        "path": "github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+                      }
+                    ],
+                    "schema_definition": "stringplanmodifier.RequiresReplace()"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "name": "namespace",
+            "string": {
+              "computed_optional_required": "required",
+              "description": "Repository namespace. Should be an organization name or username",
+              "plan_modifiers": [
+                {
+                  "custom": {
+                    "imports": [
+                      {
+                        "path": "github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+                      }
+                    ],
+                    "schema_definition": "stringplanmodifier.RequiresReplace()"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "name": "visibility",
+            "string": {
+              "computed_optional_required": "computed_optional",
+              "default" : {
+                "static": "private"
+              },
+              "description": "Repository visibility. Should be private or public. Defaults to private.",
+              "validators": [
+                {
+                  "custom": {
+                    "imports": [
+                      {
+                        "path": "github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
+                      }
+                    ],
+                    "schema_definition": "stringvalidator.OneOf([]string{\"private\", \"public\"}...)"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
     }
   ],
   "datasources": [
@@ -200,6 +277,41 @@
             "string": {
               "computed_optional_required": "required",
               "description": "Organization name"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "repository",
+      "schema": {
+        "attributes": [
+          {
+            "name": "description",
+            "string": {
+              "computed_optional_required": "computed",
+              "description": "Markdown description"
+            }
+          },
+          {
+            "name": "name",
+            "string": {
+              "computed_optional_required": "required",
+              "description": "Repository name"
+            }
+          },
+          {
+            "name": "namespace",
+            "string": {
+              "computed_optional_required": "required",
+              "description": "Repository namespace. Should be an organization name or username"
+            }
+          },
+          {
+            "name": "visibility",
+            "string": {
+              "computed_optional_required": "computed",
+              "description": "Repository visibility. Should be private or public."
             }
           }
         ]
