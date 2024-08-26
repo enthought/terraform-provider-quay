@@ -43,8 +43,8 @@ func RepositoryResourceSchema(ctx context.Context) schema.Schema {
 			"visibility": schema.StringAttribute{
 				Optional:            true,
 				Computed:            true,
-				Description:         "Repository visibility. Should be private or public.",
-				MarkdownDescription: "Repository visibility. Should be private or public.",
+				Description:         "Repository visibility. Should be private or public. Defaults to private.",
+				MarkdownDescription: "Repository visibility. Should be private or public. Defaults to private.",
 				Validators: []validator.String{
 					stringvalidator.OneOf([]string{"private", "public"}...),
 				},

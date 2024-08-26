@@ -37,7 +37,7 @@ resource "quay_repository" "test" {
 ### Optional
 
 - `description` (String) Markdown description
-- `visibility` (String) Repository visibility. Should be private or public.
+- `visibility` (String) Repository visibility. Should be private or public. Defaults to private.
 
 ## Import
 

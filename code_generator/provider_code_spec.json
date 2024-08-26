@@ -241,7 +241,7 @@
               "default" : {
                 "static": "private"
               },
-              "description": "Repository visibility. Should be private or public.",
+              "description": "Repository visibility. Should be private or public. Defaults to private.",
               "validators": [
                 {
                   "custom": {
