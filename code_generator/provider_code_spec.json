@@ -281,6 +281,41 @@
           }
         ]
       }
+    },
+    {
+      "name": "repository",
+      "schema": {
+        "attributes": [
+          {
+            "name": "description",
+            "string": {
+              "computed_optional_required": "computed",
+              "description": "Markdown description"
+            }
+          },
+          {
+            "name": "name",
+            "string": {
+              "computed_optional_required": "required",
+              "description": "Repository name"
+            }
+          },
+          {
+            "name": "namespace",
+            "string": {
+              "computed_optional_required": "required",
+              "description": "Repository namespace. Should be an organization name or username"
+            }
+          },
+          {
+            "name": "visibility",
+            "string": {
+              "computed_optional_required": "computed",
+              "description": "Repository visibility. Should be private or public."
+            }
+          }
+        ]
+      }
     }
   ],
   "version": "0.1"
