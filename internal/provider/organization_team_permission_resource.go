@@ -8,7 +8,10 @@ package provider
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
+	"github.com/hashicorp/terraform-plugin-framework/types"
+	"io"
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -32,6 +35,10 @@ type organizationTeamPermissionResource struct {
 	client *quay_api.APIClient
 }
 
+type teamPermissionModelJSON struct {
+	Permission string `json:"role"`
+}
+
 func (r *organizationTeamPermissionResource) Metadata(_ context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
 	resp.TypeName = req.ProviderTypeName + "_organization_team_permission"
 }
@@ -50,7 +57,22 @@ func (r *organizationTeamPermissionResource) Create(ctx context.Context, req res
 		return
 	}
 
-	// Create API call logic
+	// Create variables
+	orgName := data.Orgname.ValueString()
+	repoName := data.Reponame.ValueString()
+	teamName := data.Teamname.ValueString()
+	permission := data.Permission.ValueString()
+
+	// Create team permission
+	newTeamPermission := quay_api.NewTeamPermission(permission)
+	_, err := r.client.PermissionAPI.ChangeTeamPermissions(context.Background(), orgName+"/"+repoName, teamName).Body(*newTeamPermission).Execute()
+	if err != nil {
+		errDetail := handleQuayAPIError(err)
+		resp.Diagnostics.AddError(
+			"Error creating Quay team permission",
+			"Could not create Quay team permission, unexpected error: "+errDetail)
+		return
+	}
 
 	// Save data into Terraform state
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -58,6 +80,7 @@ func (r *organizationTeamPermissionResource) Create(ctx context.Context, req res
 
 func (r *organizationTeamPermissionResource) Read(ctx context.Context, req resource.ReadRequest, resp *resource.ReadResponse) {
 	var data resource_organization_team_permission.OrganizationTeamPermissionModel
+	var resData teamPermissionModelJSON
 
 	// Read Terraform prior state data into the model
 	resp.Diagnostics.Append(req.State.Get(ctx, &data)...)
@@ -66,7 +89,38 @@ func (r *organizationTeamPermissionResource) Read(ctx context.Context, req resou
 		return
 	}
 
-	// Read API call logic
+	// Create variables
+	orgName := data.Orgname.ValueString()
+	repoName := data.Reponame.ValueString()
+	teamName := data.Teamname.ValueString()
+
+	// Get team permission
+	httpRes, err := r.client.PermissionAPI.GetTeamPermissions(context.Background(), orgName+"/"+repoName, teamName).Execute()
+	if err != nil {
+		errDetail := handleQuayAPIError(err)
+		resp.Diagnostics.AddError(
+			"Error reading Quay team permission",
+			"Could not read Quay team permission, unexpected error: "+errDetail)
+		return
+	}
+
+	body, err := io.ReadAll(httpRes.Body)
+	if err != nil {
+		resp.Diagnostics.AddError(
+			"Error reading Quay team permission",
+			"Could not read Quay team permission, unexpected error: "+err.Error())
+		return
+	}
+	err = json.Unmarshal(body, &resData)
+	if err != nil {
+		resp.Diagnostics.AddError(
+			"Error reading Quay team permission",
+			"Could not read Quay team permission, unexpected error: "+err.Error())
+		return
+	}
+
+	// Set permission
+	data.Permission = types.StringValue(resData.Permission)
 
 	// Save updated data into Terraform state
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -98,7 +152,20 @@ func (r *organizationTeamPermissionResource) Delete(ctx context.Context, req res
 		return
 	}
 
-	// Delete API call logic
+	// Create variables
+	orgName := data.Orgname.ValueString()
+	repoName := data.Reponame.ValueString()
+	teamName := data.Teamname.ValueString()
+
+	// Delete team permission
+	_, err := r.client.PermissionAPI.DeleteTeamPermissions(context.Background(), orgName+"/"+repoName, teamName).Execute()
+	if err != nil {
+		errDetail := handleQuayAPIError(err)
+		resp.Diagnostics.AddError(
+			"Error deleting Quay team permission",
+			"Could not delete Quay team permission, unexpected error: "+errDetail)
+		return
+	}
 }
 
 func (r *organizationTeamPermissionResource) Configure(_ context.Context, req resource.ConfigureRequest, resp *resource.ConfigureResponse) {
