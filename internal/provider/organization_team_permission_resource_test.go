@@ -15,7 +15,7 @@ func TestAccOrganizationTeamPermissionResource(t *testing.T) {
 				Config: providerConfig + `
 resource "quay_organization" "org_team_perm" {
   name = "org_team_perm"
-  email = "quay+org_team@example.com"
+  email = "quay+org_team_perm@example.com"
 }
 
 resource "quay_repository" "test" {
@@ -56,7 +56,7 @@ resource "quay_organization_team_permission" "test" {
 				Config: providerConfig + `
 resource "quay_organization" "org_team_perm" {
   name = "org_team_perm"
-  email = "quay+org_team@example.com"
+  email = "quay+org_team_perm@example.com"
 }
 
 resource "quay_repository" "test" {
@@ -89,7 +89,7 @@ resource "quay_organization_team_permission" "test" {
 				Config: providerConfig + `
 resource "quay_organization" "org_team_perm" {
   name = "org_team_perm"
-  email = "quay+org_team@example.com"
+  email = "quay+org_team_perm@example.com"
 }
 
 resource "quay_repository" "test2" {

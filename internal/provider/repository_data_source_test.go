@@ -15,7 +15,7 @@ func TestAccRepositoryDataSource(t *testing.T) {
 				Config: providerConfig + `
 resource "quay_organization" "org_repo_data" {
   name = "org_repo_data"
-  email = "quay+repo@example.com"
+  email = "quay+org_repo_data@example.com"
 }
 
 resource "quay_repository" "test" {
