@@ -366,6 +366,41 @@
       }
     },
     {
+      "name": "organization_team_permission",
+      "schema": {
+        "attributes": [
+          {
+            "name": "orgname",
+            "string": {
+              "computed_optional_required": "required",
+              "description": "Organization name"
+            }
+          },
+          {
+            "name": "reponame",
+            "string": {
+              "computed_optional_required": "required",
+              "description": "Repository name"
+            }
+          },
+          {
+            "name": "teamname",
+            "string": {
+              "computed_optional_required": "required",
+              "description": "Team name"
+            }
+          },
+          {
+            "name": "permission",
+            "string": {
+              "computed_optional_required": "computed",
+              "description": "Team permission"
+            }
+          }
+        ]
+      }
+    },
+    {
       "name": "repository",
       "schema": {
         "attributes": [
