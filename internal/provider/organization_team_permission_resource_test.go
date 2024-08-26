@@ -51,6 +51,72 @@ resource "quay_organization_team_permission" "test" {
 				ImportStateVerify:                    true,
 				ImportStateVerifyIdentifierAttribute: "teamname",
 			},
+			// Update
+			{
+				Config: providerConfig + `
+resource "quay_organization" "org_team_perm" {
+  name = "org_team_perm"
+  email = "quay+org_team@example.com"
+}
+
+resource "quay_repository" "test" {
+  name = "test"
+  namespace = quay_organization.org_team_perm.name
+}
+
+resource "quay_organization_team" "test" {
+  name = "test"
+  orgname = quay_organization.org_team_perm.name
+  role = "member"
+}
+
+resource "quay_organization_team_permission" "test" {
+  orgname = quay_organization.org_team_perm.name
+  reponame = quay_repository.test.name
+  teamname = quay_organization_team.test.name
+  permission = "write"
+}
+`,
+				Check: resource.ComposeAggregateTestCheckFunc(
+					resource.TestCheckResourceAttr("quay_organization_team_permission.test", "orgname", "org_team_perm"),
+					resource.TestCheckResourceAttr("quay_organization_team_permission.test", "reponame", "test"),
+					resource.TestCheckResourceAttr("quay_organization_team_permission.test", "teamname", "test"),
+					resource.TestCheckResourceAttr("quay_organization_team_permission.test", "permission", "write"),
+				),
+			},
+			// Replace
+			{
+				Config: providerConfig + `
+resource "quay_organization" "org_team_perm" {
+  name = "org_team_perm"
+  email = "quay+org_team@example.com"
+}
+
+resource "quay_repository" "test2" {
+  name = "test2"
+  namespace = quay_organization.org_team_perm.name
+}
+
+resource "quay_organization_team" "test" {
+  name = "test"
+  orgname = quay_organization.org_team_perm.name
+  role = "member"
+}
+
+resource "quay_organization_team_permission" "test" {
+  orgname = quay_organization.org_team_perm.name
+  reponame = quay_repository.test2.name
+  teamname = quay_organization_team.test.name
+  permission = "write"
+}
+`,
+				Check: resource.ComposeAggregateTestCheckFunc(
+					resource.TestCheckResourceAttr("quay_organization_team_permission.test", "orgname", "org_team_perm"),
+					resource.TestCheckResourceAttr("quay_organization_team_permission.test", "reponame", "test2"),
+					resource.TestCheckResourceAttr("quay_organization_team_permission.test", "teamname", "test"),
+					resource.TestCheckResourceAttr("quay_organization_team_permission.test", "permission", "write"),
+				),
+			},
 		},
 	})
 }

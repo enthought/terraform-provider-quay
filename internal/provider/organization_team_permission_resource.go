@@ -10,12 +10,12 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"github.com/hashicorp/terraform-plugin-framework/types"
 	"io"
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 
 	"github.com/enthought/terraform-provider-quay/quay_api"
 	"terraform-provider-quay/internal/resource_organization_team_permission"
@@ -127,19 +127,40 @@ func (r *organizationTeamPermissionResource) Read(ctx context.Context, req resou
 }
 
 func (r *organizationTeamPermissionResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
-	var data resource_organization_team_permission.OrganizationTeamPermissionModel
+	var dataState resource_organization_team_permission.OrganizationTeamPermissionModel
+	var dataPlan resource_organization_team_permission.OrganizationTeamPermissionModel
+
+	// Read Terraform prior state data into the model
+	resp.Diagnostics.Append(req.State.Get(ctx, &dataState)...)
 
 	// Read Terraform plan data into the model
-	resp.Diagnostics.Append(req.Plan.Get(ctx, &data)...)
+	resp.Diagnostics.Append(req.Plan.Get(ctx, &dataPlan)...)
 
 	if resp.Diagnostics.HasError() {
 		return
 	}
 
-	// Update API call logic
+	// Create variables
+	orgName := dataPlan.Orgname.ValueString()
+	repoName := dataPlan.Reponame.ValueString()
+	teamName := dataPlan.Teamname.ValueString()
+	permission := dataPlan.Permission.ValueString()
+
+	// Update team permission
+	if dataPlan.Permission != dataState.Permission {
+		newTeamPermission := quay_api.NewTeamPermission(permission)
+		_, err := r.client.PermissionAPI.ChangeTeamPermissions(context.Background(), orgName+"/"+repoName, teamName).Body(*newTeamPermission).Execute()
+		if err != nil {
+			errDetail := handleQuayAPIError(err)
+			resp.Diagnostics.AddError(
+				"Error updating Quay team permission",
+				"Could not update Quay team permission, unexpected error: "+errDetail)
+			return
+		}
+	}
 
 	// Save updated data into Terraform state
-	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
+	resp.Diagnostics.Append(resp.State.Set(ctx, &dataPlan)...)
 }
 
 func (r *organizationTeamPermissionResource) Delete(ctx context.Context, req resource.DeleteRequest, resp *resource.DeleteResponse) {
