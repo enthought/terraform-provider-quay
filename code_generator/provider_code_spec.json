@@ -164,7 +164,7 @@
             "name": "role",
             "string": {
               "computed_optional_required": "required",
-              "description": "Team permission. Should be admin, creator, or member.",
+              "description": "Team role. Should be admin, creator, or member.",
               "validators": [
                 {
                   "custom": {
@@ -174,6 +174,89 @@
                       }
                     ],
                     "schema_definition": "stringvalidator.OneOf([]string{\"admin\", \"creator\", \"member\"}...)"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "organization_team_permission",
+      "schema": {
+        "attributes": [
+          {
+            "name": "orgname",
+            "string": {
+              "computed_optional_required": "required",
+              "description": "Organization name",
+              "plan_modifiers": [
+                {
+                  "custom": {
+                    "imports": [
+                      {
+                        "path": "github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+                      }
+                    ],
+                    "schema_definition": "stringplanmodifier.RequiresReplace()"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "name": "reponame",
+            "string": {
+              "computed_optional_required": "required",
+              "description": "Repository name",
+              "plan_modifiers": [
+                {
+                  "custom": {
+                    "imports": [
+                      {
+                        "path": "github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+                      }
+                    ],
+                    "schema_definition": "stringplanmodifier.RequiresReplace()"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "name": "teamname",
+            "string": {
+              "computed_optional_required": "required",
+              "description": "Team name",
+              "plan_modifiers": [
+                {
+                  "custom": {
+                    "imports": [
+                      {
+                        "path": "github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+                      }
+                    ],
+                    "schema_definition": "stringplanmodifier.RequiresReplace()"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "name": "permission",
+            "string": {
+              "computed_optional_required": "required",
+              "description": "Team permission. Should be read, write or admin.",
+              "validators": [
+                {
+                  "custom": {
+                    "imports": [
+                      {
+                        "path": "github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
+                      }
+                    ],
+                    "schema_definition": "stringvalidator.OneOf([]string{\"read\", \"write\", \"admin\"}...)"
                   }
                 }
               ]
@@ -277,6 +360,41 @@
             "string": {
               "computed_optional_required": "required",
               "description": "Organization name"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "organization_team_permission",
+      "schema": {
+        "attributes": [
+          {
+            "name": "orgname",
+            "string": {
+              "computed_optional_required": "required",
+              "description": "Organization name"
+            }
+          },
+          {
+            "name": "reponame",
+            "string": {
+              "computed_optional_required": "required",
+              "description": "Repository name"
+            }
+          },
+          {
+            "name": "teamname",
+            "string": {
+              "computed_optional_required": "required",
+              "description": "Team name"
+            }
+          },
+          {
+            "name": "permission",
+            "string": {
+              "computed_optional_required": "computed",
+              "description": "Team permission"
             }
           }
         ]

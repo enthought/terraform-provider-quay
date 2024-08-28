@@ -152,6 +152,7 @@ func (p *quayProvider) DataSources(_ context.Context) []func() datasource.DataSo
 	return []func() datasource.DataSource{
 		NewOrganizationDataSource,
 		NewRepositoryDataSource,
+		NewOrganizationTeamPermissionDataSource,
 	}
 }
 
@@ -161,5 +162,6 @@ func (p *quayProvider) Resources(_ context.Context) []func() resource.Resource {
 		NewOrganizationTeamResource,
 		NewOrganizationRobotResource,
 		NewRepositoryResource,
+		NewOrganizationTeamPermissionResource,
 	}
 }
