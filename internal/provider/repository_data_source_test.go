@@ -28,6 +28,10 @@ resource "quay_repository" "test" {
 data "quay_repository" "test" {
   name = "test"
   namespace = quay_organization.org_repo_data.name
+  
+  depends_on = [
+    quay_repository.test
+  ]
 }
 `,
 				Check: resource.ComposeAggregateTestCheckFunc(
