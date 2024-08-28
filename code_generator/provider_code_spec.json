@@ -366,6 +366,51 @@
       }
     },
     {
+      "name": "organization_team",
+      "schema": {
+        "attributes": [
+          {
+            "name": "description",
+            "string": {
+              "computed_optional_required": "computed",
+              "description": "Markdown description"
+            }
+          },
+          {
+            "name": "members",
+            "list": {
+              "computed_optional_required": "computed",
+              "description": "List of team members",
+              "element_type": {
+                "string": {}
+              }
+            }
+          },
+          {
+            "name": "name",
+            "string": {
+              "computed_optional_required": "required",
+              "description": "Team name"
+            }
+          },
+          {
+            "name": "orgname",
+            "string": {
+              "computed_optional_required": "required",
+              "description": "Organization name"
+            }
+          },
+          {
+            "name": "role",
+            "string": {
+              "computed_optional_required": "computed",
+              "description": "Team role"
+            }
+          }
+        ]
+      }
+    },
+    {
       "name": "organization_team_permission",
       "schema": {
         "attributes": [
