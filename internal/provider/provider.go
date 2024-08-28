@@ -154,6 +154,7 @@ func (p *quayProvider) DataSources(_ context.Context) []func() datasource.DataSo
 		NewRepositoryDataSource,
 		NewOrganizationTeamPermissionDataSource,
 		NewOrganizationTeamDataSource,
+		NewOrganizationRobotDataSource,
 	}
 }
 

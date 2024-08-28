@@ -366,6 +366,41 @@
       }
     },
     {
+      "name": "organization_robot",
+      "schema": {
+        "attributes": [
+          {
+            "name": "description",
+            "string": {
+              "computed_optional_required": "computed",
+              "description": "Text description"
+            }
+          },
+          {
+            "name": "fullname",
+            "string": {
+              "computed_optional_required": "computed",
+              "description": "Robot full name"
+            }
+          },
+          {
+            "name": "name",
+            "string": {
+              "computed_optional_required": "required",
+              "description": "Robot short name"
+            }
+          },
+          {
+            "name": "orgname",
+            "string": {
+              "computed_optional_required": "required",
+              "description": "Organization name"
+            }
+          }
+        ]
+      }
+    },
+    {
       "name": "organization_team",
       "schema": {
         "attributes": [
