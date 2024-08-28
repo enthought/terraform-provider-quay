@@ -40,7 +40,7 @@ resource "quay_organization_team" "admin" {
 
 - `name` (String) Team name
 - `orgname` (String) Organization name
-- `role` (String) Team permission. Should be admin, creator, or member.
+- `role` (String) Team role. Should be admin, creator, or member.
 
 ### Optional
 
