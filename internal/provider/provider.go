@@ -54,6 +54,52 @@ func (p *quayProvider) Configure(ctx context.Context, req provider.ConfigureRequ
 		return
 	}
 
+	quayURL := os.Getenv("QUAY_URL")
+	quayToken := os.Getenv("QUAY_TOKEN")
+
+	if !config.Url.IsNull() {
+		quayURL = config.Url.ValueString()
+	}
+
+	if !config.Token.IsNull() {
+		quayToken = config.Token.ValueString()
+	}
+
+	ctx = tflog.SetField(ctx, "quay_url", quayURL)
+	ctx = tflog.SetField(ctx, "quay_token", quayToken)
+	ctx = tflog.MaskFieldValuesWithFieldKeys(ctx, "quay_token")
+
+	tflog.Debug(ctx, "Creating Quay client")
+
+	configuration := &quay_api.Configuration{
+		DefaultHeader: make(map[string]string),
+		UserAgent:     "OpenAPI-Generator/1.0.0/go",
+		Debug:         false,
+		Servers: quay_api.ServerConfigurations{
+			{
+				URL:         quayURL,
+				Description: "No description provided",
+			},
+		},
+		OperationServers: map[string]quay_api.ServerConfigurations{},
+	}
+	configuration.AddDefaultHeader("Authorization", "Bearer "+quayToken)
+	client := quay_api.NewAPIClient(configuration)
+
+	resp.DataSourceData = client
+	resp.ResourceData = client
+
+	tflog.Info(ctx, "Configured Quay client", map[string]any{"success": true})
+}
+
+func (p *quayProvider) ValidateConfig(ctx context.Context, req provider.ValidateConfigRequest, resp *provider.ValidateConfigResponse) {
+	var config quayProviderModel
+	diags := req.Config.Get(ctx, &config)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
 	if config.Url.IsUnknown() {
 		resp.Diagnostics.AddAttributeError(
 			path.Root("url"),
@@ -116,32 +162,6 @@ func (p *quayProvider) Configure(ctx context.Context, req provider.ConfigureRequ
 	if resp.Diagnostics.HasError() {
 		return
 	}
-
-	ctx = tflog.SetField(ctx, "quay_url", quayURL)
-	ctx = tflog.SetField(ctx, "quay_token", quayToken)
-	ctx = tflog.MaskFieldValuesWithFieldKeys(ctx, "quay_token")
-
-	tflog.Debug(ctx, "Creating Quay client")
-
-	configuration := &quay_api.Configuration{
-		DefaultHeader: make(map[string]string),
-		UserAgent:     "OpenAPI-Generator/1.0.0/go",
-		Debug:         false,
-		Servers: quay_api.ServerConfigurations{
-			{
-				URL:         quayURL,
-				Description: "No description provided",
-			},
-		},
-		OperationServers: map[string]quay_api.ServerConfigurations{},
-	}
-	configuration.AddDefaultHeader("Authorization", "Bearer "+quayToken)
-	client := quay_api.NewAPIClient(configuration)
-
-	resp.DataSourceData = client
-	resp.ResourceData = client
-
-	tflog.Info(ctx, "Configured Quay client", map[string]any{"success": true})
 }
 
 func (p *quayProvider) Metadata(_ context.Context, _ provider.MetadataRequest, resp *provider.MetadataResponse) {
