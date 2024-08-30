@@ -26,8 +26,10 @@ func New() func() provider.Provider {
 type quayProvider struct{}
 
 type quayProviderModel struct {
-	Url   types.String `tfsdk:"url"`
-	Token types.String `tfsdk:"token"`
+	Url          types.String `tfsdk:"url"`
+	Token        types.String `tfsdk:"token"`
+	ClientID     types.String `tfsdk:"client_id"`
+	ClientSecret types.String `tfsdk:"client_secret"`
 }
 
 func (p *quayProvider) Schema(_ context.Context, _ provider.SchemaRequest, resp *provider.SchemaResponse) {
@@ -38,6 +40,15 @@ func (p *quayProvider) Schema(_ context.Context, _ provider.SchemaRequest, resp 
 		},
 		"token": schema.StringAttribute{
 			Description: "Quay token. May also be provided via the QUAY_TOKEN environment variable.",
+			Optional:    true,
+			Sensitive:   true,
+		},
+		"client_id": schema.StringAttribute{
+			Description: "Client ID. Used for generating a JWT OAuth2 access token with client credentials.",
+			Optional:    true,
+		},
+		"client_secret": schema.StringAttribute{
+			Description: "Client secret. Used for generating a JWT OAuth2 access token with client credentials.",
 			Optional:    true,
 			Sensitive:   true,
 		},
@@ -100,21 +111,11 @@ func (p *quayProvider) ValidateConfig(ctx context.Context, req provider.Validate
 		return
 	}
 
-	if config.Url.IsUnknown() {
-		resp.Diagnostics.AddAttributeError(
-			path.Root("url"),
-			"Unknown Quay URL",
-			"The provider cannot create the Quay client as the URL value is unknown. "+
-				"Either target apply the source of the value first, set the value statically in the configuration, or use the QUAY_URL environment variable",
-		)
-	}
-
-	if config.Token.IsUnknown() {
-		resp.Diagnostics.AddAttributeError(
-			path.Root("token"),
-			"Unknown Quay token",
-			"The provider cannot create the Quay client as the token value is unknown. "+
-				"Either target apply the source of the value first, set the value statically in the configuration, or use the QUAY_TOKEN environment variable",
+	if config.Url.IsUnknown() || config.Token.IsUnknown() || config.ClientID.IsUnknown() || config.ClientSecret.IsUnknown() {
+		resp.Diagnostics.AddError(
+			"Unknown configuration values",
+			"The provider cannot create the Quay client if any configuration values are unknown. "+
+				"Either target apply the source of the unknown value(s) first, set the value(s) statically in the configuration, or set the appropriate environment variable(s).",
 		)
 	}
 
@@ -124,6 +125,8 @@ func (p *quayProvider) ValidateConfig(ctx context.Context, req provider.Validate
 
 	quayURL := os.Getenv("QUAY_URL")
 	quayToken := os.Getenv("QUAY_TOKEN")
+	clientID := os.Getenv("QUAY_CLIENT_ID")
+	clientSecret := os.Getenv("QUAY_CLIENT_SECRET")
 
 	if !config.Url.IsNull() {
 		quayURL = config.Url.ValueString()
@@ -133,13 +136,36 @@ func (p *quayProvider) ValidateConfig(ctx context.Context, req provider.Validate
 		quayToken = config.Token.ValueString()
 	}
 
+	if !config.ClientID.IsNull() {
+		clientID = config.ClientID.ValueString()
+	}
+
+	if !config.ClientSecret.IsNull() {
+		clientSecret = config.ClientSecret.ValueString()
+	}
+
+	if (quayToken != "" && clientID != "") || (quayToken != "" && clientSecret != "") {
+		resp.Diagnostics.AddError(
+			"Cannot specify token and client credentials",
+			"Token cannot be specified when a client ID or client secret are also specified. You must pick one authentication method.",
+		)
+	}
+
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
 	if quayURL == "" {
 		resp.Diagnostics.AddAttributeError(
 			path.Root("url"),
 			"Missing Quay URL",
 			"The provider cannot create the Quay client as there is a missing or empty value for the Quay URL. "+
-				"Set the URL in the configuration or use the QUAY_URL environment variable. ",
+				"Set the URL in the configuration or use the QUAY_URL environment variable.",
 		)
+	}
+
+	if resp.Diagnostics.HasError() {
+		return
 	}
 
 	if !isValidURL(quayURL) {
@@ -150,12 +176,40 @@ func (p *quayProvider) ValidateConfig(ctx context.Context, req provider.Validate
 		)
 	}
 
-	if quayToken == "" {
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
+	if quayToken == "" && (clientID == "" && clientSecret == "") {
+		resp.Diagnostics.AddError(
+			"Missing Quay token and client credentials",
+			"The provider cannot create the Quay client as both the Quay token and client credentials are missing or empty.",
+		)
+	}
+
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
+	if clientID != "" && clientSecret == "" {
 		resp.Diagnostics.AddAttributeError(
-			path.Root("token"),
-			"Missing Quay token",
-			"The provider cannot create the Quay client as there is a missing or empty value for the Quay token. "+
-				"Set the token in the configuration or use the QUAY_TOKEN environment variable. ",
+			path.Root("client_secret"),
+			"Missing client secret",
+			"The provider cannot create the Quay client as there is a missing value or empty value for the client secret."+
+				"Set the client secret in the configuration or use the QUAY_CLIENT_SECRET environment variable.",
+		)
+	}
+
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
+	if clientID == "" && clientSecret != "" {
+		resp.Diagnostics.AddAttributeError(
+			path.Root("client_id"),
+			"Missing client ID",
+			"The provider cannot create the Quay client as there is a missing value or empty value for the client ID."+
+				"Set the client ID in the configuration or use the QUAY_CLIENT_ID environment variable.",
 		)
 	}
 
