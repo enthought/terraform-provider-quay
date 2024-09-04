@@ -25,8 +25,10 @@ func TestAccProviderValidationWithoutENV(t *testing.T) {
 	// unset QUAY_* environment variables
 	t.Setenv("QUAY_URL", "")
 	t.Setenv("QUAY_TOKEN", "")
-	t.Setenv("QUAY_CLIENT_ID", "")
-	t.Setenv("QUAY_CLIENT_SECRET", "")
+	t.Setenv("QUAY_OAUTH2_USERNAME", "")
+	t.Setenv("QUAY_OAUTH2_PASSWORD", "")
+	t.Setenv("QUAY_OAUTH2_CLIENT_ID", "")
+	t.Setenv("QUAY_OAUTH2_TOKEN_URL", "")
 
 	resource.Test(t, resource.TestCase{
 		ExternalProviders: map[string]resource.ExternalProvider{
@@ -55,22 +57,21 @@ data "quay_organization" "provider_test" {
 `,
 				ExpectError: regexp.MustCompile(".*Error: Unknown configuration values"),
 			},
-			// Token and client credentials
+			// Token and OAuth2 credentials
 			{
 				PlanOnly: true,
 				Config: `
 provider "quay" {
   url = "https://quay.example.com"
   token = "asdf"
-  client_id = "quay"
-  client_secret = "asdf"
+  oauth2_client_id = "quay"
 }
 
 data "quay_organization" "provider_test" {
   name = "provider_test"
 }
 `,
-				ExpectError: regexp.MustCompile(".*Error: Cannot specify token and client credentials"),
+				ExpectError: regexp.MustCompile(".*Error: Cannot specify token and OAuth2 credentials"),
 			},
 			// No config values
 			{
@@ -99,7 +100,7 @@ data "quay_organization" "provider_test" {
 `,
 				ExpectError: regexp.MustCompile(".*Error: Quay URL is not a valid URL"),
 			},
-			// Missing Quay token and client credentials
+			// Missing Quay token and OAuth2 credentials
 			{
 				PlanOnly: true,
 				Config: `
@@ -111,37 +112,75 @@ data "quay_organization" "provider_test" {
   name = "provider_test"
 }
 `,
-				ExpectError: regexp.MustCompile(".*Error: Missing Quay token and client credentials"),
+				ExpectError: regexp.MustCompile(".*Error: Missing Quay token and OAuth2 credentials"),
 			},
-			// Missing client secret
+			// Missing OAuth2 username
 			{
 				PlanOnly: true,
 				Config: `
 provider "quay" {
   url = "https://quay.example.com"
-  client_id = "quay"
+  oauth2_password = "test"
+  oauth2_client_id = "quay"
+  oauth2_token_url = "https://auth.example.com/token"
 }
 
 data "quay_organization" "provider_test" {
   name = "provider_test"
 }
 `,
-				ExpectError: regexp.MustCompile(".*Error: Missing client secret"),
+				ExpectError: regexp.MustCompile(".*Error: Missing OAuth2 username"),
 			},
-			// Missing client ID
+			// Missing OAuth2 password
 			{
 				PlanOnly: true,
 				Config: `
 provider "quay" {
   url = "https://quay.example.com"
-  client_secret = "asdf"
+  oauth2_username = "test"
+  oauth2_client_id = "quay"
+  oauth2_token_url = "https://auth.example.com/token"
 }
 
 data "quay_organization" "provider_test" {
   name = "provider_test"
 }
 `,
-				ExpectError: regexp.MustCompile(".*Error: Missing client ID"),
+				ExpectError: regexp.MustCompile(".*Error: Missing OAuth2 password"),
+			},
+			// Missing OAuth2 client ID
+			{
+				PlanOnly: true,
+				Config: `
+provider "quay" {
+  url = "https://quay.example.com"
+  oauth2_username = "test"
+  oauth2_password = "test"
+  oauth2_token_url = "https://auth.example.com/token"
+}
+
+data "quay_organization" "provider_test" {
+  name = "provider_test"
+}
+`,
+				ExpectError: regexp.MustCompile(".*Error: Missing OAuth2 client ID"),
+			},
+			// Missing OAuth2 token URL
+			{
+				PlanOnly: true,
+				Config: `
+provider "quay" {
+  url = "https://quay.example.com"
+  oauth2_username = "test"
+  oauth2_password = "test"
+  oauth2_client_id = "quay"
+}
+
+data "quay_organization" "provider_test" {
+  name = "provider_test"
+}
+`,
+				ExpectError: regexp.MustCompile(".*Error: Missing OAuth2 token URL"),
 			},
 		},
 	})

@@ -26,10 +26,12 @@ func New() func() provider.Provider {
 type quayProvider struct{}
 
 type quayProviderModel struct {
-	Url          types.String `tfsdk:"url"`
-	Token        types.String `tfsdk:"token"`
-	ClientID     types.String `tfsdk:"client_id"`
-	ClientSecret types.String `tfsdk:"client_secret"`
+	Url            types.String `tfsdk:"url"`
+	Token          types.String `tfsdk:"token"`
+	OAuth2Username types.String `tfsdk:"oauth2_username"`
+	OAuth2Password types.String `tfsdk:"oauth2_password"`
+	OAuth2ClientID types.String `tfsdk:"oauth2_client_id"`
+	OAuth2TokenURL types.String `tfsdk:"oauth2_token_url"`
 }
 
 func (p *quayProvider) Schema(_ context.Context, _ provider.SchemaRequest, resp *provider.SchemaResponse) {
@@ -43,14 +45,22 @@ func (p *quayProvider) Schema(_ context.Context, _ provider.SchemaRequest, resp 
 			Optional:    true,
 			Sensitive:   true,
 		},
-		"client_id": schema.StringAttribute{
-			Description: "Client ID. Used for generating a JWT OAuth2 access token with client credentials.",
+		"oauth2_username": schema.StringAttribute{
+			Description: "OAuth2 username. Used for generating a JWT OAuth2 access token with password grant.",
 			Optional:    true,
 		},
-		"client_secret": schema.StringAttribute{
-			Description: "Client secret. Used for generating a JWT OAuth2 access token with client credentials.",
+		"oauth2_password": schema.StringAttribute{
+			Description: "OAuth2 password. Used for generating a JWT OAuth2 access token with password grant.",
 			Optional:    true,
 			Sensitive:   true,
+		},
+		"oauth2_client_id": schema.StringAttribute{
+			Description: "OAuth2 client ID. Used for generating a JWT OAuth2 access token with password grant.",
+			Optional:    true,
+		},
+		"oauth2_token_url": schema.StringAttribute{
+			Description: "OAuth2 token endpoint URL. Used for generating a JWT OAuth2 access token with password grant.",
+			Optional:    true,
 		},
 	}}
 }
@@ -65,20 +75,45 @@ func (p *quayProvider) Configure(ctx context.Context, req provider.ConfigureRequ
 		return
 	}
 
-	quayURL := os.Getenv("QUAY_URL")
-	quayToken := os.Getenv("QUAY_TOKEN")
+	url := os.Getenv("QUAY_URL")
+	token := os.Getenv("QUAY_TOKEN")
+	oauth2Username := os.Getenv("QUAY_OAUTH2_USERNAME")
+	oauth2Password := os.Getenv("QUAY_OAUTH2_PASSWORD")
+	oauth2ClientID := os.Getenv("QUAY_OAUTH2_CLIENT_ID")
+	oauth2TokenURL := os.Getenv("QUAY_OAUTH2_TOKEN_URL")
 
 	if !config.Url.IsNull() {
-		quayURL = config.Url.ValueString()
+		url = config.Url.ValueString()
 	}
 
 	if !config.Token.IsNull() {
-		quayToken = config.Token.ValueString()
+		token = config.Token.ValueString()
 	}
 
-	ctx = tflog.SetField(ctx, "quay_url", quayURL)
-	ctx = tflog.SetField(ctx, "quay_token", quayToken)
-	ctx = tflog.MaskFieldValuesWithFieldKeys(ctx, "quay_token")
+	if !config.OAuth2Username.IsNull() {
+		oauth2Username = config.OAuth2Username.ValueString()
+	}
+
+	if !config.OAuth2Password.IsNull() {
+		oauth2Password = config.OAuth2Password.ValueString()
+	}
+
+	if !config.OAuth2ClientID.IsNull() {
+		oauth2ClientID = config.OAuth2ClientID.ValueString()
+	}
+
+	if !config.OAuth2TokenURL.IsNull() {
+		oauth2TokenURL = config.OAuth2TokenURL.ValueString()
+	}
+
+	ctx = tflog.SetField(ctx, "url", url)
+	ctx = tflog.SetField(ctx, "token", token)
+	ctx = tflog.SetField(ctx, "oauth2_username", oauth2Username)
+	ctx = tflog.SetField(ctx, "oauth2_password", oauth2Password)
+	ctx = tflog.SetField(ctx, "oauth2_client_id", oauth2ClientID)
+	ctx = tflog.SetField(ctx, "oauth2_token_url", oauth2TokenURL)
+	ctx = tflog.MaskFieldValuesWithFieldKeys(ctx, "token")
+	ctx = tflog.MaskFieldValuesWithFieldKeys(ctx, "oauth2_password")
 
 	tflog.Debug(ctx, "Creating Quay client")
 
@@ -88,13 +123,13 @@ func (p *quayProvider) Configure(ctx context.Context, req provider.ConfigureRequ
 		Debug:         false,
 		Servers: quay_api.ServerConfigurations{
 			{
-				URL:         quayURL,
+				URL:         url,
 				Description: "No description provided",
 			},
 		},
 		OperationServers: map[string]quay_api.ServerConfigurations{},
 	}
-	configuration.AddDefaultHeader("Authorization", "Bearer "+quayToken)
+	configuration.AddDefaultHeader("Authorization", "Bearer "+token)
 	client := quay_api.NewAPIClient(configuration)
 
 	resp.DataSourceData = client
@@ -111,7 +146,8 @@ func (p *quayProvider) ValidateConfig(ctx context.Context, req provider.Validate
 		return
 	}
 
-	if config.Url.IsUnknown() || config.Token.IsUnknown() || config.ClientID.IsUnknown() || config.ClientSecret.IsUnknown() {
+	if config.Url.IsUnknown() || config.Token.IsUnknown() || config.OAuth2Username.IsUnknown() || config.OAuth2Password.IsUnknown() ||
+		config.OAuth2ClientID.IsUnknown() || config.OAuth2TokenURL.IsUnknown() {
 		resp.Diagnostics.AddError(
 			"Unknown configuration values",
 			"The provider cannot create the Quay client if any configuration values are unknown. "+
@@ -123,31 +159,40 @@ func (p *quayProvider) ValidateConfig(ctx context.Context, req provider.Validate
 		return
 	}
 
-	quayURL := os.Getenv("QUAY_URL")
-	quayToken := os.Getenv("QUAY_TOKEN")
-	clientID := os.Getenv("QUAY_CLIENT_ID")
-	clientSecret := os.Getenv("QUAY_CLIENT_SECRET")
+	url := os.Getenv("QUAY_URL")
+	token := os.Getenv("QUAY_TOKEN")
+	oauth2Username := os.Getenv("QUAY_OAUTH2_USERNAME")
+	oauth2Password := os.Getenv("QUAY_OAUTH2_PASSWORD")
+	oauth2ClientID := os.Getenv("QUAY_OAUTH2_CLIENT_ID")
+	oauth2TokenURL := os.Getenv("QUAY_OAUTH2_TOKEN_URL")
 
 	if !config.Url.IsNull() {
-		quayURL = config.Url.ValueString()
+		url = config.Url.ValueString()
 	}
 
 	if !config.Token.IsNull() {
-		quayToken = config.Token.ValueString()
+		token = config.Token.ValueString()
 	}
 
-	if !config.ClientID.IsNull() {
-		clientID = config.ClientID.ValueString()
+	if !config.OAuth2Username.IsNull() {
+		oauth2Username = config.OAuth2Username.ValueString()
 	}
 
-	if !config.ClientSecret.IsNull() {
-		clientSecret = config.ClientSecret.ValueString()
+	if !config.OAuth2Password.IsNull() {
+		oauth2Password = config.OAuth2Password.ValueString()
 	}
 
-	if (quayToken != "" && clientID != "") || (quayToken != "" && clientSecret != "") {
+	if !config.OAuth2ClientID.IsNull() {
+		oauth2ClientID = config.OAuth2ClientID.ValueString()
+	}
+
+	if !config.OAuth2TokenURL.IsNull() {
+		oauth2TokenURL = config.OAuth2TokenURL.ValueString()
+	}
+	if token != "" && (oauth2Username != "" || oauth2Password != "" || oauth2ClientID != "" || oauth2TokenURL != "") {
 		resp.Diagnostics.AddError(
-			"Cannot specify token and client credentials",
-			"Token cannot be specified when a client ID or client secret are also specified. You must pick one authentication method.",
+			"Cannot specify token and OAuth2 credentials",
+			"Token cannot be specified when OAuth2 credentials are also specified. You must pick one authentication method.",
 		)
 	}
 
@@ -155,7 +200,7 @@ func (p *quayProvider) ValidateConfig(ctx context.Context, req provider.Validate
 		return
 	}
 
-	if quayURL == "" {
+	if url == "" {
 		resp.Diagnostics.AddAttributeError(
 			path.Root("url"),
 			"Missing Quay URL",
@@ -168,7 +213,7 @@ func (p *quayProvider) ValidateConfig(ctx context.Context, req provider.Validate
 		return
 	}
 
-	if !isValidURL(quayURL) {
+	if !isValidURL(url) {
 		resp.Diagnostics.AddAttributeError(
 			path.Root("url"),
 			"Quay URL is not a valid URL",
@@ -180,10 +225,10 @@ func (p *quayProvider) ValidateConfig(ctx context.Context, req provider.Validate
 		return
 	}
 
-	if quayToken == "" && (clientID == "" && clientSecret == "") {
+	if token == "" && oauth2Username == "" && oauth2Password == "" && oauth2ClientID == "" && oauth2TokenURL == "" {
 		resp.Diagnostics.AddError(
-			"Missing Quay token and client credentials",
-			"The provider cannot create the Quay client as both the Quay token and client credentials are missing or empty.",
+			"Missing Quay token and OAuth2 credentials",
+			"The provider cannot create the Quay client as both the Quay token and OAuth2 credentials are missing or empty.",
 		)
 	}
 
@@ -191,12 +236,12 @@ func (p *quayProvider) ValidateConfig(ctx context.Context, req provider.Validate
 		return
 	}
 
-	if clientID != "" && clientSecret == "" {
+	if token == "" && oauth2Username == "" {
 		resp.Diagnostics.AddAttributeError(
-			path.Root("client_secret"),
-			"Missing client secret",
-			"The provider cannot create the Quay client as there is a missing value or empty value for the client secret."+
-				"Set the client secret in the configuration or use the QUAY_CLIENT_SECRET environment variable.",
+			path.Root("oauth2_username"),
+			"Missing OAuth2 username",
+			"The provider cannot create the Quay client as there is a missing value or empty value for the OAuth2 username."+
+				"Set the OAuth2 username in the configuration or use the QUAY_OAUTH2_USERNAME environment variable.",
 		)
 	}
 
@@ -204,12 +249,38 @@ func (p *quayProvider) ValidateConfig(ctx context.Context, req provider.Validate
 		return
 	}
 
-	if clientID == "" && clientSecret != "" {
+	if token == "" && oauth2Password == "" {
 		resp.Diagnostics.AddAttributeError(
-			path.Root("client_id"),
-			"Missing client ID",
-			"The provider cannot create the Quay client as there is a missing value or empty value for the client ID."+
-				"Set the client ID in the configuration or use the QUAY_CLIENT_ID environment variable.",
+			path.Root("oauth2_password"),
+			"Missing OAuth2 password",
+			"The provider cannot create the Quay client as there is a missing value or empty value for the OAuth2 password."+
+				"Set the OAuth2 password in the configuration or use the QUAY_OAUTH2_PASSWORD environment variable.",
+		)
+	}
+
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
+	if token == "" && oauth2ClientID == "" {
+		resp.Diagnostics.AddAttributeError(
+			path.Root("oauth2_client_id"),
+			"Missing OAuth2 client ID",
+			"The provider cannot create the Quay client as there is a missing value or empty value for the OAuth2 client ID."+
+				"Set the OAuth2 client ID in the configuration or use the QUAY_OAUTH2_CLIENT_ID environment variable.",
+		)
+	}
+
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
+	if token == "" && oauth2TokenURL == "" {
+		resp.Diagnostics.AddAttributeError(
+			path.Root("oauth2_token_url"),
+			"Missing OAuth2 token URL",
+			"The provider cannot create the Quay client as there is a missing value or empty value for the OAuth2 token URL."+
+				"Set the OAuth2 token URL in the configuration or use the QUAY_OAUTH2_TOKEN_URL environment variable.",
 		)
 	}
 
