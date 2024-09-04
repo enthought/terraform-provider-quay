@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
+	"golang.org/x/oauth2"
 
 	"github.com/enthought/terraform-provider-quay/quay_api"
 )
@@ -129,6 +130,25 @@ func (p *quayProvider) Configure(ctx context.Context, req provider.ConfigureRequ
 		},
 		OperationServers: map[string]quay_api.ServerConfigurations{},
 	}
+
+	if token == "" {
+		oauth2Config := &oauth2.Config{
+			ClientID: oauth2ClientID,
+			Endpoint: oauth2.Endpoint{
+				TokenURL: oauth2TokenURL,
+			},
+		}
+
+		oauth2Token, err := oauth2Config.PasswordCredentialsToken(ctx, oauth2Username, oauth2Password)
+		if err != nil {
+			resp.Diagnostics.AddError("Error retrieving OAuth2 access token",
+				"Error retrieving OAuth2 access token: "+err.Error())
+			return
+		}
+
+		token = oauth2Token.AccessToken
+	}
+
 	configuration.AddDefaultHeader("Authorization", "Bearer "+token)
 	client := quay_api.NewAPIClient(configuration)
 
