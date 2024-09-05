@@ -47,21 +47,25 @@ func (p *quayProvider) Schema(_ context.Context, _ provider.SchemaRequest, resp 
 			Sensitive:   true,
 		},
 		"oauth2_username": schema.StringAttribute{
-			Description: "OAuth2 username. Used for generating a JWT OAuth2 access token with password grant.",
-			Optional:    true,
+			Description: "OAuth2 username. Used for generating a JWT OAuth2 access token with password grant. " +
+				"May also be provided via the QUAY_OAUTH2_USERNAME environment variable.",
+			Optional: true,
 		},
 		"oauth2_password": schema.StringAttribute{
-			Description: "OAuth2 password. Used for generating a JWT OAuth2 access token with password grant.",
-			Optional:    true,
-			Sensitive:   true,
+			Description: "OAuth2 password. Used for generating a JWT OAuth2 access token with password grant. " +
+				"May also be provided via the QUAY_OAUTH2_PASSWORD environment variable.",
+			Optional:  true,
+			Sensitive: true,
 		},
 		"oauth2_client_id": schema.StringAttribute{
-			Description: "OAuth2 client ID. Used for generating a JWT OAuth2 access token with password grant.",
-			Optional:    true,
+			Description: "OAuth2 client ID. Used for generating a JWT OAuth2 access token with password grant. " +
+				"May also be provided via the QUAY_OAUTH2_CLIENT_ID environment variable.",
+			Optional: true,
 		},
 		"oauth2_token_url": schema.StringAttribute{
-			Description: "OAuth2 token endpoint URL. Used for generating a JWT OAuth2 access token with password grant.",
-			Optional:    true,
+			Description: "OAuth2 token endpoint URL. Used for generating a JWT OAuth2 access token with password grant. " +
+				"May also be provided via the QUAY_OAUTH2_TOKEN_URL environment variable.",
+			Optional: true,
 		},
 	}}
 }
