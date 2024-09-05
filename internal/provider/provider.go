@@ -173,9 +173,6 @@ func (p *quayProvider) ValidateConfig(ctx context.Context, req provider.Validate
 			"The provider cannot create the Quay client if any configuration values are unknown. "+
 				"Either target apply the source of the unknown value(s) first, set the value(s) statically in the configuration, or set the appropriate environment variable(s).",
 		)
-	}
-
-	if resp.Diagnostics.HasError() {
 		return
 	}
 
@@ -214,9 +211,6 @@ func (p *quayProvider) ValidateConfig(ctx context.Context, req provider.Validate
 			"Cannot specify token and OAuth2 credentials",
 			"Token cannot be specified when OAuth2 credentials are also specified. You must pick one authentication method.",
 		)
-	}
-
-	if resp.Diagnostics.HasError() {
 		return
 	}
 
@@ -227,9 +221,6 @@ func (p *quayProvider) ValidateConfig(ctx context.Context, req provider.Validate
 			"The provider cannot create the Quay client as there is a missing or empty value for the Quay URL. "+
 				"Set the URL in the configuration or use the QUAY_URL environment variable.",
 		)
-	}
-
-	if resp.Diagnostics.HasError() {
 		return
 	}
 
@@ -239,9 +230,6 @@ func (p *quayProvider) ValidateConfig(ctx context.Context, req provider.Validate
 			"Quay URL is not a valid URL",
 			"The provider cannot create the Quay client as the URL provided is not valid.",
 		)
-	}
-
-	if resp.Diagnostics.HasError() {
 		return
 	}
 
@@ -250,9 +238,6 @@ func (p *quayProvider) ValidateConfig(ctx context.Context, req provider.Validate
 			"Missing Quay token and OAuth2 credentials",
 			"The provider cannot create the Quay client as both the Quay token and OAuth2 credentials are missing or empty.",
 		)
-	}
-
-	if resp.Diagnostics.HasError() {
 		return
 	}
 
@@ -263,9 +248,6 @@ func (p *quayProvider) ValidateConfig(ctx context.Context, req provider.Validate
 			"The provider cannot create the Quay client as there is a missing value or empty value for the OAuth2 username."+
 				"Set the OAuth2 username in the configuration or use the QUAY_OAUTH2_USERNAME environment variable.",
 		)
-	}
-
-	if resp.Diagnostics.HasError() {
 		return
 	}
 
@@ -276,9 +258,6 @@ func (p *quayProvider) ValidateConfig(ctx context.Context, req provider.Validate
 			"The provider cannot create the Quay client as there is a missing value or empty value for the OAuth2 password."+
 				"Set the OAuth2 password in the configuration or use the QUAY_OAUTH2_PASSWORD environment variable.",
 		)
-	}
-
-	if resp.Diagnostics.HasError() {
 		return
 	}
 
@@ -289,9 +268,6 @@ func (p *quayProvider) ValidateConfig(ctx context.Context, req provider.Validate
 			"The provider cannot create the Quay client as there is a missing value or empty value for the OAuth2 client ID."+
 				"Set the OAuth2 client ID in the configuration or use the QUAY_OAUTH2_CLIENT_ID environment variable.",
 		)
-	}
-
-	if resp.Diagnostics.HasError() {
 		return
 	}
 
@@ -302,9 +278,6 @@ func (p *quayProvider) ValidateConfig(ctx context.Context, req provider.Validate
 			"The provider cannot create the Quay client as there is a missing value or empty value for the OAuth2 token URL."+
 				"Set the OAuth2 token URL in the configuration or use the QUAY_OAUTH2_TOKEN_URL environment variable.",
 		)
-	}
-
-	if resp.Diagnostics.HasError() {
 		return
 	}
 }
