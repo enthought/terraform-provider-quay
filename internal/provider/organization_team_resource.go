@@ -152,7 +152,7 @@ func (r *organizationTeamResource) Read(ctx context.Context, req resource.ReadRe
 	for _, member := range resTeamData.Members {
 		memList = append(memList, member.Name)
 	}
-	members, diags := types.ListValueFrom(ctx, types.StringType, memList)
+	members, diags := types.SetValueFrom(ctx, types.StringType, memList)
 
 	resp.Diagnostics.Append(diags...)
 	if resp.Diagnostics.HasError() {

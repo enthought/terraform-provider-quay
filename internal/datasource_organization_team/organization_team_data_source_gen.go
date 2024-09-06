@@ -17,7 +17,7 @@ func OrganizationTeamDataSourceSchema(ctx context.Context) schema.Schema {
 				Description:         "Markdown description",
 				MarkdownDescription: "Markdown description",
 			},
-			"members": schema.ListAttribute{
+			"members": schema.SetAttribute{
 				ElementType:         types.StringType,
 				Computed:            true,
 				Description:         "List of team members",
@@ -44,7 +44,7 @@ func OrganizationTeamDataSourceSchema(ctx context.Context) schema.Schema {
 
 type OrganizationTeamModel struct {
 	Description types.String `tfsdk:"description"`
-	Members     types.List   `tfsdk:"members"`
+	Members     types.Set    `tfsdk:"members"`
 	Name        types.String `tfsdk:"name"`
 	Orgname     types.String `tfsdk:"orgname"`
 	Role        types.String `tfsdk:"role"`
