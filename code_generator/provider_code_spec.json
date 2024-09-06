@@ -114,7 +114,7 @@
           },
           {
             "name": "members",
-            "list": {
+            "set": {
               "computed_optional_required": "optional",
               "description": "List of team members",
               "element_type": {
@@ -413,7 +413,7 @@
           },
           {
             "name": "members",
-            "list": {
+            "set": {
               "computed_optional_required": "computed",
               "description": "List of team members",
               "element_type": {

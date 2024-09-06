@@ -45,5 +45,5 @@ data "quay_organization_team" "team" {
 ### Read-Only
 
 - `description` (String) Markdown description
-- `members` (List of String) List of team members
+- `members` (Set of String) List of team members
 - `role` (String) Team role
