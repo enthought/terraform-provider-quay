@@ -45,7 +45,7 @@ resource "quay_organization_team" "admin" {
 ### Optional
 
 - `description` (String) Markdown description
-- `members` (List of String) List of team members
+- `members` (Set of String) List of team members
 
 ## Import
 
