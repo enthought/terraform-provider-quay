@@ -36,6 +36,10 @@ func TestAccProviderValidationWithoutENV(t *testing.T) {
 				Source:            "hashicorp/random",
 				VersionConstraint: "~> 3.6",
 			},
+			"null": {
+				Source:            "hashicorp/null",
+				VersionConstraint: "~> 3.2",
+			},
 		},
 		ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
 		Steps: []resource.TestStep{
@@ -48,7 +52,7 @@ resource "random_string" "this" {
 }
 
 provider "quay" {
-  url = "https://quay-${random_string.this}.example.com"
+  url = "https://quay-${random_string.this.result}.example.com"
 }
 
 data "quay_organization" "provider_test" {
@@ -56,6 +60,27 @@ data "quay_organization" "provider_test" {
 }
 `,
 				ExpectError: regexp.MustCompile(".*Error: Unknown configuration values"),
+			},
+			// Config value from data source
+			{
+				PlanOnly: true,
+				Config: `
+data "null_data_source" "token" {
+  inputs = {
+    token = "test"
+  }
+}
+
+provider "quay" {
+  url = "https://quay.example.com"
+  token = data.null_data_source.token.outputs["token"]
+}
+
+data "quay_organization" "provider_test" {
+  name = "provider_test"
+}
+`,
+				ExpectError: regexp.MustCompile(".*Error: Error reading Quay org"),
 			},
 			// Token and OAuth2 credentials
 			{

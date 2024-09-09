@@ -80,96 +80,6 @@ func (p *quayProvider) Configure(ctx context.Context, req provider.ConfigureRequ
 		return
 	}
 
-	url := os.Getenv("QUAY_URL")
-	token := os.Getenv("QUAY_TOKEN")
-	oauth2Username := os.Getenv("QUAY_OAUTH2_USERNAME")
-	oauth2Password := os.Getenv("QUAY_OAUTH2_PASSWORD")
-	oauth2ClientID := os.Getenv("QUAY_OAUTH2_CLIENT_ID")
-	oauth2TokenURL := os.Getenv("QUAY_OAUTH2_TOKEN_URL")
-
-	if !config.Url.IsNull() {
-		url = config.Url.ValueString()
-	}
-
-	if !config.Token.IsNull() {
-		token = config.Token.ValueString()
-	}
-
-	if !config.OAuth2Username.IsNull() {
-		oauth2Username = config.OAuth2Username.ValueString()
-	}
-
-	if !config.OAuth2Password.IsNull() {
-		oauth2Password = config.OAuth2Password.ValueString()
-	}
-
-	if !config.OAuth2ClientID.IsNull() {
-		oauth2ClientID = config.OAuth2ClientID.ValueString()
-	}
-
-	if !config.OAuth2TokenURL.IsNull() {
-		oauth2TokenURL = config.OAuth2TokenURL.ValueString()
-	}
-
-	ctx = tflog.SetField(ctx, "url", url)
-	ctx = tflog.SetField(ctx, "token", token)
-	ctx = tflog.SetField(ctx, "oauth2_username", oauth2Username)
-	ctx = tflog.SetField(ctx, "oauth2_password", oauth2Password)
-	ctx = tflog.SetField(ctx, "oauth2_client_id", oauth2ClientID)
-	ctx = tflog.SetField(ctx, "oauth2_token_url", oauth2TokenURL)
-	ctx = tflog.MaskFieldValuesWithFieldKeys(ctx, "token")
-	ctx = tflog.MaskFieldValuesWithFieldKeys(ctx, "oauth2_password")
-
-	tflog.Debug(ctx, "Creating Quay client")
-
-	configuration := &quay_api.Configuration{
-		DefaultHeader: make(map[string]string),
-		UserAgent:     "OpenAPI-Generator/1.0.0/go",
-		Debug:         false,
-		Servers: quay_api.ServerConfigurations{
-			{
-				URL:         url,
-				Description: "No description provided",
-			},
-		},
-		OperationServers: map[string]quay_api.ServerConfigurations{},
-	}
-
-	if token == "" {
-		oauth2Config := &oauth2.Config{
-			ClientID: oauth2ClientID,
-			Endpoint: oauth2.Endpoint{
-				TokenURL: oauth2TokenURL,
-			},
-		}
-
-		oauth2Token, err := oauth2Config.PasswordCredentialsToken(ctx, oauth2Username, oauth2Password)
-		if err != nil {
-			resp.Diagnostics.AddError("Error retrieving OAuth2 access token",
-				"Error retrieving OAuth2 access token: "+err.Error())
-			return
-		}
-
-		token = oauth2Token.AccessToken
-	}
-
-	configuration.AddDefaultHeader("Authorization", "Bearer "+token)
-	client := quay_api.NewAPIClient(configuration)
-
-	resp.DataSourceData = client
-	resp.ResourceData = client
-
-	tflog.Info(ctx, "Configured Quay client", map[string]any{"success": true})
-}
-
-func (p *quayProvider) ValidateConfig(ctx context.Context, req provider.ValidateConfigRequest, resp *provider.ValidateConfigResponse) {
-	var config quayProviderModel
-	diags := req.Config.Get(ctx, &config)
-	resp.Diagnostics.Append(diags...)
-	if resp.Diagnostics.HasError() {
-		return
-	}
-
 	if config.Url.IsUnknown() || config.Token.IsUnknown() || config.OAuth2Username.IsUnknown() || config.OAuth2Password.IsUnknown() ||
 		config.OAuth2ClientID.IsUnknown() || config.OAuth2TokenURL.IsUnknown() {
 		resp.Diagnostics.AddError(
@@ -284,6 +194,56 @@ func (p *quayProvider) ValidateConfig(ctx context.Context, req provider.Validate
 		)
 		return
 	}
+
+	ctx = tflog.SetField(ctx, "url", url)
+	ctx = tflog.SetField(ctx, "token", token)
+	ctx = tflog.SetField(ctx, "oauth2_username", oauth2Username)
+	ctx = tflog.SetField(ctx, "oauth2_password", oauth2Password)
+	ctx = tflog.SetField(ctx, "oauth2_client_id", oauth2ClientID)
+	ctx = tflog.SetField(ctx, "oauth2_token_url", oauth2TokenURL)
+	ctx = tflog.MaskFieldValuesWithFieldKeys(ctx, "token")
+	ctx = tflog.MaskFieldValuesWithFieldKeys(ctx, "oauth2_password")
+
+	tflog.Debug(ctx, "Creating Quay client")
+
+	configuration := &quay_api.Configuration{
+		DefaultHeader: make(map[string]string),
+		UserAgent:     "OpenAPI-Generator/1.0.0/go",
+		Debug:         false,
+		Servers: quay_api.ServerConfigurations{
+			{
+				URL:         url,
+				Description: "No description provided",
+			},
+		},
+		OperationServers: map[string]quay_api.ServerConfigurations{},
+	}
+
+	if token == "" {
+		oauth2Config := &oauth2.Config{
+			ClientID: oauth2ClientID,
+			Endpoint: oauth2.Endpoint{
+				TokenURL: oauth2TokenURL,
+			},
+		}
+
+		oauth2Token, err := oauth2Config.PasswordCredentialsToken(ctx, oauth2Username, oauth2Password)
+		if err != nil {
+			resp.Diagnostics.AddError("Error retrieving OAuth2 access token",
+				"Error retrieving OAuth2 access token: "+err.Error())
+			return
+		}
+
+		token = oauth2Token.AccessToken
+	}
+
+	configuration.AddDefaultHeader("Authorization", "Bearer "+token)
+	client := quay_api.NewAPIClient(configuration)
+
+	resp.DataSourceData = client
+	resp.ResourceData = client
+
+	tflog.Info(ctx, "Configured Quay client", map[string]any{"success": true})
 }
 
 func (p *quayProvider) Metadata(_ context.Context, _ provider.MetadataRequest, resp *provider.MetadataResponse) {
