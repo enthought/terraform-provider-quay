@@ -33,10 +33,11 @@ data "quay_organization_robot" "test" {
 }
 `,
 				Check: resource.ComposeAggregateTestCheckFunc(
-					resource.TestCheckResourceAttr("quay_organization_robot.test", "name", "test"),
-					resource.TestCheckResourceAttr("quay_organization_robot.test", "orgname", "org_robot_data"),
-					resource.TestCheckResourceAttr("quay_organization_robot.test", "description", "test"),
-					resource.TestCheckResourceAttr("quay_organization_robot.test", "fullname", "org_robot_data+test"),
+					resource.TestCheckResourceAttr("data.quay_organization_robot.test", "name", "test"),
+					resource.TestCheckResourceAttr("data.quay_organization_robot.test", "orgname", "org_robot_data"),
+					resource.TestCheckResourceAttr("data.quay_organization_robot.test", "description", "test"),
+					resource.TestCheckResourceAttr("data.quay_organization_robot.test", "fullname", "org_robot_data+test"),
+					resource.TestCheckResourceAttrSet("data.quay_organization_robot.test", "token"),
 				),
 			},
 		},
