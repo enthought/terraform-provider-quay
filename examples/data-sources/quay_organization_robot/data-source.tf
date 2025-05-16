@@ -9,6 +9,6 @@ data "quay_organization_robot" "robot" {
 }
 
 output "robot_token" {
-  value     = data.quay_organisation_robot.robot.token
+  value     = data.quay_organization_robot.robot.token
   sensitive = true
 }
