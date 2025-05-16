@@ -55,7 +55,7 @@ func (d *repositoryDataSource) Read(ctx context.Context, req datasource.ReadRequ
 	if err != nil {
 		errDetail := handleQuayAPIError(err)
 		resp.Diagnostics.AddError("Error reading Quay repository",
-			"Could not create Quay repository, unexpected error: "+errDetail)
+			"Could not read Quay repository, unexpected error: "+errDetail)
 		return
 	}
 

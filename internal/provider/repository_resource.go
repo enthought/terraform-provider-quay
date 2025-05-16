@@ -103,7 +103,7 @@ func (r *repositoryResource) Read(ctx context.Context, req resource.ReadRequest,
 	httpRes, err := r.client.RepositoryAPI.GetRepo(context.Background(), namespace+"/"+repoName).Execute()
 	if err != nil {
 		errDetail := handleQuayAPIError(err)
-		resp.Diagnostics.AddError("Error reading Quay repository", "Could not create Quay repository, unexpected error: "+errDetail)
+		resp.Diagnostics.AddError("Error reading Quay repository", "Could not read Quay repository, unexpected error: "+errDetail)
 		return
 	}
 
