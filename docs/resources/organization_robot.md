@@ -39,6 +39,7 @@ resource "quay_organization_robot" "test" {
 ### Read-Only
 
 - `fullname` (String) Robot full name
+- `token` (String, Sensitive) Robot token (sensitive)
 
 ## Import
 

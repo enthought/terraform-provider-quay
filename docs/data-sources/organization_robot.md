@@ -36,3 +36,4 @@ data "quay_organization_robot" "robot" {
 
 - `description` (String) Text description
 - `fullname` (String) Robot full name
+- `token` (String, Sensitive) Robot token (sensitive)
