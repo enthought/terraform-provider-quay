@@ -77,6 +77,7 @@ func (r *organizationRobotResource) Create(ctx context.Context, req resource.Cre
 		resp.Diagnostics.AddError("Error creating Quay org robot", "Could not create Quay org robot, unexpected error: "+errDetail)
 		return
 	}
+	defer httpRes.Body.Close()
 
 	// Parse response to get token
 	var resRobotData organizationRobotModelJSON
@@ -129,6 +130,7 @@ func (r *organizationRobotResource) Read(ctx context.Context, req resource.ReadR
 		resp.Diagnostics.AddError("Error reading Quay org robot", "Could not read Quay org robot, unexpected error: "+errDetail)
 		return
 	}
+	defer httpRes.Body.Close()
 	body, err := io.ReadAll(httpRes.Body)
 	if err != nil {
 		resp.Diagnostics.AddError(

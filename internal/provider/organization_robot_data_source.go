@@ -58,6 +58,7 @@ func (d *organizationRobotDataSource) Read(ctx context.Context, req datasource.R
 			"Could not read Quay org robot, unexpected error: "+errDetail)
 		return
 	}
+	defer httpRes.Body.Close()
 	body, err := io.ReadAll(httpRes.Body)
 	if err != nil {
 		resp.Diagnostics.AddError(

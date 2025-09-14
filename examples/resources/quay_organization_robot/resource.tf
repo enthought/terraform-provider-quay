@@ -9,6 +9,6 @@ resource "quay_organization_robot" "test" {
 }
 
 output "robot_token" {
-  value     = quay_organization.robot.test.token
+  value     = quay_organization_robot.test.token
   sensitive = true
 }
