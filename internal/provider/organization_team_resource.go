@@ -131,6 +131,7 @@ func (r *organizationTeamResource) Read(ctx context.Context, req resource.ReadRe
 		resp.Diagnostics.AddError("Error reading Quay team", "Could not read Quay team, unexpected error: "+errDetail)
 		return
 	}
+	defer httpRes.Body.Close()
 
 	body, err := io.ReadAll(httpRes.Body)
 	if err != nil {
@@ -171,6 +172,7 @@ func (r *organizationTeamResource) Read(ctx context.Context, req resource.ReadRe
 		resp.Diagnostics.AddError("Error reading Quay team", "Could not read Quay team, unexpected error: "+errDetail)
 		return
 	}
+	defer httpRes.Body.Close()
 
 	body, err = io.ReadAll(httpRes.Body)
 	if err != nil {

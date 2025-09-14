@@ -106,6 +106,7 @@ func (r *repositoryResource) Read(ctx context.Context, req resource.ReadRequest,
 		resp.Diagnostics.AddError("Error reading Quay repository", "Could not read Quay repository, unexpected error: "+errDetail)
 		return
 	}
+	defer httpRes.Body.Close()
 
 	body, err := io.ReadAll(httpRes.Body)
 	if err != nil {

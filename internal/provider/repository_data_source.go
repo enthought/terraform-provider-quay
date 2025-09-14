@@ -58,6 +58,7 @@ func (d *repositoryDataSource) Read(ctx context.Context, req datasource.ReadRequ
 			"Could not read Quay repository, unexpected error: "+errDetail)
 		return
 	}
+	defer httpRes.Body.Close()
 
 	body, err := io.ReadAll(httpRes.Body)
 	if err != nil {
