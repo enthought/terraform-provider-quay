@@ -1,7 +1,6 @@
 module terraform-provider-quay
 
-go 1.22
-toolchain go1.22.5
+go 1.24.0
 
 replace github.com/enthought/terraform-provider-quay/quay_api => ./quay_api
 
@@ -12,7 +11,7 @@ require (
 	github.com/hashicorp/terraform-plugin-go v0.25.0
 	github.com/hashicorp/terraform-plugin-log v0.9.0
 	github.com/hashicorp/terraform-plugin-testing v1.11.0
-	golang.org/x/oauth2 v0.23.0
+	golang.org/x/oauth2 v0.31.0
 )
 
 require (
