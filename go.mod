@@ -2,6 +2,8 @@ module terraform-provider-quay
 
 go 1.24.0
 
+toolchain go1.24.7
+
 replace github.com/enthought/terraform-provider-quay/quay_api => ./quay_api
 
 require (
