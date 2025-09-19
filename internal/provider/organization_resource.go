@@ -92,6 +92,7 @@ func (r *organizationResource) Read(ctx context.Context, req resource.ReadReques
 		resp.Diagnostics.AddError("Error read Quay org", "Could not read Quay org, unexpected error: "+errDetail)
 		return
 	}
+	defer httpRes.Body.Close()
 
 	body, err := io.ReadAll(httpRes.Body)
 	if err != nil {

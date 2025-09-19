@@ -29,6 +29,7 @@ resource "quay_organization_robot" "test" {
 					resource.TestCheckResourceAttr("quay_organization_robot.test", "orgname", "org_robot"),
 					resource.TestCheckResourceAttr("quay_organization_robot.test", "description", "test"),
 					resource.TestCheckResourceAttr("quay_organization_robot.test", "fullname", "org_robot+test"),
+					resource.TestCheckResourceAttrSet("quay_organization_robot.test", "token"),
 				),
 			},
 			// Import
@@ -58,6 +59,7 @@ resource "quay_organization_robot" "test" {
 					resource.TestCheckResourceAttr("quay_organization_robot.test", "orgname", "org_robot"),
 					resource.TestCheckResourceAttr("quay_organization_robot.test", "description", "test2"),
 					resource.TestCheckResourceAttr("quay_organization_robot.test", "fullname", "org_robot+test2"),
+					resource.TestCheckResourceAttrSet("quay_organization_robot.test", "token"),
 				),
 			},
 		},

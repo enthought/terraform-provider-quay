@@ -32,6 +32,12 @@ func OrganizationRobotDataSourceSchema(ctx context.Context) schema.Schema {
 				Description:         "Organization name",
 				MarkdownDescription: "Organization name",
 			},
+			"token": schema.StringAttribute{
+				Computed:            true,
+				Description:         "Robot token (sensitive)",
+				MarkdownDescription: "Robot token (sensitive)",
+				Sensitive:           true,
+			},
 		},
 	}
 }
@@ -41,4 +47,5 @@ type OrganizationRobotModel struct {
 	Fullname    types.String `tfsdk:"fullname"`
 	Name        types.String `tfsdk:"name"`
 	Orgname     types.String `tfsdk:"orgname"`
+	Token       types.String `tfsdk:"token"`
 }

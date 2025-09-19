@@ -58,23 +58,29 @@ func (d *organizationRobotDataSource) Read(ctx context.Context, req datasource.R
 			"Could not read Quay org robot, unexpected error: "+errDetail)
 		return
 	}
+	defer httpRes.Body.Close()
 	body, err := io.ReadAll(httpRes.Body)
 	if err != nil {
 		resp.Diagnostics.AddError(
-			"Error reading Quay team",
-			"Could not read Quay team, unexpected error: "+err.Error())
+			"Error reading Quay org robot",
+			"Could not read Quay org robot, unexpected error: "+err.Error())
 		return
 	}
 	err = json.Unmarshal(body, &resRobotData)
 	if err != nil {
 		resp.Diagnostics.AddError(
-			"Error reading Quay team",
-			"Could not read Quay team, unexpected error: "+err.Error())
+			"Error reading Quay org robot",
+			"Could not read Quay org robot, unexpected error: "+err.Error())
 		return
 	}
 
 	// Set Description
 	data.Description = types.StringValue(resRobotData.Description)
+
+	// Set Token if available
+	if resRobotData.Token != "" {
+		data.Token = types.StringValue(resRobotData.Token)
+	}
 
 	// Set robot full name
 	data.Fullname = types.StringValue(orgName + "+" + robotName)

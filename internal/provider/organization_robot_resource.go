@@ -71,11 +71,34 @@ func (r *organizationRobotResource) Create(ctx context.Context, req resource.Cre
 		Description:          robotDescription,
 		UnstructuredMetadata: nil,
 	}
-	_, err := r.client.RobotAPI.CreateOrgRobot(context.Background(), orgName, robotName).Body(newRobot).Execute()
+	httpRes, err := r.client.RobotAPI.CreateOrgRobot(context.Background(), orgName, robotName).Body(newRobot).Execute()
 	if err != nil {
 		errDetail := handleQuayAPIError(err)
 		resp.Diagnostics.AddError("Error creating Quay org robot", "Could not create Quay org robot, unexpected error: "+errDetail)
 		return
+	}
+	defer httpRes.Body.Close()
+
+	// Parse response to get token
+	var resRobotData organizationRobotModelJSON
+	body, err := io.ReadAll(httpRes.Body)
+	if err != nil {
+		resp.Diagnostics.AddError(
+			"Error reading Quay org robot response",
+			"Could not read Quay org robot response, unexpected error: "+err.Error())
+		return
+	}
+	err = json.Unmarshal(body, &resRobotData)
+	if err != nil {
+		resp.Diagnostics.AddError(
+			"Error parsing Quay org robot response",
+			"Could not parse Quay org robot response, unexpected error: "+err.Error())
+		return
+	}
+
+	// Set token if available
+	if resRobotData.Token != "" {
+		data.Token = types.StringValue(resRobotData.Token)
 	}
 
 	// Set robot full name
@@ -107,23 +130,29 @@ func (r *organizationRobotResource) Read(ctx context.Context, req resource.ReadR
 		resp.Diagnostics.AddError("Error reading Quay org robot", "Could not read Quay org robot, unexpected error: "+errDetail)
 		return
 	}
+	defer httpRes.Body.Close()
 	body, err := io.ReadAll(httpRes.Body)
 	if err != nil {
 		resp.Diagnostics.AddError(
-			"Error reading Quay team",
-			"Could not read Quay team, unexpected error: "+err.Error())
+			"Error reading Quay org robot",
+			"Could not read Quay org robot, unexpected error: "+err.Error())
 		return
 	}
 	err = json.Unmarshal(body, &resRobotData)
 	if err != nil {
 		resp.Diagnostics.AddError(
-			"Error reading Quay team",
-			"Could not read Quay team, unexpected error: "+err.Error())
+			"Error reading Quay org robot",
+			"Could not read Quay org robot, unexpected error: "+err.Error())
 		return
 	}
 
 	// Set Description
 	data.Description = types.StringValue(resRobotData.Description)
+
+	// Set Token if available
+	if resRobotData.Token != "" {
+		data.Token = types.StringValue(resRobotData.Token)
+	}
 
 	// Set robot full name
 	data.Fullname = types.StringValue(orgName + "+" + robotName)

@@ -61,6 +61,7 @@ func (d *organizationDataSource) Read(ctx context.Context, req datasource.ReadRe
 			"Could not read Quay org, unexpected error: "+errDetail)
 		return
 	}
+	defer httpRes.Body.Close()
 
 	body, err := io.ReadAll(httpRes.Body)
 	if err != nil {

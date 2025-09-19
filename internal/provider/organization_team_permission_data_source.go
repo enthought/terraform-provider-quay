@@ -59,6 +59,7 @@ func (d *organizationTeamPermissionDataSource) Read(ctx context.Context, req dat
 			"Could not read Quay team permission, unexpected error: "+errDetail)
 		return
 	}
+	defer httpRes.Body.Close()
 
 	body, err := io.ReadAll(httpRes.Body)
 	if err != nil {
