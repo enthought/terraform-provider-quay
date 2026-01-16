@@ -26,13 +26,13 @@ type NamespacequotaAPIService service
 type ApiChangeOrganizationQuotaRequest struct {
 	ctx        context.Context
 	ApiService *NamespacequotaAPIService
-	orgname    string
 	quotaId    string
-	body       *UpdateOrgQuota
+	orgname    string
+	body       *map[string]interface{}
 }
 
 // Request body contents.
-func (r ApiChangeOrganizationQuotaRequest) Body(body UpdateOrgQuota) ApiChangeOrganizationQuotaRequest {
+func (r ApiChangeOrganizationQuotaRequest) Body(body map[string]interface{}) ApiChangeOrganizationQuotaRequest {
 	r.body = &body
 	return r
 }
@@ -45,16 +45,16 @@ func (r ApiChangeOrganizationQuotaRequest) Execute() (*http.Response, error) {
 ChangeOrganizationQuota Method for ChangeOrganizationQuota
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param orgname
 	@param quotaId
+	@param orgname
 	@return ApiChangeOrganizationQuotaRequest
 */
-func (a *NamespacequotaAPIService) ChangeOrganizationQuota(ctx context.Context, orgname string, quotaId string) ApiChangeOrganizationQuotaRequest {
+func (a *NamespacequotaAPIService) ChangeOrganizationQuota(ctx context.Context, quotaId string, orgname string) ApiChangeOrganizationQuotaRequest {
 	return ApiChangeOrganizationQuotaRequest{
 		ApiService: a,
 		ctx:        ctx,
-		orgname:    orgname,
 		quotaId:    quotaId,
+		orgname:    orgname,
 	}
 }
 
@@ -72,8 +72,8 @@ func (a *NamespacequotaAPIService) ChangeOrganizationQuotaExecute(r ApiChangeOrg
 	}
 
 	localVarPath := localBasePath + "/api/v1/organization/{orgname}/quota/{quota_id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"orgname"+"}", url.PathEscape(parameterValueToString(r.orgname, "orgname")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"quota_id"+"}", url.PathEscape(parameterValueToString(r.quotaId, "quotaId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"orgname"+"}", url.PathEscape(parameterValueToString(r.orgname, "orgname")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -176,9 +176,9 @@ func (a *NamespacequotaAPIService) ChangeOrganizationQuotaExecute(r ApiChangeOrg
 type ApiChangeOrganizationQuotaLimitRequest struct {
 	ctx        context.Context
 	ApiService *NamespacequotaAPIService
+	quotaId    string
 	orgname    string
 	limitId    string
-	quotaId    string
 	body       *UpdateOrgQuotaLimit
 }
 
@@ -196,18 +196,18 @@ func (r ApiChangeOrganizationQuotaLimitRequest) Execute() (*http.Response, error
 ChangeOrganizationQuotaLimit Method for ChangeOrganizationQuotaLimit
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param quotaId
 	@param orgname
 	@param limitId
-	@param quotaId
 	@return ApiChangeOrganizationQuotaLimitRequest
 */
-func (a *NamespacequotaAPIService) ChangeOrganizationQuotaLimit(ctx context.Context, orgname string, limitId string, quotaId string) ApiChangeOrganizationQuotaLimitRequest {
+func (a *NamespacequotaAPIService) ChangeOrganizationQuotaLimit(ctx context.Context, quotaId string, orgname string, limitId string) ApiChangeOrganizationQuotaLimitRequest {
 	return ApiChangeOrganizationQuotaLimitRequest{
 		ApiService: a,
 		ctx:        ctx,
+		quotaId:    quotaId,
 		orgname:    orgname,
 		limitId:    limitId,
-		quotaId:    quotaId,
 	}
 }
 
@@ -225,9 +225,9 @@ func (a *NamespacequotaAPIService) ChangeOrganizationQuotaLimitExecute(r ApiChan
 	}
 
 	localVarPath := localBasePath + "/api/v1/organization/{orgname}/quota/{quota_id}/limit/{limit_id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"quota_id"+"}", url.PathEscape(parameterValueToString(r.quotaId, "quotaId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"orgname"+"}", url.PathEscape(parameterValueToString(r.orgname, "orgname")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"limit_id"+"}", url.PathEscape(parameterValueToString(r.limitId, "limitId")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"quota_id"+"}", url.PathEscape(parameterValueToString(r.quotaId, "quotaId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -331,11 +331,11 @@ type ApiCreateOrganizationQuotaRequest struct {
 	ctx        context.Context
 	ApiService *NamespacequotaAPIService
 	orgname    string
-	body       *NewOrgQuota
+	body       *map[string]interface{}
 }
 
 // Request body contents.
-func (r ApiCreateOrganizationQuotaRequest) Body(body NewOrgQuota) ApiCreateOrganizationQuotaRequest {
+func (r ApiCreateOrganizationQuotaRequest) Body(body map[string]interface{}) ApiCreateOrganizationQuotaRequest {
 	r.body = &body
 	return r
 }
@@ -478,8 +478,8 @@ func (a *NamespacequotaAPIService) CreateOrganizationQuotaExecute(r ApiCreateOrg
 type ApiCreateOrganizationQuotaLimitRequest struct {
 	ctx        context.Context
 	ApiService *NamespacequotaAPIService
-	orgname    string
 	quotaId    string
+	orgname    string
 	body       *NewOrgQuotaLimit
 }
 
@@ -497,16 +497,16 @@ func (r ApiCreateOrganizationQuotaLimitRequest) Execute() (*http.Response, error
 CreateOrganizationQuotaLimit Method for CreateOrganizationQuotaLimit
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param orgname
 	@param quotaId
+	@param orgname
 	@return ApiCreateOrganizationQuotaLimitRequest
 */
-func (a *NamespacequotaAPIService) CreateOrganizationQuotaLimit(ctx context.Context, orgname string, quotaId string) ApiCreateOrganizationQuotaLimitRequest {
+func (a *NamespacequotaAPIService) CreateOrganizationQuotaLimit(ctx context.Context, quotaId string, orgname string) ApiCreateOrganizationQuotaLimitRequest {
 	return ApiCreateOrganizationQuotaLimitRequest{
 		ApiService: a,
 		ctx:        ctx,
-		orgname:    orgname,
 		quotaId:    quotaId,
+		orgname:    orgname,
 	}
 }
 
@@ -524,8 +524,8 @@ func (a *NamespacequotaAPIService) CreateOrganizationQuotaLimitExecute(r ApiCrea
 	}
 
 	localVarPath := localBasePath + "/api/v1/organization/{orgname}/quota/{quota_id}/limit"
-	localVarPath = strings.Replace(localVarPath, "{"+"orgname"+"}", url.PathEscape(parameterValueToString(r.orgname, "orgname")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"quota_id"+"}", url.PathEscape(parameterValueToString(r.quotaId, "quotaId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"orgname"+"}", url.PathEscape(parameterValueToString(r.orgname, "orgname")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -628,8 +628,8 @@ func (a *NamespacequotaAPIService) CreateOrganizationQuotaLimitExecute(r ApiCrea
 type ApiDeleteOrganizationQuotaRequest struct {
 	ctx        context.Context
 	ApiService *NamespacequotaAPIService
-	orgname    string
 	quotaId    string
+	orgname    string
 }
 
 func (r ApiDeleteOrganizationQuotaRequest) Execute() (*http.Response, error) {
@@ -640,16 +640,16 @@ func (r ApiDeleteOrganizationQuotaRequest) Execute() (*http.Response, error) {
 DeleteOrganizationQuota Method for DeleteOrganizationQuota
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param orgname
 	@param quotaId
+	@param orgname
 	@return ApiDeleteOrganizationQuotaRequest
 */
-func (a *NamespacequotaAPIService) DeleteOrganizationQuota(ctx context.Context, orgname string, quotaId string) ApiDeleteOrganizationQuotaRequest {
+func (a *NamespacequotaAPIService) DeleteOrganizationQuota(ctx context.Context, quotaId string, orgname string) ApiDeleteOrganizationQuotaRequest {
 	return ApiDeleteOrganizationQuotaRequest{
 		ApiService: a,
 		ctx:        ctx,
-		orgname:    orgname,
 		quotaId:    quotaId,
+		orgname:    orgname,
 	}
 }
 
@@ -667,8 +667,8 @@ func (a *NamespacequotaAPIService) DeleteOrganizationQuotaExecute(r ApiDeleteOrg
 	}
 
 	localVarPath := localBasePath + "/api/v1/organization/{orgname}/quota/{quota_id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"orgname"+"}", url.PathEscape(parameterValueToString(r.orgname, "orgname")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"quota_id"+"}", url.PathEscape(parameterValueToString(r.quotaId, "quotaId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"orgname"+"}", url.PathEscape(parameterValueToString(r.orgname, "orgname")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -766,9 +766,9 @@ func (a *NamespacequotaAPIService) DeleteOrganizationQuotaExecute(r ApiDeleteOrg
 type ApiDeleteOrganizationQuotaLimitRequest struct {
 	ctx        context.Context
 	ApiService *NamespacequotaAPIService
+	quotaId    string
 	orgname    string
 	limitId    string
-	quotaId    string
 }
 
 func (r ApiDeleteOrganizationQuotaLimitRequest) Execute() (*http.Response, error) {
@@ -779,18 +779,18 @@ func (r ApiDeleteOrganizationQuotaLimitRequest) Execute() (*http.Response, error
 DeleteOrganizationQuotaLimit Method for DeleteOrganizationQuotaLimit
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param quotaId
 	@param orgname
 	@param limitId
-	@param quotaId
 	@return ApiDeleteOrganizationQuotaLimitRequest
 */
-func (a *NamespacequotaAPIService) DeleteOrganizationQuotaLimit(ctx context.Context, orgname string, limitId string, quotaId string) ApiDeleteOrganizationQuotaLimitRequest {
+func (a *NamespacequotaAPIService) DeleteOrganizationQuotaLimit(ctx context.Context, quotaId string, orgname string, limitId string) ApiDeleteOrganizationQuotaLimitRequest {
 	return ApiDeleteOrganizationQuotaLimitRequest{
 		ApiService: a,
 		ctx:        ctx,
+		quotaId:    quotaId,
 		orgname:    orgname,
 		limitId:    limitId,
-		quotaId:    quotaId,
 	}
 }
 
@@ -808,9 +808,9 @@ func (a *NamespacequotaAPIService) DeleteOrganizationQuotaLimitExecute(r ApiDele
 	}
 
 	localVarPath := localBasePath + "/api/v1/organization/{orgname}/quota/{quota_id}/limit/{limit_id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"quota_id"+"}", url.PathEscape(parameterValueToString(r.quotaId, "quotaId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"orgname"+"}", url.PathEscape(parameterValueToString(r.orgname, "orgname")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"limit_id"+"}", url.PathEscape(parameterValueToString(r.limitId, "limitId")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"quota_id"+"}", url.PathEscape(parameterValueToString(r.quotaId, "quotaId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -908,8 +908,8 @@ func (a *NamespacequotaAPIService) DeleteOrganizationQuotaLimitExecute(r ApiDele
 type ApiGetOrganizationQuotaRequest struct {
 	ctx        context.Context
 	ApiService *NamespacequotaAPIService
-	orgname    string
 	quotaId    string
+	orgname    string
 }
 
 func (r ApiGetOrganizationQuotaRequest) Execute() (*http.Response, error) {
@@ -920,16 +920,16 @@ func (r ApiGetOrganizationQuotaRequest) Execute() (*http.Response, error) {
 GetOrganizationQuota Method for GetOrganizationQuota
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param orgname
 	@param quotaId
+	@param orgname
 	@return ApiGetOrganizationQuotaRequest
 */
-func (a *NamespacequotaAPIService) GetOrganizationQuota(ctx context.Context, orgname string, quotaId string) ApiGetOrganizationQuotaRequest {
+func (a *NamespacequotaAPIService) GetOrganizationQuota(ctx context.Context, quotaId string, orgname string) ApiGetOrganizationQuotaRequest {
 	return ApiGetOrganizationQuotaRequest{
 		ApiService: a,
 		ctx:        ctx,
-		orgname:    orgname,
 		quotaId:    quotaId,
+		orgname:    orgname,
 	}
 }
 
@@ -947,8 +947,8 @@ func (a *NamespacequotaAPIService) GetOrganizationQuotaExecute(r ApiGetOrganizat
 	}
 
 	localVarPath := localBasePath + "/api/v1/organization/{orgname}/quota/{quota_id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"orgname"+"}", url.PathEscape(parameterValueToString(r.orgname, "orgname")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"quota_id"+"}", url.PathEscape(parameterValueToString(r.quotaId, "quotaId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"orgname"+"}", url.PathEscape(parameterValueToString(r.orgname, "orgname")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1046,9 +1046,9 @@ func (a *NamespacequotaAPIService) GetOrganizationQuotaExecute(r ApiGetOrganizat
 type ApiGetOrganizationQuotaLimitRequest struct {
 	ctx        context.Context
 	ApiService *NamespacequotaAPIService
+	quotaId    string
 	orgname    string
 	limitId    string
-	quotaId    string
 }
 
 func (r ApiGetOrganizationQuotaLimitRequest) Execute() (*http.Response, error) {
@@ -1059,18 +1059,18 @@ func (r ApiGetOrganizationQuotaLimitRequest) Execute() (*http.Response, error) {
 GetOrganizationQuotaLimit Method for GetOrganizationQuotaLimit
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param quotaId
 	@param orgname
 	@param limitId
-	@param quotaId
 	@return ApiGetOrganizationQuotaLimitRequest
 */
-func (a *NamespacequotaAPIService) GetOrganizationQuotaLimit(ctx context.Context, orgname string, limitId string, quotaId string) ApiGetOrganizationQuotaLimitRequest {
+func (a *NamespacequotaAPIService) GetOrganizationQuotaLimit(ctx context.Context, quotaId string, orgname string, limitId string) ApiGetOrganizationQuotaLimitRequest {
 	return ApiGetOrganizationQuotaLimitRequest{
 		ApiService: a,
 		ctx:        ctx,
+		quotaId:    quotaId,
 		orgname:    orgname,
 		limitId:    limitId,
-		quotaId:    quotaId,
 	}
 }
 
@@ -1088,9 +1088,9 @@ func (a *NamespacequotaAPIService) GetOrganizationQuotaLimitExecute(r ApiGetOrga
 	}
 
 	localVarPath := localBasePath + "/api/v1/organization/{orgname}/quota/{quota_id}/limit/{limit_id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"quota_id"+"}", url.PathEscape(parameterValueToString(r.quotaId, "quotaId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"orgname"+"}", url.PathEscape(parameterValueToString(r.orgname, "orgname")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"limit_id"+"}", url.PathEscape(parameterValueToString(r.limitId, "limitId")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"quota_id"+"}", url.PathEscape(parameterValueToString(r.quotaId, "quotaId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1322,8 +1322,8 @@ func (a *NamespacequotaAPIService) GetUserQuotaExecute(r ApiGetUserQuotaRequest)
 type ApiGetUserQuotaLimitRequest struct {
 	ctx        context.Context
 	ApiService *NamespacequotaAPIService
-	limitId    string
 	quotaId    string
+	limitId    string
 }
 
 func (r ApiGetUserQuotaLimitRequest) Execute() (*http.Response, error) {
@@ -1334,16 +1334,16 @@ func (r ApiGetUserQuotaLimitRequest) Execute() (*http.Response, error) {
 GetUserQuotaLimit Method for GetUserQuotaLimit
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param limitId
 	@param quotaId
+	@param limitId
 	@return ApiGetUserQuotaLimitRequest
 */
-func (a *NamespacequotaAPIService) GetUserQuotaLimit(ctx context.Context, limitId string, quotaId string) ApiGetUserQuotaLimitRequest {
+func (a *NamespacequotaAPIService) GetUserQuotaLimit(ctx context.Context, quotaId string, limitId string) ApiGetUserQuotaLimitRequest {
 	return ApiGetUserQuotaLimitRequest{
 		ApiService: a,
 		ctx:        ctx,
-		limitId:    limitId,
 		quotaId:    quotaId,
+		limitId:    limitId,
 	}
 }
 
@@ -1361,8 +1361,8 @@ func (a *NamespacequotaAPIService) GetUserQuotaLimitExecute(r ApiGetUserQuotaLim
 	}
 
 	localVarPath := localBasePath + "/api/v1/user/quota/{quota_id}/limit/{limit_id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"limit_id"+"}", url.PathEscape(parameterValueToString(r.limitId, "limitId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"quota_id"+"}", url.PathEscape(parameterValueToString(r.quotaId, "quotaId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"limit_id"+"}", url.PathEscape(parameterValueToString(r.limitId, "limitId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1594,8 +1594,8 @@ func (a *NamespacequotaAPIService) ListOrganizationQuotaExecute(r ApiListOrganiz
 type ApiListOrganizationQuotaLimitRequest struct {
 	ctx        context.Context
 	ApiService *NamespacequotaAPIService
-	orgname    string
 	quotaId    string
+	orgname    string
 }
 
 func (r ApiListOrganizationQuotaLimitRequest) Execute() (*http.Response, error) {
@@ -1606,16 +1606,16 @@ func (r ApiListOrganizationQuotaLimitRequest) Execute() (*http.Response, error) 
 ListOrganizationQuotaLimit Method for ListOrganizationQuotaLimit
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param orgname
 	@param quotaId
+	@param orgname
 	@return ApiListOrganizationQuotaLimitRequest
 */
-func (a *NamespacequotaAPIService) ListOrganizationQuotaLimit(ctx context.Context, orgname string, quotaId string) ApiListOrganizationQuotaLimitRequest {
+func (a *NamespacequotaAPIService) ListOrganizationQuotaLimit(ctx context.Context, quotaId string, orgname string) ApiListOrganizationQuotaLimitRequest {
 	return ApiListOrganizationQuotaLimitRequest{
 		ApiService: a,
 		ctx:        ctx,
-		orgname:    orgname,
 		quotaId:    quotaId,
+		orgname:    orgname,
 	}
 }
 
@@ -1633,8 +1633,8 @@ func (a *NamespacequotaAPIService) ListOrganizationQuotaLimitExecute(r ApiListOr
 	}
 
 	localVarPath := localBasePath + "/api/v1/organization/{orgname}/quota/{quota_id}/limit"
-	localVarPath = strings.Replace(localVarPath, "{"+"orgname"+"}", url.PathEscape(parameterValueToString(r.orgname, "orgname")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"quota_id"+"}", url.PathEscape(parameterValueToString(r.quotaId, "quotaId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"orgname"+"}", url.PathEscape(parameterValueToString(r.orgname, "orgname")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

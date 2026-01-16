@@ -4,11 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Password** | Pointer to **string** | The user&#39;s password | [optional] 
-**InvoiceEmail** | Pointer to **bool** | Whether the user desires to receive an invoice email. | [optional] 
-**Email** | Pointer to **string** | The user&#39;s email address | [optional] 
-**TagExpirationS** | Pointer to **int32** | The number of seconds for tag expiration | [optional] 
-**Username** | Pointer to **string** | The user&#39;s username | [optional] 
+**Password** | Pointer to **string** | The new password for the user | [optional] 
+**Email** | Pointer to **string** | The new e-mail address for the user | [optional] 
+**Enabled** | Pointer to **bool** | Whether the user is enabled | [optional] 
 
 ## Methods
 
@@ -54,31 +52,6 @@ SetPassword sets Password field to given value.
 
 HasPassword returns a boolean if a field has been set.
 
-### GetInvoiceEmail
-
-`func (o *UpdateUser) GetInvoiceEmail() bool`
-
-GetInvoiceEmail returns the InvoiceEmail field if non-nil, zero value otherwise.
-
-### GetInvoiceEmailOk
-
-`func (o *UpdateUser) GetInvoiceEmailOk() (*bool, bool)`
-
-GetInvoiceEmailOk returns a tuple with the InvoiceEmail field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetInvoiceEmail
-
-`func (o *UpdateUser) SetInvoiceEmail(v bool)`
-
-SetInvoiceEmail sets InvoiceEmail field to given value.
-
-### HasInvoiceEmail
-
-`func (o *UpdateUser) HasInvoiceEmail() bool`
-
-HasInvoiceEmail returns a boolean if a field has been set.
-
 ### GetEmail
 
 `func (o *UpdateUser) GetEmail() string`
@@ -104,55 +77,30 @@ SetEmail sets Email field to given value.
 
 HasEmail returns a boolean if a field has been set.
 
-### GetTagExpirationS
+### GetEnabled
 
-`func (o *UpdateUser) GetTagExpirationS() int32`
+`func (o *UpdateUser) GetEnabled() bool`
 
-GetTagExpirationS returns the TagExpirationS field if non-nil, zero value otherwise.
+GetEnabled returns the Enabled field if non-nil, zero value otherwise.
 
-### GetTagExpirationSOk
+### GetEnabledOk
 
-`func (o *UpdateUser) GetTagExpirationSOk() (*int32, bool)`
+`func (o *UpdateUser) GetEnabledOk() (*bool, bool)`
 
-GetTagExpirationSOk returns a tuple with the TagExpirationS field if it's non-nil, zero value otherwise
+GetEnabledOk returns a tuple with the Enabled field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetTagExpirationS
+### SetEnabled
 
-`func (o *UpdateUser) SetTagExpirationS(v int32)`
+`func (o *UpdateUser) SetEnabled(v bool)`
 
-SetTagExpirationS sets TagExpirationS field to given value.
+SetEnabled sets Enabled field to given value.
 
-### HasTagExpirationS
+### HasEnabled
 
-`func (o *UpdateUser) HasTagExpirationS() bool`
+`func (o *UpdateUser) HasEnabled() bool`
 
-HasTagExpirationS returns a boolean if a field has been set.
-
-### GetUsername
-
-`func (o *UpdateUser) GetUsername() string`
-
-GetUsername returns the Username field if non-nil, zero value otherwise.
-
-### GetUsernameOk
-
-`func (o *UpdateUser) GetUsernameOk() (*string, bool)`
-
-GetUsernameOk returns a tuple with the Username field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetUsername
-
-`func (o *UpdateUser) SetUsername(v string)`
-
-SetUsername sets Username field to given value.
-
-### HasUsername
-
-`func (o *UpdateUser) HasUsername() bool`
-
-HasUsername returns a boolean if a field has been set.
+HasEnabled returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

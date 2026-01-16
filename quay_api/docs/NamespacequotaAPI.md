@@ -1,6 +1,6 @@
 # \NamespacequotaAPI
 
-All URIs are relative to *https://quay.example.com*
+All URIs are relative to *https://quay.enthought.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -23,7 +23,7 @@ Method | HTTP request | Description
 
 ## ChangeOrganizationQuota
 
-> ChangeOrganizationQuota(ctx, orgname, quotaId).Body(body).Execute()
+> ChangeOrganizationQuota(ctx, quotaId, orgname).Body(body).Execute()
 
 
 
@@ -40,13 +40,13 @@ import (
 )
 
 func main() {
-	orgname := "orgname_example" // string | 
 	quotaId := "quotaId_example" // string | 
-	body := *openapiclient.NewUpdateOrgQuota() // UpdateOrgQuota | Request body contents.
+	orgname := "orgname_example" // string | 
+	body := map[string]interface{}{ ... } // map[string]interface{} | Request body contents.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.NamespacequotaAPI.ChangeOrganizationQuota(context.Background(), orgname, quotaId).Body(body).Execute()
+	r, err := apiClient.NamespacequotaAPI.ChangeOrganizationQuota(context.Background(), quotaId, orgname).Body(body).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NamespacequotaAPI.ChangeOrganizationQuota``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -60,8 +60,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**orgname** | **string** |  | 
 **quotaId** | **string** |  | 
+**orgname** | **string** |  | 
 
 ### Other Parameters
 
@@ -72,7 +72,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **body** | [**UpdateOrgQuota**](UpdateOrgQuota.md) | Request body contents. | 
+ **body** | **map[string]interface{}** | Request body contents. | 
 
 ### Return type
 
@@ -94,7 +94,7 @@ No authorization required
 
 ## ChangeOrganizationQuotaLimit
 
-> ChangeOrganizationQuotaLimit(ctx, orgname, limitId, quotaId).Body(body).Execute()
+> ChangeOrganizationQuotaLimit(ctx, quotaId, orgname, limitId).Body(body).Execute()
 
 
 
@@ -111,14 +111,14 @@ import (
 )
 
 func main() {
+	quotaId := "quotaId_example" // string | 
 	orgname := "orgname_example" // string | 
 	limitId := "limitId_example" // string | 
-	quotaId := "quotaId_example" // string | 
 	body := *openapiclient.NewUpdateOrgQuotaLimit() // UpdateOrgQuotaLimit | Request body contents.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.NamespacequotaAPI.ChangeOrganizationQuotaLimit(context.Background(), orgname, limitId, quotaId).Body(body).Execute()
+	r, err := apiClient.NamespacequotaAPI.ChangeOrganizationQuotaLimit(context.Background(), quotaId, orgname, limitId).Body(body).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NamespacequotaAPI.ChangeOrganizationQuotaLimit``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -132,9 +132,9 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**quotaId** | **string** |  | 
 **orgname** | **string** |  | 
 **limitId** | **string** |  | 
-**quotaId** | **string** |  | 
 
 ### Other Parameters
 
@@ -188,7 +188,7 @@ import (
 
 func main() {
 	orgname := "orgname_example" // string | 
-	body := *openapiclient.NewNewOrgQuota(int32(123)) // NewOrgQuota | Request body contents.
+	body := map[string]interface{}{ ... } // map[string]interface{} | Request body contents.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -216,7 +216,7 @@ Other parameters are passed through a pointer to a apiCreateOrganizationQuotaReq
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **body** | [**NewOrgQuota**](NewOrgQuota.md) | Request body contents. | 
+ **body** | **map[string]interface{}** | Request body contents. | 
 
 ### Return type
 
@@ -238,7 +238,7 @@ No authorization required
 
 ## CreateOrganizationQuotaLimit
 
-> CreateOrganizationQuotaLimit(ctx, orgname, quotaId).Body(body).Execute()
+> CreateOrganizationQuotaLimit(ctx, quotaId, orgname).Body(body).Execute()
 
 
 
@@ -255,13 +255,13 @@ import (
 )
 
 func main() {
-	orgname := "orgname_example" // string | 
 	quotaId := "quotaId_example" // string | 
+	orgname := "orgname_example" // string | 
 	body := *openapiclient.NewNewOrgQuotaLimit("Type_example", int32(123)) // NewOrgQuotaLimit | Request body contents.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.NamespacequotaAPI.CreateOrganizationQuotaLimit(context.Background(), orgname, quotaId).Body(body).Execute()
+	r, err := apiClient.NamespacequotaAPI.CreateOrganizationQuotaLimit(context.Background(), quotaId, orgname).Body(body).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NamespacequotaAPI.CreateOrganizationQuotaLimit``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -275,8 +275,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**orgname** | **string** |  | 
 **quotaId** | **string** |  | 
+**orgname** | **string** |  | 
 
 ### Other Parameters
 
@@ -309,7 +309,7 @@ No authorization required
 
 ## DeleteOrganizationQuota
 
-> DeleteOrganizationQuota(ctx, orgname, quotaId).Execute()
+> DeleteOrganizationQuota(ctx, quotaId, orgname).Execute()
 
 
 
@@ -326,12 +326,12 @@ import (
 )
 
 func main() {
-	orgname := "orgname_example" // string | 
 	quotaId := "quotaId_example" // string | 
+	orgname := "orgname_example" // string | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.NamespacequotaAPI.DeleteOrganizationQuota(context.Background(), orgname, quotaId).Execute()
+	r, err := apiClient.NamespacequotaAPI.DeleteOrganizationQuota(context.Background(), quotaId, orgname).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NamespacequotaAPI.DeleteOrganizationQuota``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -345,8 +345,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**orgname** | **string** |  | 
 **quotaId** | **string** |  | 
+**orgname** | **string** |  | 
 
 ### Other Parameters
 
@@ -378,7 +378,7 @@ No authorization required
 
 ## DeleteOrganizationQuotaLimit
 
-> DeleteOrganizationQuotaLimit(ctx, orgname, limitId, quotaId).Execute()
+> DeleteOrganizationQuotaLimit(ctx, quotaId, orgname, limitId).Execute()
 
 
 
@@ -395,13 +395,13 @@ import (
 )
 
 func main() {
+	quotaId := "quotaId_example" // string | 
 	orgname := "orgname_example" // string | 
 	limitId := "limitId_example" // string | 
-	quotaId := "quotaId_example" // string | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.NamespacequotaAPI.DeleteOrganizationQuotaLimit(context.Background(), orgname, limitId, quotaId).Execute()
+	r, err := apiClient.NamespacequotaAPI.DeleteOrganizationQuotaLimit(context.Background(), quotaId, orgname, limitId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NamespacequotaAPI.DeleteOrganizationQuotaLimit``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -415,9 +415,9 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**quotaId** | **string** |  | 
 **orgname** | **string** |  | 
 **limitId** | **string** |  | 
-**quotaId** | **string** |  | 
 
 ### Other Parameters
 
@@ -450,7 +450,7 @@ No authorization required
 
 ## GetOrganizationQuota
 
-> GetOrganizationQuota(ctx, orgname, quotaId).Execute()
+> GetOrganizationQuota(ctx, quotaId, orgname).Execute()
 
 
 
@@ -467,12 +467,12 @@ import (
 )
 
 func main() {
-	orgname := "orgname_example" // string | 
 	quotaId := "quotaId_example" // string | 
+	orgname := "orgname_example" // string | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.NamespacequotaAPI.GetOrganizationQuota(context.Background(), orgname, quotaId).Execute()
+	r, err := apiClient.NamespacequotaAPI.GetOrganizationQuota(context.Background(), quotaId, orgname).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NamespacequotaAPI.GetOrganizationQuota``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -486,8 +486,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**orgname** | **string** |  | 
 **quotaId** | **string** |  | 
+**orgname** | **string** |  | 
 
 ### Other Parameters
 
@@ -519,7 +519,7 @@ No authorization required
 
 ## GetOrganizationQuotaLimit
 
-> GetOrganizationQuotaLimit(ctx, orgname, limitId, quotaId).Execute()
+> GetOrganizationQuotaLimit(ctx, quotaId, orgname, limitId).Execute()
 
 
 
@@ -536,13 +536,13 @@ import (
 )
 
 func main() {
+	quotaId := "quotaId_example" // string | 
 	orgname := "orgname_example" // string | 
 	limitId := "limitId_example" // string | 
-	quotaId := "quotaId_example" // string | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.NamespacequotaAPI.GetOrganizationQuotaLimit(context.Background(), orgname, limitId, quotaId).Execute()
+	r, err := apiClient.NamespacequotaAPI.GetOrganizationQuotaLimit(context.Background(), quotaId, orgname, limitId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NamespacequotaAPI.GetOrganizationQuotaLimit``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -556,9 +556,9 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**quotaId** | **string** |  | 
 **orgname** | **string** |  | 
 **limitId** | **string** |  | 
-**quotaId** | **string** |  | 
 
 ### Other Parameters
 
@@ -657,7 +657,7 @@ No authorization required
 
 ## GetUserQuotaLimit
 
-> GetUserQuotaLimit(ctx, limitId, quotaId).Execute()
+> GetUserQuotaLimit(ctx, quotaId, limitId).Execute()
 
 
 
@@ -674,12 +674,12 @@ import (
 )
 
 func main() {
-	limitId := "limitId_example" // string | 
 	quotaId := "quotaId_example" // string | 
+	limitId := "limitId_example" // string | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.NamespacequotaAPI.GetUserQuotaLimit(context.Background(), limitId, quotaId).Execute()
+	r, err := apiClient.NamespacequotaAPI.GetUserQuotaLimit(context.Background(), quotaId, limitId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NamespacequotaAPI.GetUserQuotaLimit``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -693,8 +693,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**limitId** | **string** |  | 
 **quotaId** | **string** |  | 
+**limitId** | **string** |  | 
 
 ### Other Parameters
 
@@ -792,7 +792,7 @@ No authorization required
 
 ## ListOrganizationQuotaLimit
 
-> ListOrganizationQuotaLimit(ctx, orgname, quotaId).Execute()
+> ListOrganizationQuotaLimit(ctx, quotaId, orgname).Execute()
 
 
 
@@ -809,12 +809,12 @@ import (
 )
 
 func main() {
-	orgname := "orgname_example" // string | 
 	quotaId := "quotaId_example" // string | 
+	orgname := "orgname_example" // string | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.NamespacequotaAPI.ListOrganizationQuotaLimit(context.Background(), orgname, quotaId).Execute()
+	r, err := apiClient.NamespacequotaAPI.ListOrganizationQuotaLimit(context.Background(), quotaId, orgname).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `NamespacequotaAPI.ListOrganizationQuotaLimit``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -828,8 +828,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**orgname** | **string** |  | 
 **quotaId** | **string** |  | 
+**orgname** | **string** |  | 
 
 ### Other Parameters
 
