@@ -1,6 +1,6 @@
 # \PrototypeAPI
 
-All URIs are relative to *https://quay.example.com*
+All URIs are relative to *https://quay.enthought.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -83,7 +83,7 @@ No authorization required
 
 ## DeleteOrganizationPrototypePermission
 
-> DeleteOrganizationPrototypePermission(ctx, orgname, prototypeid).Execute()
+> DeleteOrganizationPrototypePermission(ctx, prototypeid, orgname).Execute()
 
 
 
@@ -102,12 +102,12 @@ import (
 )
 
 func main() {
-	orgname := "orgname_example" // string | The name of the organization
 	prototypeid := "prototypeid_example" // string | The ID of the prototype
+	orgname := "orgname_example" // string | The name of the organization
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.PrototypeAPI.DeleteOrganizationPrototypePermission(context.Background(), orgname, prototypeid).Execute()
+	r, err := apiClient.PrototypeAPI.DeleteOrganizationPrototypePermission(context.Background(), prototypeid, orgname).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PrototypeAPI.DeleteOrganizationPrototypePermission``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -121,8 +121,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**orgname** | **string** | The name of the organization | 
 **prototypeid** | **string** | The ID of the prototype | 
+**orgname** | **string** | The name of the organization | 
 
 ### Other Parameters
 
@@ -222,7 +222,7 @@ No authorization required
 
 ## UpdateOrganizationPrototypePermission
 
-> UpdateOrganizationPrototypePermission(ctx, orgname, prototypeid).Body(body).Execute()
+> UpdateOrganizationPrototypePermission(ctx, prototypeid, orgname).Body(body).Execute()
 
 
 
@@ -241,13 +241,13 @@ import (
 )
 
 func main() {
-	orgname := "orgname_example" // string | The name of the organization
 	prototypeid := "prototypeid_example" // string | The ID of the prototype
+	orgname := "orgname_example" // string | The name of the organization
 	body := *openapiclient.NewPrototypeUpdate("Role_example") // PrototypeUpdate | Request body contents.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.PrototypeAPI.UpdateOrganizationPrototypePermission(context.Background(), orgname, prototypeid).Body(body).Execute()
+	r, err := apiClient.PrototypeAPI.UpdateOrganizationPrototypePermission(context.Background(), prototypeid, orgname).Body(body).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PrototypeAPI.UpdateOrganizationPrototypePermission``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -261,8 +261,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**orgname** | **string** | The name of the organization | 
 **prototypeid** | **string** | The ID of the prototype | 
+**orgname** | **string** | The name of the organization | 
 
 ### Other Parameters
 

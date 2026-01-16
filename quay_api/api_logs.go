@@ -95,10 +95,10 @@ func (a *LogsAPIService) ExportOrgLogsExecute(r ApiExportOrgLogsRequest) (*http.
 	}
 
 	if r.endtime != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "endtime", r.endtime, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "endtime", r.endtime, "form", "")
 	}
 	if r.starttime != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "starttime", r.starttime, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "starttime", r.starttime, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -263,10 +263,10 @@ func (a *LogsAPIService) ExportRepoLogsExecute(r ApiExportRepoLogsRequest) (*htt
 	}
 
 	if r.endtime != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "endtime", r.endtime, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "endtime", r.endtime, "form", "")
 	}
 	if r.starttime != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "starttime", r.starttime, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "starttime", r.starttime, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -427,10 +427,10 @@ func (a *LogsAPIService) ExportUserLogsExecute(r ApiExportUserLogsRequest) (*htt
 	}
 
 	if r.endtime != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "endtime", r.endtime, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "endtime", r.endtime, "form", "")
 	}
 	if r.starttime != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "starttime", r.starttime, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "starttime", r.starttime, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -592,13 +592,13 @@ func (a *LogsAPIService) GetAggregateOrgLogsExecute(r ApiGetAggregateOrgLogsRequ
 	localVarFormParams := url.Values{}
 
 	if r.performer != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "performer", r.performer, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "performer", r.performer, "form", "")
 	}
 	if r.endtime != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "endtime", r.endtime, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "endtime", r.endtime, "form", "")
 	}
 	if r.starttime != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "starttime", r.starttime, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "starttime", r.starttime, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -751,10 +751,10 @@ func (a *LogsAPIService) GetAggregateRepoLogsExecute(r ApiGetAggregateRepoLogsRe
 	localVarFormParams := url.Values{}
 
 	if r.endtime != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "endtime", r.endtime, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "endtime", r.endtime, "form", "")
 	}
 	if r.starttime != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "starttime", r.starttime, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "starttime", r.starttime, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -910,13 +910,13 @@ func (a *LogsAPIService) GetAggregateUserLogsExecute(r ApiGetAggregateUserLogsRe
 	localVarFormParams := url.Values{}
 
 	if r.performer != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "performer", r.performer, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "performer", r.performer, "form", "")
 	}
 	if r.endtime != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "endtime", r.endtime, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "endtime", r.endtime, "form", "")
 	}
 	if r.starttime != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "starttime", r.starttime, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "starttime", r.starttime, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1083,16 +1083,16 @@ func (a *LogsAPIService) ListOrgLogsExecute(r ApiListOrgLogsRequest) (*http.Resp
 	localVarFormParams := url.Values{}
 
 	if r.nextPage != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "next_page", r.nextPage, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "next_page", r.nextPage, "form", "")
 	}
 	if r.performer != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "performer", r.performer, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "performer", r.performer, "form", "")
 	}
 	if r.endtime != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "endtime", r.endtime, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "endtime", r.endtime, "form", "")
 	}
 	if r.starttime != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "starttime", r.starttime, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "starttime", r.starttime, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1252,13 +1252,13 @@ func (a *LogsAPIService) ListRepoLogsExecute(r ApiListRepoLogsRequest) (*http.Re
 	localVarFormParams := url.Values{}
 
 	if r.nextPage != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "next_page", r.nextPage, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "next_page", r.nextPage, "form", "")
 	}
 	if r.endtime != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "endtime", r.endtime, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "endtime", r.endtime, "form", "")
 	}
 	if r.starttime != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "starttime", r.starttime, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "starttime", r.starttime, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1421,16 +1421,16 @@ func (a *LogsAPIService) ListUserLogsExecute(r ApiListUserLogsRequest) (*http.Re
 	localVarFormParams := url.Values{}
 
 	if r.nextPage != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "next_page", r.nextPage, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "next_page", r.nextPage, "form", "")
 	}
 	if r.performer != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "performer", r.performer, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "performer", r.performer, "form", "")
 	}
 	if r.endtime != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "endtime", r.endtime, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "endtime", r.endtime, "form", "")
 	}
 	if r.starttime != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "starttime", r.starttime, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "starttime", r.starttime, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

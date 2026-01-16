@@ -39,10 +39,10 @@ func Test_quay_api_PrototypeAPIService(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		var orgname string
 		var prototypeid string
+		var orgname string
 
-		httpRes, err := apiClient.PrototypeAPI.DeleteOrganizationPrototypePermission(context.Background(), orgname, prototypeid).Execute()
+		httpRes, err := apiClient.PrototypeAPI.DeleteOrganizationPrototypePermission(context.Background(), prototypeid, orgname).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
@@ -66,10 +66,10 @@ func Test_quay_api_PrototypeAPIService(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		var orgname string
 		var prototypeid string
+		var orgname string
 
-		httpRes, err := apiClient.PrototypeAPI.UpdateOrganizationPrototypePermission(context.Background(), orgname, prototypeid).Execute()
+		httpRes, err := apiClient.PrototypeAPI.UpdateOrganizationPrototypePermission(context.Background(), prototypeid, orgname).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)

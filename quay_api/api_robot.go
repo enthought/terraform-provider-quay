@@ -26,8 +26,8 @@ type RobotAPIService service
 type ApiCreateOrgRobotRequest struct {
 	ctx            context.Context
 	ApiService     *RobotAPIService
-	orgname        string
 	robotShortname string
+	orgname        string
 	body           *CreateRobot
 }
 
@@ -47,16 +47,16 @@ CreateOrgRobot Method for CreateOrgRobot
 Create a new robot in the organization.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param orgname The name of the organization
 	@param robotShortname The short name for the robot, without any user or organization prefix
+	@param orgname The name of the organization
 	@return ApiCreateOrgRobotRequest
 */
-func (a *RobotAPIService) CreateOrgRobot(ctx context.Context, orgname string, robotShortname string) ApiCreateOrgRobotRequest {
+func (a *RobotAPIService) CreateOrgRobot(ctx context.Context, robotShortname string, orgname string) ApiCreateOrgRobotRequest {
 	return ApiCreateOrgRobotRequest{
 		ApiService:     a,
 		ctx:            ctx,
-		orgname:        orgname,
 		robotShortname: robotShortname,
+		orgname:        orgname,
 	}
 }
 
@@ -74,8 +74,8 @@ func (a *RobotAPIService) CreateOrgRobotExecute(r ApiCreateOrgRobotRequest) (*ht
 	}
 
 	localVarPath := localBasePath + "/api/v1/organization/{orgname}/robots/{robot_shortname}"
-	localVarPath = strings.Replace(localVarPath, "{"+"orgname"+"}", url.PathEscape(parameterValueToString(r.orgname, "orgname")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"robot_shortname"+"}", url.PathEscape(parameterValueToString(r.robotShortname, "robotShortname")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"orgname"+"}", url.PathEscape(parameterValueToString(r.orgname, "orgname")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -326,8 +326,8 @@ func (a *RobotAPIService) CreateUserRobotExecute(r ApiCreateUserRobotRequest) (*
 type ApiDeleteOrgRobotRequest struct {
 	ctx            context.Context
 	ApiService     *RobotAPIService
-	orgname        string
 	robotShortname string
+	orgname        string
 }
 
 func (r ApiDeleteOrgRobotRequest) Execute() (*http.Response, error) {
@@ -340,16 +340,16 @@ DeleteOrgRobot Method for DeleteOrgRobot
 Delete an existing organization robot.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param orgname The name of the organization
 	@param robotShortname The short name for the robot, without any user or organization prefix
+	@param orgname The name of the organization
 	@return ApiDeleteOrgRobotRequest
 */
-func (a *RobotAPIService) DeleteOrgRobot(ctx context.Context, orgname string, robotShortname string) ApiDeleteOrgRobotRequest {
+func (a *RobotAPIService) DeleteOrgRobot(ctx context.Context, robotShortname string, orgname string) ApiDeleteOrgRobotRequest {
 	return ApiDeleteOrgRobotRequest{
 		ApiService:     a,
 		ctx:            ctx,
-		orgname:        orgname,
 		robotShortname: robotShortname,
+		orgname:        orgname,
 	}
 }
 
@@ -367,8 +367,8 @@ func (a *RobotAPIService) DeleteOrgRobotExecute(r ApiDeleteOrgRobotRequest) (*ht
 	}
 
 	localVarPath := localBasePath + "/api/v1/organization/{orgname}/robots/{robot_shortname}"
-	localVarPath = strings.Replace(localVarPath, "{"+"orgname"+"}", url.PathEscape(parameterValueToString(r.orgname, "orgname")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"robot_shortname"+"}", url.PathEscape(parameterValueToString(r.robotShortname, "robotShortname")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"orgname"+"}", url.PathEscape(parameterValueToString(r.orgname, "orgname")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -602,8 +602,8 @@ func (a *RobotAPIService) DeleteUserRobotExecute(r ApiDeleteUserRobotRequest) (*
 type ApiGetOrgRobotRequest struct {
 	ctx            context.Context
 	ApiService     *RobotAPIService
-	orgname        string
 	robotShortname string
+	orgname        string
 }
 
 func (r ApiGetOrgRobotRequest) Execute() (*http.Response, error) {
@@ -616,16 +616,16 @@ GetOrgRobot Method for GetOrgRobot
 Returns the organization's robot with the specified name.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param orgname The name of the organization
 	@param robotShortname The short name for the robot, without any user or organization prefix
+	@param orgname The name of the organization
 	@return ApiGetOrgRobotRequest
 */
-func (a *RobotAPIService) GetOrgRobot(ctx context.Context, orgname string, robotShortname string) ApiGetOrgRobotRequest {
+func (a *RobotAPIService) GetOrgRobot(ctx context.Context, robotShortname string, orgname string) ApiGetOrgRobotRequest {
 	return ApiGetOrgRobotRequest{
 		ApiService:     a,
 		ctx:            ctx,
-		orgname:        orgname,
 		robotShortname: robotShortname,
+		orgname:        orgname,
 	}
 }
 
@@ -643,8 +643,8 @@ func (a *RobotAPIService) GetOrgRobotExecute(r ApiGetOrgRobotRequest) (*http.Res
 	}
 
 	localVarPath := localBasePath + "/api/v1/organization/{orgname}/robots/{robot_shortname}"
-	localVarPath = strings.Replace(localVarPath, "{"+"orgname"+"}", url.PathEscape(parameterValueToString(r.orgname, "orgname")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"robot_shortname"+"}", url.PathEscape(parameterValueToString(r.robotShortname, "robotShortname")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"orgname"+"}", url.PathEscape(parameterValueToString(r.orgname, "orgname")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -742,8 +742,8 @@ func (a *RobotAPIService) GetOrgRobotExecute(r ApiGetOrgRobotRequest) (*http.Res
 type ApiGetOrgRobotPermissionsRequest struct {
 	ctx            context.Context
 	ApiService     *RobotAPIService
-	orgname        string
 	robotShortname string
+	orgname        string
 }
 
 func (r ApiGetOrgRobotPermissionsRequest) Execute() (*http.Response, error) {
@@ -756,16 +756,16 @@ GetOrgRobotPermissions Method for GetOrgRobotPermissions
 Returns the list of repository permissions for the org's robot.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param orgname The name of the organization
 	@param robotShortname The short name for the robot, without any user or organization prefix
+	@param orgname The name of the organization
 	@return ApiGetOrgRobotPermissionsRequest
 */
-func (a *RobotAPIService) GetOrgRobotPermissions(ctx context.Context, orgname string, robotShortname string) ApiGetOrgRobotPermissionsRequest {
+func (a *RobotAPIService) GetOrgRobotPermissions(ctx context.Context, robotShortname string, orgname string) ApiGetOrgRobotPermissionsRequest {
 	return ApiGetOrgRobotPermissionsRequest{
 		ApiService:     a,
 		ctx:            ctx,
-		orgname:        orgname,
 		robotShortname: robotShortname,
+		orgname:        orgname,
 	}
 }
 
@@ -783,8 +783,8 @@ func (a *RobotAPIService) GetOrgRobotPermissionsExecute(r ApiGetOrgRobotPermissi
 	}
 
 	localVarPath := localBasePath + "/api/v1/organization/{orgname}/robots/{robot_shortname}/permissions"
-	localVarPath = strings.Replace(localVarPath, "{"+"orgname"+"}", url.PathEscape(parameterValueToString(r.orgname, "orgname")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"robot_shortname"+"}", url.PathEscape(parameterValueToString(r.robotShortname, "robotShortname")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"orgname"+"}", url.PathEscape(parameterValueToString(r.orgname, "orgname")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -948,13 +948,13 @@ func (a *RobotAPIService) GetOrgRobotsExecute(r ApiGetOrgRobotsRequest) (*http.R
 	localVarFormParams := url.Values{}
 
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	if r.token != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "token", r.token, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "token", r.token, "form", "")
 	}
 	if r.permissions != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "permissions", r.permissions, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "permissions", r.permissions, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1382,13 +1382,13 @@ func (a *RobotAPIService) GetUserRobotsExecute(r ApiGetUserRobotsRequest) (*http
 	localVarFormParams := url.Values{}
 
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	if r.token != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "token", r.token, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "token", r.token, "form", "")
 	}
 	if r.permissions != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "permissions", r.permissions, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "permissions", r.permissions, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1482,8 +1482,8 @@ func (a *RobotAPIService) GetUserRobotsExecute(r ApiGetUserRobotsRequest) (*http
 type ApiRegenerateOrgRobotTokenRequest struct {
 	ctx            context.Context
 	ApiService     *RobotAPIService
-	orgname        string
 	robotShortname string
+	orgname        string
 }
 
 func (r ApiRegenerateOrgRobotTokenRequest) Execute() (*http.Response, error) {
@@ -1496,16 +1496,16 @@ RegenerateOrgRobotToken Method for RegenerateOrgRobotToken
 Regenerates the token for an organization robot.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param orgname The name of the organization
 	@param robotShortname The short name for the robot, without any user or organization prefix
+	@param orgname The name of the organization
 	@return ApiRegenerateOrgRobotTokenRequest
 */
-func (a *RobotAPIService) RegenerateOrgRobotToken(ctx context.Context, orgname string, robotShortname string) ApiRegenerateOrgRobotTokenRequest {
+func (a *RobotAPIService) RegenerateOrgRobotToken(ctx context.Context, robotShortname string, orgname string) ApiRegenerateOrgRobotTokenRequest {
 	return ApiRegenerateOrgRobotTokenRequest{
 		ApiService:     a,
 		ctx:            ctx,
-		orgname:        orgname,
 		robotShortname: robotShortname,
+		orgname:        orgname,
 	}
 }
 
@@ -1523,8 +1523,8 @@ func (a *RobotAPIService) RegenerateOrgRobotTokenExecute(r ApiRegenerateOrgRobot
 	}
 
 	localVarPath := localBasePath + "/api/v1/organization/{orgname}/robots/{robot_shortname}/regenerate"
-	localVarPath = strings.Replace(localVarPath, "{"+"orgname"+"}", url.PathEscape(parameterValueToString(r.orgname, "orgname")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"robot_shortname"+"}", url.PathEscape(parameterValueToString(r.robotShortname, "robotShortname")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"orgname"+"}", url.PathEscape(parameterValueToString(r.orgname, "orgname")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

@@ -167,8 +167,8 @@ type ApiDeleteOrganizationTeamMemberRequest struct {
 	ctx        context.Context
 	ApiService *TeamAPIService
 	orgname    string
-	membername string
 	teamname   string
+	membername string
 }
 
 func (r ApiDeleteOrganizationTeamMemberRequest) Execute() (*http.Response, error) {
@@ -184,17 +184,17 @@ Delete a member of a team.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param orgname The name of the organization
-	@param membername The username of the team member
 	@param teamname The name of the team
+	@param membername The username of the team member
 	@return ApiDeleteOrganizationTeamMemberRequest
 */
-func (a *TeamAPIService) DeleteOrganizationTeamMember(ctx context.Context, orgname string, membername string, teamname string) ApiDeleteOrganizationTeamMemberRequest {
+func (a *TeamAPIService) DeleteOrganizationTeamMember(ctx context.Context, orgname string, teamname string, membername string) ApiDeleteOrganizationTeamMemberRequest {
 	return ApiDeleteOrganizationTeamMemberRequest{
 		ApiService: a,
 		ctx:        ctx,
 		orgname:    orgname,
-		membername: membername,
 		teamname:   teamname,
+		membername: membername,
 	}
 }
 
@@ -213,8 +213,8 @@ func (a *TeamAPIService) DeleteOrganizationTeamMemberExecute(r ApiDeleteOrganiza
 
 	localVarPath := localBasePath + "/api/v1/organization/{orgname}/team/{teamname}/members/{membername}"
 	localVarPath = strings.Replace(localVarPath, "{"+"orgname"+"}", url.PathEscape(parameterValueToString(r.orgname, "orgname")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"membername"+"}", url.PathEscape(parameterValueToString(r.membername, "membername")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"teamname"+"}", url.PathEscape(parameterValueToString(r.teamname, "teamname")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"membername"+"}", url.PathEscape(parameterValueToString(r.membername, "membername")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -313,8 +313,8 @@ type ApiDeleteTeamMemberEmailInviteRequest struct {
 	ctx        context.Context
 	ApiService *TeamAPIService
 	orgname    string
-	email      string
 	teamname   string
+	email      string
 }
 
 func (r ApiDeleteTeamMemberEmailInviteRequest) Execute() (*http.Response, error) {
@@ -328,17 +328,17 @@ Delete an invite of an email address to join a team.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param orgname
-	@param email
 	@param teamname
+	@param email
 	@return ApiDeleteTeamMemberEmailInviteRequest
 */
-func (a *TeamAPIService) DeleteTeamMemberEmailInvite(ctx context.Context, orgname string, email string, teamname string) ApiDeleteTeamMemberEmailInviteRequest {
+func (a *TeamAPIService) DeleteTeamMemberEmailInvite(ctx context.Context, orgname string, teamname string, email string) ApiDeleteTeamMemberEmailInviteRequest {
 	return ApiDeleteTeamMemberEmailInviteRequest{
 		ApiService: a,
 		ctx:        ctx,
 		orgname:    orgname,
-		email:      email,
 		teamname:   teamname,
+		email:      email,
 	}
 }
 
@@ -357,8 +357,8 @@ func (a *TeamAPIService) DeleteTeamMemberEmailInviteExecute(r ApiDeleteTeamMembe
 
 	localVarPath := localBasePath + "/api/v1/organization/{orgname}/team/{teamname}/invite/{email}"
 	localVarPath = strings.Replace(localVarPath, "{"+"orgname"+"}", url.PathEscape(parameterValueToString(r.orgname, "orgname")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"email"+"}", url.PathEscape(parameterValueToString(r.email, "email")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"teamname"+"}", url.PathEscape(parameterValueToString(r.teamname, "teamname")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"email"+"}", url.PathEscape(parameterValueToString(r.email, "email")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -788,7 +788,7 @@ func (a *TeamAPIService) GetOrganizationTeamMembersExecute(r ApiGetOrganizationT
 	localVarFormParams := url.Values{}
 
 	if r.includePending != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "includePending", r.includePending, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "includePending", r.includePending, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1023,8 +1023,8 @@ type ApiInviteTeamMemberEmailRequest struct {
 	ctx        context.Context
 	ApiService *TeamAPIService
 	orgname    string
-	email      string
 	teamname   string
+	email      string
 }
 
 func (r ApiInviteTeamMemberEmailRequest) Execute() (*http.Response, error) {
@@ -1038,17 +1038,17 @@ Invites an email address to an existing team.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param orgname
-	@param email
 	@param teamname
+	@param email
 	@return ApiInviteTeamMemberEmailRequest
 */
-func (a *TeamAPIService) InviteTeamMemberEmail(ctx context.Context, orgname string, email string, teamname string) ApiInviteTeamMemberEmailRequest {
+func (a *TeamAPIService) InviteTeamMemberEmail(ctx context.Context, orgname string, teamname string, email string) ApiInviteTeamMemberEmailRequest {
 	return ApiInviteTeamMemberEmailRequest{
 		ApiService: a,
 		ctx:        ctx,
 		orgname:    orgname,
-		email:      email,
 		teamname:   teamname,
+		email:      email,
 	}
 }
 
@@ -1067,8 +1067,8 @@ func (a *TeamAPIService) InviteTeamMemberEmailExecute(r ApiInviteTeamMemberEmail
 
 	localVarPath := localBasePath + "/api/v1/organization/{orgname}/team/{teamname}/invite/{email}"
 	localVarPath = strings.Replace(localVarPath, "{"+"orgname"+"}", url.PathEscape(parameterValueToString(r.orgname, "orgname")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"email"+"}", url.PathEscape(parameterValueToString(r.email, "email")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"teamname"+"}", url.PathEscape(parameterValueToString(r.teamname, "teamname")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"email"+"}", url.PathEscape(parameterValueToString(r.email, "email")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1319,8 +1319,8 @@ type ApiUpdateOrganizationTeamMemberRequest struct {
 	ctx        context.Context
 	ApiService *TeamAPIService
 	orgname    string
-	membername string
 	teamname   string
+	membername string
 }
 
 func (r ApiUpdateOrganizationTeamMemberRequest) Execute() (*http.Response, error) {
@@ -1334,17 +1334,17 @@ Adds or invites a member to an existing team.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param orgname The name of the organization
-	@param membername The username of the team member
 	@param teamname The name of the team
+	@param membername The username of the team member
 	@return ApiUpdateOrganizationTeamMemberRequest
 */
-func (a *TeamAPIService) UpdateOrganizationTeamMember(ctx context.Context, orgname string, membername string, teamname string) ApiUpdateOrganizationTeamMemberRequest {
+func (a *TeamAPIService) UpdateOrganizationTeamMember(ctx context.Context, orgname string, teamname string, membername string) ApiUpdateOrganizationTeamMemberRequest {
 	return ApiUpdateOrganizationTeamMemberRequest{
 		ApiService: a,
 		ctx:        ctx,
 		orgname:    orgname,
-		membername: membername,
 		teamname:   teamname,
+		membername: membername,
 	}
 }
 
@@ -1363,8 +1363,8 @@ func (a *TeamAPIService) UpdateOrganizationTeamMemberExecute(r ApiUpdateOrganiza
 
 	localVarPath := localBasePath + "/api/v1/organization/{orgname}/team/{teamname}/members/{membername}"
 	localVarPath = strings.Replace(localVarPath, "{"+"orgname"+"}", url.PathEscape(parameterValueToString(r.orgname, "orgname")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"membername"+"}", url.PathEscape(parameterValueToString(r.membername, "membername")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"teamname"+"}", url.PathEscape(parameterValueToString(r.teamname, "teamname")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"membername"+"}", url.PathEscape(parameterValueToString(r.membername, "membername")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

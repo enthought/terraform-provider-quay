@@ -1,6 +1,6 @@
 # \RobotAPI
 
-All URIs are relative to *https://quay.example.com*
+All URIs are relative to *https://quay.enthought.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -21,7 +21,7 @@ Method | HTTP request | Description
 
 ## CreateOrgRobot
 
-> CreateOrgRobot(ctx, orgname, robotShortname).Body(body).Execute()
+> CreateOrgRobot(ctx, robotShortname, orgname).Body(body).Execute()
 
 
 
@@ -40,13 +40,13 @@ import (
 )
 
 func main() {
-	orgname := "orgname_example" // string | The name of the organization
 	robotShortname := "robotShortname_example" // string | The short name for the robot, without any user or organization prefix
+	orgname := "orgname_example" // string | The name of the organization
 	body := *openapiclient.NewCreateRobot() // CreateRobot | Request body contents.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.RobotAPI.CreateOrgRobot(context.Background(), orgname, robotShortname).Body(body).Execute()
+	r, err := apiClient.RobotAPI.CreateOrgRobot(context.Background(), robotShortname, orgname).Body(body).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `RobotAPI.CreateOrgRobot``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -60,8 +60,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**orgname** | **string** | The name of the organization | 
 **robotShortname** | **string** | The short name for the robot, without any user or organization prefix | 
+**orgname** | **string** | The name of the organization | 
 
 ### Other Parameters
 
@@ -164,7 +164,7 @@ No authorization required
 
 ## DeleteOrgRobot
 
-> DeleteOrgRobot(ctx, orgname, robotShortname).Execute()
+> DeleteOrgRobot(ctx, robotShortname, orgname).Execute()
 
 
 
@@ -183,12 +183,12 @@ import (
 )
 
 func main() {
-	orgname := "orgname_example" // string | The name of the organization
 	robotShortname := "robotShortname_example" // string | The short name for the robot, without any user or organization prefix
+	orgname := "orgname_example" // string | The name of the organization
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.RobotAPI.DeleteOrgRobot(context.Background(), orgname, robotShortname).Execute()
+	r, err := apiClient.RobotAPI.DeleteOrgRobot(context.Background(), robotShortname, orgname).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `RobotAPI.DeleteOrgRobot``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -202,8 +202,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**orgname** | **string** | The name of the organization | 
 **robotShortname** | **string** | The short name for the robot, without any user or organization prefix | 
+**orgname** | **string** | The name of the organization | 
 
 ### Other Parameters
 
@@ -303,7 +303,7 @@ No authorization required
 
 ## GetOrgRobot
 
-> GetOrgRobot(ctx, orgname, robotShortname).Execute()
+> GetOrgRobot(ctx, robotShortname, orgname).Execute()
 
 
 
@@ -322,12 +322,12 @@ import (
 )
 
 func main() {
-	orgname := "orgname_example" // string | The name of the organization
 	robotShortname := "robotShortname_example" // string | The short name for the robot, without any user or organization prefix
+	orgname := "orgname_example" // string | The name of the organization
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.RobotAPI.GetOrgRobot(context.Background(), orgname, robotShortname).Execute()
+	r, err := apiClient.RobotAPI.GetOrgRobot(context.Background(), robotShortname, orgname).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `RobotAPI.GetOrgRobot``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -341,8 +341,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**orgname** | **string** | The name of the organization | 
 **robotShortname** | **string** | The short name for the robot, without any user or organization prefix | 
+**orgname** | **string** | The name of the organization | 
 
 ### Other Parameters
 
@@ -374,7 +374,7 @@ No authorization required
 
 ## GetOrgRobotPermissions
 
-> GetOrgRobotPermissions(ctx, orgname, robotShortname).Execute()
+> GetOrgRobotPermissions(ctx, robotShortname, orgname).Execute()
 
 
 
@@ -393,12 +393,12 @@ import (
 )
 
 func main() {
-	orgname := "orgname_example" // string | The name of the organization
 	robotShortname := "robotShortname_example" // string | The short name for the robot, without any user or organization prefix
+	orgname := "orgname_example" // string | The name of the organization
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.RobotAPI.GetOrgRobotPermissions(context.Background(), orgname, robotShortname).Execute()
+	r, err := apiClient.RobotAPI.GetOrgRobotPermissions(context.Background(), robotShortname, orgname).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `RobotAPI.GetOrgRobotPermissions``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -412,8 +412,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**orgname** | **string** | The name of the organization | 
 **robotShortname** | **string** | The short name for the robot, without any user or organization prefix | 
+**orgname** | **string** | The name of the organization | 
 
 ### Other Parameters
 
@@ -723,7 +723,7 @@ No authorization required
 
 ## RegenerateOrgRobotToken
 
-> RegenerateOrgRobotToken(ctx, orgname, robotShortname).Execute()
+> RegenerateOrgRobotToken(ctx, robotShortname, orgname).Execute()
 
 
 
@@ -742,12 +742,12 @@ import (
 )
 
 func main() {
-	orgname := "orgname_example" // string | The name of the organization
 	robotShortname := "robotShortname_example" // string | The short name for the robot, without any user or organization prefix
+	orgname := "orgname_example" // string | The name of the organization
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.RobotAPI.RegenerateOrgRobotToken(context.Background(), orgname, robotShortname).Execute()
+	r, err := apiClient.RobotAPI.RegenerateOrgRobotToken(context.Background(), robotShortname, orgname).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `RobotAPI.RegenerateOrgRobotToken``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -761,8 +761,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**orgname** | **string** | The name of the organization | 
 **robotShortname** | **string** | The short name for the robot, without any user or organization prefix | 
+**orgname** | **string** | The name of the organization | 
 
 ### Other Parameters
 

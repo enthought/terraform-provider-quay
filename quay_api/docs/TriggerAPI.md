@@ -1,6 +1,6 @@
 # \TriggerAPI
 
-All URIs are relative to *https://quay.example.com*
+All URIs are relative to *https://quay.enthought.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 ## ActivateBuildTrigger
 
-> ActivateBuildTrigger(ctx, triggerUuid, repository).Body(body).Execute()
+> ActivateBuildTrigger(ctx, repository, triggerUuid).Body(body).Execute()
 
 
 
@@ -35,13 +35,13 @@ import (
 )
 
 func main() {
-	triggerUuid := "triggerUuid_example" // string | The UUID of the build trigger
 	repository := "repository_example" // string | The full path of the repository. e.g. namespace/name
+	triggerUuid := "triggerUuid_example" // string | The UUID of the build trigger
 	body := *openapiclient.NewBuildTriggerActivateRequest(map[string]interface{}(123)) // BuildTriggerActivateRequest | Request body contents.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.TriggerAPI.ActivateBuildTrigger(context.Background(), triggerUuid, repository).Body(body).Execute()
+	r, err := apiClient.TriggerAPI.ActivateBuildTrigger(context.Background(), repository, triggerUuid).Body(body).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `TriggerAPI.ActivateBuildTrigger``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -55,8 +55,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**triggerUuid** | **string** | The UUID of the build trigger | 
 **repository** | **string** | The full path of the repository. e.g. namespace/name | 
+**triggerUuid** | **string** | The UUID of the build trigger | 
 
 ### Other Parameters
 
@@ -89,7 +89,7 @@ No authorization required
 
 ## DeleteBuildTrigger
 
-> DeleteBuildTrigger(ctx, triggerUuid, repository).Execute()
+> DeleteBuildTrigger(ctx, repository, triggerUuid).Execute()
 
 
 
@@ -108,12 +108,12 @@ import (
 )
 
 func main() {
-	triggerUuid := "triggerUuid_example" // string | The UUID of the build trigger
 	repository := "repository_example" // string | The full path of the repository. e.g. namespace/name
+	triggerUuid := "triggerUuid_example" // string | The UUID of the build trigger
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.TriggerAPI.DeleteBuildTrigger(context.Background(), triggerUuid, repository).Execute()
+	r, err := apiClient.TriggerAPI.DeleteBuildTrigger(context.Background(), repository, triggerUuid).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `TriggerAPI.DeleteBuildTrigger``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -127,8 +127,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**triggerUuid** | **string** | The UUID of the build trigger | 
 **repository** | **string** | The full path of the repository. e.g. namespace/name | 
+**triggerUuid** | **string** | The UUID of the build trigger | 
 
 ### Other Parameters
 
@@ -160,7 +160,7 @@ No authorization required
 
 ## GetBuildTrigger
 
-> GetBuildTrigger(ctx, triggerUuid, repository).Execute()
+> GetBuildTrigger(ctx, repository, triggerUuid).Execute()
 
 
 
@@ -179,12 +179,12 @@ import (
 )
 
 func main() {
-	triggerUuid := "triggerUuid_example" // string | The UUID of the build trigger
 	repository := "repository_example" // string | The full path of the repository. e.g. namespace/name
+	triggerUuid := "triggerUuid_example" // string | The UUID of the build trigger
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.TriggerAPI.GetBuildTrigger(context.Background(), triggerUuid, repository).Execute()
+	r, err := apiClient.TriggerAPI.GetBuildTrigger(context.Background(), repository, triggerUuid).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `TriggerAPI.GetBuildTrigger``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -198,8 +198,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**triggerUuid** | **string** | The UUID of the build trigger | 
 **repository** | **string** | The full path of the repository. e.g. namespace/name | 
+**triggerUuid** | **string** | The UUID of the build trigger | 
 
 ### Other Parameters
 
@@ -299,7 +299,7 @@ No authorization required
 
 ## ListTriggerRecentBuilds
 
-> ListTriggerRecentBuilds(ctx, triggerUuid, repository).Limit(limit).Execute()
+> ListTriggerRecentBuilds(ctx, repository, triggerUuid).Limit(limit).Execute()
 
 
 
@@ -318,13 +318,13 @@ import (
 )
 
 func main() {
-	triggerUuid := "triggerUuid_example" // string | The UUID of the build trigger
 	repository := "repository_example" // string | The full path of the repository. e.g. namespace/name
+	triggerUuid := "triggerUuid_example" // string | The UUID of the build trigger
 	limit := int32(56) // int32 | The maximum number of builds to return (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.TriggerAPI.ListTriggerRecentBuilds(context.Background(), triggerUuid, repository).Limit(limit).Execute()
+	r, err := apiClient.TriggerAPI.ListTriggerRecentBuilds(context.Background(), repository, triggerUuid).Limit(limit).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `TriggerAPI.ListTriggerRecentBuilds``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -338,8 +338,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**triggerUuid** | **string** | The UUID of the build trigger | 
 **repository** | **string** | The full path of the repository. e.g. namespace/name | 
+**triggerUuid** | **string** | The UUID of the build trigger | 
 
 ### Other Parameters
 
@@ -372,7 +372,7 @@ No authorization required
 
 ## ManuallyStartBuildTrigger
 
-> ManuallyStartBuildTrigger(ctx, triggerUuid, repository).Body(body).Execute()
+> ManuallyStartBuildTrigger(ctx, repository, triggerUuid).Body(body).Execute()
 
 
 
@@ -391,13 +391,13 @@ import (
 )
 
 func main() {
-	triggerUuid := "triggerUuid_example" // string | The UUID of the build trigger
 	repository := "repository_example" // string | The full path of the repository. e.g. namespace/name
+	triggerUuid := "triggerUuid_example" // string | The UUID of the build trigger
 	body := *openapiclient.NewRunParameters() // RunParameters | Request body contents.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.TriggerAPI.ManuallyStartBuildTrigger(context.Background(), triggerUuid, repository).Body(body).Execute()
+	r, err := apiClient.TriggerAPI.ManuallyStartBuildTrigger(context.Background(), repository, triggerUuid).Body(body).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `TriggerAPI.ManuallyStartBuildTrigger``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -411,8 +411,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**triggerUuid** | **string** | The UUID of the build trigger | 
 **repository** | **string** | The full path of the repository. e.g. namespace/name | 
+**triggerUuid** | **string** | The UUID of the build trigger | 
 
 ### Other Parameters
 
@@ -445,7 +445,7 @@ No authorization required
 
 ## UpdateBuildTrigger
 
-> UpdateBuildTrigger(ctx, triggerUuid, repository).Body(body).Execute()
+> UpdateBuildTrigger(ctx, repository, triggerUuid).Body(body).Execute()
 
 
 
@@ -464,13 +464,13 @@ import (
 )
 
 func main() {
-	triggerUuid := "triggerUuid_example" // string | The UUID of the build trigger
 	repository := "repository_example" // string | The full path of the repository. e.g. namespace/name
+	triggerUuid := "triggerUuid_example" // string | The UUID of the build trigger
 	body := *openapiclient.NewUpdateTrigger(false) // UpdateTrigger | Request body contents.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.TriggerAPI.UpdateBuildTrigger(context.Background(), triggerUuid, repository).Body(body).Execute()
+	r, err := apiClient.TriggerAPI.UpdateBuildTrigger(context.Background(), repository, triggerUuid).Body(body).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `TriggerAPI.UpdateBuildTrigger``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -484,8 +484,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**triggerUuid** | **string** | The UUID of the build trigger | 
 **repository** | **string** | The full path of the repository. e.g. namespace/name | 
+**triggerUuid** | **string** | The UUID of the build trigger | 
 
 ### Other Parameters
 

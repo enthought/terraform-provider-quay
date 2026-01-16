@@ -73,7 +73,7 @@ func (a *DiscoveryAPIService) DiscoveryExecute(r ApiDiscoveryRequest) (*http.Res
 	localVarFormParams := url.Values{}
 
 	if r.internal != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "internal", r.internal, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "internal", r.internal, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
