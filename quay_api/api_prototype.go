@@ -174,8 +174,8 @@ func (a *PrototypeAPIService) CreateOrganizationPrototypePermissionExecute(r Api
 type ApiDeleteOrganizationPrototypePermissionRequest struct {
 	ctx         context.Context
 	ApiService  *PrototypeAPIService
-	orgname     string
 	prototypeid string
+	orgname     string
 }
 
 func (r ApiDeleteOrganizationPrototypePermissionRequest) Execute() (*http.Response, error) {
@@ -188,16 +188,16 @@ DeleteOrganizationPrototypePermission Method for DeleteOrganizationPrototypePerm
 Delete an existing permission prototype.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param orgname The name of the organization
 	@param prototypeid The ID of the prototype
+	@param orgname The name of the organization
 	@return ApiDeleteOrganizationPrototypePermissionRequest
 */
-func (a *PrototypeAPIService) DeleteOrganizationPrototypePermission(ctx context.Context, orgname string, prototypeid string) ApiDeleteOrganizationPrototypePermissionRequest {
+func (a *PrototypeAPIService) DeleteOrganizationPrototypePermission(ctx context.Context, prototypeid string, orgname string) ApiDeleteOrganizationPrototypePermissionRequest {
 	return ApiDeleteOrganizationPrototypePermissionRequest{
 		ApiService:  a,
 		ctx:         ctx,
-		orgname:     orgname,
 		prototypeid: prototypeid,
+		orgname:     orgname,
 	}
 }
 
@@ -215,8 +215,8 @@ func (a *PrototypeAPIService) DeleteOrganizationPrototypePermissionExecute(r Api
 	}
 
 	localVarPath := localBasePath + "/api/v1/organization/{orgname}/prototypes/{prototypeid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"orgname"+"}", url.PathEscape(parameterValueToString(r.orgname, "orgname")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"prototypeid"+"}", url.PathEscape(parameterValueToString(r.prototypeid, "prototypeid")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"orgname"+"}", url.PathEscape(parameterValueToString(r.orgname, "orgname")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -450,8 +450,8 @@ func (a *PrototypeAPIService) GetOrganizationPrototypePermissionsExecute(r ApiGe
 type ApiUpdateOrganizationPrototypePermissionRequest struct {
 	ctx         context.Context
 	ApiService  *PrototypeAPIService
-	orgname     string
 	prototypeid string
+	orgname     string
 	body        *PrototypeUpdate
 }
 
@@ -471,16 +471,16 @@ UpdateOrganizationPrototypePermission Method for UpdateOrganizationPrototypePerm
 Update the role of an existing permission prototype.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param orgname The name of the organization
 	@param prototypeid The ID of the prototype
+	@param orgname The name of the organization
 	@return ApiUpdateOrganizationPrototypePermissionRequest
 */
-func (a *PrototypeAPIService) UpdateOrganizationPrototypePermission(ctx context.Context, orgname string, prototypeid string) ApiUpdateOrganizationPrototypePermissionRequest {
+func (a *PrototypeAPIService) UpdateOrganizationPrototypePermission(ctx context.Context, prototypeid string, orgname string) ApiUpdateOrganizationPrototypePermissionRequest {
 	return ApiUpdateOrganizationPrototypePermissionRequest{
 		ApiService:  a,
 		ctx:         ctx,
-		orgname:     orgname,
 		prototypeid: prototypeid,
+		orgname:     orgname,
 	}
 }
 
@@ -498,8 +498,8 @@ func (a *PrototypeAPIService) UpdateOrganizationPrototypePermissionExecute(r Api
 	}
 
 	localVarPath := localBasePath + "/api/v1/organization/{orgname}/prototypes/{prototypeid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"orgname"+"}", url.PathEscape(parameterValueToString(r.orgname, "orgname")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"prototypeid"+"}", url.PathEscape(parameterValueToString(r.prototypeid, "prototypeid")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"orgname"+"}", url.PathEscape(parameterValueToString(r.orgname, "orgname")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

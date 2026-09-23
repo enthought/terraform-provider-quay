@@ -634,7 +634,7 @@ func (a *UserAPIService) ListStarredReposExecute(r ApiListStarredReposRequest) (
 	localVarFormParams := url.Values{}
 
 	if r.nextPage != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "next_page", r.nextPage, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "next_page", r.nextPage, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

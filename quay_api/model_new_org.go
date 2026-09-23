@@ -25,7 +25,7 @@ type NewOrg struct {
 	// Organization username
 	Name string `json:"name"`
 	// Organization contact email
-	Email string `json:"email"`
+	Email *string `json:"email,omitempty"`
 	// The (may be disabled) recaptcha response code for verification
 	RecaptchaResponse *string `json:"recaptcha_response,omitempty"`
 }
@@ -36,10 +36,9 @@ type _NewOrg NewOrg
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNewOrg(name string, email string) *NewOrg {
+func NewNewOrg(name string) *NewOrg {
 	this := NewOrg{}
 	this.Name = name
-	this.Email = email
 	return &this
 }
 
@@ -75,28 +74,36 @@ func (o *NewOrg) SetName(v string) {
 	o.Name = v
 }
 
-// GetEmail returns the Email field value
+// GetEmail returns the Email field value if set, zero value otherwise.
 func (o *NewOrg) GetEmail() string {
-	if o == nil {
+	if o == nil || IsNil(o.Email) {
 		var ret string
 		return ret
 	}
-
-	return o.Email
+	return *o.Email
 }
 
-// GetEmailOk returns a tuple with the Email field value
+// GetEmailOk returns a tuple with the Email field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NewOrg) GetEmailOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Email) {
 		return nil, false
 	}
-	return &o.Email, true
+	return o.Email, true
 }
 
-// SetEmail sets field value
+// HasEmail returns a boolean if a field has been set.
+func (o *NewOrg) HasEmail() bool {
+	if o != nil && !IsNil(o.Email) {
+		return true
+	}
+
+	return false
+}
+
+// SetEmail gets a reference to the given string and assigns it to the Email field.
 func (o *NewOrg) SetEmail(v string) {
-	o.Email = v
+	o.Email = &v
 }
 
 // GetRecaptchaResponse returns the RecaptchaResponse field value if set, zero value otherwise.
@@ -142,7 +149,9 @@ func (o NewOrg) MarshalJSON() ([]byte, error) {
 func (o NewOrg) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["name"] = o.Name
-	toSerialize["email"] = o.Email
+	if !IsNil(o.Email) {
+		toSerialize["email"] = o.Email
+	}
 	if !IsNil(o.RecaptchaResponse) {
 		toSerialize["recaptcha_response"] = o.RecaptchaResponse
 	}
@@ -155,7 +164,6 @@ func (o *NewOrg) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"name",
-		"email",
 	}
 
 	allProperties := make(map[string]interface{})

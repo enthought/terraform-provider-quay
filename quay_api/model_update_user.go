@@ -18,18 +18,14 @@ import (
 // checks if the UpdateUser type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &UpdateUser{}
 
-// UpdateUser Fields which can be updated in a user.
+// UpdateUser Description of updates for a user
 type UpdateUser struct {
-	// The user's password
+	// The new password for the user
 	Password *string `json:"password,omitempty"`
-	// Whether the user desires to receive an invoice email.
-	InvoiceEmail *bool `json:"invoice_email,omitempty"`
-	// The user's email address
+	// The new e-mail address for the user
 	Email *string `json:"email,omitempty"`
-	// The number of seconds for tag expiration
-	TagExpirationS *int32 `json:"tag_expiration_s,omitempty"`
-	// The user's username
-	Username *string `json:"username,omitempty"`
+	// Whether the user is enabled
+	Enabled *bool `json:"enabled,omitempty"`
 }
 
 // NewUpdateUser instantiates a new UpdateUser object
@@ -81,38 +77,6 @@ func (o *UpdateUser) SetPassword(v string) {
 	o.Password = &v
 }
 
-// GetInvoiceEmail returns the InvoiceEmail field value if set, zero value otherwise.
-func (o *UpdateUser) GetInvoiceEmail() bool {
-	if o == nil || IsNil(o.InvoiceEmail) {
-		var ret bool
-		return ret
-	}
-	return *o.InvoiceEmail
-}
-
-// GetInvoiceEmailOk returns a tuple with the InvoiceEmail field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UpdateUser) GetInvoiceEmailOk() (*bool, bool) {
-	if o == nil || IsNil(o.InvoiceEmail) {
-		return nil, false
-	}
-	return o.InvoiceEmail, true
-}
-
-// HasInvoiceEmail returns a boolean if a field has been set.
-func (o *UpdateUser) HasInvoiceEmail() bool {
-	if o != nil && !IsNil(o.InvoiceEmail) {
-		return true
-	}
-
-	return false
-}
-
-// SetInvoiceEmail gets a reference to the given bool and assigns it to the InvoiceEmail field.
-func (o *UpdateUser) SetInvoiceEmail(v bool) {
-	o.InvoiceEmail = &v
-}
-
 // GetEmail returns the Email field value if set, zero value otherwise.
 func (o *UpdateUser) GetEmail() string {
 	if o == nil || IsNil(o.Email) {
@@ -145,68 +109,36 @@ func (o *UpdateUser) SetEmail(v string) {
 	o.Email = &v
 }
 
-// GetTagExpirationS returns the TagExpirationS field value if set, zero value otherwise.
-func (o *UpdateUser) GetTagExpirationS() int32 {
-	if o == nil || IsNil(o.TagExpirationS) {
-		var ret int32
+// GetEnabled returns the Enabled field value if set, zero value otherwise.
+func (o *UpdateUser) GetEnabled() bool {
+	if o == nil || IsNil(o.Enabled) {
+		var ret bool
 		return ret
 	}
-	return *o.TagExpirationS
+	return *o.Enabled
 }
 
-// GetTagExpirationSOk returns a tuple with the TagExpirationS field value if set, nil otherwise
+// GetEnabledOk returns a tuple with the Enabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateUser) GetTagExpirationSOk() (*int32, bool) {
-	if o == nil || IsNil(o.TagExpirationS) {
+func (o *UpdateUser) GetEnabledOk() (*bool, bool) {
+	if o == nil || IsNil(o.Enabled) {
 		return nil, false
 	}
-	return o.TagExpirationS, true
+	return o.Enabled, true
 }
 
-// HasTagExpirationS returns a boolean if a field has been set.
-func (o *UpdateUser) HasTagExpirationS() bool {
-	if o != nil && !IsNil(o.TagExpirationS) {
+// HasEnabled returns a boolean if a field has been set.
+func (o *UpdateUser) HasEnabled() bool {
+	if o != nil && !IsNil(o.Enabled) {
 		return true
 	}
 
 	return false
 }
 
-// SetTagExpirationS gets a reference to the given int32 and assigns it to the TagExpirationS field.
-func (o *UpdateUser) SetTagExpirationS(v int32) {
-	o.TagExpirationS = &v
-}
-
-// GetUsername returns the Username field value if set, zero value otherwise.
-func (o *UpdateUser) GetUsername() string {
-	if o == nil || IsNil(o.Username) {
-		var ret string
-		return ret
-	}
-	return *o.Username
-}
-
-// GetUsernameOk returns a tuple with the Username field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UpdateUser) GetUsernameOk() (*string, bool) {
-	if o == nil || IsNil(o.Username) {
-		return nil, false
-	}
-	return o.Username, true
-}
-
-// HasUsername returns a boolean if a field has been set.
-func (o *UpdateUser) HasUsername() bool {
-	if o != nil && !IsNil(o.Username) {
-		return true
-	}
-
-	return false
-}
-
-// SetUsername gets a reference to the given string and assigns it to the Username field.
-func (o *UpdateUser) SetUsername(v string) {
-	o.Username = &v
+// SetEnabled gets a reference to the given bool and assigns it to the Enabled field.
+func (o *UpdateUser) SetEnabled(v bool) {
+	o.Enabled = &v
 }
 
 func (o UpdateUser) MarshalJSON() ([]byte, error) {
@@ -222,17 +154,11 @@ func (o UpdateUser) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Password) {
 		toSerialize["password"] = o.Password
 	}
-	if !IsNil(o.InvoiceEmail) {
-		toSerialize["invoice_email"] = o.InvoiceEmail
-	}
 	if !IsNil(o.Email) {
 		toSerialize["email"] = o.Email
 	}
-	if !IsNil(o.TagExpirationS) {
-		toSerialize["tag_expiration_s"] = o.TagExpirationS
-	}
-	if !IsNil(o.Username) {
-		toSerialize["username"] = o.Username
+	if !IsNil(o.Enabled) {
+		toSerialize["enabled"] = o.Enabled
 	}
 	return toSerialize, nil
 }

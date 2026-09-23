@@ -96,7 +96,7 @@ func (r *organizationTeamResource) Create(ctx context.Context, req resource.Crea
 		}
 
 		for _, member := range elements {
-			_, err = r.client.TeamAPI.UpdateOrganizationTeamMember(context.Background(), orgName, member.ValueString(), teamName).Execute()
+			_, err = r.client.TeamAPI.UpdateOrganizationTeamMember(context.Background(), orgName, teamName, member.ValueString()).Execute()
 			if err != nil {
 				errDetail := handleQuayAPIError(err)
 				resp.Diagnostics.AddError("Error creating Quay team", "Could not create Quay team, unexpected error: "+errDetail)
@@ -238,7 +238,7 @@ func (r *organizationTeamResource) Update(ctx context.Context, req resource.Upda
 
 		// add team members
 		for _, member := range subtractStringSlice(elementsPlan, elementsState) {
-			_, err := r.client.TeamAPI.UpdateOrganizationTeamMember(context.Background(), orgName, member, teamName).Execute()
+			_, err := r.client.TeamAPI.UpdateOrganizationTeamMember(context.Background(), orgName, teamName, member).Execute()
 			if err != nil {
 				errDetail := handleQuayAPIError(err)
 				resp.Diagnostics.AddError("Error updating Quay team", "Could not update Quay team, unexpected error: "+errDetail)
@@ -248,7 +248,7 @@ func (r *organizationTeamResource) Update(ctx context.Context, req resource.Upda
 
 		// remove team members
 		for _, member := range subtractStringSlice(elementsState, elementsPlan) {
-			_, err := r.client.TeamAPI.DeleteOrganizationTeamMember(context.Background(), orgName, member, teamName).Execute()
+			_, err := r.client.TeamAPI.DeleteOrganizationTeamMember(context.Background(), orgName, teamName, member).Execute()
 			if err != nil {
 				// handle case where team member no longer exists
 				if errors.As(err, &apiErr) {

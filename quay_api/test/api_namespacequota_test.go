@@ -26,10 +26,10 @@ func Test_quay_api_NamespacequotaAPIService(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		var orgname string
 		var quotaId string
+		var orgname string
 
-		httpRes, err := apiClient.NamespacequotaAPI.ChangeOrganizationQuota(context.Background(), orgname, quotaId).Execute()
+		httpRes, err := apiClient.NamespacequotaAPI.ChangeOrganizationQuota(context.Background(), quotaId, orgname).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
@@ -40,11 +40,11 @@ func Test_quay_api_NamespacequotaAPIService(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
+		var quotaId string
 		var orgname string
 		var limitId string
-		var quotaId string
 
-		httpRes, err := apiClient.NamespacequotaAPI.ChangeOrganizationQuotaLimit(context.Background(), orgname, limitId, quotaId).Execute()
+		httpRes, err := apiClient.NamespacequotaAPI.ChangeOrganizationQuotaLimit(context.Background(), quotaId, orgname, limitId).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
@@ -68,10 +68,10 @@ func Test_quay_api_NamespacequotaAPIService(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		var orgname string
 		var quotaId string
+		var orgname string
 
-		httpRes, err := apiClient.NamespacequotaAPI.CreateOrganizationQuotaLimit(context.Background(), orgname, quotaId).Execute()
+		httpRes, err := apiClient.NamespacequotaAPI.CreateOrganizationQuotaLimit(context.Background(), quotaId, orgname).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
@@ -82,10 +82,10 @@ func Test_quay_api_NamespacequotaAPIService(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		var orgname string
 		var quotaId string
+		var orgname string
 
-		httpRes, err := apiClient.NamespacequotaAPI.DeleteOrganizationQuota(context.Background(), orgname, quotaId).Execute()
+		httpRes, err := apiClient.NamespacequotaAPI.DeleteOrganizationQuota(context.Background(), quotaId, orgname).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
@@ -96,11 +96,11 @@ func Test_quay_api_NamespacequotaAPIService(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
+		var quotaId string
 		var orgname string
 		var limitId string
-		var quotaId string
 
-		httpRes, err := apiClient.NamespacequotaAPI.DeleteOrganizationQuotaLimit(context.Background(), orgname, limitId, quotaId).Execute()
+		httpRes, err := apiClient.NamespacequotaAPI.DeleteOrganizationQuotaLimit(context.Background(), quotaId, orgname, limitId).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
@@ -111,10 +111,10 @@ func Test_quay_api_NamespacequotaAPIService(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		var orgname string
 		var quotaId string
+		var orgname string
 
-		httpRes, err := apiClient.NamespacequotaAPI.GetOrganizationQuota(context.Background(), orgname, quotaId).Execute()
+		httpRes, err := apiClient.NamespacequotaAPI.GetOrganizationQuota(context.Background(), quotaId, orgname).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
@@ -125,11 +125,11 @@ func Test_quay_api_NamespacequotaAPIService(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
+		var quotaId string
 		var orgname string
 		var limitId string
-		var quotaId string
 
-		httpRes, err := apiClient.NamespacequotaAPI.GetOrganizationQuotaLimit(context.Background(), orgname, limitId, quotaId).Execute()
+		httpRes, err := apiClient.NamespacequotaAPI.GetOrganizationQuotaLimit(context.Background(), quotaId, orgname, limitId).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
@@ -153,10 +153,10 @@ func Test_quay_api_NamespacequotaAPIService(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		var limitId string
 		var quotaId string
+		var limitId string
 
-		httpRes, err := apiClient.NamespacequotaAPI.GetUserQuotaLimit(context.Background(), limitId, quotaId).Execute()
+		httpRes, err := apiClient.NamespacequotaAPI.GetUserQuotaLimit(context.Background(), quotaId, limitId).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
@@ -180,10 +180,10 @@ func Test_quay_api_NamespacequotaAPIService(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		var orgname string
 		var quotaId string
+		var orgname string
 
-		httpRes, err := apiClient.NamespacequotaAPI.ListOrganizationQuotaLimit(context.Background(), orgname, quotaId).Execute()
+		httpRes, err := apiClient.NamespacequotaAPI.ListOrganizationQuotaLimit(context.Background(), quotaId, orgname).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)

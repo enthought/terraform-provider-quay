@@ -1,6 +1,6 @@
 # \AppspecifictokensAPI
 
-All URIs are relative to *https://quay.example.com*
+All URIs are relative to *https://quay.enthought.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------

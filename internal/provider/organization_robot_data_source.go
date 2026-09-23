@@ -50,7 +50,7 @@ func (d *organizationRobotDataSource) Read(ctx context.Context, req datasource.R
 	robotName := data.Name.ValueString()
 
 	// Get robot
-	httpRes, err := d.client.RobotAPI.GetOrgRobot(context.Background(), orgName, robotName).Execute()
+	httpRes, err := d.client.RobotAPI.GetOrgRobot(context.Background(), robotName, orgName).Execute()
 	if err != nil {
 		errDetail := handleQuayAPIError(err)
 		resp.Diagnostics.AddError(

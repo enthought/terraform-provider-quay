@@ -396,19 +396,19 @@ func (a *TagAPIService) ListRepoTagsExecute(r ApiListRepoTagsRequest) (*http.Res
 	localVarFormParams := url.Values{}
 
 	if r.onlyActiveTags != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "onlyActiveTags", r.onlyActiveTags, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "onlyActiveTags", r.onlyActiveTags, "form", "")
 	}
 	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "form", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	if r.filterTagName != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "filter_tag_name", r.filterTagName, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "filter_tag_name", r.filterTagName, "form", "")
 	}
 	if r.specificTag != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "specificTag", r.specificTag, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "specificTag", r.specificTag, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

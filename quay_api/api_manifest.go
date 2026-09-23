@@ -26,8 +26,8 @@ type ManifestAPIService service
 type ApiAddManifestLabelRequest struct {
 	ctx         context.Context
 	ApiService  *ManifestAPIService
-	manifestref string
 	repository  string
+	manifestref string
 	body        *AddLabel
 }
 
@@ -47,16 +47,16 @@ AddManifestLabel Method for AddManifestLabel
 Adds a new label into the tag manifest.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param manifestref The digest of the manifest
 	@param repository The full path of the repository. e.g. namespace/name
+	@param manifestref The digest of the manifest
 	@return ApiAddManifestLabelRequest
 */
-func (a *ManifestAPIService) AddManifestLabel(ctx context.Context, manifestref string, repository string) ApiAddManifestLabelRequest {
+func (a *ManifestAPIService) AddManifestLabel(ctx context.Context, repository string, manifestref string) ApiAddManifestLabelRequest {
 	return ApiAddManifestLabelRequest{
 		ApiService:  a,
 		ctx:         ctx,
-		manifestref: manifestref,
 		repository:  repository,
+		manifestref: manifestref,
 	}
 }
 
@@ -74,8 +74,8 @@ func (a *ManifestAPIService) AddManifestLabelExecute(r ApiAddManifestLabelReques
 	}
 
 	localVarPath := localBasePath + "/api/v1/repository/{repository}/manifest/{manifestref}/labels"
-	localVarPath = strings.Replace(localVarPath, "{"+"manifestref"+"}", url.PathEscape(parameterValueToString(r.manifestref, "manifestref")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"repository"+"}", url.PathEscape(parameterValueToString(r.repository, "repository")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"manifestref"+"}", url.PathEscape(parameterValueToString(r.manifestref, "manifestref")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -178,9 +178,9 @@ func (a *ManifestAPIService) AddManifestLabelExecute(r ApiAddManifestLabelReques
 type ApiDeleteManifestLabelRequest struct {
 	ctx         context.Context
 	ApiService  *ManifestAPIService
-	manifestref string
-	repository  string
 	labelid     string
+	repository  string
+	manifestref string
 }
 
 func (r ApiDeleteManifestLabelRequest) Execute() (*http.Response, error) {
@@ -193,18 +193,18 @@ DeleteManifestLabel Method for DeleteManifestLabel
 Deletes an existing label from a manifest.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param manifestref The digest of the manifest
-	@param repository The full path of the repository. e.g. namespace/name
 	@param labelid The ID of the label
+	@param repository The full path of the repository. e.g. namespace/name
+	@param manifestref The digest of the manifest
 	@return ApiDeleteManifestLabelRequest
 */
-func (a *ManifestAPIService) DeleteManifestLabel(ctx context.Context, manifestref string, repository string, labelid string) ApiDeleteManifestLabelRequest {
+func (a *ManifestAPIService) DeleteManifestLabel(ctx context.Context, labelid string, repository string, manifestref string) ApiDeleteManifestLabelRequest {
 	return ApiDeleteManifestLabelRequest{
 		ApiService:  a,
 		ctx:         ctx,
-		manifestref: manifestref,
-		repository:  repository,
 		labelid:     labelid,
+		repository:  repository,
+		manifestref: manifestref,
 	}
 }
 
@@ -222,9 +222,9 @@ func (a *ManifestAPIService) DeleteManifestLabelExecute(r ApiDeleteManifestLabel
 	}
 
 	localVarPath := localBasePath + "/api/v1/repository/{repository}/manifest/{manifestref}/labels/{labelid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"manifestref"+"}", url.PathEscape(parameterValueToString(r.manifestref, "manifestref")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"repository"+"}", url.PathEscape(parameterValueToString(r.repository, "repository")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"labelid"+"}", url.PathEscape(parameterValueToString(r.labelid, "labelid")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"repository"+"}", url.PathEscape(parameterValueToString(r.repository, "repository")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"manifestref"+"}", url.PathEscape(parameterValueToString(r.manifestref, "manifestref")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -322,9 +322,9 @@ func (a *ManifestAPIService) DeleteManifestLabelExecute(r ApiDeleteManifestLabel
 type ApiGetManifestLabelRequest struct {
 	ctx         context.Context
 	ApiService  *ManifestAPIService
-	manifestref string
-	repository  string
 	labelid     string
+	repository  string
+	manifestref string
 }
 
 func (r ApiGetManifestLabelRequest) Execute() (*http.Response, error) {
@@ -337,18 +337,18 @@ GetManifestLabel Method for GetManifestLabel
 Retrieves the label with the specific ID under the manifest.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param manifestref The digest of the manifest
-	@param repository The full path of the repository. e.g. namespace/name
 	@param labelid The ID of the label
+	@param repository The full path of the repository. e.g. namespace/name
+	@param manifestref The digest of the manifest
 	@return ApiGetManifestLabelRequest
 */
-func (a *ManifestAPIService) GetManifestLabel(ctx context.Context, manifestref string, repository string, labelid string) ApiGetManifestLabelRequest {
+func (a *ManifestAPIService) GetManifestLabel(ctx context.Context, labelid string, repository string, manifestref string) ApiGetManifestLabelRequest {
 	return ApiGetManifestLabelRequest{
 		ApiService:  a,
 		ctx:         ctx,
-		manifestref: manifestref,
-		repository:  repository,
 		labelid:     labelid,
+		repository:  repository,
+		manifestref: manifestref,
 	}
 }
 
@@ -366,9 +366,9 @@ func (a *ManifestAPIService) GetManifestLabelExecute(r ApiGetManifestLabelReques
 	}
 
 	localVarPath := localBasePath + "/api/v1/repository/{repository}/manifest/{manifestref}/labels/{labelid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"manifestref"+"}", url.PathEscape(parameterValueToString(r.manifestref, "manifestref")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"repository"+"}", url.PathEscape(parameterValueToString(r.repository, "repository")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"labelid"+"}", url.PathEscape(parameterValueToString(r.labelid, "labelid")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"repository"+"}", url.PathEscape(parameterValueToString(r.repository, "repository")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"manifestref"+"}", url.PathEscape(parameterValueToString(r.manifestref, "manifestref")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -464,10 +464,17 @@ func (a *ManifestAPIService) GetManifestLabelExecute(r ApiGetManifestLabelReques
 }
 
 type ApiGetRepoManifestRequest struct {
-	ctx         context.Context
-	ApiService  *ManifestAPIService
-	manifestref string
-	repository  string
+	ctx              context.Context
+	ApiService       *ManifestAPIService
+	repository       string
+	manifestref      string
+	includeModelcard *bool
+}
+
+// If specified, include modelcard markdown from image, if any
+func (r ApiGetRepoManifestRequest) IncludeModelcard(includeModelcard bool) ApiGetRepoManifestRequest {
+	r.includeModelcard = &includeModelcard
+	return r
 }
 
 func (r ApiGetRepoManifestRequest) Execute() (*http.Response, error) {
@@ -478,16 +485,16 @@ func (r ApiGetRepoManifestRequest) Execute() (*http.Response, error) {
 GetRepoManifest Method for GetRepoManifest
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param manifestref The digest of the manifest
 	@param repository The full path of the repository. e.g. namespace/name
+	@param manifestref The digest of the manifest
 	@return ApiGetRepoManifestRequest
 */
-func (a *ManifestAPIService) GetRepoManifest(ctx context.Context, manifestref string, repository string) ApiGetRepoManifestRequest {
+func (a *ManifestAPIService) GetRepoManifest(ctx context.Context, repository string, manifestref string) ApiGetRepoManifestRequest {
 	return ApiGetRepoManifestRequest{
 		ApiService:  a,
 		ctx:         ctx,
-		manifestref: manifestref,
 		repository:  repository,
+		manifestref: manifestref,
 	}
 }
 
@@ -505,13 +512,16 @@ func (a *ManifestAPIService) GetRepoManifestExecute(r ApiGetRepoManifestRequest)
 	}
 
 	localVarPath := localBasePath + "/api/v1/repository/{repository}/manifest/{manifestref}"
-	localVarPath = strings.Replace(localVarPath, "{"+"manifestref"+"}", url.PathEscape(parameterValueToString(r.manifestref, "manifestref")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"repository"+"}", url.PathEscape(parameterValueToString(r.repository, "repository")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"manifestref"+"}", url.PathEscape(parameterValueToString(r.manifestref, "manifestref")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.includeModelcard != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "include_modelcard", r.includeModelcard, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -604,8 +614,8 @@ func (a *ManifestAPIService) GetRepoManifestExecute(r ApiGetRepoManifestRequest)
 type ApiListManifestLabelsRequest struct {
 	ctx         context.Context
 	ApiService  *ManifestAPIService
-	manifestref string
 	repository  string
+	manifestref string
 	filter      *string
 }
 
@@ -623,16 +633,16 @@ func (r ApiListManifestLabelsRequest) Execute() (*http.Response, error) {
 ListManifestLabels Method for ListManifestLabels
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param manifestref The digest of the manifest
 	@param repository The full path of the repository. e.g. namespace/name
+	@param manifestref The digest of the manifest
 	@return ApiListManifestLabelsRequest
 */
-func (a *ManifestAPIService) ListManifestLabels(ctx context.Context, manifestref string, repository string) ApiListManifestLabelsRequest {
+func (a *ManifestAPIService) ListManifestLabels(ctx context.Context, repository string, manifestref string) ApiListManifestLabelsRequest {
 	return ApiListManifestLabelsRequest{
 		ApiService:  a,
 		ctx:         ctx,
-		manifestref: manifestref,
 		repository:  repository,
+		manifestref: manifestref,
 	}
 }
 
@@ -650,15 +660,15 @@ func (a *ManifestAPIService) ListManifestLabelsExecute(r ApiListManifestLabelsRe
 	}
 
 	localVarPath := localBasePath + "/api/v1/repository/{repository}/manifest/{manifestref}/labels"
-	localVarPath = strings.Replace(localVarPath, "{"+"manifestref"+"}", url.PathEscape(parameterValueToString(r.manifestref, "manifestref")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"repository"+"}", url.PathEscape(parameterValueToString(r.repository, "repository")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"manifestref"+"}", url.PathEscape(parameterValueToString(r.manifestref, "manifestref")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "filter", r.filter, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "filter", r.filter, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

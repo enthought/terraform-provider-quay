@@ -26,8 +26,8 @@ type TriggerAPIService service
 type ApiActivateBuildTriggerRequest struct {
 	ctx         context.Context
 	ApiService  *TriggerAPIService
-	triggerUuid string
 	repository  string
+	triggerUuid string
 	body        *BuildTriggerActivateRequest
 }
 
@@ -47,16 +47,16 @@ ActivateBuildTrigger Method for ActivateBuildTrigger
 Activate the specified build trigger.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param triggerUuid The UUID of the build trigger
 	@param repository The full path of the repository. e.g. namespace/name
+	@param triggerUuid The UUID of the build trigger
 	@return ApiActivateBuildTriggerRequest
 */
-func (a *TriggerAPIService) ActivateBuildTrigger(ctx context.Context, triggerUuid string, repository string) ApiActivateBuildTriggerRequest {
+func (a *TriggerAPIService) ActivateBuildTrigger(ctx context.Context, repository string, triggerUuid string) ApiActivateBuildTriggerRequest {
 	return ApiActivateBuildTriggerRequest{
 		ApiService:  a,
 		ctx:         ctx,
-		triggerUuid: triggerUuid,
 		repository:  repository,
+		triggerUuid: triggerUuid,
 	}
 }
 
@@ -74,8 +74,8 @@ func (a *TriggerAPIService) ActivateBuildTriggerExecute(r ApiActivateBuildTrigge
 	}
 
 	localVarPath := localBasePath + "/api/v1/repository/{repository}/trigger/{trigger_uuid}/activate"
-	localVarPath = strings.Replace(localVarPath, "{"+"trigger_uuid"+"}", url.PathEscape(parameterValueToString(r.triggerUuid, "triggerUuid")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"repository"+"}", url.PathEscape(parameterValueToString(r.repository, "repository")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"trigger_uuid"+"}", url.PathEscape(parameterValueToString(r.triggerUuid, "triggerUuid")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -178,8 +178,8 @@ func (a *TriggerAPIService) ActivateBuildTriggerExecute(r ApiActivateBuildTrigge
 type ApiDeleteBuildTriggerRequest struct {
 	ctx         context.Context
 	ApiService  *TriggerAPIService
-	triggerUuid string
 	repository  string
+	triggerUuid string
 }
 
 func (r ApiDeleteBuildTriggerRequest) Execute() (*http.Response, error) {
@@ -192,16 +192,16 @@ DeleteBuildTrigger Method for DeleteBuildTrigger
 Delete the specified build trigger.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param triggerUuid The UUID of the build trigger
 	@param repository The full path of the repository. e.g. namespace/name
+	@param triggerUuid The UUID of the build trigger
 	@return ApiDeleteBuildTriggerRequest
 */
-func (a *TriggerAPIService) DeleteBuildTrigger(ctx context.Context, triggerUuid string, repository string) ApiDeleteBuildTriggerRequest {
+func (a *TriggerAPIService) DeleteBuildTrigger(ctx context.Context, repository string, triggerUuid string) ApiDeleteBuildTriggerRequest {
 	return ApiDeleteBuildTriggerRequest{
 		ApiService:  a,
 		ctx:         ctx,
-		triggerUuid: triggerUuid,
 		repository:  repository,
+		triggerUuid: triggerUuid,
 	}
 }
 
@@ -219,8 +219,8 @@ func (a *TriggerAPIService) DeleteBuildTriggerExecute(r ApiDeleteBuildTriggerReq
 	}
 
 	localVarPath := localBasePath + "/api/v1/repository/{repository}/trigger/{trigger_uuid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"trigger_uuid"+"}", url.PathEscape(parameterValueToString(r.triggerUuid, "triggerUuid")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"repository"+"}", url.PathEscape(parameterValueToString(r.repository, "repository")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"trigger_uuid"+"}", url.PathEscape(parameterValueToString(r.triggerUuid, "triggerUuid")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -318,8 +318,8 @@ func (a *TriggerAPIService) DeleteBuildTriggerExecute(r ApiDeleteBuildTriggerReq
 type ApiGetBuildTriggerRequest struct {
 	ctx         context.Context
 	ApiService  *TriggerAPIService
-	triggerUuid string
 	repository  string
+	triggerUuid string
 }
 
 func (r ApiGetBuildTriggerRequest) Execute() (*http.Response, error) {
@@ -332,16 +332,16 @@ GetBuildTrigger Method for GetBuildTrigger
 Get information for the specified build trigger.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param triggerUuid The UUID of the build trigger
 	@param repository The full path of the repository. e.g. namespace/name
+	@param triggerUuid The UUID of the build trigger
 	@return ApiGetBuildTriggerRequest
 */
-func (a *TriggerAPIService) GetBuildTrigger(ctx context.Context, triggerUuid string, repository string) ApiGetBuildTriggerRequest {
+func (a *TriggerAPIService) GetBuildTrigger(ctx context.Context, repository string, triggerUuid string) ApiGetBuildTriggerRequest {
 	return ApiGetBuildTriggerRequest{
 		ApiService:  a,
 		ctx:         ctx,
-		triggerUuid: triggerUuid,
 		repository:  repository,
+		triggerUuid: triggerUuid,
 	}
 }
 
@@ -359,8 +359,8 @@ func (a *TriggerAPIService) GetBuildTriggerExecute(r ApiGetBuildTriggerRequest) 
 	}
 
 	localVarPath := localBasePath + "/api/v1/repository/{repository}/trigger/{trigger_uuid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"trigger_uuid"+"}", url.PathEscape(parameterValueToString(r.triggerUuid, "triggerUuid")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"repository"+"}", url.PathEscape(parameterValueToString(r.repository, "repository")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"trigger_uuid"+"}", url.PathEscape(parameterValueToString(r.triggerUuid, "triggerUuid")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -594,8 +594,8 @@ func (a *TriggerAPIService) ListBuildTriggersExecute(r ApiListBuildTriggersReque
 type ApiListTriggerRecentBuildsRequest struct {
 	ctx         context.Context
 	ApiService  *TriggerAPIService
-	triggerUuid string
 	repository  string
+	triggerUuid string
 	limit       *int32
 }
 
@@ -615,16 +615,16 @@ ListTriggerRecentBuilds Method for ListTriggerRecentBuilds
 List the builds started by the specified trigger.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param triggerUuid The UUID of the build trigger
 	@param repository The full path of the repository. e.g. namespace/name
+	@param triggerUuid The UUID of the build trigger
 	@return ApiListTriggerRecentBuildsRequest
 */
-func (a *TriggerAPIService) ListTriggerRecentBuilds(ctx context.Context, triggerUuid string, repository string) ApiListTriggerRecentBuildsRequest {
+func (a *TriggerAPIService) ListTriggerRecentBuilds(ctx context.Context, repository string, triggerUuid string) ApiListTriggerRecentBuildsRequest {
 	return ApiListTriggerRecentBuildsRequest{
 		ApiService:  a,
 		ctx:         ctx,
-		triggerUuid: triggerUuid,
 		repository:  repository,
+		triggerUuid: triggerUuid,
 	}
 }
 
@@ -642,15 +642,15 @@ func (a *TriggerAPIService) ListTriggerRecentBuildsExecute(r ApiListTriggerRecen
 	}
 
 	localVarPath := localBasePath + "/api/v1/repository/{repository}/trigger/{trigger_uuid}/builds"
-	localVarPath = strings.Replace(localVarPath, "{"+"trigger_uuid"+"}", url.PathEscape(parameterValueToString(r.triggerUuid, "triggerUuid")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"repository"+"}", url.PathEscape(parameterValueToString(r.repository, "repository")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"trigger_uuid"+"}", url.PathEscape(parameterValueToString(r.triggerUuid, "triggerUuid")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -744,8 +744,8 @@ func (a *TriggerAPIService) ListTriggerRecentBuildsExecute(r ApiListTriggerRecen
 type ApiManuallyStartBuildTriggerRequest struct {
 	ctx         context.Context
 	ApiService  *TriggerAPIService
-	triggerUuid string
 	repository  string
+	triggerUuid string
 	body        *RunParameters
 }
 
@@ -765,16 +765,16 @@ ManuallyStartBuildTrigger Method for ManuallyStartBuildTrigger
 Manually start a build from the specified trigger.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param triggerUuid The UUID of the build trigger
 	@param repository The full path of the repository. e.g. namespace/name
+	@param triggerUuid The UUID of the build trigger
 	@return ApiManuallyStartBuildTriggerRequest
 */
-func (a *TriggerAPIService) ManuallyStartBuildTrigger(ctx context.Context, triggerUuid string, repository string) ApiManuallyStartBuildTriggerRequest {
+func (a *TriggerAPIService) ManuallyStartBuildTrigger(ctx context.Context, repository string, triggerUuid string) ApiManuallyStartBuildTriggerRequest {
 	return ApiManuallyStartBuildTriggerRequest{
 		ApiService:  a,
 		ctx:         ctx,
-		triggerUuid: triggerUuid,
 		repository:  repository,
+		triggerUuid: triggerUuid,
 	}
 }
 
@@ -792,8 +792,8 @@ func (a *TriggerAPIService) ManuallyStartBuildTriggerExecute(r ApiManuallyStartB
 	}
 
 	localVarPath := localBasePath + "/api/v1/repository/{repository}/trigger/{trigger_uuid}/start"
-	localVarPath = strings.Replace(localVarPath, "{"+"trigger_uuid"+"}", url.PathEscape(parameterValueToString(r.triggerUuid, "triggerUuid")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"repository"+"}", url.PathEscape(parameterValueToString(r.repository, "repository")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"trigger_uuid"+"}", url.PathEscape(parameterValueToString(r.triggerUuid, "triggerUuid")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -896,8 +896,8 @@ func (a *TriggerAPIService) ManuallyStartBuildTriggerExecute(r ApiManuallyStartB
 type ApiUpdateBuildTriggerRequest struct {
 	ctx         context.Context
 	ApiService  *TriggerAPIService
-	triggerUuid string
 	repository  string
+	triggerUuid string
 	body        *UpdateTrigger
 }
 
@@ -917,16 +917,16 @@ UpdateBuildTrigger Method for UpdateBuildTrigger
 Updates the specified build trigger.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param triggerUuid The UUID of the build trigger
 	@param repository The full path of the repository. e.g. namespace/name
+	@param triggerUuid The UUID of the build trigger
 	@return ApiUpdateBuildTriggerRequest
 */
-func (a *TriggerAPIService) UpdateBuildTrigger(ctx context.Context, triggerUuid string, repository string) ApiUpdateBuildTriggerRequest {
+func (a *TriggerAPIService) UpdateBuildTrigger(ctx context.Context, repository string, triggerUuid string) ApiUpdateBuildTriggerRequest {
 	return ApiUpdateBuildTriggerRequest{
 		ApiService:  a,
 		ctx:         ctx,
-		triggerUuid: triggerUuid,
 		repository:  repository,
+		triggerUuid: triggerUuid,
 	}
 }
 
@@ -944,8 +944,8 @@ func (a *TriggerAPIService) UpdateBuildTriggerExecute(r ApiUpdateBuildTriggerReq
 	}
 
 	localVarPath := localBasePath + "/api/v1/repository/{repository}/trigger/{trigger_uuid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"trigger_uuid"+"}", url.PathEscape(parameterValueToString(r.triggerUuid, "triggerUuid")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"repository"+"}", url.PathEscape(parameterValueToString(r.repository, "repository")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"trigger_uuid"+"}", url.PathEscape(parameterValueToString(r.triggerUuid, "triggerUuid")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

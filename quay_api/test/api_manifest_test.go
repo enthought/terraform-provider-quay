@@ -26,10 +26,10 @@ func Test_quay_api_ManifestAPIService(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		var manifestref string
 		var repository string
+		var manifestref string
 
-		httpRes, err := apiClient.ManifestAPI.AddManifestLabel(context.Background(), manifestref, repository).Execute()
+		httpRes, err := apiClient.ManifestAPI.AddManifestLabel(context.Background(), repository, manifestref).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
@@ -40,11 +40,11 @@ func Test_quay_api_ManifestAPIService(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		var manifestref string
-		var repository string
 		var labelid string
+		var repository string
+		var manifestref string
 
-		httpRes, err := apiClient.ManifestAPI.DeleteManifestLabel(context.Background(), manifestref, repository, labelid).Execute()
+		httpRes, err := apiClient.ManifestAPI.DeleteManifestLabel(context.Background(), labelid, repository, manifestref).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
@@ -55,11 +55,11 @@ func Test_quay_api_ManifestAPIService(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		var manifestref string
-		var repository string
 		var labelid string
+		var repository string
+		var manifestref string
 
-		httpRes, err := apiClient.ManifestAPI.GetManifestLabel(context.Background(), manifestref, repository, labelid).Execute()
+		httpRes, err := apiClient.ManifestAPI.GetManifestLabel(context.Background(), labelid, repository, manifestref).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
@@ -70,10 +70,10 @@ func Test_quay_api_ManifestAPIService(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		var manifestref string
 		var repository string
+		var manifestref string
 
-		httpRes, err := apiClient.ManifestAPI.GetRepoManifest(context.Background(), manifestref, repository).Execute()
+		httpRes, err := apiClient.ManifestAPI.GetRepoManifest(context.Background(), repository, manifestref).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
@@ -84,10 +84,10 @@ func Test_quay_api_ManifestAPIService(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		var manifestref string
 		var repository string
+		var manifestref string
 
-		httpRes, err := apiClient.ManifestAPI.ListManifestLabels(context.Background(), manifestref, repository).Execute()
+		httpRes, err := apiClient.ManifestAPI.ListManifestLabels(context.Background(), repository, manifestref).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)

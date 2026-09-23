@@ -354,7 +354,7 @@ func (a *AppspecifictokensAPIService) ListAppTokensExecute(r ApiListAppTokensReq
 	localVarFormParams := url.Values{}
 
 	if r.expiring != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "expiring", r.expiring, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "expiring", r.expiring, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

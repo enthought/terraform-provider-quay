@@ -513,10 +513,10 @@ func (a *RepositoryAPIService) GetRepoExecute(r ApiGetRepoRequest) (*http.Respon
 	localVarFormParams := url.Values{}
 
 	if r.includeTags != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "includeTags", r.includeTags, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "includeTags", r.includeTags, "form", "")
 	}
 	if r.includeStats != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "includeStats", r.includeStats, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "includeStats", r.includeStats, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -700,25 +700,25 @@ func (a *RepositoryAPIService) ListReposExecute(r ApiListReposRequest) (*http.Re
 	localVarFormParams := url.Values{}
 
 	if r.nextPage != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "next_page", r.nextPage, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "next_page", r.nextPage, "form", "")
 	}
 	if r.repoKind != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "repo_kind", r.repoKind, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "repo_kind", r.repoKind, "form", "")
 	}
 	if r.popularity != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "popularity", r.popularity, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "popularity", r.popularity, "form", "")
 	}
 	if r.lastModified != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "last_modified", r.lastModified, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "last_modified", r.lastModified, "form", "")
 	}
 	if r.public != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "public", r.public, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "public", r.public, "form", "")
 	}
 	if r.starred != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "starred", r.starred, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "starred", r.starred, "form", "")
 	}
 	if r.namespace != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "namespace", r.namespace, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "namespace", r.namespace, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

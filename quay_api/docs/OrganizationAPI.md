@@ -1,6 +1,6 @@
 # \OrganizationAPI
 
-All URIs are relative to *https://quay.example.com*
+All URIs are relative to *https://quay.enthought.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -112,7 +112,7 @@ import (
 )
 
 func main() {
-	body := *openapiclient.NewNewOrg("Name_example", "Email_example") // NewOrg | Request body contents.
+	body := *openapiclient.NewNewOrg("Name_example") // NewOrg | Request body contents.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)

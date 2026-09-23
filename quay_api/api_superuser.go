@@ -169,6 +169,154 @@ func (a *SuperuserAPIService) ApproveServiceKeyExecute(r ApiApproveServiceKeyReq
 	return localVarHTTPResponse, nil
 }
 
+type ApiChangeInstallUserRequest struct {
+	ctx        context.Context
+	ApiService *SuperuserAPIService
+	username   string
+	body       *UpdateUser
+}
+
+// Request body contents.
+func (r ApiChangeInstallUserRequest) Body(body UpdateUser) ApiChangeInstallUserRequest {
+	r.body = &body
+	return r
+}
+
+func (r ApiChangeInstallUserRequest) Execute() (*http.Response, error) {
+	return r.ApiService.ChangeInstallUserExecute(r)
+}
+
+/*
+ChangeInstallUser Method for ChangeInstallUser
+
+Updates information about the specified user.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param username The username of the user being managed
+	@return ApiChangeInstallUserRequest
+*/
+func (a *SuperuserAPIService) ChangeInstallUser(ctx context.Context, username string) ApiChangeInstallUserRequest {
+	return ApiChangeInstallUserRequest{
+		ApiService: a,
+		ctx:        ctx,
+		username:   username,
+	}
+}
+
+// Execute executes the request
+func (a *SuperuserAPIService) ChangeInstallUserExecute(r ApiChangeInstallUserRequest) (*http.Response, error) {
+	var (
+		localVarHTTPMethod = http.MethodPut
+		localVarPostBody   interface{}
+		formFiles          []formFile
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SuperuserAPIService.ChangeInstallUser")
+	if err != nil {
+		return nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/superuser/users/{username}"
+	localVarPath = strings.Replace(localVarPath, "{"+"username"+"}", url.PathEscape(parameterValueToString(r.username, "username")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.body == nil {
+		return nil, reportError("body is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"*/*"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.body
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
+
 type ApiChangeOrganizationRequest struct {
 	ctx        context.Context
 	ApiService *SuperuserAPIService
@@ -322,11 +470,11 @@ type ApiChangeOrganizationQuotaSuperUserRequest struct {
 	ApiService *SuperuserAPIService
 	quotaId    string
 	namespace  string
-	body       *UpdateNamespaceQuota
+	body       *map[string]interface{}
 }
 
 // Request body contents.
-func (r ApiChangeOrganizationQuotaSuperUserRequest) Body(body UpdateNamespaceQuota) ApiChangeOrganizationQuotaSuperUserRequest {
+func (r ApiChangeOrganizationQuotaSuperUserRequest) Body(body map[string]interface{}) ApiChangeOrganizationQuotaSuperUserRequest {
 	r.body = &body
 	return r
 }
@@ -472,11 +620,11 @@ type ApiChangeUserQuotaSuperUserRequest struct {
 	ApiService *SuperuserAPIService
 	quotaId    string
 	namespace  string
-	body       *UpdateNamespaceQuota
+	body       *map[string]interface{}
 }
 
 // Request body contents.
-func (r ApiChangeUserQuotaSuperUserRequest) Body(body UpdateNamespaceQuota) ApiChangeUserQuotaSuperUserRequest {
+func (r ApiChangeUserQuotaSuperUserRequest) Body(body map[string]interface{}) ApiChangeUserQuotaSuperUserRequest {
 	r.body = &body
 	return r
 }
@@ -765,11 +913,11 @@ type ApiCreateOrganizationQuotaSuperUserRequest struct {
 	ctx        context.Context
 	ApiService *SuperuserAPIService
 	namespace  string
-	body       *NewNamespaceQuota
+	body       *map[string]interface{}
 }
 
 // Request body contents.
-func (r ApiCreateOrganizationQuotaSuperUserRequest) Body(body NewNamespaceQuota) ApiCreateOrganizationQuotaSuperUserRequest {
+func (r ApiCreateOrganizationQuotaSuperUserRequest) Body(body map[string]interface{}) ApiCreateOrganizationQuotaSuperUserRequest {
 	r.body = &body
 	return r
 }
@@ -1053,11 +1201,11 @@ type ApiCreateUserQuotaSuperUserRequest struct {
 	ctx        context.Context
 	ApiService *SuperuserAPIService
 	namespace  string
-	body       *NewNamespaceQuota
+	body       *map[string]interface{}
 }
 
 // Request body contents.
-func (r ApiCreateUserQuotaSuperUserRequest) Body(body NewNamespaceQuota) ApiCreateUserQuotaSuperUserRequest {
+func (r ApiCreateUserQuotaSuperUserRequest) Body(body map[string]interface{}) ApiCreateUserQuotaSuperUserRequest {
 	r.body = &body
 	return r
 }
@@ -1123,6 +1271,142 @@ func (a *SuperuserAPIService) CreateUserQuotaSuperUserExecute(r ApiCreateUserQuo
 	}
 	// body params
 	localVarPostBody = r.body
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
+
+type ApiDeleteInstallUserRequest struct {
+	ctx        context.Context
+	ApiService *SuperuserAPIService
+	username   string
+}
+
+func (r ApiDeleteInstallUserRequest) Execute() (*http.Response, error) {
+	return r.ApiService.DeleteInstallUserExecute(r)
+}
+
+/*
+DeleteInstallUser Method for DeleteInstallUser
+
+Deletes the specified user.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param username The username of the user being managed
+	@return ApiDeleteInstallUserRequest
+*/
+func (a *SuperuserAPIService) DeleteInstallUser(ctx context.Context, username string) ApiDeleteInstallUserRequest {
+	return ApiDeleteInstallUserRequest{
+		ApiService: a,
+		ctx:        ctx,
+		username:   username,
+	}
+}
+
+// Execute executes the request
+func (a *SuperuserAPIService) DeleteInstallUserExecute(r ApiDeleteInstallUserRequest) (*http.Response, error) {
+	var (
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SuperuserAPIService.DeleteInstallUser")
+	if err != nil {
+		return nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/superuser/users/{username}"
+	localVarPath = strings.Replace(localVarPath, "{"+"username"+"}", url.PathEscape(parameterValueToString(r.username, "username")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"*/*"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
@@ -1647,6 +1931,142 @@ func (a *SuperuserAPIService) DeleteUserQuotaSuperUserExecute(r ApiDeleteUserQuo
 	localVarPath := localBasePath + "/api/v1/superuser/users/{namespace}/quota/{quota_id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"quota_id"+"}", url.PathEscape(parameterValueToString(r.quotaId, "quotaId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"namespace"+"}", url.PathEscape(parameterValueToString(r.namespace, "namespace")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"*/*"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ApiError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
+
+type ApiGetInstallUserRequest struct {
+	ctx        context.Context
+	ApiService *SuperuserAPIService
+	username   string
+}
+
+func (r ApiGetInstallUserRequest) Execute() (*http.Response, error) {
+	return r.ApiService.GetInstallUserExecute(r)
+}
+
+/*
+GetInstallUser Method for GetInstallUser
+
+Returns information about the specified user.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param username The username of the user being managed
+	@return ApiGetInstallUserRequest
+*/
+func (a *SuperuserAPIService) GetInstallUser(ctx context.Context, username string) ApiGetInstallUserRequest {
+	return ApiGetInstallUserRequest{
+		ApiService: a,
+		ctx:        ctx,
+		username:   username,
+	}
+}
+
+// Execute executes the request
+func (a *SuperuserAPIService) GetInstallUserExecute(r ApiGetInstallUserRequest) (*http.Response, error) {
+	var (
+		localVarHTTPMethod = http.MethodGet
+		localVarPostBody   interface{}
+		formFiles          []formFile
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SuperuserAPIService.GetInstallUser")
+	if err != nil {
+		return nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/superuser/users/{username}"
+	localVarPath = strings.Replace(localVarPath, "{"+"username"+"}", url.PathEscape(parameterValueToString(r.username, "username")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -2363,16 +2783,16 @@ func (a *SuperuserAPIService) ListAllLogsExecute(r ApiListAllLogsRequest) (*http
 	localVarFormParams := url.Values{}
 
 	if r.nextPage != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "next_page", r.nextPage, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "next_page", r.nextPage, "form", "")
 	}
 	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "form", "")
 	}
 	if r.endtime != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "endtime", r.endtime, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "endtime", r.endtime, "form", "")
 	}
 	if r.starttime != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "starttime", r.starttime, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "starttime", r.starttime, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2528,13 +2948,13 @@ func (a *SuperuserAPIService) ListAllUsersExecute(r ApiListAllUsersRequest) (*ht
 	localVarFormParams := url.Values{}
 
 	if r.nextPage != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "next_page", r.nextPage, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "next_page", r.nextPage, "form", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	if r.disabled != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "disabled", r.disabled, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "disabled", r.disabled, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

@@ -91,7 +91,7 @@ func NewConfiguration() *Configuration {
 		Debug:         false,
 		Servers: ServerConfigurations{
 			{
-				URL:         "https://quay.example.com",
+				URL:         "https://quay.enthought.com",
 				Description: "No description provided",
 			},
 		},

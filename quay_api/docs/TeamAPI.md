@@ -1,6 +1,6 @@
 # \TeamAPI
 
-All URIs are relative to *https://quay.example.com*
+All URIs are relative to *https://quay.enthought.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -90,7 +90,7 @@ No authorization required
 
 ## DeleteOrganizationTeamMember
 
-> DeleteOrganizationTeamMember(ctx, orgname, membername, teamname).Execute()
+> DeleteOrganizationTeamMember(ctx, orgname, teamname, membername).Execute()
 
 
 
@@ -110,12 +110,12 @@ import (
 
 func main() {
 	orgname := "orgname_example" // string | The name of the organization
-	membername := "membername_example" // string | The username of the team member
 	teamname := "teamname_example" // string | The name of the team
+	membername := "membername_example" // string | The username of the team member
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.TeamAPI.DeleteOrganizationTeamMember(context.Background(), orgname, membername, teamname).Execute()
+	r, err := apiClient.TeamAPI.DeleteOrganizationTeamMember(context.Background(), orgname, teamname, membername).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `TeamAPI.DeleteOrganizationTeamMember``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -130,8 +130,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **orgname** | **string** | The name of the organization | 
-**membername** | **string** | The username of the team member | 
 **teamname** | **string** | The name of the team | 
+**membername** | **string** | The username of the team member | 
 
 ### Other Parameters
 
@@ -164,7 +164,7 @@ No authorization required
 
 ## DeleteTeamMemberEmailInvite
 
-> DeleteTeamMemberEmailInvite(ctx, orgname, email, teamname).Execute()
+> DeleteTeamMemberEmailInvite(ctx, orgname, teamname, email).Execute()
 
 
 
@@ -184,12 +184,12 @@ import (
 
 func main() {
 	orgname := "orgname_example" // string | 
-	email := "email_example" // string | 
 	teamname := "teamname_example" // string | 
+	email := "email_example" // string | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.TeamAPI.DeleteTeamMemberEmailInvite(context.Background(), orgname, email, teamname).Execute()
+	r, err := apiClient.TeamAPI.DeleteTeamMemberEmailInvite(context.Background(), orgname, teamname, email).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `TeamAPI.DeleteTeamMemberEmailInvite``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -204,8 +204,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **orgname** | **string** |  | 
-**email** | **string** |  | 
 **teamname** | **string** |  | 
+**email** | **string** |  | 
 
 ### Other Parameters
 
@@ -520,7 +520,7 @@ No authorization required
 
 ## InviteTeamMemberEmail
 
-> InviteTeamMemberEmail(ctx, orgname, email, teamname).Execute()
+> InviteTeamMemberEmail(ctx, orgname, teamname, email).Execute()
 
 
 
@@ -540,12 +540,12 @@ import (
 
 func main() {
 	orgname := "orgname_example" // string | 
-	email := "email_example" // string | 
 	teamname := "teamname_example" // string | 
+	email := "email_example" // string | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.TeamAPI.InviteTeamMemberEmail(context.Background(), orgname, email, teamname).Execute()
+	r, err := apiClient.TeamAPI.InviteTeamMemberEmail(context.Background(), orgname, teamname, email).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `TeamAPI.InviteTeamMemberEmail``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -560,8 +560,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **orgname** | **string** |  | 
-**email** | **string** |  | 
 **teamname** | **string** |  | 
+**email** | **string** |  | 
 
 ### Other Parameters
 
@@ -667,7 +667,7 @@ No authorization required
 
 ## UpdateOrganizationTeamMember
 
-> UpdateOrganizationTeamMember(ctx, orgname, membername, teamname).Execute()
+> UpdateOrganizationTeamMember(ctx, orgname, teamname, membername).Execute()
 
 
 
@@ -687,12 +687,12 @@ import (
 
 func main() {
 	orgname := "orgname_example" // string | The name of the organization
-	membername := "membername_example" // string | The username of the team member
 	teamname := "teamname_example" // string | The name of the team
+	membername := "membername_example" // string | The username of the team member
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.TeamAPI.UpdateOrganizationTeamMember(context.Background(), orgname, membername, teamname).Execute()
+	r, err := apiClient.TeamAPI.UpdateOrganizationTeamMember(context.Background(), orgname, teamname, membername).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `TeamAPI.UpdateOrganizationTeamMember``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -707,8 +707,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **orgname** | **string** | The name of the organization | 
-**membername** | **string** | The username of the team member | 
 **teamname** | **string** | The name of the team | 
+**membername** | **string** | The username of the team member | 
 
 ### Other Parameters
 

@@ -1,10 +1,11 @@
 # \SuperuserAPI
 
-All URIs are relative to *https://quay.example.com*
+All URIs are relative to *https://quay.enthought.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**ApproveServiceKey**](SuperuserAPI.md#ApproveServiceKey) | **Post** /api/v1/superuser/approvedkeys/{kid} | 
+[**ChangeInstallUser**](SuperuserAPI.md#ChangeInstallUser) | **Put** /api/v1/superuser/users/{username} | 
 [**ChangeOrganization**](SuperuserAPI.md#ChangeOrganization) | **Put** /api/v1/superuser/organizations/{name} | 
 [**ChangeOrganizationQuotaSuperUser**](SuperuserAPI.md#ChangeOrganizationQuotaSuperUser) | **Put** /api/v1/superuser/organization/{namespace}/quota/{quota_id} | 
 [**ChangeUserQuotaSuperUser**](SuperuserAPI.md#ChangeUserQuotaSuperUser) | **Put** /api/v1/superuser/users/{namespace}/quota/{quota_id} | 
@@ -12,10 +13,12 @@ Method | HTTP request | Description
 [**CreateOrganizationQuotaSuperUser**](SuperuserAPI.md#CreateOrganizationQuotaSuperUser) | **Post** /api/v1/superuser/organization/{namespace}/quota | 
 [**CreateServiceKey**](SuperuserAPI.md#CreateServiceKey) | **Post** /api/v1/superuser/keys | 
 [**CreateUserQuotaSuperUser**](SuperuserAPI.md#CreateUserQuotaSuperUser) | **Post** /api/v1/superuser/users/{namespace}/quota | 
+[**DeleteInstallUser**](SuperuserAPI.md#DeleteInstallUser) | **Delete** /api/v1/superuser/users/{username} | 
 [**DeleteOrganization**](SuperuserAPI.md#DeleteOrganization) | **Delete** /api/v1/superuser/organizations/{name} | 
 [**DeleteOrganizationQuotaSuperUser**](SuperuserAPI.md#DeleteOrganizationQuotaSuperUser) | **Delete** /api/v1/superuser/organization/{namespace}/quota/{quota_id} | 
 [**DeleteServiceKey**](SuperuserAPI.md#DeleteServiceKey) | **Delete** /api/v1/superuser/keys/{kid} | 
 [**DeleteUserQuotaSuperUser**](SuperuserAPI.md#DeleteUserQuotaSuperUser) | **Delete** /api/v1/superuser/users/{namespace}/quota/{quota_id} | 
+[**GetInstallUser**](SuperuserAPI.md#GetInstallUser) | **Get** /api/v1/superuser/users/{username} | 
 [**GetRepoBuildLogsSuperUser**](SuperuserAPI.md#GetRepoBuildLogsSuperUser) | **Get** /api/v1/superuser/{build_uuid}/logs | 
 [**GetRepoBuildStatusSuperUser**](SuperuserAPI.md#GetRepoBuildStatusSuperUser) | **Get** /api/v1/superuser/{build_uuid}/status | 
 [**GetRepoBuildSuperUser**](SuperuserAPI.md#GetRepoBuildSuperUser) | **Get** /api/v1/superuser/{build_uuid}/build | 
@@ -78,6 +81,76 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **body** | [**ApproveServiceKey**](ApproveServiceKey.md) | Request body contents. | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: */*
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ChangeInstallUser
+
+> ChangeInstallUser(ctx, username).Body(body).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/enthought/terraform-provider-quay/quay_api"
+)
+
+func main() {
+	username := "username_example" // string | The username of the user being managed
+	body := *openapiclient.NewUpdateUser() // UpdateUser | Request body contents.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.SuperuserAPI.ChangeInstallUser(context.Background(), username).Body(body).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `SuperuserAPI.ChangeInstallUser``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**username** | **string** | The username of the user being managed | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiChangeInstallUserRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **body** | [**UpdateUser**](UpdateUser.md) | Request body contents. | 
 
 ### Return type
 
@@ -188,7 +261,7 @@ import (
 func main() {
 	quotaId := "quotaId_example" // string | 
 	namespace := "namespace_example" // string | 
-	body := *openapiclient.NewUpdateNamespaceQuota() // UpdateNamespaceQuota | Request body contents.
+	body := map[string]interface{}{ ... } // map[string]interface{} | Request body contents.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -218,7 +291,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **body** | [**UpdateNamespaceQuota**](UpdateNamespaceQuota.md) | Request body contents. | 
+ **body** | **map[string]interface{}** | Request body contents. | 
 
 ### Return type
 
@@ -259,7 +332,7 @@ import (
 func main() {
 	quotaId := "quotaId_example" // string | 
 	namespace := "namespace_example" // string | 
-	body := *openapiclient.NewUpdateNamespaceQuota() // UpdateNamespaceQuota | Request body contents.
+	body := map[string]interface{}{ ... } // map[string]interface{} | Request body contents.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -289,7 +362,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **body** | [**UpdateNamespaceQuota**](UpdateNamespaceQuota.md) | Request body contents. | 
+ **body** | **map[string]interface{}** | Request body contents. | 
 
 ### Return type
 
@@ -393,7 +466,7 @@ import (
 
 func main() {
 	namespace := "namespace_example" // string | 
-	body := *openapiclient.NewNewNamespaceQuota(int32(123)) // NewNamespaceQuota | Request body contents.
+	body := map[string]interface{}{ ... } // map[string]interface{} | Request body contents.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -421,7 +494,7 @@ Other parameters are passed through a pointer to a apiCreateOrganizationQuotaSup
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **body** | [**NewNamespaceQuota**](NewNamespaceQuota.md) | Request body contents. | 
+ **body** | **map[string]interface{}** | Request body contents. | 
 
 ### Return type
 
@@ -523,7 +596,7 @@ import (
 
 func main() {
 	namespace := "namespace_example" // string | 
-	body := *openapiclient.NewNewNamespaceQuota(int32(123)) // NewNamespaceQuota | Request body contents.
+	body := map[string]interface{}{ ... } // map[string]interface{} | Request body contents.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -551,7 +624,75 @@ Other parameters are passed through a pointer to a apiCreateUserQuotaSuperUserRe
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **body** | [**NewNamespaceQuota**](NewNamespaceQuota.md) | Request body contents. | 
+ **body** | **map[string]interface{}** | Request body contents. | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: */*
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteInstallUser
+
+> DeleteInstallUser(ctx, username).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/enthought/terraform-provider-quay/quay_api"
+)
+
+func main() {
+	username := "username_example" // string | The username of the user being managed
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.SuperuserAPI.DeleteInstallUser(context.Background(), username).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `SuperuserAPI.DeleteInstallUser``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**username** | **string** | The username of the user being managed | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteInstallUserRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
 
 ### Return type
 
@@ -823,6 +964,74 @@ Other parameters are passed through a pointer to a apiDeleteUserQuotaSuperUserRe
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: */*
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetInstallUser
+
+> GetInstallUser(ctx, username).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/enthought/terraform-provider-quay/quay_api"
+)
+
+func main() {
+	username := "username_example" // string | The username of the user being managed
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.SuperuserAPI.GetInstallUser(context.Background(), username).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `SuperuserAPI.GetInstallUser``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**username** | **string** | The username of the user being managed | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetInstallUserRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 ### Return type

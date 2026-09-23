@@ -22,8 +22,6 @@ var _ MappedNullable = &UpdateOrg{}
 type UpdateOrg struct {
 	// The new name for the organization
 	Name *string `json:"name,omitempty"`
-	// Organization contact email
-	Email *string `json:"email,omitempty"`
 }
 
 // NewUpdateOrg instantiates a new UpdateOrg object
@@ -75,38 +73,6 @@ func (o *UpdateOrg) SetName(v string) {
 	o.Name = &v
 }
 
-// GetEmail returns the Email field value if set, zero value otherwise.
-func (o *UpdateOrg) GetEmail() string {
-	if o == nil || IsNil(o.Email) {
-		var ret string
-		return ret
-	}
-	return *o.Email
-}
-
-// GetEmailOk returns a tuple with the Email field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UpdateOrg) GetEmailOk() (*string, bool) {
-	if o == nil || IsNil(o.Email) {
-		return nil, false
-	}
-	return o.Email, true
-}
-
-// HasEmail returns a boolean if a field has been set.
-func (o *UpdateOrg) HasEmail() bool {
-	if o != nil && !IsNil(o.Email) {
-		return true
-	}
-
-	return false
-}
-
-// SetEmail gets a reference to the given string and assigns it to the Email field.
-func (o *UpdateOrg) SetEmail(v string) {
-	o.Email = &v
-}
-
 func (o UpdateOrg) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -119,9 +85,6 @@ func (o UpdateOrg) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
-	}
-	if !IsNil(o.Email) {
-		toSerialize["email"] = o.Email
 	}
 	return toSerialize, nil
 }

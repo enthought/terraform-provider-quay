@@ -88,13 +88,13 @@ func (a *SearchAPIService) ConductRepoSearchExecute(r ApiConductRepoSearchReques
 	localVarFormParams := url.Values{}
 
 	if r.includeUsage != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "includeUsage", r.includeUsage, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "includeUsage", r.includeUsage, "form", "")
 	}
 	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "form", "")
 	}
 	if r.query != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "query", r.query, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "query", r.query, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -236,7 +236,7 @@ func (a *SearchAPIService) ConductSearchExecute(r ApiConductSearchRequest) (*htt
 	localVarFormParams := url.Values{}
 
 	if r.query != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "query", r.query, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "query", r.query, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -396,13 +396,13 @@ func (a *SearchAPIService) GetMatchingEntitiesExecute(r ApiGetMatchingEntitiesRe
 	localVarFormParams := url.Values{}
 
 	if r.includeOrgs != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "includeOrgs", r.includeOrgs, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "includeOrgs", r.includeOrgs, "form", "")
 	}
 	if r.includeTeams != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "includeTeams", r.includeTeams, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "includeTeams", r.includeTeams, "form", "")
 	}
 	if r.namespace != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "namespace", r.namespace, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "namespace", r.namespace, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

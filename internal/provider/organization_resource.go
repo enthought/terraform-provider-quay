@@ -63,7 +63,10 @@ func (r *organizationResource) Create(ctx context.Context, req resource.CreateRe
 	}
 
 	// Create API call logic
-	newOrg := quay_api.NewNewOrg(data.Name.ValueString(), data.Email.ValueString())
+	newOrg := quay_api.NewNewOrg(data.Name.ValueString())
+	if !data.Email.IsNull() && !data.Email.IsUnknown() {
+		newOrg.Email = data.Email.ValueStringPointer()
+	}
 	_, err := r.client.OrganizationAPI.CreateOrganization(context.Background()).Body(*newOrg).Execute()
 	if err != nil {
 		errDetail := handleQuayAPIError(err)
@@ -132,24 +135,17 @@ func (r *organizationResource) Update(ctx context.Context, req resource.UpdateRe
 	}
 
 	// Update API call logic
-	// Update email first since the org path will change if the org name changes
+	// Note: Email updates are not supported by the current Quay API
 	if dataPlan.Email != dataState.Email {
-		updateOrg := quay_api.UpdateOrg{
-			Name:  dataState.Name.ValueStringPointer(),
-			Email: dataPlan.Email.ValueStringPointer(),
-		}
-		_, err := r.client.OrganizationAPI.ChangeOrganizationDetails(context.Background(), dataState.Name.ValueString()).Body(updateOrg).Execute()
-		if err != nil {
-			errDetail := handleQuayAPIError(err)
-			resp.Diagnostics.AddError("Error updating Quay org", "Could not update Quay org, unexpected error: "+errDetail)
-			return
-		}
+		resp.Diagnostics.AddWarning(
+			"Email update not supported",
+			"The Quay API does not support updating organization email. The email will remain unchanged.",
+		)
 	}
 
 	if dataPlan.Name != dataState.Name {
 		updateOrg := quay_api.UpdateOrg{
-			Name:  dataPlan.Name.ValueStringPointer(),
-			Email: dataPlan.Email.ValueStringPointer(),
+			Name: dataPlan.Name.ValueStringPointer(),
 		}
 		_, err := r.client.SuperuserAPI.ChangeOrganization(context.Background(), dataState.Name.ValueString()).Body(updateOrg).Execute()
 		if err != nil {

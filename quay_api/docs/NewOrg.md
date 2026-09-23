@@ -5,14 +5,14 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Name** | **string** | Organization username | 
-**Email** | **string** | Organization contact email | 
+**Email** | Pointer to **string** | Organization contact email | [optional] 
 **RecaptchaResponse** | Pointer to **string** | The (may be disabled) recaptcha response code for verification | [optional] 
 
 ## Methods
 
 ### NewNewOrg
 
-`func NewNewOrg(name string, email string, ) *NewOrg`
+`func NewNewOrg(name string, ) *NewOrg`
 
 NewNewOrg instantiates a new NewOrg object
 This constructor will assign default values to properties that have it defined,
@@ -66,6 +66,11 @@ and a boolean to check if the value has been set.
 
 SetEmail sets Email field to given value.
 
+### HasEmail
+
+`func (o *NewOrg) HasEmail() bool`
+
+HasEmail returns a boolean if a field has been set.
 
 ### GetRecaptchaResponse
 

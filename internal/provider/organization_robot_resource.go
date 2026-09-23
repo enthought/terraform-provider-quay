@@ -71,7 +71,7 @@ func (r *organizationRobotResource) Create(ctx context.Context, req resource.Cre
 		Description:          robotDescription,
 		UnstructuredMetadata: nil,
 	}
-	httpRes, err := r.client.RobotAPI.CreateOrgRobot(context.Background(), orgName, robotName).Body(newRobot).Execute()
+	httpRes, err := r.client.RobotAPI.CreateOrgRobot(context.Background(), robotName, orgName).Body(newRobot).Execute()
 	if err != nil {
 		errDetail := handleQuayAPIError(err)
 		resp.Diagnostics.AddError("Error creating Quay org robot", "Could not create Quay org robot, unexpected error: "+errDetail)
@@ -124,7 +124,7 @@ func (r *organizationRobotResource) Read(ctx context.Context, req resource.ReadR
 	robotName := data.Name.ValueString()
 
 	// Get robot
-	httpRes, err := r.client.RobotAPI.GetOrgRobot(context.Background(), orgName, robotName).Execute()
+	httpRes, err := r.client.RobotAPI.GetOrgRobot(context.Background(), robotName, orgName).Execute()
 	if err != nil {
 		errDetail := handleQuayAPIError(err)
 		resp.Diagnostics.AddError("Error reading Quay org robot", "Could not read Quay org robot, unexpected error: "+errDetail)
@@ -190,7 +190,7 @@ func (r *organizationRobotResource) Delete(ctx context.Context, req resource.Del
 	robotName := data.Name.ValueString()
 
 	// Delete robot
-	_, err := r.client.RobotAPI.DeleteOrgRobot(context.Background(), orgName, robotName).Execute()
+	_, err := r.client.RobotAPI.DeleteOrgRobot(context.Background(), robotName, orgName).Execute()
 	if err != nil {
 		errDetail := handleQuayAPIError(err)
 		resp.Diagnostics.AddError("Error deleting Quay org robot", "Could not delete Quay org robot, unexpected error: "+errDetail)

@@ -8,7 +8,7 @@ info:
   title: Quay Frontend
   version: v1
 servers:
-- url: https://quay.example.com/
+- url: https://quay.enthought.com/
 tags:
 - description: Manages app specific tokens for the current user.
   name: appspecifictokens
@@ -73,25 +73,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -105,7 +105,7 @@ paths:
         content:
           '*/*':
             schema:
-              $ref: '#/components/schemas/NewToken'
+              $ref: "#/components/schemas/NewToken"
         description: Request body contents.
         required: true
       responses:
@@ -113,25 +113,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "201":
           content: {}
@@ -160,25 +160,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "204":
           content: {}
@@ -202,25 +202,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -264,25 +264,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -306,7 +306,7 @@ paths:
         content:
           '*/*':
             schema:
-              $ref: '#/components/schemas/RepositoryBuildRequest'
+              $ref: "#/components/schemas/RepositoryBuildRequest"
         description: Request body contents.
         required: true
       responses:
@@ -314,25 +314,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "201":
           content: {}
@@ -369,25 +369,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "204":
           content: {}
@@ -419,25 +419,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -473,25 +473,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -527,25 +527,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -573,25 +573,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -619,31 +619,31 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiErrorDescription'
+                $ref: "#/components/schemas/ApiErrorDescription"
           description: Successful invocation
       tags:
       - error
@@ -659,25 +659,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -691,7 +691,7 @@ paths:
         content:
           '*/*':
             schema:
-              $ref: '#/components/schemas/CreateMessage'
+              $ref: "#/components/schemas/CreateMessage"
         description: Request body contents.
         required: true
       responses:
@@ -699,25 +699,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "201":
           content: {}
@@ -745,25 +745,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "204":
           content: {}
@@ -815,25 +815,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -885,25 +885,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -963,25 +963,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -1025,25 +1025,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -1087,25 +1087,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -1157,25 +1157,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -1218,7 +1218,7 @@ paths:
         content:
           '*/*':
             schema:
-              $ref: '#/components/schemas/ExportLogs'
+              $ref: "#/components/schemas/ExportLogs"
         description: Request body contents.
         required: true
       responses:
@@ -1226,25 +1226,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "201":
           content: {}
@@ -1280,7 +1280,7 @@ paths:
         content:
           '*/*':
             schema:
-              $ref: '#/components/schemas/ExportLogs'
+              $ref: "#/components/schemas/ExportLogs"
         description: Request body contents.
         required: true
       responses:
@@ -1288,25 +1288,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "201":
           content: {}
@@ -1350,7 +1350,7 @@ paths:
         content:
           '*/*':
             schema:
-              $ref: '#/components/schemas/ExportLogs'
+              $ref: "#/components/schemas/ExportLogs"
         description: Request body contents.
         required: true
       responses:
@@ -1358,25 +1358,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "201":
           content: {}
@@ -1391,14 +1391,6 @@ paths:
     get:
       operationId: getRepoManifest
       parameters:
-      - description: The digest of the manifest
-        explode: false
-        in: path
-        name: manifestref
-        required: true
-        schema:
-          type: string
-        style: simple
       - description: The full path of the repository. e.g. namespace/name
         explode: false
         in: path
@@ -1407,30 +1399,46 @@ paths:
         schema:
           type: string
         style: simple
+      - description: The digest of the manifest
+        explode: false
+        in: path
+        name: manifestref
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: "If specified, include modelcard markdown from image, if any"
+        explode: true
+        in: query
+        name: include_modelcard
+        required: false
+        schema:
+          type: boolean
+        style: form
       responses:
         "400":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -1444,18 +1452,18 @@ paths:
     get:
       operationId: listManifestLabels
       parameters:
-      - description: The digest of the manifest
-        explode: false
-        in: path
-        name: manifestref
-        required: true
-        schema:
-          type: string
-        style: simple
       - description: The full path of the repository. e.g. namespace/name
         explode: false
         in: path
         name: repository
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The digest of the manifest
+        explode: false
+        in: path
+        name: manifestref
         required: true
         schema:
           type: string
@@ -1474,25 +1482,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -1503,14 +1511,6 @@ paths:
       description: Adds a new label into the tag manifest.
       operationId: addManifestLabel
       parameters:
-      - description: The digest of the manifest
-        explode: false
-        in: path
-        name: manifestref
-        required: true
-        schema:
-          type: string
-        style: simple
       - description: The full path of the repository. e.g. namespace/name
         explode: false
         in: path
@@ -1519,11 +1519,19 @@ paths:
         schema:
           type: string
         style: simple
+      - description: The digest of the manifest
+        explode: false
+        in: path
+        name: manifestref
+        required: true
+        schema:
+          type: string
+        style: simple
       requestBody:
         content:
           '*/*':
             schema:
-              $ref: '#/components/schemas/AddLabel'
+              $ref: "#/components/schemas/AddLabel"
         description: Request body contents.
         required: true
       responses:
@@ -1531,25 +1539,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "201":
           content: {}
@@ -1565,10 +1573,10 @@ paths:
       description: Deletes an existing label from a manifest.
       operationId: deleteManifestLabel
       parameters:
-      - description: The digest of the manifest
+      - description: The ID of the label
         explode: false
         in: path
-        name: manifestref
+        name: labelid
         required: true
         schema:
           type: string
@@ -1581,10 +1589,10 @@ paths:
         schema:
           type: string
         style: simple
-      - description: The ID of the label
+      - description: The digest of the manifest
         explode: false
         in: path
-        name: labelid
+        name: manifestref
         required: true
         schema:
           type: string
@@ -1594,25 +1602,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "204":
           content: {}
@@ -1623,10 +1631,10 @@ paths:
       description: Retrieves the label with the specific ID under the manifest.
       operationId: getManifestLabel
       parameters:
-      - description: The digest of the manifest
+      - description: The ID of the label
         explode: false
         in: path
-        name: manifestref
+        name: labelid
         required: true
         schema:
           type: string
@@ -1639,10 +1647,10 @@ paths:
         schema:
           type: string
         style: simple
-      - description: The ID of the label
+      - description: The digest of the manifest
         explode: false
         in: path
-        name: labelid
+        name: manifestref
         required: true
         schema:
           type: string
@@ -1652,25 +1660,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -1696,25 +1704,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -1736,7 +1744,7 @@ paths:
         content:
           '*/*':
             schema:
-              $ref: '#/components/schemas/NewOrgQuota'
+              $ref: "#/components/schemas/NewOrgQuota"
         description: Request body contents.
         required: true
       responses:
@@ -1744,25 +1752,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "201":
           content: {}
@@ -1779,14 +1787,14 @@ paths:
       parameters:
       - explode: false
         in: path
-        name: orgname
+        name: quota_id
         required: true
         schema:
           type: string
         style: simple
       - explode: false
         in: path
-        name: quota_id
+        name: orgname
         required: true
         schema:
           type: string
@@ -1796,25 +1804,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "204":
           content: {}
@@ -1826,14 +1834,14 @@ paths:
       parameters:
       - explode: false
         in: path
-        name: orgname
+        name: quota_id
         required: true
         schema:
           type: string
         style: simple
       - explode: false
         in: path
-        name: quota_id
+        name: orgname
         required: true
         schema:
           type: string
@@ -1843,25 +1851,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -1873,14 +1881,14 @@ paths:
       parameters:
       - explode: false
         in: path
-        name: orgname
+        name: quota_id
         required: true
         schema:
           type: string
         style: simple
       - explode: false
         in: path
-        name: quota_id
+        name: orgname
         required: true
         schema:
           type: string
@@ -1889,7 +1897,7 @@ paths:
         content:
           '*/*':
             schema:
-              $ref: '#/components/schemas/UpdateOrgQuota'
+              $ref: "#/components/schemas/UpdateOrgQuota"
         description: Request body contents.
         required: true
       responses:
@@ -1897,25 +1905,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -1932,14 +1940,14 @@ paths:
       parameters:
       - explode: false
         in: path
-        name: orgname
+        name: quota_id
         required: true
         schema:
           type: string
         style: simple
       - explode: false
         in: path
-        name: quota_id
+        name: orgname
         required: true
         schema:
           type: string
@@ -1949,25 +1957,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -1979,14 +1987,14 @@ paths:
       parameters:
       - explode: false
         in: path
-        name: orgname
+        name: quota_id
         required: true
         schema:
           type: string
         style: simple
       - explode: false
         in: path
-        name: quota_id
+        name: orgname
         required: true
         schema:
           type: string
@@ -1995,7 +2003,7 @@ paths:
         content:
           '*/*':
             schema:
-              $ref: '#/components/schemas/NewOrgQuotaLimit'
+              $ref: "#/components/schemas/NewOrgQuotaLimit"
         description: Request body contents.
         required: true
       responses:
@@ -2003,25 +2011,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "201":
           content: {}
@@ -2038,6 +2046,13 @@ paths:
       parameters:
       - explode: false
         in: path
+        name: quota_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
         name: orgname
         required: true
         schema:
@@ -2050,37 +2065,30 @@ paths:
         schema:
           type: string
         style: simple
-      - explode: false
-        in: path
-        name: quota_id
-        required: true
-        schema:
-          type: string
-        style: simple
       responses:
         "400":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "204":
           content: {}
@@ -2092,6 +2100,13 @@ paths:
       parameters:
       - explode: false
         in: path
+        name: quota_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
         name: orgname
         required: true
         schema:
@@ -2104,37 +2119,30 @@ paths:
         schema:
           type: string
         style: simple
-      - explode: false
-        in: path
-        name: quota_id
-        required: true
-        schema:
-          type: string
-        style: simple
       responses:
         "400":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -2146,6 +2154,13 @@ paths:
       parameters:
       - explode: false
         in: path
+        name: quota_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
         name: orgname
         required: true
         schema:
@@ -2158,18 +2173,11 @@ paths:
         schema:
           type: string
         style: simple
-      - explode: false
-        in: path
-        name: quota_id
-        required: true
-        schema:
-          type: string
-        style: simple
       requestBody:
         content:
           '*/*':
             schema:
-              $ref: '#/components/schemas/UpdateOrgQuotaLimit'
+              $ref: "#/components/schemas/UpdateOrgQuotaLimit"
         description: Request body contents.
         required: true
       responses:
@@ -2177,25 +2185,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -2214,25 +2222,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -2258,25 +2266,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -2302,25 +2310,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -2336,14 +2344,14 @@ paths:
       parameters:
       - explode: false
         in: path
-        name: limit_id
+        name: quota_id
         required: true
         schema:
           type: string
         style: simple
       - explode: false
         in: path
-        name: quota_id
+        name: limit_id
         required: true
         schema:
           type: string
@@ -2353,25 +2361,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -2389,7 +2397,7 @@ paths:
         content:
           '*/*':
             schema:
-              $ref: '#/components/schemas/NewOrg'
+              $ref: "#/components/schemas/NewOrg"
         description: Request body contents.
         required: true
       responses:
@@ -2397,25 +2405,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "201":
           content: {}
@@ -2444,25 +2452,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "204":
           content: {}
@@ -2486,25 +2494,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -2527,7 +2535,7 @@ paths:
         content:
           '*/*':
             schema:
-              $ref: '#/components/schemas/UpdateOrg'
+              $ref: "#/components/schemas/UpdateOrg"
         description: Request body contents.
         required: true
       responses:
@@ -2535,25 +2543,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -2582,25 +2590,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -2628,25 +2636,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -2684,25 +2692,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "204":
           content: {}
@@ -2734,25 +2742,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -2780,25 +2788,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -2826,25 +2834,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -2867,7 +2875,7 @@ paths:
         content:
           '*/*':
             schema:
-              $ref: '#/components/schemas/NewApp'
+              $ref: "#/components/schemas/NewApp"
         description: Request body contents.
         required: true
       responses:
@@ -2875,25 +2883,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "201":
           content: {}
@@ -2930,25 +2938,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "204":
           content: {}
@@ -2981,25 +2989,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -3030,7 +3038,7 @@ paths:
         content:
           '*/*':
             schema:
-              $ref: '#/components/schemas/UpdateApp'
+              $ref: "#/components/schemas/UpdateApp"
         description: Request body contents.
         required: true
       responses:
@@ -3038,25 +3046,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -3085,25 +3093,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -3131,25 +3139,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -3185,25 +3193,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -3239,25 +3247,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "204":
           content: {}
@@ -3289,25 +3297,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -3338,7 +3346,7 @@ paths:
         content:
           '*/*':
             schema:
-              $ref: '#/components/schemas/UserPermission'
+              $ref: "#/components/schemas/UserPermission"
         description: Request body contents.
         required: true
       responses:
@@ -3346,25 +3354,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -3401,25 +3409,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "204":
           content: {}
@@ -3451,25 +3459,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -3500,7 +3508,7 @@ paths:
         content:
           '*/*':
             schema:
-              $ref: '#/components/schemas/TeamPermission'
+              $ref: "#/components/schemas/TeamPermission"
         description: Request body contents.
         required: true
       responses:
@@ -3508,25 +3516,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -3555,25 +3563,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -3596,7 +3604,7 @@ paths:
         content:
           '*/*':
             schema:
-              $ref: '#/components/schemas/NewPrototype'
+              $ref: "#/components/schemas/NewPrototype"
         description: Request body contents.
         required: true
       responses:
@@ -3604,25 +3612,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "201":
           content: {}
@@ -3638,18 +3646,18 @@ paths:
       description: Delete an existing permission prototype.
       operationId: deleteOrganizationPrototypePermission
       parameters:
-      - description: The name of the organization
-        explode: false
-        in: path
-        name: orgname
-        required: true
-        schema:
-          type: string
-        style: simple
       - description: The ID of the prototype
         explode: false
         in: path
         name: prototypeid
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The name of the organization
+        explode: false
+        in: path
+        name: orgname
         required: true
         schema:
           type: string
@@ -3659,25 +3667,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "204":
           content: {}
@@ -3688,14 +3696,6 @@ paths:
       description: Update the role of an existing permission prototype.
       operationId: updateOrganizationPrototypePermission
       parameters:
-      - description: The name of the organization
-        explode: false
-        in: path
-        name: orgname
-        required: true
-        schema:
-          type: string
-        style: simple
       - description: The ID of the prototype
         explode: false
         in: path
@@ -3704,11 +3704,19 @@ paths:
         schema:
           type: string
         style: simple
+      - description: The name of the organization
+        explode: false
+        in: path
+        name: orgname
+        required: true
+        schema:
+          type: string
+        style: simple
       requestBody:
         content:
           '*/*':
             schema:
-              $ref: '#/components/schemas/PrototypeUpdate'
+              $ref: "#/components/schemas/PrototypeUpdate"
         description: Request body contents.
         required: true
       responses:
@@ -3716,25 +3724,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -3813,25 +3821,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -3845,7 +3853,7 @@ paths:
         content:
           '*/*':
             schema:
-              $ref: '#/components/schemas/NewRepo'
+              $ref: "#/components/schemas/NewRepo"
         description: Request body contents.
         required: true
       responses:
@@ -3853,25 +3861,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "201":
           content: {}
@@ -3900,25 +3908,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "204":
           content: {}
@@ -3958,25 +3966,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -3999,7 +4007,7 @@ paths:
         content:
           '*/*':
             schema:
-              $ref: '#/components/schemas/RepoUpdate'
+              $ref: "#/components/schemas/RepoUpdate"
         description: Request body contents.
         required: true
       responses:
@@ -4007,25 +4015,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -4053,7 +4061,7 @@ paths:
         content:
           '*/*':
             schema:
-              $ref: '#/components/schemas/ChangeVisibility'
+              $ref: "#/components/schemas/ChangeVisibility"
         description: Request body contents.
         required: true
       responses:
@@ -4061,25 +4069,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "201":
           content: {}
@@ -4112,25 +4120,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -4152,7 +4160,7 @@ paths:
         content:
           '*/*':
             schema:
-              $ref: '#/components/schemas/NotificationCreateRequest'
+              $ref: "#/components/schemas/NotificationCreateRequest"
         description: Request body contents.
         required: true
       responses:
@@ -4160,25 +4168,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "201":
           content: {}
@@ -4215,25 +4223,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "204":
           content: {}
@@ -4265,25 +4273,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -4315,25 +4323,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "201":
           content: {}
@@ -4369,25 +4377,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "201":
           content: {}
@@ -4415,25 +4423,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -4456,7 +4464,7 @@ paths:
         content:
           '*/*':
             schema:
-              $ref: '#/components/schemas/NewToken'
+              $ref: "#/components/schemas/NewToken"
         description: Request body contents.
         required: true
       responses:
@@ -4464,25 +4472,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "201":
           content: {}
@@ -4519,25 +4527,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "204":
           content: {}
@@ -4569,25 +4577,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -4618,7 +4626,7 @@ paths:
         content:
           '*/*':
             schema:
-              $ref: '#/components/schemas/TokenPermission'
+              $ref: "#/components/schemas/TokenPermission"
         description: Request body contents.
         required: true
       responses:
@@ -4626,25 +4634,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -4690,25 +4698,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -4737,25 +4745,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "204":
           content: {}
@@ -4780,25 +4788,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -4822,7 +4830,7 @@ paths:
         content:
           '*/*':
             schema:
-              $ref: '#/components/schemas/CreateRobot'
+              $ref: "#/components/schemas/CreateRobot"
         description: Request body contents.
         required: true
       responses:
@@ -4830,25 +4838,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -4902,25 +4910,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -4935,14 +4943,6 @@ paths:
       description: Delete an existing organization robot.
       operationId: deleteOrgRobot
       parameters:
-      - description: The name of the organization
-        explode: false
-        in: path
-        name: orgname
-        required: true
-        schema:
-          type: string
-        style: simple
       - description: "The short name for the robot, without any user or organization\
           \ prefix"
         explode: false
@@ -4952,30 +4952,38 @@ paths:
         schema:
           type: string
         style: simple
+      - description: The name of the organization
+        explode: false
+        in: path
+        name: orgname
+        required: true
+        schema:
+          type: string
+        style: simple
       responses:
         "400":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "204":
           content: {}
@@ -4986,14 +4994,6 @@ paths:
       description: Returns the organization's robot with the specified name.
       operationId: getOrgRobot
       parameters:
-      - description: The name of the organization
-        explode: false
-        in: path
-        name: orgname
-        required: true
-        schema:
-          type: string
-        style: simple
       - description: "The short name for the robot, without any user or organization\
           \ prefix"
         explode: false
@@ -5003,30 +5003,38 @@ paths:
         schema:
           type: string
         style: simple
+      - description: The name of the organization
+        explode: false
+        in: path
+        name: orgname
+        required: true
+        schema:
+          type: string
+        style: simple
       responses:
         "400":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -5037,14 +5045,6 @@ paths:
       description: Create a new robot in the organization.
       operationId: createOrgRobot
       parameters:
-      - description: The name of the organization
-        explode: false
-        in: path
-        name: orgname
-        required: true
-        schema:
-          type: string
-        style: simple
       - description: "The short name for the robot, without any user or organization\
           \ prefix"
         explode: false
@@ -5054,11 +5054,19 @@ paths:
         schema:
           type: string
         style: simple
+      - description: The name of the organization
+        explode: false
+        in: path
+        name: orgname
+        required: true
+        schema:
+          type: string
+        style: simple
       requestBody:
         content:
           '*/*':
             schema:
-              $ref: '#/components/schemas/CreateRobot'
+              $ref: "#/components/schemas/CreateRobot"
         description: Request body contents.
         required: true
       responses:
@@ -5066,25 +5074,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -5114,25 +5122,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -5147,14 +5155,6 @@ paths:
       description: Returns the list of repository permissions for the org's robot.
       operationId: getOrgRobotPermissions
       parameters:
-      - description: The name of the organization
-        explode: false
-        in: path
-        name: orgname
-        required: true
-        schema:
-          type: string
-        style: simple
       - description: "The short name for the robot, without any user or organization\
           \ prefix"
         explode: false
@@ -5164,30 +5164,38 @@ paths:
         schema:
           type: string
         style: simple
+      - description: The name of the organization
+        explode: false
+        in: path
+        name: orgname
+        required: true
+        schema:
+          type: string
+        style: simple
       responses:
         "400":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -5216,25 +5224,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "201":
           content: {}
@@ -5249,14 +5257,6 @@ paths:
       description: Regenerates the token for an organization robot.
       operationId: regenerateOrgRobotToken
       parameters:
-      - description: The name of the organization
-        explode: false
-        in: path
-        name: orgname
-        required: true
-        schema:
-          type: string
-        style: simple
       - description: "The short name for the robot, without any user or organization\
           \ prefix"
         explode: false
@@ -5266,30 +5266,38 @@ paths:
         schema:
           type: string
         style: simple
+      - description: The name of the organization
+        explode: false
+        in: path
+        name: orgname
+        required: true
+        schema:
+          type: string
+        style: simple
       responses:
         "400":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "201":
           content: {}
@@ -5298,6 +5306,10 @@ paths:
       - robot
     x-name: endpoints.api.robot.RegenerateOrgRobot
     x-path: "/api/v1/organization/{orgname}/robots/{robot_shortname}/regenerate"
+    x-tag: robot
+  /api/v1/organization/{orgname}/robots/{robot_shortname}/federation:
+    x-name: endpoints.api.robot.OrgRobotFederation
+    x-path: "/api/v1/organization/{orgname}/robots/{robot_shortname}/federation"
     x-tag: robot
   /api/v1/entities/{prefix}:
     get:
@@ -5340,25 +5352,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -5386,25 +5398,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -5448,25 +5460,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -5518,25 +5530,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -5562,25 +5574,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -5601,7 +5613,7 @@ paths:
         content:
           '*/*':
             schema:
-              $ref: '#/components/schemas/NewNamespaceQuota'
+              $ref: "#/components/schemas/NewNamespaceQuota"
         description: Request body contents.
         required: true
       responses:
@@ -5609,25 +5621,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "201":
           content: {}
@@ -5654,25 +5666,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -5693,7 +5705,7 @@ paths:
         content:
           '*/*':
             schema:
-              $ref: '#/components/schemas/NewNamespaceQuota'
+              $ref: "#/components/schemas/NewNamespaceQuota"
         description: Request body contents.
         required: true
       responses:
@@ -5701,25 +5713,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "201":
           content: {}
@@ -5753,25 +5765,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "204":
           content: {}
@@ -5799,7 +5811,7 @@ paths:
         content:
           '*/*':
             schema:
-              $ref: '#/components/schemas/UpdateNamespaceQuota'
+              $ref: "#/components/schemas/UpdateNamespaceQuota"
         description: Request body contents.
         required: true
       responses:
@@ -5807,25 +5819,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -5859,25 +5871,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "204":
           content: {}
@@ -5905,7 +5917,7 @@ paths:
         content:
           '*/*':
             schema:
-              $ref: '#/components/schemas/UpdateNamespaceQuota'
+              $ref: "#/components/schemas/UpdateNamespaceQuota"
         description: Request body contents.
         required: true
       responses:
@@ -5913,25 +5925,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -5976,25 +5988,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -6008,7 +6020,7 @@ paths:
         content:
           '*/*':
             schema:
-              $ref: '#/components/schemas/CreateInstallUser'
+              $ref: "#/components/schemas/CreateInstallUser"
         description: Request body contents.
         required: true
       responses:
@@ -6016,25 +6028,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "201":
           content: {}
@@ -6044,6 +6056,144 @@ paths:
       x-codegen-request-body-name: body
     x-name: endpoints.api.superuser.SuperUserList
     x-path: /api/v1/superuser/users/
+    x-tag: superuser
+  /api/v1/superuser/users/{username}:
+    delete:
+      description: Deletes the specified user.
+      operationId: deleteInstallUser
+      parameters:
+      - description: The username of the user being managed
+        explode: false
+        in: path
+        name: username
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "400":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ApiError"
+          description: Bad Request
+        "401":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ApiError"
+          description: Session required
+        "403":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ApiError"
+          description: Unauthorized access
+        "404":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ApiError"
+          description: Not found
+        "204":
+          content: {}
+          description: Deleted
+      tags:
+      - superuser
+    get:
+      description: Returns information about the specified user.
+      operationId: getInstallUser
+      parameters:
+      - description: The username of the user being managed
+        explode: false
+        in: path
+        name: username
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "400":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ApiError"
+          description: Bad Request
+        "401":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ApiError"
+          description: Session required
+        "403":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ApiError"
+          description: Unauthorized access
+        "404":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ApiError"
+          description: Not found
+        "200":
+          content: {}
+          description: Successful invocation
+      tags:
+      - superuser
+    put:
+      description: Updates information about the specified user.
+      operationId: changeInstallUser
+      parameters:
+      - description: The username of the user being managed
+        explode: false
+        in: path
+        name: username
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: "#/components/schemas/UpdateUser"
+        description: Request body contents.
+        required: true
+      responses:
+        "400":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ApiError"
+          description: Bad Request
+        "401":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ApiError"
+          description: Session required
+        "403":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ApiError"
+          description: Unauthorized access
+        "404":
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ApiError"
+          description: Not found
+        "200":
+          content: {}
+          description: Successful invocation
+      tags:
+      - superuser
+      x-codegen-request-body-name: body
+    x-name: endpoints.api.superuser.SuperUserManagement
+    x-path: "/api/v1/superuser/users/{username}"
     x-tag: superuser
   /api/v1/superuser/organizations/{name}:
     delete:
@@ -6063,25 +6213,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "204":
           content: {}
@@ -6104,7 +6254,7 @@ paths:
         content:
           '*/*':
             schema:
-              $ref: '#/components/schemas/UpdateOrg'
+              $ref: "#/components/schemas/UpdateOrg"
         description: Request body contents.
         required: true
       responses:
@@ -6112,25 +6262,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -6149,25 +6299,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -6180,7 +6330,7 @@ paths:
         content:
           '*/*':
             schema:
-              $ref: '#/components/schemas/CreateServiceKey'
+              $ref: "#/components/schemas/CreateServiceKey"
         description: Request body contents.
         required: true
       responses:
@@ -6188,25 +6338,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "201":
           content: {}
@@ -6234,25 +6384,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "204":
           content: {}
@@ -6275,25 +6425,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -6315,7 +6465,7 @@ paths:
         content:
           '*/*':
             schema:
-              $ref: '#/components/schemas/PutServiceKey'
+              $ref: "#/components/schemas/PutServiceKey"
         description: Request body contents.
         required: true
       responses:
@@ -6323,25 +6473,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -6368,7 +6518,7 @@ paths:
         content:
           '*/*':
             schema:
-              $ref: '#/components/schemas/ApproveServiceKey'
+              $ref: "#/components/schemas/ApproveServiceKey"
         description: Request body contents.
         required: true
       responses:
@@ -6376,25 +6526,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "201":
           content: {}
@@ -6423,25 +6573,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -6477,25 +6627,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -6531,25 +6681,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -6558,6 +6708,10 @@ paths:
       - superuser
     x-name: endpoints.api.superuser.SuperUserRepositoryBuildResource
     x-path: "/api/v1/superuser/{build_uuid}/build"
+    x-tag: superuser
+  /api/v1/superuser/config:
+    x-name: endpoints.api.superuser.SuperUserDumpConfig
+    x-path: /api/v1/superuser/config
     x-tag: superuser
   /api/v1/repository/{repository}/tag/:
     get:
@@ -6617,25 +6771,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -6671,25 +6825,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "204":
           content: {}
@@ -6720,7 +6874,7 @@ paths:
         content:
           '*/*':
             schema:
-              $ref: '#/components/schemas/ChangeTag'
+              $ref: "#/components/schemas/ChangeTag"
         description: Request body contents.
         required: true
       responses:
@@ -6728,25 +6882,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -6782,7 +6936,7 @@ paths:
         content:
           '*/*':
             schema:
-              $ref: '#/components/schemas/RestoreTag'
+              $ref: "#/components/schemas/RestoreTag"
         description: Request body contents.
         required: true
       responses:
@@ -6790,25 +6944,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "201":
           content: {}
@@ -6845,25 +6999,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "204":
           content: {}
@@ -6894,7 +7048,7 @@ paths:
         content:
           '*/*':
             schema:
-              $ref: '#/components/schemas/TeamDescription'
+              $ref: "#/components/schemas/TeamDescription"
         description: Request body contents.
         required: true
       responses:
@@ -6902,25 +7056,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -6956,25 +7110,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "204":
           content: {}
@@ -7005,25 +7159,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "201":
           content: {}
@@ -7067,25 +7221,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -7111,18 +7265,18 @@ paths:
         schema:
           type: string
         style: simple
-      - description: The username of the team member
-        explode: false
-        in: path
-        name: membername
-        required: true
-        schema:
-          type: string
-        style: simple
       - description: The name of the team
         explode: false
         in: path
         name: teamname
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The username of the team member
+        explode: false
+        in: path
+        name: membername
         required: true
         schema:
           type: string
@@ -7132,25 +7286,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "204":
           content: {}
@@ -7169,18 +7323,18 @@ paths:
         schema:
           type: string
         style: simple
-      - description: The username of the team member
-        explode: false
-        in: path
-        name: membername
-        required: true
-        schema:
-          type: string
-        style: simple
       - description: The name of the team
         explode: false
         in: path
         name: teamname
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The username of the team member
+        explode: false
+        in: path
+        name: membername
         required: true
         schema:
           type: string
@@ -7190,25 +7344,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -7232,14 +7386,14 @@ paths:
         style: simple
       - explode: false
         in: path
-        name: email
+        name: teamname
         required: true
         schema:
           type: string
         style: simple
       - explode: false
         in: path
-        name: teamname
+        name: email
         required: true
         schema:
           type: string
@@ -7249,25 +7403,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "204":
           content: {}
@@ -7287,14 +7441,14 @@ paths:
         style: simple
       - explode: false
         in: path
-        name: email
+        name: teamname
         required: true
         schema:
           type: string
         style: simple
       - explode: false
         in: path
-        name: teamname
+        name: email
         required: true
         schema:
           type: string
@@ -7304,25 +7458,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -7358,25 +7512,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -7404,25 +7558,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -7437,18 +7591,18 @@ paths:
       description: Delete the specified build trigger.
       operationId: deleteBuildTrigger
       parameters:
-      - description: The UUID of the build trigger
-        explode: false
-        in: path
-        name: trigger_uuid
-        required: true
-        schema:
-          type: string
-        style: simple
       - description: The full path of the repository. e.g. namespace/name
         explode: false
         in: path
         name: repository
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The UUID of the build trigger
+        explode: false
+        in: path
+        name: trigger_uuid
         required: true
         schema:
           type: string
@@ -7458,25 +7612,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "204":
           content: {}
@@ -7487,18 +7641,18 @@ paths:
       description: Get information for the specified build trigger.
       operationId: getBuildTrigger
       parameters:
-      - description: The UUID of the build trigger
-        explode: false
-        in: path
-        name: trigger_uuid
-        required: true
-        schema:
-          type: string
-        style: simple
       - description: The full path of the repository. e.g. namespace/name
         explode: false
         in: path
         name: repository
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The UUID of the build trigger
+        explode: false
+        in: path
+        name: trigger_uuid
         required: true
         schema:
           type: string
@@ -7508,25 +7662,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -7537,14 +7691,6 @@ paths:
       description: Updates the specified build trigger.
       operationId: updateBuildTrigger
       parameters:
-      - description: The UUID of the build trigger
-        explode: false
-        in: path
-        name: trigger_uuid
-        required: true
-        schema:
-          type: string
-        style: simple
       - description: The full path of the repository. e.g. namespace/name
         explode: false
         in: path
@@ -7553,11 +7699,19 @@ paths:
         schema:
           type: string
         style: simple
+      - description: The UUID of the build trigger
+        explode: false
+        in: path
+        name: trigger_uuid
+        required: true
+        schema:
+          type: string
+        style: simple
       requestBody:
         content:
           '*/*':
             schema:
-              $ref: '#/components/schemas/UpdateTrigger'
+              $ref: "#/components/schemas/UpdateTrigger"
         description: Request body contents.
         required: true
       responses:
@@ -7565,25 +7719,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -7599,14 +7753,6 @@ paths:
       description: Activate the specified build trigger.
       operationId: activateBuildTrigger
       parameters:
-      - description: The UUID of the build trigger
-        explode: false
-        in: path
-        name: trigger_uuid
-        required: true
-        schema:
-          type: string
-        style: simple
       - description: The full path of the repository. e.g. namespace/name
         explode: false
         in: path
@@ -7615,11 +7761,19 @@ paths:
         schema:
           type: string
         style: simple
+      - description: The UUID of the build trigger
+        explode: false
+        in: path
+        name: trigger_uuid
+        required: true
+        schema:
+          type: string
+        style: simple
       requestBody:
         content:
           '*/*':
             schema:
-              $ref: '#/components/schemas/BuildTriggerActivateRequest'
+              $ref: "#/components/schemas/BuildTriggerActivateRequest"
         description: Request body contents.
         required: true
       responses:
@@ -7627,25 +7781,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "201":
           content: {}
@@ -7661,14 +7815,6 @@ paths:
       description: Manually start a build from the specified trigger.
       operationId: manuallyStartBuildTrigger
       parameters:
-      - description: The UUID of the build trigger
-        explode: false
-        in: path
-        name: trigger_uuid
-        required: true
-        schema:
-          type: string
-        style: simple
       - description: The full path of the repository. e.g. namespace/name
         explode: false
         in: path
@@ -7677,11 +7823,19 @@ paths:
         schema:
           type: string
         style: simple
+      - description: The UUID of the build trigger
+        explode: false
+        in: path
+        name: trigger_uuid
+        required: true
+        schema:
+          type: string
+        style: simple
       requestBody:
         content:
           '*/*':
             schema:
-              $ref: '#/components/schemas/RunParameters'
+              $ref: "#/components/schemas/RunParameters"
         description: Request body contents.
         required: true
       responses:
@@ -7689,25 +7843,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "201":
           content: {}
@@ -7723,18 +7877,18 @@ paths:
       description: List the builds started by the specified trigger.
       operationId: listTriggerRecentBuilds
       parameters:
-      - description: The UUID of the build trigger
-        explode: false
-        in: path
-        name: trigger_uuid
-        required: true
-        schema:
-          type: string
-        style: simple
       - description: The full path of the repository. e.g. namespace/name
         explode: false
         in: path
         name: repository
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The UUID of the build trigger
+        explode: false
+        in: path
+        name: trigger_uuid
         required: true
         schema:
           type: string
@@ -7752,25 +7906,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -7789,31 +7943,31 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/UserView'
+                $ref: "#/components/schemas/UserView"
           description: Successful invocation
       tags:
       - user
@@ -7838,25 +7992,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -7870,7 +8024,7 @@ paths:
         content:
           '*/*':
             schema:
-              $ref: '#/components/schemas/NewStarredRepository'
+              $ref: "#/components/schemas/NewStarredRepository"
         description: Request body contents.
         required: true
       responses:
@@ -7878,25 +8032,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "201":
           content: {}
@@ -7925,25 +8079,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "204":
           content: {}
@@ -7970,25 +8124,25 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Bad Request
         "401":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Session required
         "403":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Unauthorized access
         "404":
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiError'
+                $ref: "#/components/schemas/ApiError"
           description: Not found
         "200":
           content: {}
@@ -8132,7 +8286,7 @@ components:
           content: content
       properties:
         message:
-          $ref: '#/components/schemas/CreateMessage_message'
+          $ref: "#/components/schemas/CreateMessage_message"
       type: object
     ExportLogs:
       description: Configuration for an export logs operation
@@ -8166,23 +8320,9 @@ components:
       type: object
     NewOrgQuota:
       description: Description of a new organization quota
-      example:
-        limit_bytes: 0
-      properties:
-        limit_bytes:
-          description: Number of bytes the organization is allowed
-          type: integer
-      required:
-      - limit_bytes
       type: object
     UpdateOrgQuota:
       description: Description of a new organization quota
-      example:
-        limit_bytes: 0
-      properties:
-        limit_bytes:
-          description: Number of bytes the organization is allowed
-          type: integer
       type: object
     NewOrgQuotaLimit:
       description: Description of a new organization quota limit
@@ -8234,26 +8374,6 @@ components:
       required:
       - password
       - username
-      type: object
-    UpdateUser:
-      description: Fields which can be updated in a user.
-      properties:
-        password:
-          description: The user's password
-          type: string
-        invoice_email:
-          description: Whether the user desires to receive an invoice email.
-          type: boolean
-        email:
-          description: The user's email address
-          type: string
-        tag_expiration_s:
-          description: The number of seconds for tag expiration
-          minimum: 0
-          type: integer
-        username:
-          description: The user's username
-          type: string
       type: object
     UserView:
       description: Describes a user
@@ -8309,6 +8429,23 @@ components:
       - anonymous
       - avatar
       type: object
+    UpdateUser:
+      description: Description of updates for a user
+      example:
+        password: password
+        email: email
+        enabled: true
+      properties:
+        password:
+          description: The new password for the user
+          type: string
+        email:
+          description: The new e-mail address for the user
+          type: string
+        enabled:
+          description: Whether the user is enabled
+          type: boolean
+      type: object
     NewStarredRepository:
       example:
         namespace: namespace
@@ -8341,20 +8478,15 @@ components:
           description: The (may be disabled) recaptcha response code for verification
           type: string
       required:
-      - email
       - name
       type: object
     UpdateOrg:
       description: Description of updates for an organization
       example:
         name: name
-        email: email
       properties:
         name:
           description: The new name for the organization
-          type: string
-        email:
-          description: Organization contact email
           type: string
       type: object
     NewApp:
@@ -8461,9 +8593,9 @@ components:
           - admin
           type: string
         activating_user:
-          $ref: '#/components/schemas/NewPrototype_activating_user'
+          $ref: "#/components/schemas/NewPrototype_activating_user"
         delegate:
-          $ref: '#/components/schemas/NewPrototype_delegate'
+          $ref: "#/components/schemas/NewPrototype_delegate"
       required:
       - delegate
       - role
@@ -8601,23 +8733,9 @@ components:
       type: object
     NewNamespaceQuota:
       description: Description of a new organization quota
-      example:
-        limit_bytes: 0
-      properties:
-        limit_bytes:
-          description: Number of bytes the organization is allowed
-          type: integer
-      required:
-      - limit_bytes
       type: object
     UpdateNamespaceQuota:
       description: Description of a new organization quota
-      example:
-        limit_bytes: 0
-      properties:
-        limit_bytes:
-          description: Number of bytes the organization is allowed
-          type: integer
       type: object
     CreateInstallUser:
       description: Data for creating a user

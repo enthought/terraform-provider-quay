@@ -26,10 +26,10 @@ func Test_quay_api_TriggerAPIService(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		var triggerUuid string
 		var repository string
+		var triggerUuid string
 
-		httpRes, err := apiClient.TriggerAPI.ActivateBuildTrigger(context.Background(), triggerUuid, repository).Execute()
+		httpRes, err := apiClient.TriggerAPI.ActivateBuildTrigger(context.Background(), repository, triggerUuid).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
@@ -40,10 +40,10 @@ func Test_quay_api_TriggerAPIService(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		var triggerUuid string
 		var repository string
+		var triggerUuid string
 
-		httpRes, err := apiClient.TriggerAPI.DeleteBuildTrigger(context.Background(), triggerUuid, repository).Execute()
+		httpRes, err := apiClient.TriggerAPI.DeleteBuildTrigger(context.Background(), repository, triggerUuid).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
@@ -54,10 +54,10 @@ func Test_quay_api_TriggerAPIService(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		var triggerUuid string
 		var repository string
+		var triggerUuid string
 
-		httpRes, err := apiClient.TriggerAPI.GetBuildTrigger(context.Background(), triggerUuid, repository).Execute()
+		httpRes, err := apiClient.TriggerAPI.GetBuildTrigger(context.Background(), repository, triggerUuid).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
@@ -81,10 +81,10 @@ func Test_quay_api_TriggerAPIService(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		var triggerUuid string
 		var repository string
+		var triggerUuid string
 
-		httpRes, err := apiClient.TriggerAPI.ListTriggerRecentBuilds(context.Background(), triggerUuid, repository).Execute()
+		httpRes, err := apiClient.TriggerAPI.ListTriggerRecentBuilds(context.Background(), repository, triggerUuid).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
@@ -95,10 +95,10 @@ func Test_quay_api_TriggerAPIService(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		var triggerUuid string
 		var repository string
+		var triggerUuid string
 
-		httpRes, err := apiClient.TriggerAPI.ManuallyStartBuildTrigger(context.Background(), triggerUuid, repository).Execute()
+		httpRes, err := apiClient.TriggerAPI.ManuallyStartBuildTrigger(context.Background(), repository, triggerUuid).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
@@ -109,10 +109,10 @@ func Test_quay_api_TriggerAPIService(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		var triggerUuid string
 		var repository string
+		var triggerUuid string
 
-		httpRes, err := apiClient.TriggerAPI.UpdateBuildTrigger(context.Background(), triggerUuid, repository).Execute()
+		httpRes, err := apiClient.TriggerAPI.UpdateBuildTrigger(context.Background(), repository, triggerUuid).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
