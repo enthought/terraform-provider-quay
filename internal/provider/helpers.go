@@ -18,6 +18,23 @@ func handleQuayAPIError(err error) string {
 	return errDetail
 }
 
+// apiErrorModel extracts the parsed ApiError from a client error. The generated
+// client stores the decoded error as either an ApiError value or an *ApiError
+// pointer, so both forms are handled.
+func apiErrorModel(err error) (*quay_api.ApiError, bool) {
+	var apiErr *quay_api.GenericOpenAPIError
+	if !errors.As(err, &apiErr) {
+		return nil, false
+	}
+	switch m := apiErr.Model().(type) {
+	case quay_api.ApiError:
+		return &m, true
+	case *quay_api.ApiError:
+		return m, true
+	}
+	return nil, false
+}
+
 func isValidURL(u string) bool {
 	_, err := url.ParseRequestURI(u)
 	return err == nil

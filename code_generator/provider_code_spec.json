@@ -21,7 +21,8 @@
               "description": "Organization name"
             }
           }
-        ]
+        ],
+        "blocks": []
       }
     },
     {
@@ -32,10 +33,10 @@
             "name": "description",
             "string": {
               "computed_optional_required": "computed_optional",
-              "default" : {
+              "description": "Text description",
+              "default": {
                 "static": ""
               },
-              "description": "Text description",
               "plan_modifiers": [
                 {
                   "custom": {
@@ -95,7 +96,8 @@
               ]
             }
           }
-        ]
+        ],
+        "blocks": []
       }
     },
     {
@@ -106,10 +108,10 @@
             "name": "description",
             "string": {
               "computed_optional_required": "computed_optional",
-              "default" : {
+              "description": "Markdown description",
+              "default": {
                 "static": ""
-              },
-              "description": "Markdown description"
+              }
             }
           },
           {
@@ -179,7 +181,8 @@
               ]
             }
           }
-        ]
+        ],
+        "blocks": []
       }
     },
     {
@@ -262,7 +265,8 @@
               ]
             }
           }
-        ]
+        ],
+        "blocks": []
       }
     },
     {
@@ -273,10 +277,10 @@
             "name": "description",
             "string": {
               "computed_optional_required": "computed_optional",
-              "default" : {
+              "description": "Markdown description",
+              "default": {
                 "static": ""
-              },
-              "description": "Markdown description"
+              }
             }
           },
           {
@@ -321,10 +325,10 @@
             "name": "visibility",
             "string": {
               "computed_optional_required": "computed_optional",
-              "default" : {
+              "description": "Repository visibility. Should be private or public. Defaults to private.",
+              "default": {
                 "static": "private"
               },
-              "description": "Repository visibility. Should be private or public. Defaults to private.",
               "validators": [
                 {
                   "custom": {
@@ -334,6 +338,173 @@
                       }
                     ],
                     "schema_definition": "stringvalidator.OneOf([]string{\"private\", \"public\"}...)"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "name": "state",
+            "string": {
+              "computed_optional_required": "computed_optional",
+              "description": "Repository state. Should be normal, readonly, or mirror. Defaults to normal.",
+              "default": {
+                "static": "normal"
+              },
+              "validators": [
+                {
+                  "custom": {
+                    "imports": [
+                      {
+                        "path": "github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
+                      }
+                    ],
+                    "schema_definition": "stringvalidator.OneOf([]string{\"normal\", \"readonly\", \"mirror\"}...)"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "blocks": [
+          {
+            "name": "mirror",
+            "single_nested": {
+              "description": "Mirroring configuration. Required when state is mirror, forbidden otherwise.",
+              "attributes": [
+                {
+                  "name": "upstream_repository",
+                  "string": {
+                    "computed_optional_required": "optional",
+                    "description": "Upstream repository reference to mirror from, e.g. quay.io/argoproj/argocd Required when state is \"mirror\"."
+                  }
+                },
+                {
+                  "name": "upstream_username",
+                  "string": {
+                    "computed_optional_required": "optional",
+                    "description": "Username used to pull from the upstream registry"
+                  }
+                },
+                {
+                  "name": "upstream_password",
+                  "string": {
+                    "computed_optional_required": "optional",
+                    "description": "Password used to pull from the upstream registry (write-only; not returned by the API)",
+                    "sensitive": true
+                  }
+                },
+                {
+                  "name": "sync_interval",
+                  "int64": {
+                    "computed_optional_required": "optional",
+                    "description": "Interval in seconds between mirror syncs. Defaults to the platform default when omitted."
+                  }
+                },
+                {
+                  "name": "sync_timeout",
+                  "int64": {
+                    "computed_optional_required": "computed_optional",
+                    "description": "Number of seconds the mirroring job may run before timing out. Must be at least 300. Defaults to 600. Automatically omitted on Quay versions that do not support this field.",
+                    "default": {
+                      "static": 600
+                    },
+                    "validators": [
+                      {
+                        "custom": {
+                          "imports": [
+                            {
+                              "path": "github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+                            }
+                          ],
+                          "schema_definition": "int64validator.AtLeast(300)"
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "verify_tls",
+                  "bool": {
+                    "computed_optional_required": "computed_optional",
+                    "description": "Whether to verify TLS of the upstream registry. Defaults to true.",
+                    "default": {
+                      "static": true
+                    }
+                  }
+                },
+                {
+                  "name": "unsigned_images",
+                  "bool": {
+                    "computed_optional_required": "computed_optional",
+                    "description": "Whether to allow unsigned images to be mirrored. Defaults to false.",
+                    "default": {
+                      "static": false
+                    }
+                  }
+                },
+                {
+                  "name": "http_proxy",
+                  "string": {
+                    "computed_optional_required": "optional",
+                    "description": "HTTP proxy URL for the upstream registry"
+                  }
+                },
+                {
+                  "name": "https_proxy",
+                  "string": {
+                    "computed_optional_required": "optional",
+                    "description": "HTTPS proxy URL for the upstream registry"
+                  }
+                },
+                {
+                  "name": "no_proxy",
+                  "string": {
+                    "computed_optional_required": "optional",
+                    "description": "No-proxy list for the upstream registry"
+                  }
+                },
+                {
+                  "name": "root_rule",
+                  "single_nested": {
+                    "computed_optional_required": "optional",
+                    "description": "Filtering rule applied to mirrored tags (tag patterns to mirror). Required when state is \"mirror\".",
+                    "attributes": [
+                      {
+                        "name": "rule_kind",
+                        "string": {
+                          "computed_optional_required": "optional",
+                          "description": "Kind of rule, e.g. tag_glob_csv. Required when state is \"mirror\"."
+                        }
+                      },
+                      {
+                        "name": "rule_value",
+                        "list": {
+                          "computed_optional_required": "optional",
+                          "description": "Values of the rule",
+                          "element_type": {
+                            "string": {}
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "robot_user",
+                  "string": {
+                    "computed_optional_required": "optional",
+                    "description": "Name of an existing robot account that Quay uses to pull images from the upstream registry. Required when state is \"mirror\"."
+                  }
+                },
+                {
+                  "name": "sync_on_change",
+                  "bool": {
+                    "computed_optional_required": "computed_optional",
+                    "description": "Whether to trigger an immediate mirror sync when the repository is created as a mirror, transitions into the mirror state, or its mirror configuration changes. Defaults to true.",
+                    "default": {
+                      "static": true
+                    }
                   }
                 }
               ]
@@ -362,7 +533,8 @@
               "description": "Organization name"
             }
           }
-        ]
+        ],
+        "blocks": []
       }
     },
     {
@@ -397,7 +569,8 @@
               "description": "Organization name"
             }
           }
-        ]
+        ],
+        "blocks": []
       }
     },
     {
@@ -442,7 +615,8 @@
               "description": "Team role"
             }
           }
-        ]
+        ],
+        "blocks": []
       }
     },
     {
@@ -477,7 +651,8 @@
               "description": "Team permission"
             }
           }
-        ]
+        ],
+        "blocks": []
       }
     },
     {
@@ -510,6 +685,112 @@
             "string": {
               "computed_optional_required": "computed",
               "description": "Repository visibility. Should be private or public."
+            }
+          },
+          {
+            "name": "state",
+            "string": {
+              "computed_optional_required": "computed",
+              "description": "Repository state: normal, readonly, or mirror."
+            }
+          }
+        ],
+        "blocks": [
+          {
+            "name": "mirror",
+            "single_nested": {
+              "description": "Mirroring configuration (not returned when the repository is not a mirror)",
+              "attributes": [
+                {
+                  "name": "upstream_repository",
+                  "string": {
+                    "computed_optional_required": "computed",
+                    "description": "Upstream repository reference mirrored from"
+                  }
+                },
+                {
+                  "name": "sync_interval",
+                  "int64": {
+                    "computed_optional_required": "computed",
+                    "description": "Interval in seconds between mirror syncs"
+                  }
+                },
+                {
+                  "name": "sync_timeout",
+                  "int64": {
+                    "computed_optional_required": "computed",
+                    "description": "Number of seconds the mirroring job may run before timing out."
+                  }
+                },
+                {
+                  "name": "verify_tls",
+                  "bool": {
+                    "computed_optional_required": "computed",
+                    "description": "Whether TLS of the upstream registry is verified"
+                  }
+                },
+                {
+                  "name": "unsigned_images",
+                  "bool": {
+                    "computed_optional_required": "computed",
+                    "description": "Whether unsigned images are allowed"
+                  }
+                },
+                {
+                  "name": "http_proxy",
+                  "string": {
+                    "computed_optional_required": "computed",
+                    "description": "HTTP proxy URL for the upstream registry"
+                  }
+                },
+                {
+                  "name": "https_proxy",
+                  "string": {
+                    "computed_optional_required": "computed",
+                    "description": "HTTPS proxy URL for the upstream registry"
+                  }
+                },
+                {
+                  "name": "no_proxy",
+                  "string": {
+                    "computed_optional_required": "computed",
+                    "description": "No-proxy list for the upstream registry"
+                  }
+                },
+                {
+                  "name": "root_rule",
+                  "single_nested": {
+                    "computed_optional_required": "computed",
+                    "description": "Filtering rule applied to mirrored tags",
+                    "attributes": [
+                      {
+                        "name": "rule_kind",
+                        "string": {
+                          "computed_optional_required": "computed",
+                          "description": "Kind of rule, e.g. tag_glob_csv"
+                        }
+                      },
+                      {
+                        "name": "rule_value",
+                        "list": {
+                          "computed_optional_required": "computed",
+                          "description": "Values of the rule",
+                          "element_type": {
+                            "string": {}
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "robot_user",
+                  "string": {
+                    "computed_optional_required": "computed",
+                    "description": "Robot account that pulls images from the upstream registry"
+                  }
+                }
+              ]
             }
           }
         ]

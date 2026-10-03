@@ -4,12 +4,21 @@ package resource_repository
 
 import (
 	"context"
+	"fmt"
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
+	"github.com/hashicorp/terraform-plugin-framework/diag"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64default"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
+	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
+	"github.com/hashicorp/terraform-plugin-go/tftypes"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 )
@@ -40,6 +49,16 @@ func RepositoryResourceSchema(ctx context.Context) schema.Schema {
 					stringplanmodifier.RequiresReplace(),
 				},
 			},
+			"state": schema.StringAttribute{
+				Optional:            true,
+				Computed:            true,
+				Description:         "Repository state. Should be normal, readonly, or mirror. Defaults to normal.",
+				MarkdownDescription: "Repository state. Should be normal, readonly, or mirror. Defaults to normal.",
+				Validators: []validator.String{
+					stringvalidator.OneOf([]string{"normal", "readonly", "mirror"}...),
+				},
+				Default: stringdefault.StaticString("normal"),
+			},
 			"visibility": schema.StringAttribute{
 				Optional:            true,
 				Computed:            true,
@@ -51,6 +70,114 @@ func RepositoryResourceSchema(ctx context.Context) schema.Schema {
 				Default: stringdefault.StaticString("private"),
 			},
 		},
+		Blocks: map[string]schema.Block{
+			"mirror": schema.SingleNestedBlock{
+				Attributes: map[string]schema.Attribute{
+					"http_proxy": schema.StringAttribute{
+						Optional:            true,
+						Description:         "HTTP proxy URL for the upstream registry",
+						MarkdownDescription: "HTTP proxy URL for the upstream registry",
+					},
+					"https_proxy": schema.StringAttribute{
+						Optional:            true,
+						Description:         "HTTPS proxy URL for the upstream registry",
+						MarkdownDescription: "HTTPS proxy URL for the upstream registry",
+					},
+					"no_proxy": schema.StringAttribute{
+						Optional:            true,
+						Description:         "No-proxy list for the upstream registry",
+						MarkdownDescription: "No-proxy list for the upstream registry",
+					},
+					"robot_user": schema.StringAttribute{
+						Optional:            true,
+						Description:         "Name of an existing robot account that Quay uses to pull images from the upstream registry. Required when state is \"mirror\".",
+						MarkdownDescription: "Name of an existing robot account that Quay uses to pull images from the upstream registry. Required when state is \"mirror\".",
+					},
+					"root_rule": schema.SingleNestedAttribute{
+						Attributes: map[string]schema.Attribute{
+							"rule_kind": schema.StringAttribute{
+								Optional:            true,
+								Description:         "Kind of rule, e.g. tag_glob_csv. Required when state is \"mirror\".",
+								MarkdownDescription: "Kind of rule, e.g. tag_glob_csv. Required when state is \"mirror\".",
+							},
+							"rule_value": schema.ListAttribute{
+								ElementType:         types.StringType,
+								Optional:            true,
+								Description:         "Values of the rule",
+								MarkdownDescription: "Values of the rule",
+							},
+						},
+						CustomType: RootRuleType{
+							ObjectType: types.ObjectType{
+								AttrTypes: RootRuleValue{}.AttributeTypes(ctx),
+							},
+						},
+						Optional:            true,
+						Description:         "Filtering rule applied to mirrored tags (tag patterns to mirror). Required when state is \"mirror\".",
+						MarkdownDescription: "Filtering rule applied to mirrored tags (tag patterns to mirror). Required when state is \"mirror\".",
+					},
+					"sync_interval": schema.Int64Attribute{
+						Optional:            true,
+						Description:         "Interval in seconds between mirror syncs. Defaults to the platform default when omitted.",
+						MarkdownDescription: "Interval in seconds between mirror syncs. Defaults to the platform default when omitted.",
+					},
+					"sync_on_change": schema.BoolAttribute{
+						Optional:            true,
+						Computed:            true,
+						Description:         "Whether to trigger an immediate mirror sync when the repository is created as a mirror, transitions into the mirror state, or its mirror configuration changes. Defaults to true.",
+						MarkdownDescription: "Whether to trigger an immediate mirror sync when the repository is created as a mirror, transitions into the mirror state, or its mirror configuration changes. Defaults to true.",
+						Default:             booldefault.StaticBool(true),
+					},
+					"sync_timeout": schema.Int64Attribute{
+						Optional:            true,
+						Computed:            true,
+						Description:         "Number of seconds the mirroring job may run before timing out. Must be at least 300. Defaults to 600. Automatically omitted on Quay versions that do not support this field.",
+						MarkdownDescription: "Number of seconds the mirroring job may run before timing out. Must be at least 300. Defaults to 600. Automatically omitted on Quay versions that do not support this field.",
+						Validators: []validator.Int64{
+							int64validator.AtLeast(300),
+						},
+						Default: int64default.StaticInt64(600),
+					},
+					"unsigned_images": schema.BoolAttribute{
+						Optional:            true,
+						Computed:            true,
+						Description:         "Whether to allow unsigned images to be mirrored. Defaults to false.",
+						MarkdownDescription: "Whether to allow unsigned images to be mirrored. Defaults to false.",
+						Default:             booldefault.StaticBool(false),
+					},
+					"upstream_password": schema.StringAttribute{
+						Optional:            true,
+						Sensitive:           true,
+						Description:         "Password used to pull from the upstream registry (write-only; not returned by the API)",
+						MarkdownDescription: "Password used to pull from the upstream registry (write-only; not returned by the API)",
+					},
+					"upstream_repository": schema.StringAttribute{
+						Optional:            true,
+						Description:         "Upstream repository reference to mirror from, e.g. quay.io/argoproj/argocd Required when state is \"mirror\".",
+						MarkdownDescription: "Upstream repository reference to mirror from, e.g. quay.io/argoproj/argocd Required when state is \"mirror\".",
+					},
+					"upstream_username": schema.StringAttribute{
+						Optional:            true,
+						Description:         "Username used to pull from the upstream registry",
+						MarkdownDescription: "Username used to pull from the upstream registry",
+					},
+					"verify_tls": schema.BoolAttribute{
+						Optional:            true,
+						Computed:            true,
+						Description:         "Whether to verify TLS of the upstream registry. Defaults to true.",
+						MarkdownDescription: "Whether to verify TLS of the upstream registry. Defaults to true.",
+						Default:             booldefault.StaticBool(true),
+					},
+				},
+				CustomType: MirrorType{
+					ObjectType: types.ObjectType{
+						AttrTypes: MirrorValue{}.AttributeTypes(ctx),
+					},
+				},
+				Description:         "Mirroring configuration. Required when state is mirror, forbidden otherwise.",
+				MarkdownDescription: "Mirroring configuration. Required when state is mirror, forbidden otherwise.",
+			},
+		},
 	}
 }
 
@@ -58,5 +185,1424 @@ type RepositoryModel struct {
 	Description types.String `tfsdk:"description"`
 	Name        types.String `tfsdk:"name"`
 	Namespace   types.String `tfsdk:"namespace"`
+	State       types.String `tfsdk:"state"`
 	Visibility  types.String `tfsdk:"visibility"`
+	Mirror      MirrorValue  `tfsdk:"mirror"`
+}
+
+var _ basetypes.ObjectTypable = MirrorType{}
+
+type MirrorType struct {
+	basetypes.ObjectType
+}
+
+func (t MirrorType) Equal(o attr.Type) bool {
+	other, ok := o.(MirrorType)
+
+	if !ok {
+		return false
+	}
+
+	return t.ObjectType.Equal(other.ObjectType)
+}
+
+func (t MirrorType) String() string {
+	return "MirrorType"
+}
+
+func (t MirrorType) ValueFromObject(ctx context.Context, in basetypes.ObjectValue) (basetypes.ObjectValuable, diag.Diagnostics) {
+	var diags diag.Diagnostics
+
+	attributes := in.Attributes()
+
+	httpProxyAttribute, ok := attributes["http_proxy"]
+
+	if !ok {
+		diags.AddError(
+			"Attribute Missing",
+			`http_proxy is missing from object`)
+
+		return nil, diags
+	}
+
+	httpProxyVal, ok := httpProxyAttribute.(basetypes.StringValue)
+
+	if !ok {
+		diags.AddError(
+			"Attribute Wrong Type",
+			fmt.Sprintf(`http_proxy expected to be basetypes.StringValue, was: %T`, httpProxyAttribute))
+	}
+
+	httpsProxyAttribute, ok := attributes["https_proxy"]
+
+	if !ok {
+		diags.AddError(
+			"Attribute Missing",
+			`https_proxy is missing from object`)
+
+		return nil, diags
+	}
+
+	httpsProxyVal, ok := httpsProxyAttribute.(basetypes.StringValue)
+
+	if !ok {
+		diags.AddError(
+			"Attribute Wrong Type",
+			fmt.Sprintf(`https_proxy expected to be basetypes.StringValue, was: %T`, httpsProxyAttribute))
+	}
+
+	noProxyAttribute, ok := attributes["no_proxy"]
+
+	if !ok {
+		diags.AddError(
+			"Attribute Missing",
+			`no_proxy is missing from object`)
+
+		return nil, diags
+	}
+
+	noProxyVal, ok := noProxyAttribute.(basetypes.StringValue)
+
+	if !ok {
+		diags.AddError(
+			"Attribute Wrong Type",
+			fmt.Sprintf(`no_proxy expected to be basetypes.StringValue, was: %T`, noProxyAttribute))
+	}
+
+	robotUserAttribute, ok := attributes["robot_user"]
+
+	if !ok {
+		diags.AddError(
+			"Attribute Missing",
+			`robot_user is missing from object`)
+
+		return nil, diags
+	}
+
+	robotUserVal, ok := robotUserAttribute.(basetypes.StringValue)
+
+	if !ok {
+		diags.AddError(
+			"Attribute Wrong Type",
+			fmt.Sprintf(`robot_user expected to be basetypes.StringValue, was: %T`, robotUserAttribute))
+	}
+
+	rootRuleAttribute, ok := attributes["root_rule"]
+
+	if !ok {
+		diags.AddError(
+			"Attribute Missing",
+			`root_rule is missing from object`)
+
+		return nil, diags
+	}
+
+	rootRuleVal, ok := rootRuleAttribute.(basetypes.ObjectValue)
+
+	if !ok {
+		diags.AddError(
+			"Attribute Wrong Type",
+			fmt.Sprintf(`root_rule expected to be basetypes.ObjectValue, was: %T`, rootRuleAttribute))
+	}
+
+	syncIntervalAttribute, ok := attributes["sync_interval"]
+
+	if !ok {
+		diags.AddError(
+			"Attribute Missing",
+			`sync_interval is missing from object`)
+
+		return nil, diags
+	}
+
+	syncIntervalVal, ok := syncIntervalAttribute.(basetypes.Int64Value)
+
+	if !ok {
+		diags.AddError(
+			"Attribute Wrong Type",
+			fmt.Sprintf(`sync_interval expected to be basetypes.Int64Value, was: %T`, syncIntervalAttribute))
+	}
+
+	syncOnChangeAttribute, ok := attributes["sync_on_change"]
+
+	if !ok {
+		diags.AddError(
+			"Attribute Missing",
+			`sync_on_change is missing from object`)
+
+		return nil, diags
+	}
+
+	syncOnChangeVal, ok := syncOnChangeAttribute.(basetypes.BoolValue)
+
+	if !ok {
+		diags.AddError(
+			"Attribute Wrong Type",
+			fmt.Sprintf(`sync_on_change expected to be basetypes.BoolValue, was: %T`, syncOnChangeAttribute))
+	}
+
+	syncTimeoutAttribute, ok := attributes["sync_timeout"]
+
+	if !ok {
+		diags.AddError(
+			"Attribute Missing",
+			`sync_timeout is missing from object`)
+
+		return nil, diags
+	}
+
+	syncTimeoutVal, ok := syncTimeoutAttribute.(basetypes.Int64Value)
+
+	if !ok {
+		diags.AddError(
+			"Attribute Wrong Type",
+			fmt.Sprintf(`sync_timeout expected to be basetypes.Int64Value, was: %T`, syncTimeoutAttribute))
+	}
+
+	unsignedImagesAttribute, ok := attributes["unsigned_images"]
+
+	if !ok {
+		diags.AddError(
+			"Attribute Missing",
+			`unsigned_images is missing from object`)
+
+		return nil, diags
+	}
+
+	unsignedImagesVal, ok := unsignedImagesAttribute.(basetypes.BoolValue)
+
+	if !ok {
+		diags.AddError(
+			"Attribute Wrong Type",
+			fmt.Sprintf(`unsigned_images expected to be basetypes.BoolValue, was: %T`, unsignedImagesAttribute))
+	}
+
+	upstreamPasswordAttribute, ok := attributes["upstream_password"]
+
+	if !ok {
+		diags.AddError(
+			"Attribute Missing",
+			`upstream_password is missing from object`)
+
+		return nil, diags
+	}
+
+	upstreamPasswordVal, ok := upstreamPasswordAttribute.(basetypes.StringValue)
+
+	if !ok {
+		diags.AddError(
+			"Attribute Wrong Type",
+			fmt.Sprintf(`upstream_password expected to be basetypes.StringValue, was: %T`, upstreamPasswordAttribute))
+	}
+
+	upstreamRepositoryAttribute, ok := attributes["upstream_repository"]
+
+	if !ok {
+		diags.AddError(
+			"Attribute Missing",
+			`upstream_repository is missing from object`)
+
+		return nil, diags
+	}
+
+	upstreamRepositoryVal, ok := upstreamRepositoryAttribute.(basetypes.StringValue)
+
+	if !ok {
+		diags.AddError(
+			"Attribute Wrong Type",
+			fmt.Sprintf(`upstream_repository expected to be basetypes.StringValue, was: %T`, upstreamRepositoryAttribute))
+	}
+
+	upstreamUsernameAttribute, ok := attributes["upstream_username"]
+
+	if !ok {
+		diags.AddError(
+			"Attribute Missing",
+			`upstream_username is missing from object`)
+
+		return nil, diags
+	}
+
+	upstreamUsernameVal, ok := upstreamUsernameAttribute.(basetypes.StringValue)
+
+	if !ok {
+		diags.AddError(
+			"Attribute Wrong Type",
+			fmt.Sprintf(`upstream_username expected to be basetypes.StringValue, was: %T`, upstreamUsernameAttribute))
+	}
+
+	verifyTlsAttribute, ok := attributes["verify_tls"]
+
+	if !ok {
+		diags.AddError(
+			"Attribute Missing",
+			`verify_tls is missing from object`)
+
+		return nil, diags
+	}
+
+	verifyTlsVal, ok := verifyTlsAttribute.(basetypes.BoolValue)
+
+	if !ok {
+		diags.AddError(
+			"Attribute Wrong Type",
+			fmt.Sprintf(`verify_tls expected to be basetypes.BoolValue, was: %T`, verifyTlsAttribute))
+	}
+
+	if diags.HasError() {
+		return nil, diags
+	}
+
+	return MirrorValue{
+		HttpProxy:          httpProxyVal,
+		HttpsProxy:         httpsProxyVal,
+		NoProxy:            noProxyVal,
+		RobotUser:          robotUserVal,
+		RootRule:           rootRuleVal,
+		SyncInterval:       syncIntervalVal,
+		SyncOnChange:       syncOnChangeVal,
+		SyncTimeout:        syncTimeoutVal,
+		UnsignedImages:     unsignedImagesVal,
+		UpstreamPassword:   upstreamPasswordVal,
+		UpstreamRepository: upstreamRepositoryVal,
+		UpstreamUsername:   upstreamUsernameVal,
+		VerifyTls:          verifyTlsVal,
+		state:              attr.ValueStateKnown,
+	}, diags
+}
+
+func NewMirrorValueNull() MirrorValue {
+	return MirrorValue{
+		state: attr.ValueStateNull,
+	}
+}
+
+func NewMirrorValueUnknown() MirrorValue {
+	return MirrorValue{
+		state: attr.ValueStateUnknown,
+	}
+}
+
+func NewMirrorValue(attributeTypes map[string]attr.Type, attributes map[string]attr.Value) (MirrorValue, diag.Diagnostics) {
+	var diags diag.Diagnostics
+
+	// Reference: https://github.com/hashicorp/terraform-plugin-framework/issues/521
+	ctx := context.Background()
+
+	for name, attributeType := range attributeTypes {
+		attribute, ok := attributes[name]
+
+		if !ok {
+			diags.AddError(
+				"Missing MirrorValue Attribute Value",
+				"While creating a MirrorValue value, a missing attribute value was detected. "+
+					"A MirrorValue must contain values for all attributes, even if null or unknown. "+
+					"This is always an issue with the provider and should be reported to the provider developers.\n\n"+
+					fmt.Sprintf("MirrorValue Attribute Name (%s) Expected Type: %s", name, attributeType.String()),
+			)
+
+			continue
+		}
+
+		if !attributeType.Equal(attribute.Type(ctx)) {
+			diags.AddError(
+				"Invalid MirrorValue Attribute Type",
+				"While creating a MirrorValue value, an invalid attribute value was detected. "+
+					"A MirrorValue must use a matching attribute type for the value. "+
+					"This is always an issue with the provider and should be reported to the provider developers.\n\n"+
+					fmt.Sprintf("MirrorValue Attribute Name (%s) Expected Type: %s\n", name, attributeType.String())+
+					fmt.Sprintf("MirrorValue Attribute Name (%s) Given Type: %s", name, attribute.Type(ctx)),
+			)
+		}
+	}
+
+	for name := range attributes {
+		_, ok := attributeTypes[name]
+
+		if !ok {
+			diags.AddError(
+				"Extra MirrorValue Attribute Value",
+				"While creating a MirrorValue value, an extra attribute value was detected. "+
+					"A MirrorValue must not contain values beyond the expected attribute types. "+
+					"This is always an issue with the provider and should be reported to the provider developers.\n\n"+
+					fmt.Sprintf("Extra MirrorValue Attribute Name: %s", name),
+			)
+		}
+	}
+
+	if diags.HasError() {
+		return NewMirrorValueUnknown(), diags
+	}
+
+	httpProxyAttribute, ok := attributes["http_proxy"]
+
+	if !ok {
+		diags.AddError(
+			"Attribute Missing",
+			`http_proxy is missing from object`)
+
+		return NewMirrorValueUnknown(), diags
+	}
+
+	httpProxyVal, ok := httpProxyAttribute.(basetypes.StringValue)
+
+	if !ok {
+		diags.AddError(
+			"Attribute Wrong Type",
+			fmt.Sprintf(`http_proxy expected to be basetypes.StringValue, was: %T`, httpProxyAttribute))
+	}
+
+	httpsProxyAttribute, ok := attributes["https_proxy"]
+
+	if !ok {
+		diags.AddError(
+			"Attribute Missing",
+			`https_proxy is missing from object`)
+
+		return NewMirrorValueUnknown(), diags
+	}
+
+	httpsProxyVal, ok := httpsProxyAttribute.(basetypes.StringValue)
+
+	if !ok {
+		diags.AddError(
+			"Attribute Wrong Type",
+			fmt.Sprintf(`https_proxy expected to be basetypes.StringValue, was: %T`, httpsProxyAttribute))
+	}
+
+	noProxyAttribute, ok := attributes["no_proxy"]
+
+	if !ok {
+		diags.AddError(
+			"Attribute Missing",
+			`no_proxy is missing from object`)
+
+		return NewMirrorValueUnknown(), diags
+	}
+
+	noProxyVal, ok := noProxyAttribute.(basetypes.StringValue)
+
+	if !ok {
+		diags.AddError(
+			"Attribute Wrong Type",
+			fmt.Sprintf(`no_proxy expected to be basetypes.StringValue, was: %T`, noProxyAttribute))
+	}
+
+	robotUserAttribute, ok := attributes["robot_user"]
+
+	if !ok {
+		diags.AddError(
+			"Attribute Missing",
+			`robot_user is missing from object`)
+
+		return NewMirrorValueUnknown(), diags
+	}
+
+	robotUserVal, ok := robotUserAttribute.(basetypes.StringValue)
+
+	if !ok {
+		diags.AddError(
+			"Attribute Wrong Type",
+			fmt.Sprintf(`robot_user expected to be basetypes.StringValue, was: %T`, robotUserAttribute))
+	}
+
+	rootRuleAttribute, ok := attributes["root_rule"]
+
+	if !ok {
+		diags.AddError(
+			"Attribute Missing",
+			`root_rule is missing from object`)
+
+		return NewMirrorValueUnknown(), diags
+	}
+
+	rootRuleVal, ok := rootRuleAttribute.(basetypes.ObjectValue)
+
+	if !ok {
+		diags.AddError(
+			"Attribute Wrong Type",
+			fmt.Sprintf(`root_rule expected to be basetypes.ObjectValue, was: %T`, rootRuleAttribute))
+	}
+
+	syncIntervalAttribute, ok := attributes["sync_interval"]
+
+	if !ok {
+		diags.AddError(
+			"Attribute Missing",
+			`sync_interval is missing from object`)
+
+		return NewMirrorValueUnknown(), diags
+	}
+
+	syncIntervalVal, ok := syncIntervalAttribute.(basetypes.Int64Value)
+
+	if !ok {
+		diags.AddError(
+			"Attribute Wrong Type",
+			fmt.Sprintf(`sync_interval expected to be basetypes.Int64Value, was: %T`, syncIntervalAttribute))
+	}
+
+	syncOnChangeAttribute, ok := attributes["sync_on_change"]
+
+	if !ok {
+		diags.AddError(
+			"Attribute Missing",
+			`sync_on_change is missing from object`)
+
+		return NewMirrorValueUnknown(), diags
+	}
+
+	syncOnChangeVal, ok := syncOnChangeAttribute.(basetypes.BoolValue)
+
+	if !ok {
+		diags.AddError(
+			"Attribute Wrong Type",
+			fmt.Sprintf(`sync_on_change expected to be basetypes.BoolValue, was: %T`, syncOnChangeAttribute))
+	}
+
+	syncTimeoutAttribute, ok := attributes["sync_timeout"]
+
+	if !ok {
+		diags.AddError(
+			"Attribute Missing",
+			`sync_timeout is missing from object`)
+
+		return NewMirrorValueUnknown(), diags
+	}
+
+	syncTimeoutVal, ok := syncTimeoutAttribute.(basetypes.Int64Value)
+
+	if !ok {
+		diags.AddError(
+			"Attribute Wrong Type",
+			fmt.Sprintf(`sync_timeout expected to be basetypes.Int64Value, was: %T`, syncTimeoutAttribute))
+	}
+
+	unsignedImagesAttribute, ok := attributes["unsigned_images"]
+
+	if !ok {
+		diags.AddError(
+			"Attribute Missing",
+			`unsigned_images is missing from object`)
+
+		return NewMirrorValueUnknown(), diags
+	}
+
+	unsignedImagesVal, ok := unsignedImagesAttribute.(basetypes.BoolValue)
+
+	if !ok {
+		diags.AddError(
+			"Attribute Wrong Type",
+			fmt.Sprintf(`unsigned_images expected to be basetypes.BoolValue, was: %T`, unsignedImagesAttribute))
+	}
+
+	upstreamPasswordAttribute, ok := attributes["upstream_password"]
+
+	if !ok {
+		diags.AddError(
+			"Attribute Missing",
+			`upstream_password is missing from object`)
+
+		return NewMirrorValueUnknown(), diags
+	}
+
+	upstreamPasswordVal, ok := upstreamPasswordAttribute.(basetypes.StringValue)
+
+	if !ok {
+		diags.AddError(
+			"Attribute Wrong Type",
+			fmt.Sprintf(`upstream_password expected to be basetypes.StringValue, was: %T`, upstreamPasswordAttribute))
+	}
+
+	upstreamRepositoryAttribute, ok := attributes["upstream_repository"]
+
+	if !ok {
+		diags.AddError(
+			"Attribute Missing",
+			`upstream_repository is missing from object`)
+
+		return NewMirrorValueUnknown(), diags
+	}
+
+	upstreamRepositoryVal, ok := upstreamRepositoryAttribute.(basetypes.StringValue)
+
+	if !ok {
+		diags.AddError(
+			"Attribute Wrong Type",
+			fmt.Sprintf(`upstream_repository expected to be basetypes.StringValue, was: %T`, upstreamRepositoryAttribute))
+	}
+
+	upstreamUsernameAttribute, ok := attributes["upstream_username"]
+
+	if !ok {
+		diags.AddError(
+			"Attribute Missing",
+			`upstream_username is missing from object`)
+
+		return NewMirrorValueUnknown(), diags
+	}
+
+	upstreamUsernameVal, ok := upstreamUsernameAttribute.(basetypes.StringValue)
+
+	if !ok {
+		diags.AddError(
+			"Attribute Wrong Type",
+			fmt.Sprintf(`upstream_username expected to be basetypes.StringValue, was: %T`, upstreamUsernameAttribute))
+	}
+
+	verifyTlsAttribute, ok := attributes["verify_tls"]
+
+	if !ok {
+		diags.AddError(
+			"Attribute Missing",
+			`verify_tls is missing from object`)
+
+		return NewMirrorValueUnknown(), diags
+	}
+
+	verifyTlsVal, ok := verifyTlsAttribute.(basetypes.BoolValue)
+
+	if !ok {
+		diags.AddError(
+			"Attribute Wrong Type",
+			fmt.Sprintf(`verify_tls expected to be basetypes.BoolValue, was: %T`, verifyTlsAttribute))
+	}
+
+	if diags.HasError() {
+		return NewMirrorValueUnknown(), diags
+	}
+
+	return MirrorValue{
+		HttpProxy:          httpProxyVal,
+		HttpsProxy:         httpsProxyVal,
+		NoProxy:            noProxyVal,
+		RobotUser:          robotUserVal,
+		RootRule:           rootRuleVal,
+		SyncInterval:       syncIntervalVal,
+		SyncOnChange:       syncOnChangeVal,
+		SyncTimeout:        syncTimeoutVal,
+		UnsignedImages:     unsignedImagesVal,
+		UpstreamPassword:   upstreamPasswordVal,
+		UpstreamRepository: upstreamRepositoryVal,
+		UpstreamUsername:   upstreamUsernameVal,
+		VerifyTls:          verifyTlsVal,
+		state:              attr.ValueStateKnown,
+	}, diags
+}
+
+func NewMirrorValueMust(attributeTypes map[string]attr.Type, attributes map[string]attr.Value) MirrorValue {
+	object, diags := NewMirrorValue(attributeTypes, attributes)
+
+	if diags.HasError() {
+		// This could potentially be added to the diag package.
+		diagsStrings := make([]string, 0, len(diags))
+
+		for _, diagnostic := range diags {
+			diagsStrings = append(diagsStrings, fmt.Sprintf(
+				"%s | %s | %s",
+				diagnostic.Severity(),
+				diagnostic.Summary(),
+				diagnostic.Detail()))
+		}
+
+		panic("NewMirrorValueMust received error(s): " + strings.Join(diagsStrings, "\n"))
+	}
+
+	return object
+}
+
+func (t MirrorType) ValueFromTerraform(ctx context.Context, in tftypes.Value) (attr.Value, error) {
+	if in.Type() == nil {
+		return NewMirrorValueNull(), nil
+	}
+
+	if !in.Type().Equal(t.TerraformType(ctx)) {
+		return nil, fmt.Errorf("expected %s, got %s", t.TerraformType(ctx), in.Type())
+	}
+
+	if !in.IsKnown() {
+		return NewMirrorValueUnknown(), nil
+	}
+
+	if in.IsNull() {
+		return NewMirrorValueNull(), nil
+	}
+
+	attributes := map[string]attr.Value{}
+
+	val := map[string]tftypes.Value{}
+
+	err := in.As(&val)
+
+	if err != nil {
+		return nil, err
+	}
+
+	for k, v := range val {
+		a, err := t.AttrTypes[k].ValueFromTerraform(ctx, v)
+
+		if err != nil {
+			return nil, err
+		}
+
+		attributes[k] = a
+	}
+
+	return NewMirrorValueMust(MirrorValue{}.AttributeTypes(ctx), attributes), nil
+}
+
+func (t MirrorType) ValueType(ctx context.Context) attr.Value {
+	return MirrorValue{}
+}
+
+var _ basetypes.ObjectValuable = MirrorValue{}
+
+type MirrorValue struct {
+	HttpProxy          basetypes.StringValue `tfsdk:"http_proxy"`
+	HttpsProxy         basetypes.StringValue `tfsdk:"https_proxy"`
+	NoProxy            basetypes.StringValue `tfsdk:"no_proxy"`
+	RobotUser          basetypes.StringValue `tfsdk:"robot_user"`
+	RootRule           basetypes.ObjectValue `tfsdk:"root_rule"`
+	SyncInterval       basetypes.Int64Value  `tfsdk:"sync_interval"`
+	SyncOnChange       basetypes.BoolValue   `tfsdk:"sync_on_change"`
+	SyncTimeout        basetypes.Int64Value  `tfsdk:"sync_timeout"`
+	UnsignedImages     basetypes.BoolValue   `tfsdk:"unsigned_images"`
+	UpstreamPassword   basetypes.StringValue `tfsdk:"upstream_password"`
+	UpstreamRepository basetypes.StringValue `tfsdk:"upstream_repository"`
+	UpstreamUsername   basetypes.StringValue `tfsdk:"upstream_username"`
+	VerifyTls          basetypes.BoolValue   `tfsdk:"verify_tls"`
+	state              attr.ValueState
+}
+
+func (v MirrorValue) ToTerraformValue(ctx context.Context) (tftypes.Value, error) {
+	attrTypes := make(map[string]tftypes.Type, 13)
+
+	var val tftypes.Value
+	var err error
+
+	attrTypes["http_proxy"] = basetypes.StringType{}.TerraformType(ctx)
+	attrTypes["https_proxy"] = basetypes.StringType{}.TerraformType(ctx)
+	attrTypes["no_proxy"] = basetypes.StringType{}.TerraformType(ctx)
+	attrTypes["robot_user"] = basetypes.StringType{}.TerraformType(ctx)
+	attrTypes["root_rule"] = basetypes.ObjectType{
+		AttrTypes: RootRuleValue{}.AttributeTypes(ctx),
+	}.TerraformType(ctx)
+	attrTypes["sync_interval"] = basetypes.Int64Type{}.TerraformType(ctx)
+	attrTypes["sync_on_change"] = basetypes.BoolType{}.TerraformType(ctx)
+	attrTypes["sync_timeout"] = basetypes.Int64Type{}.TerraformType(ctx)
+	attrTypes["unsigned_images"] = basetypes.BoolType{}.TerraformType(ctx)
+	attrTypes["upstream_password"] = basetypes.StringType{}.TerraformType(ctx)
+	attrTypes["upstream_repository"] = basetypes.StringType{}.TerraformType(ctx)
+	attrTypes["upstream_username"] = basetypes.StringType{}.TerraformType(ctx)
+	attrTypes["verify_tls"] = basetypes.BoolType{}.TerraformType(ctx)
+
+	objectType := tftypes.Object{AttributeTypes: attrTypes}
+
+	switch v.state {
+	case attr.ValueStateKnown:
+		vals := make(map[string]tftypes.Value, 13)
+
+		val, err = v.HttpProxy.ToTerraformValue(ctx)
+
+		if err != nil {
+			return tftypes.NewValue(objectType, tftypes.UnknownValue), err
+		}
+
+		vals["http_proxy"] = val
+
+		val, err = v.HttpsProxy.ToTerraformValue(ctx)
+
+		if err != nil {
+			return tftypes.NewValue(objectType, tftypes.UnknownValue), err
+		}
+
+		vals["https_proxy"] = val
+
+		val, err = v.NoProxy.ToTerraformValue(ctx)
+
+		if err != nil {
+			return tftypes.NewValue(objectType, tftypes.UnknownValue), err
+		}
+
+		vals["no_proxy"] = val
+
+		val, err = v.RobotUser.ToTerraformValue(ctx)
+
+		if err != nil {
+			return tftypes.NewValue(objectType, tftypes.UnknownValue), err
+		}
+
+		vals["robot_user"] = val
+
+		val, err = v.RootRule.ToTerraformValue(ctx)
+
+		if err != nil {
+			return tftypes.NewValue(objectType, tftypes.UnknownValue), err
+		}
+
+		vals["root_rule"] = val
+
+		val, err = v.SyncInterval.ToTerraformValue(ctx)
+
+		if err != nil {
+			return tftypes.NewValue(objectType, tftypes.UnknownValue), err
+		}
+
+		vals["sync_interval"] = val
+
+		val, err = v.SyncOnChange.ToTerraformValue(ctx)
+
+		if err != nil {
+			return tftypes.NewValue(objectType, tftypes.UnknownValue), err
+		}
+
+		vals["sync_on_change"] = val
+
+		val, err = v.SyncTimeout.ToTerraformValue(ctx)
+
+		if err != nil {
+			return tftypes.NewValue(objectType, tftypes.UnknownValue), err
+		}
+
+		vals["sync_timeout"] = val
+
+		val, err = v.UnsignedImages.ToTerraformValue(ctx)
+
+		if err != nil {
+			return tftypes.NewValue(objectType, tftypes.UnknownValue), err
+		}
+
+		vals["unsigned_images"] = val
+
+		val, err = v.UpstreamPassword.ToTerraformValue(ctx)
+
+		if err != nil {
+			return tftypes.NewValue(objectType, tftypes.UnknownValue), err
+		}
+
+		vals["upstream_password"] = val
+
+		val, err = v.UpstreamRepository.ToTerraformValue(ctx)
+
+		if err != nil {
+			return tftypes.NewValue(objectType, tftypes.UnknownValue), err
+		}
+
+		vals["upstream_repository"] = val
+
+		val, err = v.UpstreamUsername.ToTerraformValue(ctx)
+
+		if err != nil {
+			return tftypes.NewValue(objectType, tftypes.UnknownValue), err
+		}
+
+		vals["upstream_username"] = val
+
+		val, err = v.VerifyTls.ToTerraformValue(ctx)
+
+		if err != nil {
+			return tftypes.NewValue(objectType, tftypes.UnknownValue), err
+		}
+
+		vals["verify_tls"] = val
+
+		if err := tftypes.ValidateValue(objectType, vals); err != nil {
+			return tftypes.NewValue(objectType, tftypes.UnknownValue), err
+		}
+
+		return tftypes.NewValue(objectType, vals), nil
+	case attr.ValueStateNull:
+		return tftypes.NewValue(objectType, nil), nil
+	case attr.ValueStateUnknown:
+		return tftypes.NewValue(objectType, tftypes.UnknownValue), nil
+	default:
+		panic(fmt.Sprintf("unhandled Object state in ToTerraformValue: %s", v.state))
+	}
+}
+
+func (v MirrorValue) IsNull() bool {
+	return v.state == attr.ValueStateNull
+}
+
+func (v MirrorValue) IsUnknown() bool {
+	return v.state == attr.ValueStateUnknown
+}
+
+func (v MirrorValue) String() string {
+	return "MirrorValue"
+}
+
+func (v MirrorValue) ToObjectValue(ctx context.Context) (basetypes.ObjectValue, diag.Diagnostics) {
+	var diags diag.Diagnostics
+
+	var rootRule basetypes.ObjectValue
+
+	if v.RootRule.IsNull() {
+		rootRule = types.ObjectNull(
+			RootRuleValue{}.AttributeTypes(ctx),
+		)
+	}
+
+	if v.RootRule.IsUnknown() {
+		rootRule = types.ObjectUnknown(
+			RootRuleValue{}.AttributeTypes(ctx),
+		)
+	}
+
+	if !v.RootRule.IsNull() && !v.RootRule.IsUnknown() {
+		rootRule = types.ObjectValueMust(
+			RootRuleValue{}.AttributeTypes(ctx),
+			v.RootRule.Attributes(),
+		)
+	}
+
+	attributeTypes := map[string]attr.Type{
+		"http_proxy":  basetypes.StringType{},
+		"https_proxy": basetypes.StringType{},
+		"no_proxy":    basetypes.StringType{},
+		"robot_user":  basetypes.StringType{},
+		"root_rule": basetypes.ObjectType{
+			AttrTypes: RootRuleValue{}.AttributeTypes(ctx),
+		},
+		"sync_interval":       basetypes.Int64Type{},
+		"sync_on_change":      basetypes.BoolType{},
+		"sync_timeout":        basetypes.Int64Type{},
+		"unsigned_images":     basetypes.BoolType{},
+		"upstream_password":   basetypes.StringType{},
+		"upstream_repository": basetypes.StringType{},
+		"upstream_username":   basetypes.StringType{},
+		"verify_tls":          basetypes.BoolType{},
+	}
+
+	if v.IsNull() {
+		return types.ObjectNull(attributeTypes), diags
+	}
+
+	if v.IsUnknown() {
+		return types.ObjectUnknown(attributeTypes), diags
+	}
+
+	objVal, diags := types.ObjectValue(
+		attributeTypes,
+		map[string]attr.Value{
+			"http_proxy":          v.HttpProxy,
+			"https_proxy":         v.HttpsProxy,
+			"no_proxy":            v.NoProxy,
+			"robot_user":          v.RobotUser,
+			"root_rule":           rootRule,
+			"sync_interval":       v.SyncInterval,
+			"sync_on_change":      v.SyncOnChange,
+			"sync_timeout":        v.SyncTimeout,
+			"unsigned_images":     v.UnsignedImages,
+			"upstream_password":   v.UpstreamPassword,
+			"upstream_repository": v.UpstreamRepository,
+			"upstream_username":   v.UpstreamUsername,
+			"verify_tls":          v.VerifyTls,
+		})
+
+	return objVal, diags
+}
+
+func (v MirrorValue) Equal(o attr.Value) bool {
+	other, ok := o.(MirrorValue)
+
+	if !ok {
+		return false
+	}
+
+	if v.state != other.state {
+		return false
+	}
+
+	if v.state != attr.ValueStateKnown {
+		return true
+	}
+
+	if !v.HttpProxy.Equal(other.HttpProxy) {
+		return false
+	}
+
+	if !v.HttpsProxy.Equal(other.HttpsProxy) {
+		return false
+	}
+
+	if !v.NoProxy.Equal(other.NoProxy) {
+		return false
+	}
+
+	if !v.RobotUser.Equal(other.RobotUser) {
+		return false
+	}
+
+	if !v.RootRule.Equal(other.RootRule) {
+		return false
+	}
+
+	if !v.SyncInterval.Equal(other.SyncInterval) {
+		return false
+	}
+
+	if !v.SyncOnChange.Equal(other.SyncOnChange) {
+		return false
+	}
+
+	if !v.SyncTimeout.Equal(other.SyncTimeout) {
+		return false
+	}
+
+	if !v.UnsignedImages.Equal(other.UnsignedImages) {
+		return false
+	}
+
+	if !v.UpstreamPassword.Equal(other.UpstreamPassword) {
+		return false
+	}
+
+	if !v.UpstreamRepository.Equal(other.UpstreamRepository) {
+		return false
+	}
+
+	if !v.UpstreamUsername.Equal(other.UpstreamUsername) {
+		return false
+	}
+
+	if !v.VerifyTls.Equal(other.VerifyTls) {
+		return false
+	}
+
+	return true
+}
+
+func (v MirrorValue) Type(ctx context.Context) attr.Type {
+	return MirrorType{
+		basetypes.ObjectType{
+			AttrTypes: v.AttributeTypes(ctx),
+		},
+	}
+}
+
+func (v MirrorValue) AttributeTypes(ctx context.Context) map[string]attr.Type {
+	return map[string]attr.Type{
+		"http_proxy":  basetypes.StringType{},
+		"https_proxy": basetypes.StringType{},
+		"no_proxy":    basetypes.StringType{},
+		"robot_user":  basetypes.StringType{},
+		"root_rule": basetypes.ObjectType{
+			AttrTypes: RootRuleValue{}.AttributeTypes(ctx),
+		},
+		"sync_interval":       basetypes.Int64Type{},
+		"sync_on_change":      basetypes.BoolType{},
+		"sync_timeout":        basetypes.Int64Type{},
+		"unsigned_images":     basetypes.BoolType{},
+		"upstream_password":   basetypes.StringType{},
+		"upstream_repository": basetypes.StringType{},
+		"upstream_username":   basetypes.StringType{},
+		"verify_tls":          basetypes.BoolType{},
+	}
+}
+
+var _ basetypes.ObjectTypable = RootRuleType{}
+
+type RootRuleType struct {
+	basetypes.ObjectType
+}
+
+func (t RootRuleType) Equal(o attr.Type) bool {
+	other, ok := o.(RootRuleType)
+
+	if !ok {
+		return false
+	}
+
+	return t.ObjectType.Equal(other.ObjectType)
+}
+
+func (t RootRuleType) String() string {
+	return "RootRuleType"
+}
+
+func (t RootRuleType) ValueFromObject(ctx context.Context, in basetypes.ObjectValue) (basetypes.ObjectValuable, diag.Diagnostics) {
+	var diags diag.Diagnostics
+
+	attributes := in.Attributes()
+
+	ruleKindAttribute, ok := attributes["rule_kind"]
+
+	if !ok {
+		diags.AddError(
+			"Attribute Missing",
+			`rule_kind is missing from object`)
+
+		return nil, diags
+	}
+
+	ruleKindVal, ok := ruleKindAttribute.(basetypes.StringValue)
+
+	if !ok {
+		diags.AddError(
+			"Attribute Wrong Type",
+			fmt.Sprintf(`rule_kind expected to be basetypes.StringValue, was: %T`, ruleKindAttribute))
+	}
+
+	ruleValueAttribute, ok := attributes["rule_value"]
+
+	if !ok {
+		diags.AddError(
+			"Attribute Missing",
+			`rule_value is missing from object`)
+
+		return nil, diags
+	}
+
+	ruleValueVal, ok := ruleValueAttribute.(basetypes.ListValue)
+
+	if !ok {
+		diags.AddError(
+			"Attribute Wrong Type",
+			fmt.Sprintf(`rule_value expected to be basetypes.ListValue, was: %T`, ruleValueAttribute))
+	}
+
+	if diags.HasError() {
+		return nil, diags
+	}
+
+	return RootRuleValue{
+		RuleKind:  ruleKindVal,
+		RuleValue: ruleValueVal,
+		state:     attr.ValueStateKnown,
+	}, diags
+}
+
+func NewRootRuleValueNull() RootRuleValue {
+	return RootRuleValue{
+		state: attr.ValueStateNull,
+	}
+}
+
+func NewRootRuleValueUnknown() RootRuleValue {
+	return RootRuleValue{
+		state: attr.ValueStateUnknown,
+	}
+}
+
+func NewRootRuleValue(attributeTypes map[string]attr.Type, attributes map[string]attr.Value) (RootRuleValue, diag.Diagnostics) {
+	var diags diag.Diagnostics
+
+	// Reference: https://github.com/hashicorp/terraform-plugin-framework/issues/521
+	ctx := context.Background()
+
+	for name, attributeType := range attributeTypes {
+		attribute, ok := attributes[name]
+
+		if !ok {
+			diags.AddError(
+				"Missing RootRuleValue Attribute Value",
+				"While creating a RootRuleValue value, a missing attribute value was detected. "+
+					"A RootRuleValue must contain values for all attributes, even if null or unknown. "+
+					"This is always an issue with the provider and should be reported to the provider developers.\n\n"+
+					fmt.Sprintf("RootRuleValue Attribute Name (%s) Expected Type: %s", name, attributeType.String()),
+			)
+
+			continue
+		}
+
+		if !attributeType.Equal(attribute.Type(ctx)) {
+			diags.AddError(
+				"Invalid RootRuleValue Attribute Type",
+				"While creating a RootRuleValue value, an invalid attribute value was detected. "+
+					"A RootRuleValue must use a matching attribute type for the value. "+
+					"This is always an issue with the provider and should be reported to the provider developers.\n\n"+
+					fmt.Sprintf("RootRuleValue Attribute Name (%s) Expected Type: %s\n", name, attributeType.String())+
+					fmt.Sprintf("RootRuleValue Attribute Name (%s) Given Type: %s", name, attribute.Type(ctx)),
+			)
+		}
+	}
+
+	for name := range attributes {
+		_, ok := attributeTypes[name]
+
+		if !ok {
+			diags.AddError(
+				"Extra RootRuleValue Attribute Value",
+				"While creating a RootRuleValue value, an extra attribute value was detected. "+
+					"A RootRuleValue must not contain values beyond the expected attribute types. "+
+					"This is always an issue with the provider and should be reported to the provider developers.\n\n"+
+					fmt.Sprintf("Extra RootRuleValue Attribute Name: %s", name),
+			)
+		}
+	}
+
+	if diags.HasError() {
+		return NewRootRuleValueUnknown(), diags
+	}
+
+	ruleKindAttribute, ok := attributes["rule_kind"]
+
+	if !ok {
+		diags.AddError(
+			"Attribute Missing",
+			`rule_kind is missing from object`)
+
+		return NewRootRuleValueUnknown(), diags
+	}
+
+	ruleKindVal, ok := ruleKindAttribute.(basetypes.StringValue)
+
+	if !ok {
+		diags.AddError(
+			"Attribute Wrong Type",
+			fmt.Sprintf(`rule_kind expected to be basetypes.StringValue, was: %T`, ruleKindAttribute))
+	}
+
+	ruleValueAttribute, ok := attributes["rule_value"]
+
+	if !ok {
+		diags.AddError(
+			"Attribute Missing",
+			`rule_value is missing from object`)
+
+		return NewRootRuleValueUnknown(), diags
+	}
+
+	ruleValueVal, ok := ruleValueAttribute.(basetypes.ListValue)
+
+	if !ok {
+		diags.AddError(
+			"Attribute Wrong Type",
+			fmt.Sprintf(`rule_value expected to be basetypes.ListValue, was: %T`, ruleValueAttribute))
+	}
+
+	if diags.HasError() {
+		return NewRootRuleValueUnknown(), diags
+	}
+
+	return RootRuleValue{
+		RuleKind:  ruleKindVal,
+		RuleValue: ruleValueVal,
+		state:     attr.ValueStateKnown,
+	}, diags
+}
+
+func NewRootRuleValueMust(attributeTypes map[string]attr.Type, attributes map[string]attr.Value) RootRuleValue {
+	object, diags := NewRootRuleValue(attributeTypes, attributes)
+
+	if diags.HasError() {
+		// This could potentially be added to the diag package.
+		diagsStrings := make([]string, 0, len(diags))
+
+		for _, diagnostic := range diags {
+			diagsStrings = append(diagsStrings, fmt.Sprintf(
+				"%s | %s | %s",
+				diagnostic.Severity(),
+				diagnostic.Summary(),
+				diagnostic.Detail()))
+		}
+
+		panic("NewRootRuleValueMust received error(s): " + strings.Join(diagsStrings, "\n"))
+	}
+
+	return object
+}
+
+func (t RootRuleType) ValueFromTerraform(ctx context.Context, in tftypes.Value) (attr.Value, error) {
+	if in.Type() == nil {
+		return NewRootRuleValueNull(), nil
+	}
+
+	if !in.Type().Equal(t.TerraformType(ctx)) {
+		return nil, fmt.Errorf("expected %s, got %s", t.TerraformType(ctx), in.Type())
+	}
+
+	if !in.IsKnown() {
+		return NewRootRuleValueUnknown(), nil
+	}
+
+	if in.IsNull() {
+		return NewRootRuleValueNull(), nil
+	}
+
+	attributes := map[string]attr.Value{}
+
+	val := map[string]tftypes.Value{}
+
+	err := in.As(&val)
+
+	if err != nil {
+		return nil, err
+	}
+
+	for k, v := range val {
+		a, err := t.AttrTypes[k].ValueFromTerraform(ctx, v)
+
+		if err != nil {
+			return nil, err
+		}
+
+		attributes[k] = a
+	}
+
+	return NewRootRuleValueMust(RootRuleValue{}.AttributeTypes(ctx), attributes), nil
+}
+
+func (t RootRuleType) ValueType(ctx context.Context) attr.Value {
+	return RootRuleValue{}
+}
+
+var _ basetypes.ObjectValuable = RootRuleValue{}
+
+type RootRuleValue struct {
+	RuleKind  basetypes.StringValue `tfsdk:"rule_kind"`
+	RuleValue basetypes.ListValue   `tfsdk:"rule_value"`
+	state     attr.ValueState
+}
+
+func (v RootRuleValue) ToTerraformValue(ctx context.Context) (tftypes.Value, error) {
+	attrTypes := make(map[string]tftypes.Type, 2)
+
+	var val tftypes.Value
+	var err error
+
+	attrTypes["rule_kind"] = basetypes.StringType{}.TerraformType(ctx)
+	attrTypes["rule_value"] = basetypes.ListType{
+		ElemType: types.StringType,
+	}.TerraformType(ctx)
+
+	objectType := tftypes.Object{AttributeTypes: attrTypes}
+
+	switch v.state {
+	case attr.ValueStateKnown:
+		vals := make(map[string]tftypes.Value, 2)
+
+		val, err = v.RuleKind.ToTerraformValue(ctx)
+
+		if err != nil {
+			return tftypes.NewValue(objectType, tftypes.UnknownValue), err
+		}
+
+		vals["rule_kind"] = val
+
+		val, err = v.RuleValue.ToTerraformValue(ctx)
+
+		if err != nil {
+			return tftypes.NewValue(objectType, tftypes.UnknownValue), err
+		}
+
+		vals["rule_value"] = val
+
+		if err := tftypes.ValidateValue(objectType, vals); err != nil {
+			return tftypes.NewValue(objectType, tftypes.UnknownValue), err
+		}
+
+		return tftypes.NewValue(objectType, vals), nil
+	case attr.ValueStateNull:
+		return tftypes.NewValue(objectType, nil), nil
+	case attr.ValueStateUnknown:
+		return tftypes.NewValue(objectType, tftypes.UnknownValue), nil
+	default:
+		panic(fmt.Sprintf("unhandled Object state in ToTerraformValue: %s", v.state))
+	}
+}
+
+func (v RootRuleValue) IsNull() bool {
+	return v.state == attr.ValueStateNull
+}
+
+func (v RootRuleValue) IsUnknown() bool {
+	return v.state == attr.ValueStateUnknown
+}
+
+func (v RootRuleValue) String() string {
+	return "RootRuleValue"
+}
+
+func (v RootRuleValue) ToObjectValue(ctx context.Context) (basetypes.ObjectValue, diag.Diagnostics) {
+	var diags diag.Diagnostics
+
+	var ruleValueVal basetypes.ListValue
+	switch {
+	case v.RuleValue.IsUnknown():
+		ruleValueVal = types.ListUnknown(types.StringType)
+	case v.RuleValue.IsNull():
+		ruleValueVal = types.ListNull(types.StringType)
+	default:
+		var d diag.Diagnostics
+		ruleValueVal, d = types.ListValue(types.StringType, v.RuleValue.Elements())
+		diags.Append(d...)
+	}
+
+	if diags.HasError() {
+		return types.ObjectUnknown(map[string]attr.Type{
+			"rule_kind": basetypes.StringType{},
+			"rule_value": basetypes.ListType{
+				ElemType: types.StringType,
+			},
+		}), diags
+	}
+
+	attributeTypes := map[string]attr.Type{
+		"rule_kind": basetypes.StringType{},
+		"rule_value": basetypes.ListType{
+			ElemType: types.StringType,
+		},
+	}
+
+	if v.IsNull() {
+		return types.ObjectNull(attributeTypes), diags
+	}
+
+	if v.IsUnknown() {
+		return types.ObjectUnknown(attributeTypes), diags
+	}
+
+	objVal, diags := types.ObjectValue(
+		attributeTypes,
+		map[string]attr.Value{
+			"rule_kind":  v.RuleKind,
+			"rule_value": ruleValueVal,
+		})
+
+	return objVal, diags
+}
+
+func (v RootRuleValue) Equal(o attr.Value) bool {
+	other, ok := o.(RootRuleValue)
+
+	if !ok {
+		return false
+	}
+
+	if v.state != other.state {
+		return false
+	}
+
+	if v.state != attr.ValueStateKnown {
+		return true
+	}
+
+	if !v.RuleKind.Equal(other.RuleKind) {
+		return false
+	}
+
+	if !v.RuleValue.Equal(other.RuleValue) {
+		return false
+	}
+
+	return true
+}
+
+func (v RootRuleValue) Type(ctx context.Context) attr.Type {
+	return RootRuleType{
+		basetypes.ObjectType{
+			AttrTypes: v.AttributeTypes(ctx),
+		},
+	}
+}
+
+func (v RootRuleValue) AttributeTypes(ctx context.Context) map[string]attr.Type {
+	return map[string]attr.Type{
+		"rule_kind": basetypes.StringType{},
+		"rule_value": basetypes.ListType{
+			ElemType: types.StringType,
+		},
+	}
 }
