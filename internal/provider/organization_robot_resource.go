@@ -12,6 +12,7 @@ import (
 	"fmt"
 	"io"
 	"strings"
+	"time"
 
 	"github.com/enthought/terraform-provider-quay/quay_api"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -189,13 +190,45 @@ func (r *organizationRobotResource) Delete(ctx context.Context, req resource.Del
 	orgName := data.Orgname.ValueString()
 	robotName := data.Name.ValueString()
 
-	// Delete robot
-	_, err := r.client.RobotAPI.DeleteOrgRobot(context.Background(), orgName, robotName).Execute()
-	if err != nil {
-		errDetail := handleQuayAPIError(err)
-		resp.Diagnostics.AddError("Error deleting Quay org robot", "Could not delete Quay org robot, unexpected error: "+errDetail)
-		return
+	// Delete robot. Quay deletes the repository that owns the mirror asynchronously, so
+	// the mirror record (which pins this robot) can outlive the repository for up to one
+	// garbage-collection cycle. When the platform reports the robot as still in use,
+	// retry until the GC purges the mirror record or the deadline is reached.
+	var err error
+	for attempt := 0; attempt <= robotDeleteMaxRetries; attempt++ {
+		_, err = r.client.RobotAPI.DeleteOrgRobot(context.Background(), orgName, robotName).Execute()
+		if err == nil {
+			return
+		}
+		if !isRobotInUseByMirror(err) || attempt == robotDeleteMaxRetries {
+			break
+		}
+		select {
+		case <-ctx.Done():
+			resp.Diagnostics.AddError("Error deleting Quay org robot", "Context cancelled while waiting for the mirror record to be released: "+handleQuayAPIError(err))
+			return
+		case <-time.After(robotDeleteRetryInterval):
+		}
 	}
+	errDetail := handleQuayAPIError(err)
+	resp.Diagnostics.AddError("Error deleting Quay org robot", "Could not delete Quay org robot, unexpected error: "+errDetail)
+}
+
+const (
+	// robotDeleteMaxRetries bounds the retries when Quay still reports the robot as
+	// referenced by a mirror record that is being garbage-collected.
+	robotDeleteMaxRetries = 30
+	// robotDeleteRetryInterval is the pause between retries. The repository GC worker
+	// that purges the mirror record polls roughly once a minute.
+	robotDeleteRetryInterval = 5 * time.Second
+)
+
+// isRobotInUseByMirror reports whether the robot deletion was rejected because a
+// mirror record still references the robot.
+func isRobotInUseByMirror(err error) bool {
+	apiError, ok := apiErrorModel(err)
+	return ok && apiError.GetStatus() == 400 &&
+		strings.Contains(apiError.GetDetail(), "Robot is being used by a mirror")
 }
 
 func (r *organizationRobotResource) Configure(_ context.Context, req resource.ConfigureRequest, resp *resource.ConfigureResponse) {

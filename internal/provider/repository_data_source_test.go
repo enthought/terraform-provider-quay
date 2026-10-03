@@ -39,6 +39,7 @@ data "quay_repository" "test" {
 					resource.TestCheckResourceAttr("data.quay_repository.test", "namespace", "org_repo_data"),
 					resource.TestCheckResourceAttr("data.quay_repository.test", "visibility", "private"),
 					resource.TestCheckResourceAttr("data.quay_repository.test", "description", "test"),
+					resource.TestCheckResourceAttr("data.quay_repository.test", "state", "normal"),
 				),
 			},
 		},

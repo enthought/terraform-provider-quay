@@ -3,7 +3,7 @@
 page_title: "quay_repository Data Source - quay"
 subcategory: ""
 description: |-
-  
+
 ---
 
 # quay_repository (Data Source)
@@ -35,3 +35,29 @@ data "quay_repository" "test" {
 
 - `description` (String) Markdown description
 - `visibility` (String) Repository visibility. Should be private or public.
+- `state` (String) Repository state: normal, readonly, or mirror.
+- `mirror` (Block, Read-only) Mirroring configuration (not returned when the repository is not a mirror) (see [below for nested schema](#nestedblock--mirror))
+
+<a id="nestedblock--mirror"></a>
+### Nested Schema for `mirror`
+
+Read-Only:
+
+- `http_proxy` (String) HTTP proxy URL for the upstream registry
+- `https_proxy` (String) HTTPS proxy URL for the upstream registry
+- `no_proxy` (String) No-proxy list for the upstream registry
+- `robot_user` (String) Robot account that pulls images from the upstream registry
+- `root_rule` (Attributes) Filtering rule applied to mirrored tags (see [below for nested schema](#nestedatt--mirror--root_rule))
+- `sync_interval` (Number) Interval in seconds between mirror syncs
+- `sync_timeout` (Number) Number of seconds the mirroring job may run before timing out.
+- `unsigned_images` (Boolean) Whether unsigned images are allowed
+- `upstream_repository` (String) Upstream repository reference mirrored from
+- `verify_tls` (Boolean) Whether TLS of the upstream registry is verified
+
+<a id="nestedatt--mirror--root_rule"></a>
+### Nested Schema for `mirror.root_rule`
+
+Read-Only:
+
+- `rule_kind` (String) Kind of rule, e.g. tag_glob_csv
+- `rule_value` (List of String) Values of the rule

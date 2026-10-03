@@ -86,6 +86,21 @@ func (d *repositoryDataSource) Read(ctx context.Context, req datasource.ReadRequ
 	data.Name = types.StringValue(resRepoData.Name)
 	data.Namespace = types.StringValue(resRepoData.Namespace)
 	data.Description = types.StringValue(resRepoData.Description)
+	data.State = types.StringValue(mirrorStateFromAPI(resRepoData.State))
+
+	// Read the mirror configuration when the repository is a mirror
+	if data.State.ValueString() == repoStateMirror {
+		mirror, diags := getMirror(d.client, ctx, namespace+"/"+repoName)
+		resp.Diagnostics.Append(diags...)
+		if resp.Diagnostics.HasError() {
+			return
+		}
+		mv, d := buildDataSourceMirrorValue(ctx, mirror)
+		resp.Diagnostics.Append(d...)
+		data.Mirror = mv
+	} else {
+		data.Mirror = datasource_repository.NewMirrorValueNull()
+	}
 
 	// Save updated data into Terraform state
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)

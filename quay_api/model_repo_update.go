@@ -24,6 +24,8 @@ var _ MappedNullable = &RepoUpdate{}
 type RepoUpdate struct {
 	// Markdown encoded description for the repository
 	Description string `json:"description"`
+	// State of the repository: NORMAL, READONLY or MIRROR
+	State *string `json:"state,omitempty"`
 }
 
 type _RepoUpdate RepoUpdate
@@ -70,6 +72,38 @@ func (o *RepoUpdate) SetDescription(v string) {
 	o.Description = v
 }
 
+// GetState returns the State field value if set, zero value otherwise.
+func (o *RepoUpdate) GetState() string {
+	if o == nil || IsNil(o.State) {
+		var ret string
+		return ret
+	}
+	return *o.State
+}
+
+// GetStateOk returns a tuple with the State field value
+// and a boolean to check if the value has been set.
+func (o *RepoUpdate) GetStateOk() (*string, bool) {
+	if o == nil || IsNil(o.State) {
+		return nil, false
+	}
+	return o.State, true
+}
+
+// HasState returns a boolean if a field has been set.
+func (o *RepoUpdate) HasState() bool {
+	if o != nil && !IsNil(o.State) {
+		return true
+	}
+
+	return false
+}
+
+// SetState gets a reference to the given string and assigns it to the State field.
+func (o *RepoUpdate) SetState(v string) {
+	o.State = &v
+}
+
 func (o RepoUpdate) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -81,6 +115,9 @@ func (o RepoUpdate) MarshalJSON() ([]byte, error) {
 func (o RepoUpdate) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["description"] = o.Description
+	if !IsNil(o.State) {
+		toSerialize["state"] = o.State
+	}
 	return toSerialize, nil
 }
 
