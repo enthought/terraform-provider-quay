@@ -1,6 +1,6 @@
 module terraform-provider-quay
 
-go 1.24.0
+go 1.26.10
 
 replace github.com/enthought/terraform-provider-quay/quay_api => ./quay_api
 
