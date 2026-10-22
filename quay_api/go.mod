@@ -2,6 +2,8 @@ module github.com/enthought/terraform-provider-quay/quay_api
 
 go 1.18
 
+toolchain go1.26.10
+
 require github.com/stretchr/testify v1.9.0
 
 require (
