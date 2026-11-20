@@ -18,6 +18,17 @@ func handleQuayAPIError(err error) string {
 	return errDetail
 }
 
+// isQuayNotFound reports whether err is a Quay API 404 response.
+func isQuayNotFound(err error) bool {
+	var apiErr *quay_api.GenericOpenAPIError
+	if errors.As(err, &apiErr) {
+		if model, ok := apiErr.Model().(quay_api.ApiError); ok {
+			return model.Status == 404
+		}
+	}
+	return false
+}
+
 func isValidURL(u string) bool {
 	_, err := url.ParseRequestURI(u)
 	return err == nil
